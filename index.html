@@ -447,8 +447,11 @@
     }
 
     async function classifyNode(node) {
+        node.visible = true;
+
         let descriptors = []
         let display_lower = node.data.display_text.toLowerCase();
+        let hideAiSpawner = document.getElementById("hideAiSpawner").checked;
         let image = "/img/T_UI_Icon_Rarity_Uncommon.png";
         let tint = 0xffffff;
         let zIndex = 0;
@@ -462,6 +465,7 @@
             || display_lower.includes("key ring") || display_lower.includes("loot corpse") || display_lower.includes("loot clothes")) {
             tint = 0xFFD800;
             zIndex = 100;
+            descriptors.push("good");
         }
         if (display_lower.includes("boss") || display_lower.includes("aispawner")) {
             image = "/img/T_UI_Icon_PM_HungerKill.png";
@@ -469,6 +473,7 @@
             if (display_lower.includes("boss")) tint = 0xffa500
             if (display_lower.includes("bloat")) tint = 0x00ff00
             if (display_lower.includes("rare")) tint = 0xff0000
+            if (hideAiSpawner) node.visible = false;
             zIndex = 50;
         } else if (display_lower.includes("node") && !display_lower.includes("loot node")) {
             image = "/img/T_UI_Profession_Artificer.png";
@@ -490,6 +495,7 @@
             image = "/img/egg.png";
             tint = 0xffffff;
             zIndex = 50;
+            descriptors.push("egg");
         } else if (display_lower.includes("loot")) {
             zIndex = 60;
         }
@@ -510,7 +516,6 @@
         if (!node.texture_loaded) {
             node.texture = await PIXI.Assets.load(image);
             node.texture_loaded = true;
-            node.visible = true;
             updateSpriteScreenScale(node);
         }
     }
@@ -595,7 +600,7 @@
         zMax = -Infinity;
 
         csvData.forEach(async row => {
-            if (row.ObjectName.includes("Actor") || row.ObjectName.includes("Biomme")) return;
+            if (row.ObjectName.includes("Biomme") || row.ObjectName.includes("Cube")) return;
 
             const data = {
                 row: row,
@@ -645,8 +650,12 @@
             classifyNode(g);
             updateSpriteScreenScale(g);
 
-            data.tooltip_text = `Info: ${g.data.display_text}\nZ: ${g.z}`
-            if (row.SpawnChance) data.tooltip_text += `\nSpawn Chance: ${row.SpawnChance}`
+            data.tooltip_text = `Info: ${data.display_text}`
+            data.tooltip_text += `\nZ: ${pz.toFixed(3)}`
+            if (data.row.SpawnChance) {
+                data.tooltip_text += `\nSpawn Chance: ${data.row.SpawnChance}`
+                colorMatrix.brightness((Number(data.row.SpawnChance) + 50) / 100, false);
+            }
 
             g.interactive = true;
             g.on("pointerover", e => {
@@ -663,9 +672,9 @@
             world.addChild(g);
         });
 
-        world.children.filter(c => c._type === "marker").forEach(c => {
-            // 0.276163x - 0.371129
-        });
+        // world.children.filter(c => c._type === "marker").forEach(c => {
+        //     // 0.276163x - 0.371129
+        // });
 
         updateNodes();
     }
@@ -716,7 +725,7 @@
                     const inRange = node.data.row.Z > zValue && node.data.row.Z < (zValue + step);
                     if (!inRange) {
                         node.tint = 0x808080;
-                        node.alpha = 0.6;
+                        node.alpha = 0.2;
                         // node.lineStyle(0);
                         node.zIndex -= 1000;
                     }
@@ -748,10 +757,7 @@
 
             if (match) {
                 classifyNode(node);
-                node.visible = true;
-                // if (node._style === "aispawner" && document.getElementById("hideAiSpawner").checked) {
-                //     node.visible = false;
-                // }
+                node.visible = node.visible && true;
                 node.alpha = 1.0;
                 matching.push(node);
             } else {
