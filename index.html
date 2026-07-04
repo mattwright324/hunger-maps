@@ -633,7 +633,7 @@
             const colorMatrix = new PIXI.ColorMatrixFilter();
             colorMatrix.brightness(1.2, false);
             colorMatrix.saturate(1.5, false);
-            const texture = await PIXI.Assets.load("/img/T_UI_Icon_Rarity_Uncommon.png");
+            const texture = await PIXI.Assets.load("./img/T_UI_Icon_Rarity_Uncommon.png");
             const g = new PIXI.Sprite(texture);
             g._type = "marker"
             g.anchor.set(0.5);
