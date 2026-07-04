@@ -364,7 +364,7 @@
     }
 
     async function loadMap(mapName) {
-        const tex = await PIXI.Assets.load("/" + mapName);
+        const tex = await PIXI.Assets.load("./" + mapName);
 
         if (mapSprite) world.removeChild(mapSprite);
 
