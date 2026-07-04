@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>HUNGER MAP</title>
-    <link rel="icon" href="/icon.png">
+    <link rel="icon" href="./icon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -452,11 +452,11 @@
         let descriptors = []
         let display_lower = node.data.display_text.toLowerCase();
         let hideAiSpawner = document.getElementById("hideAiSpawner").checked;
-        let image = "/img/T_UI_Icon_Rarity_Uncommon.png";
+        let image = "./img/T_UI_Icon_Rarity_Uncommon.png";
         let tint = 0xffffff;
         let zIndex = 0;
         if (display_lower.includes("loot")) {
-            image = "/img/T_UI_Icon_PingGeneric.png";
+            image = "./img/T_UI_Icon_PingGeneric.png";
             tint = 0xffffff;
             zIndex = 50;
         }
@@ -468,7 +468,7 @@
             descriptors.push("good");
         }
         if (display_lower.includes("boss") || display_lower.includes("aispawner")) {
-            image = "/img/T_UI_Icon_PM_HungerKill.png";
+            image = "./img/T_UI_Icon_PM_HungerKill.png";
             tint = 0xf08080
             if (display_lower.includes("boss")) tint = 0xffa500
             if (display_lower.includes("bloat")) tint = 0x00ff00
@@ -476,23 +476,23 @@
             if (hideAiSpawner) node.visible = false;
             zIndex = 50;
         } else if (display_lower.includes("node") && !display_lower.includes("loot node")) {
-            image = "/img/T_UI_Profession_Artificer.png";
+            image = "./img/T_UI_Profession_Artificer.png";
             tint = 0x987654;
             zIndex = 50;
         } else if (display_lower.includes("sound trap")) {
-            image = "/img/T_UI_Icon_Mic_Transmitting.png";
+            image = "./img/T_UI_Icon_Mic_Transmitting.png";
             tint = 0xff0000;
             zIndex = 50;
         } else if (display_lower.includes("trap")) {
-            image = "/img/T_UI_Item_GrenadeCeramic.png";
+            image = "./img/T_UI_Item_GrenadeCeramic.png";
             tint = 0xff0000;
             zIndex = 50;
         } else if (display_lower.includes("raid spawn")) {
-            image = "/img/T_UI_Icon_Social.png";
+            image = "./img/T_UI_Icon_Social.png";
             tint = 0xff00ff;
             zIndex = 50;
         } else if (display_lower.includes("coop")) {
-            image = "/img/egg.png";
+            image = "./img/egg.png";
             tint = 0xffffff;
             zIndex = 50;
             descriptors.push("egg");
