@@ -399,7 +399,6 @@ async function classifyNode(node) {
     let hideAiSpawner = document.getElementById("hideAiSpawner").checked;
     let image = textures.uncommon;
     let tint = 0xffffff;
-    let filters = [colorMatrix];
     let zIndex = 0;
     if (display_lower.includes("loot")) {
         image = textures.pingGeneric;
@@ -426,7 +425,7 @@ async function classifyNode(node) {
         image = textures.profUnknown;
         zIndex = 50;
         descriptors.push("profession");
-        filters = null;
+        node.filters = null;
 
         for (let c in conservatorTypes) {
             if (node.data.full_name.includes(conservatorTypes[c])) {
@@ -449,10 +448,12 @@ async function classifyNode(node) {
     } else if (display_lower.includes("sound trap")) {
         image = textures.sound;
         tint = 0xff0000;
+        if (display_lower.includes("crow") || display_lower.includes("glass")) tint = 0x888888
         zIndex = 50;
     } else if (display_lower.includes("trap")) {
         image = textures.grenade;
         tint = 0xff0000;
+        if (display_lower.includes("poison")) tint = 0x00ff00
         zIndex = 50;
     } else if (display_lower.includes("raid spawn")) {
         image = textures.social;
@@ -463,6 +464,7 @@ async function classifyNode(node) {
         tint = 0xffffff;
         zIndex = 50;
         descriptors.push("egg");
+        node.filters = null;
     } else if (display_lower.includes("loot")) {
         zIndex = 60;
     }
@@ -473,7 +475,7 @@ async function classifyNode(node) {
             tint = 0x00ff00;
             zIndex = 200;
             descriptors.push("quest");
-            filters = null;
+            node.filters = null;
             break;
         }
     }
@@ -481,12 +483,8 @@ async function classifyNode(node) {
     node.data.descriptors = descriptors.join(" ");
     node.tint = tint;
     node.zIndex = zIndex;
-    node.filters = filters;
-    if (!node.texture_loaded) {
-        node.texture = image;
-        node.texture_loaded = true;
-        updateSpriteScreenScale(node);
-    }
+    node.texture = image;
+    updateSpriteScreenScale(node);
 }
 
 let zMin, zMax;
@@ -557,10 +555,6 @@ let questItems = [
     "BP_WeaponCache05_C",
 ]
 
-const colorMatrix = new PIXI.ColorMatrixFilter();
-// colorMatrix.brightness(1, false);
-// colorMatrix.saturate(1, false);
-
 function renderNodes() {
     nodes.forEach(n => world.removeChild(n));
     nodes = [];
@@ -603,18 +597,19 @@ function renderNodes() {
             zMax = Math.max(row.Z, zMax || row.Z);
         }
 
+        const colorMatrix = new PIXI.ColorMatrixFilter();
+        colorMatrix.brightness(1, false);
+        colorMatrix.saturate(1, false);
+
         const g = new PIXI.Sprite(textures.uncommon);
         g._type = "marker"
         g.anchor.set(0.5);
         g.x = px;
         g.y = py;
         g.z = pz;
-        //g.tint = tint;
         g.visible = false;
         g.data = data;
-        g.texture_loaded = false;
-        // g.filters = [colorMatrix];
-        //g.zIndex = 0;
+        g.filters = [colorMatrix];
 
         classifyNode(g);
         updateSpriteScreenScale(g);

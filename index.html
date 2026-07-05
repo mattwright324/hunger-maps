@@ -91,50 +91,56 @@
                 <div class="container-fluid">
                     <a class="navbar-brand" href="#">
                         <img src="./icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                        HUNGER MAP
+                        HUNGER MAPS
                     </a>
                 </div>
             </nav>
 
             <div class="p-3">
                 <div class="mb-3">
-                    <h5>Select Map</h5>
+                    <h6>Select Map</h6>
                     <select class="form-select" id="mapSelect">
-                        <option value="map01.webp">Sarlat</option>
-                        <option value="map02.webp">Jacques</option>
-                        <option value="map03.webp">Sombre</option>
+                        <option value="map01.webp">Sarlat Farm</option>
+                        <option value="map02.webp">Jacques Bridge</option>
+                        <option value="map03.webp">Sombre Forest</option>
                     </select>
                 </div>
 
                 <div class="mb-3">
-                    <h5>Search Nodes</h5>
-                    <input class="form-control" type="text" id="searchBox" placeholder="Type to filter...">
-                </div>
-
-                <div class="mb-3">
-                    <h5>Options</h5>
+                    <h6 class="mb-0">Search</h6>
+                    <small class="text-muted">
+                        Special Keywords: egg, quest, profession, good
+                    </small>
+                    <input class="form-control mb-1 mt-1" type="text" id="searchBox" placeholder="Type to filter...">
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="showOnlyMatches" checked>
                         <label class="form-check-label" for="showOnlyMatches">
-                            Search show only matches
+                            Show only matches
                         </label>
                     </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6>Height Filter</h6>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="filterZrange">
+                        <label class="form-check-label" for="filterZrange">
+                            Enable (Lowest ⟶ Highest)
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <input type="range" class="form-range" id="zRange" min="0" max="100" value="0" step="10">
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <h6>Toggles</h6>
+
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="hideAiSpawner" checked>
                         <label class="form-check-label" for="hideAiSpawner">
                             Hide AISpawner
                         </label>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="filterZrange">
-                        <label class="form-check-label" for="filterZrange">
-                            Filter on Height
-                        </label>
-                    </div>
-                    <div class="mb-3">
-                        <label for="zRange" class="form-label">Z Lowest -> Highest</label>
-                        <input type="range" class="form-range" id="zRange" min="0" max="100" value="0" step="10">
                     </div>
                 </div>
 
