@@ -116,8 +116,11 @@ import {controls, dom_ready} from "dom";
         const other = controls.otherSelect.val();
 
         markerSprites().forEach(sprite => {
-            const marker = sprite._marker;
+            if (!sprite.visible) {
+                return;
+            }
 
+            const marker = sprite._marker;
             if (marker.class === "container") {
                 sprite.visible = containers.includes(marker.readable.displayName);
             }

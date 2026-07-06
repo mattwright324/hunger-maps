@@ -89,7 +89,8 @@ export const environment = [
 ]
 
 export const creatures = [
-    "AISpawner"
+    "AISpawner",
+    "Miniboss"
 ]
 
 export const spawns = [

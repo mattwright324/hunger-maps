@@ -63,6 +63,7 @@ export class Marker {
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
             .replaceAll(/Con /g, "Conservator ")
+            .replaceAll(/Spawn Miniboss/g, "Miniboss")
             .trim();
     }
 
@@ -123,6 +124,34 @@ export class Marker {
         sprite.on("pointerout", () => {
             tooltip.style.display = "none";
         });
+
+        // const copy = []
+        // if (this.#row.ObjectName) {
+        //     copy.push("Name: " + this.#row.ObjectName);
+        // }
+        // if (this.#row.StaticMeshName) {
+        //     copy.push("Mesh: " + this.#row.StaticMeshName);
+        // }
+        // const copyDetails = copy.join("\n");
+        //
+        // function onDoubleClick(e) {
+        //     navigator.clipboard.writeText(copyDetails);
+        // }
+        //
+        // sprite.eventMode = "static";
+        // sprite.cursor = "pointer";
+        // let lastTapTime = 0;
+        // const doubleTapDelay = 300; // ms
+        // sprite.on("pointertap", (event) => {
+        //     const now = performance.now();
+        //     if (now - lastTapTime <= doubleTapDelay) {
+        //         console.log("Double click / double tap detected", event);
+        //         onDoubleClick(event);
+        //         lastTapTime = 0;
+        //     } else {
+        //         lastTapTime = now;
+        //     }
+        // });
     }
 
     #tooltipText() {
@@ -235,29 +264,6 @@ export class Marker {
                 return;
             }
         }
-        for (const substr of data.creatures) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
-                this.#class = "creature";
-                sprite.texture = textures.monster;
-                this.#tint = 0xFFA2A2
-                if (display_lower.includes("boss")) this.#tint = 0xffa500
-                if (display_lower.includes("bloat") && !display_lower.includes("no bloat")) this.#tint = 0x00ff00
-                if (display_lower.includes("rare")) this.#tint = 0xff0000
-                //if (hideAiSpawner) node.visible = false;
-                this.#zIndex = 50;
-                return;
-            }
-        }
-        for (const substr of data.questItems) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
-                this.#class = "quest";
-                sprite.texture = textures.quest;
-                this.#tint = 0x00ff00;
-                this.#zIndex = 200;
-                this.#descriptors.push("quest");
-                return;
-            }
-        }
         for (const substr of data.spawns) {
             if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
                 this.#class = "spawns";
@@ -270,6 +276,27 @@ export class Marker {
                     sprite.texture = textures.extract;
                     this.zIndex = 200;
                 }
+                return;
+            }
+        }
+        for (const substr of data.creatures) {
+            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+                this.#class = "creature";
+                sprite.texture = textures.monster;
+                this.#tint = 0xFFA2A2
+                this.#zIndex = 50;
+                if (display_lower.includes("boss")) this.#tint = 0xffa500
+                if (display_lower.includes("bloat") && !display_lower.includes("no bloat")) this.#tint = 0x00ff00
+                return;
+            }
+        }
+        for (const substr of data.questItems) {
+            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+                this.#class = "quest";
+                sprite.texture = textures.quest;
+                this.#tint = 0x00ff00;
+                this.#zIndex = 200;
+                this.#descriptors.push("quest");
                 return;
             }
         }
