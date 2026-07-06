@@ -1,64 +1,40 @@
+---
+---
 <!DOCTYPE html>
-<html data-bs-theme="dark">
+<html lang="en" data-bs-theme="dark">
 <head>
+    {% assign cache_buster = site.time | date_to_xmlschema -%}
+
+    <title>HUNGER MAP (TT3)</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>HUNGER MAP</title>
+    <meta name="description"
+          content="View map data for the upcoming game HUNGER">
     <link rel="icon" href="./icon.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@2.0.0/dist/css/bootstrap-multiselect.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@2.0.0/dist/js/bootstrap-multiselect.min.js"></script>
     <script src="https://pixijs.download/release/pixi.min.js"></script>
-
-    <style>
-        .navbar-brand {
-            font-size: 1.75rem!important;
-            font-family: 'IM Fell DW Pica', serif;
-        }
-
-        .navbar {
-            font-size: 1.5rem!important;
-        }
-
-        .navbar-brand img {
-            width: 40px !important;
-            height: 40px !important;
-        }
-
-        #view-container {
-            width: 100%;
-            height: 100vh;
-            overflow:hidden;
-        }
-
-        #tooltip {
-            position: absolute;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            pointer-events: none;
-            display: none;
-            z-index: 9999;
-            white-space: pre;
-        }
-    </style>
+    <script src="//cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
 
     <!-- App -->
-<!--    <link href="./styles.css?v={{ site.time | date_to_xmlschema }}" rel="stylesheet"/>-->
-<!--    <script type="importmap">-->
-<!--        {"imports": {-->
-<!--            './util.js': './util.js?v={{ site.time | date_to_xmlschema }}',-->
-<!--            './fabric-util.js': './fabric-util.js?v={{ site.time | date_to_xmlschema }}',-->
-<!--            './constants.js': './constants.js?v={{ site.time | date_to_xmlschema }}',-->
-<!--            './data.js': './data.js?v={{ site.time | date_to_xmlschema }}',-->
-<!--        }}-->
-<!--    </script>-->
-    <script src="./script.js?v={{ site.time | date_to_xmlschema }}" type="module"></script>
+    <link href="./styles.css?v={{ cache_buster }}" rel="stylesheet"/>
+    <script type="importmap">
+        {"imports": {
+            "data": "./js/data.js?v={{ cache_buster }}",
+            "dom": "./js/dom.js?v={{ cache_buster }}",
+            "marker": "./js/marker.js?v={{ cache_buster }}",
+            "pixi": "./js/pixi.js?v={{ cache_buster }}",
+            "textures": "./js/textures.js?v={{ cache_buster }}"
+        }}
+    </script>
+    <script type="module" src="./js/main.js?v={{ cache_buster }}"></script>
 
     <!-- Analytics -->
     <script defer data-domain="mattw.io" src="https://plausible.io/js/plausible.js"></script>
@@ -66,18 +42,18 @@
 <body>
 
 <div class="container-fluid">
-    <div class="row gy-2 gx-3 align-items-center p-3" hidden>
+    <div id="data-adjust" class="row gy-2 gx-3 justify-content-center p-3" style="display: none;">
         <div class="col-auto">
             <label>Scale</label>
             <input class="form-control" type="number" id="scale" value="0.05" step="0.001">
         </div>
         <div class="col-auto">
             <label>OffsetX</label>
-            <input class="form-control" type="number" id="offsetX" value="0" step="25">
+            <input class="form-control" type="number" id="offsetX" value="0" step="5">
         </div>
         <div class="col-auto">
             <label>OffsetY</label>
-            <input class="form-control" type="number" id="offsetY" value="0" step="25">
+            <input class="form-control" type="number" id="offsetY" value="0" step="5">
         </div>
         <div class="col-auto">
             <label>Rotation (degrees)</label>
@@ -88,10 +64,11 @@
     <div class="row">
         <div class="col-md-3 m-0 p-0">
             <nav class="navbar bg-body-tertiary">
-                <div class="container-fluid">
+                <div class="container-fluid d-flex justify-content-center">
                     <a class="navbar-brand" href="#">
+                        HUNGER
                         <img src="./icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
-                        HUNGER MAPS
+                        MAPS
                     </a>
                 </div>
             </nav>
@@ -100,9 +77,9 @@
                 <div class="mb-3">
                     <h6>Select Map</h6>
                     <select class="form-select" id="mapSelect">
-                        <option value="map01.webp">Sarlat Farm</option>
-                        <option value="map02.webp">Jacques Bridge</option>
-                        <option value="map03.webp">Sombre Forest</option>
+                        <option value="map01">Sarlat Farm</option>
+                        <option value="map02">Jacques Bridge</option>
+                        <option value="map03">Sombre Forest</option>
                     </select>
                 </div>
 
@@ -133,17 +110,90 @@
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <h6>Toggles</h6>
+                <div class="mb-3 d-flex justify-content-center">
+                    <a id="showAll" href="javascript:">Show All</a>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <a id="hideAll" href="javascript:">Hide All</a>
+                </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="hideAiSpawner" checked>
-                        <label class="form-check-label" for="hideAiSpawner">
-                            Hide AISpawner
-                        </label>
+                <div class="row filters">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Containers
+                                <img src="./img/T_UI_Icon_PingGeneric.png">
+                                <img src="./img/T_UI_Item_FreshEgg.png">
+                            </h6>
+                            <select id="loot-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Loose Items
+                                <img src="./img/T_UI_Icon_Equipment_Equipment_64.png">
+                            </h6>
+                            <select id="loose-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Environment
+                                <img src="./img/T_UI_Icon_Mic_Transmitting.png">
+                                <img src="./img/T_UI_Item_GrenadeCeramic.png">
+                                <img src="./img/T_UI_Profession_Conservator.png">
+                            </h6>
+                            <select id="env-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Creatures
+                                <img src="./img/T_UI_Icon_PM_HungerKill.png">
+                            </h6>
+                            <select id="creature-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Quest
+                                <img src="./img/T_UI_Icon_TrackerHandIn.png">
+                            </h6>
+                            <select id="quest-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Spawns
+                                <img src="./img/T_UI_Icon_Social.png">
+                                <img src="./img/T_UI_Icon_Extract_64.png">
+                            </h6>
+                            <select id="spawns-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <h6>
+                                Other
+                                <img src="./img/T_UI_Icon_Rarity_Uncommon.png">
+                            </h6>
+                            <select id="other-select" multiple="multiple" style="display:none"></select>
+                        </div>
                     </div>
                 </div>
 
+                <div class="form-check" hidden>
+                    <input class="form-check-input" type="checkbox" value="" id="hideAiSpawner" checked>
+                    <label class="form-check-label" for="hideAiSpawner">
+                        Hide AISpawner
+                    </label>
+                </div>
 
             </div>
         </div>

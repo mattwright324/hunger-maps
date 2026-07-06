@@ -1,0 +1,42 @@
+.navbar-brand {
+    font-size: 1.75rem!important;
+    font-family: 'IM Fell DW Pica', serif;
+}
+
+h6 {
+    font-size: 1.25rem!important;
+    font-family: 'IM Fell DW Pica', serif;
+}
+
+.navbar {
+    font-size: 1.5rem!important;
+}
+
+.navbar-brand img {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+#view-container {
+    width: 100%;
+    height: 100vh;
+    overflow:hidden;
+}
+
+#tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    display: none;
+    z-index: 9999;
+    white-space: pre;
+}
+
+.filters img {
+    width: 24px;
+    height: 24px;
+}
