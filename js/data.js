@@ -38,15 +38,17 @@ async function parseCSV(text) {
 export const presets = {
     "map01": {
         texture: textures.mapSarlat,
+        overlay: textures.mapSarlatOverlay,
         rawData: await getCsvData("./map01_components.csv"),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
-        scale: 0.041,
-        offsetX: 2880,
-        offsetY: 1750,
+        scale: 0.0409,
+        offsetX: 2871,
+        offsetY: 1755,
         rotation: 90
     },
     "map02": {
         texture: textures.mapJacques,
+        overlay: textures.mapJacquesOverlay,
         rawData: await getCsvData("./map02_components.csv"),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
         scale: 0.036,
@@ -56,6 +58,7 @@ export const presets = {
     },
     "map03": {
         texture: textures.mapSombre,
+        overlay: textures.mapSombreOverlay,
         rawData: await getCsvData("./map03_components.csv"),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
         scale: 0.0305,

@@ -80,6 +80,7 @@ const dom_load = async () => {
     }
 
     controls.mapSelect = document.getElementById("mapSelect");
+    controls.showOverlay = document.getElementById("showOverlay");
     controls.searchBox = document.getElementById("searchBox");
     controls.checkShowOnlyMatches = document.getElementById("showOnlyMatches");
     controls.enableHeightFilter = document.getElementById("filterZrange");

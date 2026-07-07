@@ -1,7 +1,7 @@
 import * as data from "data";
 import {spawns} from "data";
 import * as pixi from "pixi";
-import {mapSprite, markerSprites, world} from "pixi";
+import {mapOverlaySprite, mapSprite, markerSprites, world} from "pixi";
 import * as dom from "dom";
 import {controls, dom_ready} from "dom";
 
@@ -18,10 +18,15 @@ import {controls, dom_ready} from "dom";
     controls.mapSelect.addEventListener("change", () => loadMapAndPreset(controls.mapSelect.value));
     controls.mapSelect.dispatchEvent(new Event('change'));
 
+    controls.showOverlay.addEventListener("change", () => {
+        mapOverlaySprite.visible = controls.showOverlay.checked;
+    })
+
     async function loadMapAndPreset(mapId) {
         pixi.clearMarkers();
         const preset = data.presets[mapId];
         mapSprite.texture = preset.texture;
+        mapOverlaySprite.texture = preset.overlay;
         pixi.fitMapSpriteToCanvas();
 
         document.getElementById("scale").value = preset.scale;
@@ -177,4 +182,9 @@ import {controls, dom_ready} from "dom";
         controls.spawnsSelect, controls.otherSelect].forEach(control => {
         control.on("change", applySearch);
     });
+
+    [controls.inputScale, controls.inputOffsetX, controls.inputOffsetY, controls.inputRotation].forEach(control => {
+        control.addEventListener("input", () => pixi.markerSprites()
+            .forEach(markerSprite => markerSprite._marker.reposition()))
+    })
 }());

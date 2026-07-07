@@ -1,7 +1,10 @@
 const texturePaths = {
     mapSarlat: "./map01.webp",
+    mapSarlatOverlay: "./map01_overlay.webp",
     mapJacques: "./map02.webp",
+    mapJacquesOverlay: "./map02_overlay.webp",
     mapSombre: "./map03.webp",
+    mapSombreOverlay: "./map03_overlay.webp",
 
     uncommon: "./img/T_UI_Icon_Rarity_Uncommon.png",
     pingGeneric: "./img/T_UI_Icon_PingGeneric.png",

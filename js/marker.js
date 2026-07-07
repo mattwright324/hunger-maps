@@ -67,6 +67,10 @@ export class Marker {
             .trim();
     }
 
+    reposition() {
+        this.#applyTransforms();
+    }
+
     #applyTransforms() {
         const rotation = parseFloat(document.getElementById("rotation").value) || 0;
         const scale = parseFloat(document.getElementById("scale").value) || 1;

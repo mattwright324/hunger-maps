@@ -23,6 +23,15 @@ mapSprite.height = 4096;
 mapSprite.zIndex = -Infinity
 world.addChildAt(mapSprite, 0);
 
+export const mapOverlaySprite = new PIXI.Sprite();
+mapOverlaySprite._type = "overlay";
+mapOverlaySprite.x = 0;
+mapOverlaySprite.y = -500;
+mapOverlaySprite.width = 4096;
+mapOverlaySprite.height = 4596;
+mapOverlaySprite.zIndex = -9999
+world.addChildAt(mapOverlaySprite, 0);
+
 export function markerSprites() {
     return world.children.filter(c => c._type === "marker");
 }
