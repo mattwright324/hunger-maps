@@ -67,6 +67,10 @@ const dom_load = async () => {
 
     new ClipboardJS(".clipboard");
 
+    elements.metaVersion = document.querySelector("meta[name='version']").content;
+
+    console.log(elements.metaVersion);
+
     const urlSearchParams = new URL(window.location).searchParams;
 
     elements.divDataAdjust = document.getElementById("data-adjust");

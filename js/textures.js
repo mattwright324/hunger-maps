@@ -1,3 +1,7 @@
+import {dom_ready, elements} from 'dom'
+
+await dom_ready();
+
 const texturePaths = {
     mapSarlat: "./map01.webp",
     mapSarlatOverlay: "./map01_overlay.webp",
@@ -20,13 +24,16 @@ const texturePaths = {
     grenade: "./img/T_UI_Item_GrenadeCeramic.png",
     social: "./img/T_UI_Icon_Social.png",
     egg: "./img/T_UI_Item_FreshEgg.png",
+    branch: "./img/T_UI_Item_SolidBranch.png",
+    charcoal: "./img/T_UI_Item_Charcoal.png",
     quest: "./img/T_UI_Icon_TrackerHandIn.png",
     extract: "./img/T_UI_Icon_Extract_64.png",
+    stairs: "./img/StairIntegrated.png",
 };
 
 const loadedTextures = await Promise.all(
     Object.entries(texturePaths).map(async ([key, path]) => {
-        return [key, await PIXI.Assets.load(path)];
+        return [key, await PIXI.Assets.load(path + "?v=" + elements.metaVersion)];
     })
 );
 

@@ -1,5 +1,5 @@
 import { textures } from "textures";
-import { controls } from "dom";
+import { elements } from "dom";
 import { Marker } from "marker";
 
 async function getCsvData(url) {
@@ -39,7 +39,7 @@ export const presets = {
     "map01": {
         texture: textures.mapSarlat,
         overlay: textures.mapSarlatOverlay,
-        rawData: await getCsvData("./map01_components.csv"),
+        rawData: await getCsvData("./map01_components.csv?v=" + elements.metaVersion),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
         scale: 0.0409,
         offsetX: 2871,
@@ -49,7 +49,7 @@ export const presets = {
     "map02": {
         texture: textures.mapJacques,
         overlay: textures.mapJacquesOverlay,
-        rawData: await getCsvData("./map02_components.csv"),
+        rawData: await getCsvData("./map02_components.csv?v=" + elements.metaVersion),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
         scale: 0.036,
         offsetX: 1990,
@@ -59,7 +59,7 @@ export const presets = {
     "map03": {
         texture: textures.mapSombre,
         overlay: textures.mapSombreOverlay,
-        rawData: await getCsvData("./map03_components.csv"),
+        rawData: await getCsvData("./map03_components.csv?v=" + elements.metaVersion),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
         scale: 0.0305,
         offsetX: 1425,
@@ -83,12 +83,14 @@ export const looseItems = [
 
 export const environment = [
     "Trap_",
+    "Soundtrap_",
     "Node_",
     "Breakable",
     "Lift",
     "Trapdoor",
     "Door",
     "Window",
+    "Stair",
 ]
 
 export const creatures = [

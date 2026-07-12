@@ -43,7 +43,7 @@ import {controls, dom_ready} from "dom";
         let minZ = Infinity;
         let maxZ = -Infinity;
 
-        markers.filter(marker => marker.class && marker.class !== "other").forEach(marker => {
+        markers.filter(marker => marker.class && !(marker.class === "other" || marker.class === "environment")).forEach(marker => {
             minZ = Math.min(minZ, marker.row.Z);
             maxZ = Math.max(maxZ, marker.row.Z);
         })

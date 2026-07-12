@@ -55,11 +55,13 @@ export class Marker {
     }
 
     #makeReadable(text) {
-        return text.replaceAll(/[\W_]/g, " ") // Special chars to spaces
+        return text
+            .replaceAll(/.*\.LIT_/g, "")
+            .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
-            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) )|( (UREL|REL|C)$)|(Loot|AISpawner|Node)/g, "") // Remove prefix/suffix chars
-            .replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
-            .replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
+            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) )|(Loot|AISpawner|Node)/g, "") // Remove prefix/suffix chars
+            //.replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
+            //.replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
             .replaceAll(/Con /g, "Conservator ")
@@ -129,33 +131,33 @@ export class Marker {
             tooltip.style.display = "none";
         });
 
-        // const copy = []
-        // if (this.#row.ObjectName) {
-        //     copy.push("Name: " + this.#row.ObjectName);
-        // }
-        // if (this.#row.StaticMeshName) {
-        //     copy.push("Mesh: " + this.#row.StaticMeshName);
-        // }
-        // const copyDetails = copy.join("\n");
-        //
-        // function onDoubleClick(e) {
-        //     navigator.clipboard.writeText(copyDetails);
-        // }
-        //
-        // sprite.eventMode = "static";
-        // sprite.cursor = "pointer";
-        // let lastTapTime = 0;
-        // const doubleTapDelay = 300; // ms
-        // sprite.on("pointertap", (event) => {
-        //     const now = performance.now();
-        //     if (now - lastTapTime <= doubleTapDelay) {
-        //         console.log("Double click / double tap detected", event);
-        //         onDoubleClick(event);
-        //         lastTapTime = 0;
-        //     } else {
-        //         lastTapTime = now;
-        //     }
-        // });
+        const copy = []
+        if (this.#row.ObjectName) {
+            copy.push("Name: " + this.#row.ObjectName);
+        }
+        if (this.#row.StaticMeshName) {
+            copy.push("Mesh: " + this.#row.StaticMeshName);
+        }
+        const copyDetails = copy.join("\n");
+
+        function onDoubleClick(e) {
+            navigator.clipboard.writeText(copyDetails);
+        }
+
+        sprite.eventMode = "static";
+        sprite.cursor = "pointer";
+        let lastTapTime = 0;
+        const doubleTapDelay = 300; // ms
+        sprite.on("pointertap", (event) => {
+            const now = performance.now();
+            if (now - lastTapTime <= doubleTapDelay) {
+                console.log("Double click / double tap detected", event);
+                onDoubleClick(event);
+                lastTapTime = 0;
+            } else {
+                lastTapTime = now;
+            }
+        });
     }
 
     #tooltipText() {
@@ -201,7 +203,7 @@ export class Marker {
         for (const substr of data.environment) {
             if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
                 this.#class = "environment";
-                this.#texture = textures.uncommon;
+                sprite.texture = textures.uncommon;
 
                 if (display_lower.includes("breakable")
                     || display_lower.includes("door")
@@ -210,9 +212,9 @@ export class Marker {
                 }
 
                 if (display_lower.includes("lift") || display_lower.includes("door")) {
-                    this.#texture = textures.door;
+                    sprite.texture = textures.door;
                 } else if (display_lower.includes("window")) {
-                    this.#texture = textures.window;
+                    sprite.texture = textures.window;
                 }
 
                 for (const resourceNode of data.professions.conservatorTypes) {
@@ -246,6 +248,12 @@ export class Marker {
                     this.#zIndex = 50;
                 }
 
+                if (display_lower.includes("stair")) {
+                    sprite.texture = textures.stairs;
+                    //this.#tint = 0x0000ff;
+                    console.log(this.#texture)
+                }
+
                 return;
             }
         }
@@ -264,6 +272,12 @@ export class Marker {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
+                } else if (display_lower.includes("kindling")) {
+                    sprite.texture = textures.branch;
+                    this.#descriptors.push("thick branch");
+                } else if (display_lower.includes("ash") || display_lower.includes("stove")) {
+                    sprite.texture = textures.charcoal;
+                    this.#descriptors.push("charcoal");
                 }
                 return;
             }

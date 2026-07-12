@@ -3,17 +3,27 @@ import json
 import csv
 
 # --- CONFIG ---
-INPUT_FOLDER = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP\_Generated_"   # folder containing .json files
-#INPUT_FOLDER = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP\_Generated_"   # folder containing .json files
-#INPUT_FOLDER = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP\_Generated_"   # folder containing .json files
-OUTPUT_CSV   = r"C:\\Users\\mattwright324\\Desktop\\map01_components.csv"
 
-def parse_file(objects):
-    """
-    Extract SceneComponents and StaticMeshComponents from a single JSON file.
-    Returns rows: (Type, SceneObjectName, StaticMeshName, X, Y, Z)
-    """
+OUTPUT_FOLDER = r"output/"
+PARSE_MAP = [
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP\_Generated_",
+        "output": "map01_components.csv"
+    },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP\_Generated_",
+        "output": "map02_components.csv"
+    },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP\_Generated_",
+        "output": "map03_components.csv"
+    },
+]
 
+types = []
+
+def parse_file(objects, full_path):
+    loot_nodes = []
     extractions = []
     ai_spawners = []
     spawn_chances = []
@@ -21,10 +31,19 @@ def parse_file(objects):
     scene_components = []
     static_mesh_components = []
     instanced_static_mesh_components = []
+    fast_geos = []
 
     for obj in objects:
         obj_type = obj.get("Type")
         props = obj.get("Properties", {})
+
+        if obj_type not in types:
+            types.append(obj_type)
+
+        if "LootNode" in obj_type:
+            name = obj.get("Name")
+            loot_name = props.get("ItemTable", {}).get("AssetPathName")
+            extractions.append([obj_type, name, loot_name])
 
         if "RaidExtractionPoint" in obj_type:
             name = obj.get("Name")
@@ -43,8 +62,41 @@ def parse_file(objects):
 
 
         # Only process SceneComponent or StaticMeshComponent
-        if not (obj_type == "SceneComponent" or obj_type == "StaticMeshComponent" or obj_type == "InstancedStaticMeshComponent" or obj_type == "SphereComponent"):
+        if not (obj_type == "SceneComponent" or obj_type == "StaticMeshComponent" or obj_type == "InstancedStaticMeshComponent" or obj_type == "SphereComponent" or obj_type == "FastGeoContainer"):
             continue
+
+        if obj_type == "FastGeoContainer":
+            clusters = obj.get("ComponentClusters", [])
+            for cluster in clusters:
+                sm_comps = cluster.get("StaticMeshComponents", [])
+                for comp in sm_comps:
+                    loc = comp.get("WorldTransform", {}).get("Translation", {})
+                    sm_name = comp.get("SceneProxyDesc", {}).get("StaticMeshSceneProxyDesc", {}).get("StaticMesh", {}).get("ObjectName", "")
+
+                    if "X" not in loc:
+                        continue;
+
+                    x = loc.get("X", "")
+                    y = loc.get("Y", "")
+                    z = loc.get("Z", "")
+
+                    fast_geos.append(["FastGeoContainer", "", sm_name, x, y, z])
+
+                ism_comps = cluster.get("InstancedStaticMeshComponents", [])
+                for comp in ism_comps:
+                    loc = comp.get("WorldTransform", {}).get("Translation", {})
+                    sm_name = comp.get("SceneProxyDesc", {}).get("StaticMeshSceneProxyDesc", {}).get("StaticMesh", {}).get("ObjectName", "")
+
+                    if not ("StairIntegrated" in sm_name):
+                        continue;
+                    if "X" not in loc:
+                        continue;
+
+                    x = loc.get("X", "")
+                    y = loc.get("Y", "")
+                    z = loc.get("Z", "")
+
+                    fast_geos.append(["FastGeoContainer", "", sm_name, x, y, z])
 
         # --- StaticMeshComponent ---
         if obj_type == "StaticMeshComponent":
@@ -91,7 +143,7 @@ def parse_file(objects):
                 if not coll.get("Response") == "ECollisionResponse::ECR_Ignore":
                     colls.append(coll.get("Channel", ""))
 
-            #if not colls and not ("Cave" in sm_outer_name or "Dungeon" in sm_outer_name):
+            #if not colls and not ("StoneStair" in sm_name):
             if not colls:
                 continue;
 
@@ -128,53 +180,64 @@ def parse_file(objects):
                 [obj_type, scene_name, "", x, y, z]
             )
 
-
     # Combine both lists
-    combined_lists = scene_components + static_mesh_components + instanced_static_mesh_components
+    combined_lists = scene_components + static_mesh_components + instanced_static_mesh_components + fast_geos
 
     for arr in combined_lists:
-        result = ""
+        for nodes in loot_nodes:
+            if nodes[1] in (arr[1] or ""):
+                arr[2] = nodes[2] + " " + arr[2]
         for extracts in extractions:
             if extracts[1] in (arr[1] or ""):
                 arr[2] = extracts[2]
         for spawner in ai_spawners:
             if spawner[1] in (arr[1] or ""):
                 arr[2] = spawner[2]
+        chance = ""
         for chance in spawn_chances:
             if chance[1] in (arr[1] or "") or chance[1] in (arr[2] or ""):
-                result = chance[2]
-        arr.append(result)
+                chance = chance[2]
+        arr.append(chance)
 
     return combined_lists
 
 
 def main():
-    all_rows = []
+    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+    for map in PARSE_MAP:
+        INPUT_FOLDER = map["folder"]
+        OUTPUT_CSV = os.path.join(OUTPUT_FOLDER, map["output"])
+        all_rows = []
 
-    for root, _, files in os.walk(INPUT_FOLDER):
-        for file in files:
-            if not file.lower().endswith(".json"):
-                continue
+        for root, _, files in os.walk(INPUT_FOLDER):
+            print(f"Reading files in {root}...")
 
-            full_path = os.path.join(root, file)
+            for file in files:
+                if not file.lower().endswith(".json"):
+                    continue
 
-            try:
-                with open(full_path, "r", encoding="utf-8") as f:
-                    objects = json.load(f)
+                full_path = os.path.join(root, file)
 
-                rows = parse_file(objects)
-                all_rows.extend(rows)
+                try:
+                    with open(full_path, "r", encoding="utf-8") as f:
+                        objects = json.load(f)
 
-            except Exception as e:
-                print(f"Failed to parse {full_path}: {e}")
+                    rows = parse_file(objects, full_path)
+                    all_rows.extend(rows)
 
-    # Write CSV
-    with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["Type", "ObjectName", "StaticMeshName", "X", "Y", "Z", "SpawnChance"])
-        writer.writerows(all_rows)
+                except Exception as e:
+                    print(f"Failed to parse {full_path}: {e}")
 
-    print(f"Done. Wrote {len(all_rows)} rows to {OUTPUT_CSV}")
+        # print(types)
+
+        # Write CSV
+        with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["Type", "ObjectName", "StaticMeshName", "X", "Y", "Z", "SpawnChance"])
+            all_rows.sort()
+            writer.writerows(all_rows)
+
+        print(f"Done. Wrote {len(all_rows)} rows to {OUTPUT_CSV}")
 
 
 if __name__ == "__main__":

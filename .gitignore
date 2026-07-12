@@ -1,3 +1,5 @@
 .idea/
+.venv/
 _site/
+output/
 gemfile.lock
