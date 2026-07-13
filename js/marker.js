@@ -248,7 +248,7 @@ export class Marker {
                     this.#zIndex = 50;
                 }
 
-                if (display_lower.includes("stair")) {
+                if (display_lower.includes("stair integrated")) {
                     sprite.texture = textures.stairs;
                     //this.#tint = 0x0000ff;
                     console.log(this.#texture)
