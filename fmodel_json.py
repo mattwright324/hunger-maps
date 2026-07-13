@@ -43,7 +43,7 @@ def parse_file(objects, full_path):
         if "LootNode" in obj_type:
             name = obj.get("Name")
             loot_name = props.get("ItemTable", {}).get("AssetPathName")
-            extractions.append([obj_type, name, loot_name])
+            loot_nodes.append([obj_type, name, loot_name])
 
         if "RaidExtractionPoint" in obj_type:
             name = obj.get("Name")
@@ -193,11 +193,11 @@ def parse_file(objects, full_path):
         for spawner in ai_spawners:
             if spawner[1] in (arr[1] or ""):
                 arr[2] = spawner[2]
-        chance = ""
+        chance_percent = ""
         for chance in spawn_chances:
             if chance[1] in (arr[1] or "") or chance[1] in (arr[2] or ""):
-                chance = chance[2]
-        arr.append(chance)
+                chance_percent = chance[2]
+        arr.append(chance_percent)
 
     return combined_lists
 

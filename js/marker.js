@@ -59,7 +59,8 @@ export class Marker {
             .replaceAll(/.*\.LIT_/g, "")
             .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
-            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) )|(Loot|AISpawner|Node)/g, "") // Remove prefix/suffix chars
+            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) )/g, "") // Remove prefix/suffix chars
+            .replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
             //.replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
             //.replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
             .replaceAll(/Scav /g, "Scavenger ")
@@ -103,7 +104,7 @@ export class Marker {
         this.#applyTransforms()
 
         this.#readable.name = this.#makeReadable(this.#row.ObjectName.replaceAll(/'map.*/gi, ""));
-        this.#readable.mesh = this.#makeReadable(this.#row.StaticMeshName.replaceAll(/^(.*?)'/gi, ""));
+        this.#readable.mesh = this.#makeReadable(this.#row.StaticMeshName);
         const display = []
         if (this.#readable.name) {
             display.push(this.#readable.name);
