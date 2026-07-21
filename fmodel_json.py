@@ -18,6 +18,10 @@ PARSE_MAP = [
         "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP\_Generated_",
         "output": "map03_components.csv"
     },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
+    #     "output": "map00_components2.csv"
+    # },
 ]
 
 types = []

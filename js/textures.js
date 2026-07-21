@@ -3,6 +3,7 @@ import {dom_ready, elements} from 'dom'
 await dom_ready();
 
 const texturePaths = {
+    mapChateau: "./map00.webp",
     mapSarlat: "./map01.webp",
     mapSarlatOverlay: "./map01_overlay.webp",
     mapJacques: "./map02.webp",

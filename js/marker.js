@@ -59,7 +59,7 @@ export class Marker {
             .replaceAll(/.*\.LIT_/g, "")
             .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
-            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) )/g, "") // Remove prefix/suffix chars
+            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) ?)/g, "") // Remove prefix/suffix chars
             .replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
             //.replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
             //.replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
@@ -184,6 +184,12 @@ export class Marker {
             this.#colorMatrix.brightness((Number(this.#row.SpawnChance) + 50) / 100, false);
         }
 
+        if (this.#row.ObjectName.startsWith("BP_")) {
+            this.#tint = 0xff0000;
+            this.#zIndex = 200;
+            this.#descriptors.push("npc");
+        }
+
         for (const substr of data.looseItems) {
             if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
                 this.#class = "loose";
@@ -221,18 +227,21 @@ export class Marker {
                 for (const resourceNode of data.professions.conservatorTypes) {
                     if (this.#row.ObjectName.includes(resourceNode)) {
                         sprite.texture = textures.profConservator;
+                        this.#descriptors.push("profession");
                         break;
                     }
                 }
                 for (const resourceNode of data.professions.naturalistTypes) {
                     if (this.#row.ObjectName.includes(resourceNode)) {
                         sprite.texture = textures.profNaturalist;
+                        this.#descriptors.push("profession");
                         break;
                     }
                 }
                 for (const resourceNode of data.professions.scavengerTypes) {
                     if (this.#row.ObjectName.includes(resourceNode)) {
                         sprite.texture = textures.profScavenger;
+                        this.#descriptors.push("profession");
                         break;
                     }
                 }

@@ -36,14 +36,23 @@ async function parseCSV(text) {
 }
 
 export const presets = {
+    "map00": {
+        texture: textures.mapChateau,
+        rawData: await getCsvData("./map00_components.csv?v=" + elements.metaVersion),
+        data: () => presets["map00"].rawData.map(row => new Marker(row)),
+        scale: 0.17,
+        offsetX: 1800,
+        offsetY: 2300,
+        rotation: 0
+    },
     "map01": {
         texture: textures.mapSarlat,
         overlay: textures.mapSarlatOverlay,
         rawData: await getCsvData("./map01_components.csv?v=" + elements.metaVersion),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
         scale: 0.0409,
-        offsetX: 2871,
-        offsetY: 1755,
+        offsetX: 2875,
+        offsetY: 1751,
         rotation: 90
     },
     "map02": {
@@ -51,9 +60,9 @@ export const presets = {
         overlay: textures.mapJacquesOverlay,
         rawData: await getCsvData("./map02_components.csv?v=" + elements.metaVersion),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
-        scale: 0.036,
-        offsetX: 1990,
-        offsetY: 1255,
+        scale: 0.03622,
+        offsetX: 1978,
+        offsetY: 1251,
         rotation: 270
     },
     "map03": {
@@ -61,9 +70,9 @@ export const presets = {
         overlay: textures.mapSombreOverlay,
         rawData: await getCsvData("./map03_components.csv?v=" + elements.metaVersion),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
-        scale: 0.0305,
-        offsetX: 1425,
-        offsetY: 1515,
+        scale: 0.03051,
+        offsetX: 1424,
+        offsetY: 1513,
         rotation: 0
     }
 };
