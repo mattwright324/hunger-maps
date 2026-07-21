@@ -63,6 +63,7 @@ export class Marker {
             .replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
             //.replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
             //.replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
+            .replaceAll(/Chateau .*/g, "")
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
             .replaceAll(/Con /g, "Conservator ")
