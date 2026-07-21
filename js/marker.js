@@ -185,12 +185,6 @@ export class Marker {
             this.#colorMatrix.brightness((Number(this.#row.SpawnChance) + 50) / 100, false);
         }
 
-        if (this.#row.ObjectName.startsWith("BP_")) {
-            this.#tint = 0xff0000;
-            this.#zIndex = 200;
-            this.#descriptors.push("npc");
-        }
-
         for (const substr of data.looseItems) {
             if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
                 this.#class = "loose";
