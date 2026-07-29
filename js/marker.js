@@ -59,10 +59,10 @@ export class Marker {
             .replaceAll(/.*\.LIT_/g, "")
             .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
-            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) ?)/g, "") // Remove prefix/suffix chars
-            .replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
-            //.replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
-            //.replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
+            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) ?|(Loot|AISpawner|Node|Static Mesh SM|Config Set DA))/g, "") // Remove prefix/suffix chars
+            //.replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
+            // .replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
+            .replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
             .replaceAll(/Chateau .*/g, "")
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
