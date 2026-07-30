@@ -83,6 +83,8 @@ export const containers = [
     "Chest Drawers",
     "Wardrobe",
     "Workbench",
+    "StoneTomb",
+    "Cabinet",
 ]
 
 export const looseItems = [
