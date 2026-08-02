@@ -79,7 +79,7 @@ import {controls, dom_ready} from "dom";
 
         dom.rebuildSelects();
 
-        controls.creatureSelect.multiselect('select', ['Miniboss', "Bloats", "Dreg Horde"]);
+        controls.creatureSelect.multiselect('select', ['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"]);
         [controls.lootSelect, controls.looseSelect, controls.envSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
             control.multiselect('selectAll', false)
             control.multiselect('updateButtonText')
