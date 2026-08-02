@@ -185,6 +185,26 @@ export class Marker {
             this.#colorMatrix.brightness((Number(this.#row.SpawnChance) + 50) / 100, false);
         }
 
+        console.log(display_lower)
+        if (display_lower.includes("a0")) {
+            sprite.texture = textures.pingGeneric;
+            this.#tint = 0xFFD800;
+            this.#zIndex = 100;
+            this.#descriptors.push("npc");
+        }
+        if (display_lower.includes("gate a0")) {
+            sprite.texture = textures.door;
+            this.#tint = 0x00D8FF
+        }
+
+        for (const substr of Object.keys(data.chateauProfessionNodes)) {
+            if (this.#row.ObjectName.startsWith(substr)) {
+                sprite.texture = data.chateauProfessionNodes[substr];
+                this.#zIndex = 50;
+                this.#descriptors.push("profession");
+            }
+        }
+
         for (const substr of data.looseItems) {
             if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
                 this.#class = "loose";

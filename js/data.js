@@ -182,6 +182,18 @@ export const questItems = [
     "BP_WeaponCache05_C",
 ]
 
+export const chateauProfessionNodes = {
+    "BP_Artificer": textures.profArtificer,
+    "BP_Conservator": textures.profConservator,
+    "BP_Cook": textures.profCook,
+    "BP_Gunsmith": textures.profGunsmith,
+    "BP_Metallurgist": textures.profMetallurgist,
+    "BP_Naturalist": textures.profNaturalist,
+    "BP_Outfitter": textures.profOutfitter,
+    "BP_Physician": textures.profPhysician,
+    "BP_Scavenger": textures.profScavenger,
+}
+
 export const professions = {
     conservatorTypes: [
         "Node_Con_BarrelLathe_C",
