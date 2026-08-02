@@ -214,7 +214,8 @@ export class Marker {
 
                 if (display_lower.includes("rare") || display_lower.includes("legendary")
                     || display_lower.includes("loose") || display_lower.includes("ampoule")
-                    || display_lower.includes("key ring") || display_lower.includes("recip")) {
+                    || display_lower.includes("key ring") || display_lower.includes("keys m0")
+                    || display_lower.includes("recip")) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
@@ -292,7 +293,8 @@ export class Marker {
                     sprite.texture = textures.egg;
                     this.tint = 0xffffff;
                     this.#descriptors.push("egg");
-                } else if (display_lower.includes("bullion") || display_lower.includes("crate")
+                } else if (display_lower.includes("dungeon m") || display_lower.includes("bullion")
+                    || display_lower.includes("crate")
                     || display_lower.includes("corpse") || display_lower.includes("clothes")) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
