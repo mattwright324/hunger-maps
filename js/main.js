@@ -34,11 +34,11 @@ import {controls, dom_ready} from "dom";
         document.getElementById("offsetY").value = preset.offsetY;
         document.getElementById("rotation").value = preset.rotation;
 
-        preset.data().forEach(marker => world.addChild(marker.sprite));
+        preset.data().forEach(marker => world.addChild(marker.container));
         pixi.scaleMarkersToZoom();
 
         const sprites = pixi.markerSprites();
-        const markers = sprites.map(sprite => sprite._marker);
+        const markers = sprites.map(sprite => sprite._marker).filter(m => m);
 
         let minZ = Infinity;
         let maxZ = -Infinity;
@@ -95,20 +95,42 @@ import {controls, dom_ready} from "dom";
 
         markerSprites().forEach(sprite => {
             const marker = sprite._marker;
-            const match = marker.readable.displayName.toLowerCase().includes(query)
-                || marker.class.includes(query)
-                || marker.descriptors.includes(query);
+            if (!marker) {
+                return;
+            }
+
+            const values = [
+                marker.readable.displayName,
+                marker.class,
+                marker.descriptors
+            ]
+            if (marker.row.SpawnChance) {
+                values.push(marker.row.SpawnChance + " (" + marker.row.ChanceType + ")")
+            }
+            if (marker.row.Health) {
+                values.push(marker.row.Health)
+            }
+            if (marker.row.Keyed) {
+                values.push(marker.row.Keyed)
+            }
+            if (marker.row.LootSource) {
+                values.push(marker.row.LootSource)
+            }
+            if (marker.row.AISpawner) {
+                values.push(marker.row.AISpawner)
+            }
+            const match = values.some(v => v.toLowerCase().includes(query));
 
             if (match) {
                 sprite.tint = marker.originalTint;
-                sprite.zIndex = marker.originalZIndex;
-                sprite.alpha = 1.0;
-                sprite.visible = true;
+                sprite.parent.zIndex = marker.originalZIndex;
+                sprite.parent.alpha = 1.0;
+                sprite.parent.visible = true;
             } else {
                 sprite.tint = 0x808080;
-                sprite.alpha = 0.2;
-                sprite.zIndex -= 1000;
-                sprite.visible = !showOnlyMatches;
+                sprite.parent.alpha = 0.2;
+                sprite.parent.zIndex -= 1000;
+                sprite.parent.visible = !showOnlyMatches;
             }
         });
 
@@ -120,32 +142,32 @@ import {controls, dom_ready} from "dom";
         const spawns = controls.spawnsSelect.val();
         const other = controls.otherSelect.val();
 
-        markerSprites().forEach(sprite => {
-            if (!sprite.visible) {
+        markerSprites().filter(m => m._marker).forEach(sprite => {
+            if (!sprite.parent.visible) {
                 return;
             }
 
             const marker = sprite._marker;
             if (marker.class === "container") {
-                sprite.visible = containers.includes(marker.readable.displayName);
+                sprite.parent.visible = containers.includes(marker.readable.displayName);
             }
             if (marker.class === "loose") {
-                sprite.visible = loose.includes(marker.readable.displayName);
+                sprite.parent.visible = loose.includes(marker.readable.displayName);
             }
             if (marker.class === "creature") {
-                sprite.visible = creature.includes(marker.readable.displayName);
+                sprite.parent.visible = creature.includes(marker.readable.displayName);
             }
             if (marker.class === "environment") {
-                sprite.visible = environment.includes(marker.readable.displayName);
+                sprite.parent.visible = environment.includes(marker.readable.displayName);
             }
             if (marker.class === "quest") {
-                sprite.visible = quest.includes(marker.readable.displayName);
+                sprite.parent.visible = quest.includes(marker.readable.displayName);
             }
             if (marker.class === "spawns") {
-                sprite.visible = spawns.includes(marker.readable.displayName);
+                sprite.parent.visible = spawns.includes(marker.readable.displayName);
             }
             if (marker.class === "other") {
-                sprite.visible = other.includes(marker.readable.displayName);
+                sprite.parent.visible = other.includes(marker.readable.displayName);
             }
         })
 
@@ -154,18 +176,18 @@ import {controls, dom_ready} from "dom";
         const zValue = Number(controls.sliderHeight.value);
         if (heightEnabled) {
             console.log("Filtering by height", zValue, step);
-            markerSprites().forEach(sprite => {
+            markerSprites().filter(m => m._marker).forEach(sprite => {
                 const marker = sprite._marker;
                 if (sprite.visible && !isNaN(marker.row.Z)) {
                     const inRange = Number(marker.row.Z) > zValue && Number(marker.row.Z) < (zValue + step);
                     if (inRange) {
                         sprite.tint = marker.originalTint;
-                        sprite.zIndex = marker.originalZIndex;
-                        sprite.alpha = 1.0;
+                        sprite.parent.zIndex = marker.originalZIndex;
+                        sprite.parent.alpha = 1.0;
                     } else {
                         sprite.tint = 0x808080;
-                        sprite.zIndex -= 1000;
-                        sprite.alpha = 0.2;
+                        sprite.parent.zIndex -= 1000;
+                        sprite.parent.alpha = 0.2;
                     }
                 }
             })

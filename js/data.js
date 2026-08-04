@@ -1,6 +1,6 @@
-import { textures } from "textures";
-import { elements } from "dom";
-import { Marker } from "marker";
+import {textures} from "textures";
+import {elements} from "dom";
+import {Marker} from "marker";
 
 async function getCsvData(url) {
     return await fetch(url)
@@ -16,19 +16,25 @@ async function parseCSV(text) {
         const cols = line.split(",");
         if (cols.length < 6) continue;
 
-        const [Type, ObjectName, StaticMeshName, X, Y, Z, SpawnChance] = cols;
+        const [RootType, OuterType, OuterName, X, Y, Z, DisplayName, SpawnChance, ChanceType, Health, Keyed, LootSource, AISpawner] = cols;
 
-        if (Type === "Type") continue;
+        //if (Type === "Type") continue;
         if (!X || !Y || !Z) continue;
 
         rows.push({
-            Type,
-            ObjectName,
-            StaticMeshName,
+            RootType,
+            OuterType,
+            OuterName,
             X: parseFloat(X),
             Y: parseFloat(Y),
             Z: parseFloat(Z),
+            DisplayName,
             SpawnChance,
+            ChanceType,
+            Health,
+            Keyed,
+            LootSource,
+            AISpawner,
         });
     }
     console.log("Parsed CSV data:", rows.length, text);

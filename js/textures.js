@@ -36,6 +36,12 @@ const texturePaths = {
     quest: "./img/T_UI_Icon_TrackerHandIn.png",
     extract: "./img/T_UI_Icon_Extract_64.png",
     stairs: "./img/StairIntegrated.png",
+
+    key_bronze: "./img/T_UI_Item_Key_Bronze.png",
+    key_silver: "./img/T_UI_Item_Key_Silver.png",
+    key_gold: "./img/T_UI_Item_Key_Gold.png",
+    key_special: "./img/T_UI_Item_Key_Unique_Silver.png",
+
 };
 
 const loadedTextures = await Promise.all(

@@ -14,6 +14,7 @@ export class Marker {
     #descriptors = [];
     #colorMatrix = new PIXI.ColorMatrixFilter();
     #texture = textures.uncommon;
+    #container = new PIXI.Container();
     #sprite = new PIXI.Sprite(this.#texture);
     #class = "other";
 
@@ -32,6 +33,10 @@ export class Marker {
 
     get descriptors() {
         return this.#descriptors.join(" ").toLowerCase();
+    }
+
+    get container() {
+        return this.#container;
     }
 
     get sprite() {
@@ -59,10 +64,10 @@ export class Marker {
             .replaceAll(/.*\.LIT_/g, "")
             .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
-            .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) ?|(Loot|AISpawner|Node|Static Mesh SM|Config Set DA))/g, "") // Remove prefix/suffix chars
+            // .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) ?|(Loot|AISpawner|Node|Static Mesh SM|Config Set DA))/g, "") // Remove prefix/suffix chars
             //.replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
             // .replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
-            .replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
+            // .replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
             .replaceAll(/Chateau .*/g, "")
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
@@ -104,16 +109,20 @@ export class Marker {
         sprite.filters = [this.#colorMatrix];
         this.#applyTransforms()
 
-        this.#readable.name = this.#makeReadable(this.#row.ObjectName.replaceAll(/'map.*/gi, ""));
-        this.#readable.mesh = this.#makeReadable(this.#row.StaticMeshName);
-        const display = []
-        if (this.#readable.name) {
-            display.push(this.#readable.name);
+        this.#container.addChild(sprite);
+
+        this.#readable.name = this.#makeReadable(this.#row.OuterType || "");
+        this.#readable.mesh = this.#makeReadable(this.#row.OuterName || "");
+
+        if (this.#row.Keyed) {
+            this.#row.Keyed = this.#row.Keyed.replace(/InventoryDefinition_Key'ID_Key_(\w+)'/g, "$1 Key");
         }
-        if (this.#readable.mesh) {
-            display.push(this.#readable.mesh);
+
+        let aiSpawner = this.#row.AISpawner;
+        if (aiSpawner) {
+            this.#row.AISpawner = this.#makeReadable(aiSpawner.replace(/AISpawnerConfigSet'DA_AISpawner_(\w+)'/g, "$1"));
         }
-        this.#readable.displayName = display.join("; ");
+        this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner || this.#row.LootSource || this.#row.OuterType
 
         // this.#colorMatrix.brightness(1.1, false);
         // this.#colorMatrix.saturate(1.05, false);
@@ -121,13 +130,14 @@ export class Marker {
         this.#classify();
         sprite.tint = this.#tint;
         sprite.zIndex = this.#zIndex;
+        this.#container.zIndex = this.#zIndex;
 
         sprite.interactive = true;
         sprite.on("pointerover", e => {
             tooltip.style.display = "block";
             tooltip.style.left = (e.clientX + 10) + "px";
             tooltip.style.top = (e.clientY - 10) + "px";
-            tooltip.textContent = this.#tooltipText();
+            tooltip.innerHTML = this.#tooltipText();
         });
         sprite.on("pointerout", () => {
             tooltip.style.display = "none";
@@ -162,27 +172,57 @@ export class Marker {
         });
     }
 
+    #replacer(key, value) {
+        if (value === null || value === {} || !value)
+            return undefined;
+        else
+            return value;
+    };
+
     #tooltipText() {
-        const lines = []
-        if (this.#readable.displayName) {
-            lines.push(this.#readable.displayName);
-        } else {
-            lines.push(this.#row.StaticMeshName || this.#row.ObjectName);
-        }
-        lines.push("Class: " + this.#class);
-        lines.push("Z: " + this.sprite.z.toFixed(2));
+        let rows = []
+        rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
+        rows.push(`<tr><td><strong>Height (Z)</strong></td><td>${this.sprite.z.toFixed(2)}</td></tr>`)
+        rows.push(`<tr><td><strong>Class</strong></td><td>${this.#class}</td></tr>`)
         if (this.#row.SpawnChance) {
-            lines.push("Spawn Chance: " + this.#row.SpawnChance + "%");
+            rows.push(`<tr><td><strong>Spawn Chance</strong></td><td>${this.#row.SpawnChance}% (${this.#row.ChanceType})</td></tr>`)
         }
-        return lines.join("\n");
+        if (this.#row.Health) {
+            rows.push(`<tr><td><strong>Health</strong></td><td>${this.#row.Health}</td></tr>`)
+        }
+        if (this.#row.Keyed) {
+            rows.push(`<tr><td><strong>Keyed</strong></td><td>${this.#row.Keyed}</td></tr>`)
+        }
+        if (this.#row.LootSource) {
+            rows.push(`<tr><td><strong>LootSource</strong></td><td>${this.#row.LootSource}</td></tr>`)
+        }
+        if (this.#row.AISpawner) {
+            rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
+        }
+        return `<div><h5>${this.#readable.displayName}</h5><table class="table table-sm table-striped">${rows.join("")}</table></div>`
     }
 
     #classify() {
         const sprite = this.#sprite;
         const display_lower = this.#readable.displayName.toLowerCase();
 
-        if (this.#row.SpawnChance) {
-            this.#colorMatrix.brightness((Number(this.#row.SpawnChance) + 50) / 100, false);
+        this.#colorMatrix.brightness((Number(this.#row.SpawnChance || "100.0") + 15) / 100, false);
+
+        if (this.#row.Keyed) {
+            let keyTexture = textures.key_special;
+            if (this.#row.Keyed.includes("Bronze")) keyTexture = textures.key_bronze;
+            if (this.#row.Keyed.includes("Silver")) keyTexture = textures.key_silver;
+            if (this.#row.Keyed.includes("Gold")) keyTexture = textures.key_gold;
+            const child = new PIXI.Sprite(keyTexture);
+            child._type = "marker";
+            child.anchor.set(0.5);
+            child.x = sprite.x;
+            child.y = sprite.y;
+            child.zIndex = sprite.zIndex + 1;
+            child._screenSize = 48
+            this.#container.addChild(child);
+
+            this.#descriptors.push("locked");
         }
 
         console.log(display_lower)
@@ -198,7 +238,7 @@ export class Marker {
         }
 
         for (const substr of Object.keys(data.chateauProfessionNodes)) {
-            if (this.#row.ObjectName.startsWith(substr)) {
+            if (this.#row.OuterType.startsWith(substr)) {
                 sprite.texture = data.chateauProfessionNodes[substr];
                 this.#zIndex = 50;
                 this.#descriptors.push("profession");
@@ -206,7 +246,7 @@ export class Marker {
         }
 
         for (const substr of data.looseItems) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "loose";
                 sprite.texture = textures.itemBag;
                 this.#tint = 0xFFFFFF;
@@ -224,7 +264,7 @@ export class Marker {
             }
         }
         for (const substr of data.environment) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "environment";
                 sprite.texture = textures.uncommon;
 
@@ -241,21 +281,21 @@ export class Marker {
                 }
 
                 for (const resourceNode of data.professions.conservatorTypes) {
-                    if (this.#row.ObjectName.includes(resourceNode)) {
+                    if (this.#row.OuterType.includes(resourceNode)) {
                         sprite.texture = textures.profConservator;
                         this.#descriptors.push("profession");
                         break;
                     }
                 }
                 for (const resourceNode of data.professions.naturalistTypes) {
-                    if (this.#row.ObjectName.includes(resourceNode)) {
+                    if (this.#row.OuterType.includes(resourceNode)) {
                         sprite.texture = textures.profNaturalist;
                         this.#descriptors.push("profession");
                         break;
                     }
                 }
                 for (const resourceNode of data.professions.scavengerTypes) {
-                    if (this.#row.ObjectName.includes(resourceNode)) {
+                    if (this.#row.OuterType.includes(resourceNode)) {
                         sprite.texture = textures.profScavenger;
                         this.#descriptors.push("profession");
                         break;
@@ -284,7 +324,7 @@ export class Marker {
             }
         }
         for (const substr of data.containers) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "container";
                 sprite.texture = textures.pingGeneric;
                 this.#zIndex = 50;
@@ -310,14 +350,14 @@ export class Marker {
             }
         }
         for (const substr of data.spawns) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "spawns";
 
-                if (display_lower.includes("raid spawn")) {
+                if (display_lower.includes("raidspawn")) {
                     sprite.texture = textures.social;
                     this.#tint = 0xff00ff;
                     this.zIndex = 200;
-                } else if (display_lower.includes("raid extract")) {
+                } else if (display_lower.includes("dirigible")) {
                     sprite.texture = textures.extract;
                     this.zIndex = 200;
                 }
@@ -325,7 +365,7 @@ export class Marker {
             }
         }
         for (const substr of data.creatures) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "creature";
                 sprite.texture = textures.monster;
                 this.#tint = 0xFFA2A2
@@ -336,7 +376,7 @@ export class Marker {
             }
         }
         for (const substr of data.questItems) {
-            if (this.#row.ObjectName.match(substr) || this.#row.StaticMeshName.match(substr)) {
+            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "quest";
                 sprite.texture = textures.quest;
                 this.#tint = 0x00ff00;

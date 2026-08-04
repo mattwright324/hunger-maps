@@ -4,6 +4,8 @@ import csv
 
 # --- CONFIG ---
 
+BP_FOLDER = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Meshes\Blueprints"
+
 OUTPUT_FOLDER = r"output/"
 PARSE_MAP = [
     {
@@ -26,11 +28,20 @@ PARSE_MAP = [
 
 types = []
 
-def parse_file(objects, full_path):
+def parse_blueprint(objects, file):
+    file_name = os.path.splitext(file)[0]
+    display_name = None
+    spawn_chance = "100"
+    key = None
+
+    return ["Blueprint", file_name, display_name, spawn_chance, key]
+
+def parse_file(objects, file, blueprints):
     loot_nodes = []
     extractions = []
     ai_spawners = []
     spawn_chances = []
+    keyed_doors = []
 
     scene_components = []
     static_mesh_components = []
@@ -58,6 +69,12 @@ def parse_file(objects, full_path):
             name = obj.get("Name")
             spawner_name = props.get("SpawnChancesSet", {}).get("ObjectName")
             ai_spawners.append([obj_type, name, spawner_name])
+
+        if "DoorController" in obj_type:
+            name = obj.get("Outer", {}).get("ObjectName")
+            key = props.get("KeyDefinition", {}).get("ObjectName")
+            if key:
+                keyed_doors.append([obj_type, name])
 
         if "InitialSpawnChance" in props:
             name = obj.get("Name")
@@ -208,6 +225,25 @@ def parse_file(objects, full_path):
 
 def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+
+    blueprints = []
+
+    for root, _, files in os.walk(BP_FOLDER):
+        for file in files:
+            if not file.lower().endswith(".json"):
+                continue
+
+            full_path = os.path.join(root, file)
+
+            try:
+                with open(full_path, "r", encoding="utf-8") as f:
+                    json = json.load(f)
+
+                rows = parse_blueprint(json, file)
+                blueprints.extend(rows)
+            except Exception as e:
+                print(f"Failed to parse {full_path}: {e}")
+
     for map in PARSE_MAP:
         INPUT_FOLDER = map["folder"]
         OUTPUT_CSV = os.path.join(OUTPUT_FOLDER, map["output"])
@@ -226,7 +262,7 @@ def main():
                     with open(full_path, "r", encoding="utf-8") as f:
                         objects = json.load(f)
 
-                    rows = parse_file(objects, full_path)
+                    rows = parse_file(objects, file)
                     all_rows.extend(rows)
 
                 except Exception as e:

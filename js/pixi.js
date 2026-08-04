@@ -30,10 +30,10 @@ mapOverlaySprite.y = -500;
 mapOverlaySprite.width = 4096;
 mapOverlaySprite.height = 4596;
 mapOverlaySprite.zIndex = -9999
-world.addChildAt(mapOverlaySprite, 0);
+world.addChildAt(mapOverlaySprite, 1);
 
 export function markerSprites() {
-    return world.children.filter(c => c._type === "marker");
+    return world.children.flatMap(e => e.children).filter(c => c._type === "marker");
 }
 
 export function sortSprites() {
