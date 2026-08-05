@@ -262,7 +262,7 @@ export class Marker {
 
                 if (display_lower.includes("rare") || display_lower.includes("legendary")
                     || display_lower.includes("loose") || display_lower.includes("ampoule")
-                    || display_lower.includes("key ring") || display_lower.includes("keys m0")
+                    || display_lower.includes("key_ring") || display_lower.includes("keys_m0")
                     || display_lower.includes("recip")) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
@@ -278,7 +278,7 @@ export class Marker {
 
                 if (display_lower.includes("breakable")
                     || display_lower.includes("door")
-                    || display_lower.includes("window large")) {
+                    || display_lower.includes("windowlarge")) {
                     this.#tint = 0x00D8FF
                 }
 
@@ -310,7 +310,7 @@ export class Marker {
                     }
                 }
 
-                if (display_lower.includes("sound trap")) {
+                if (display_lower.includes("soundtrap")) {
                     sprite.texture = textures.sound;
                     this.#tint = 0xff0000;
                     if (display_lower.includes("crow") || display_lower.includes("glass")) this.#tint = 0x888888;
