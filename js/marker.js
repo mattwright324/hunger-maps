@@ -309,7 +309,7 @@ export class Marker {
                     }
                 }
 
-                if (this.#row.OuterType.includes("Soundtrap")) {
+                if (this.#row.OuterType.toLowerCase().includes("soundtrap")) {
                     sprite.texture = textures.sound;
                     this.#tint = 0xff0000;
                     if (this.#row.OuterType.includes("Crow") || this.#row.OuterType.includes("Glass")) this.#tint = 0x888888;
