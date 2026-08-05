@@ -309,10 +309,10 @@ export class Marker {
                     }
                 }
 
-                if (display_lower.includes("soundtrap")) {
+                if (this.#row.OuterType.includes("Soundtrap")) {
                     sprite.texture = textures.sound;
                     this.#tint = 0xff0000;
-                    if (display_lower.includes("crow") || display_lower.includes("glass")) this.#tint = 0x888888;
+                    if (this.#row.OuterType.includes("Crow") || this.#row.OuterType.includes("Glass")) this.#tint = 0x888888;
                     this.#zIndex = 50;
                 } else if (display_lower.includes("trap") && !display_lower.includes("trapdoor")) {
                     sprite.texture = textures.grenade;

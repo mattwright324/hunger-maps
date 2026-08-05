@@ -111,7 +111,8 @@ export const environment = [
     "Stair",
     "Lantern",
     "BP_Dirigible",
-    "Guard_0"
+    "Guard_0",
+    "BP_HangingHerbRope_C",
 ]
 
 export const creatures = [
@@ -143,7 +144,6 @@ export const questItems = [
     "BP_FamilyRegister_C",
     "BP_FortificationBlueprint_C",
     "BP_GrainRecord_C",
-    "BP_HangingHerbRope_C",
     "BP_Interact01_C",
     "BP_Interact02_C",
     "BP_Interact03_C",
@@ -237,6 +237,7 @@ export const professions = {
         "Node_Nat_PepperPlate_C",
         "Node_Nat_Poppy_C",
         "Node_Nat_PoppyDried_01a_C",
+        "BP_HangingHerbRope_C",
     ],
     scavengerTypes: [
         "Node_Scav_Wool_C",
