@@ -208,10 +208,11 @@ def main():
             keyed = None
             loot_source = None
             ai_spawn = None
+            visible = None
 
             def walk_props(obj, parent=None, depth=0, search_text=None):
                 nonlocal read_count, read
-                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn
+                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn, visible
 
                 # if obj.get("Type").startswith("Level"):
                 #     return
@@ -262,6 +263,10 @@ def main():
                     loot_source = obj_props.get("ItemTable", {}).get("AssetPathName", "").split(".")[::-1][0]
                 if "AISpawner" in obj.get("Type") and "SpawnChancesSet" in obj_props and not ai_spawn:
                     ai_spawn = obj_props.get("SpawnChancesSet", {}).get("ObjectName")
+                if "bVisible" in obj_props and visible is None:
+                    visible = obj_props.get("bVisible")
+                if "bHiddenInGame" in obj_props and visible is None:
+                    visible = obj_props.get("bHiddenInGame")
 
                 for obj2 in resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
                     walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))
@@ -330,7 +335,7 @@ def main():
                 print(f"{display_name} {root_obj.get('CustomOuterType')}: {health}, {chance} ({chance_type}), {x}, {y}, {z}, {keyed}, {loot_source}, {ai_spawn}")
                 print()
 
-            csv_rows.append([root_obj.get("Type"), root_obj.get('CustomOuterType'), root_obj.get('CustomOuterName'), x, y, z, display_name, chance, chance_type, health, keyed, loot_source, ai_spawn])
+            csv_rows.append([root_obj.get("Type"), root_obj.get('CustomOuterType'), root_obj.get('CustomOuterName'), x, y, z, display_name, chance, chance_type, health, keyed, loot_source, ai_spawn, visible])
 
         for root_obj in resolver.by_type.get("FastGeoContainer", []):
             for clusters in root_obj.get("ComponentClusters", []):
@@ -356,11 +361,16 @@ def main():
                         z = translation.get("Z")
                     if not x:
                         continue
-                    csv_rows.append([root_obj.get("Type"), obj.get('CustomOuterType'), obj.get('CustomOuterName'), x, y, z, None, None, None, None, None, None, None])
+                    visible = None
+                    if "bVisible" in obj and visible is None:
+                        visible = obj.get("bVisible")
+                    if "bHiddenInGame" in obj and visible is None:
+                        visible = not obj.get("bHiddenInGame")
+                    csv_rows.append([root_obj.get("Type"), obj.get('CustomOuterType'), obj.get('CustomOuterName'), x, y, z, None, None, None, None, None, None, None, visible])
 
         with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "SpawnChance", "ChanceType", "Health", "Keyed", "LootSource", "AISpawner"])
+            writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "SpawnChance", "ChanceType", "Health", "Keyed", "LootSource", "AISpawner","Visible"])
             csv_rows.sort()
             writer.writerows(csv_rows)
 

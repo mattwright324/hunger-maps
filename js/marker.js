@@ -182,7 +182,7 @@ export class Marker {
             rows.push(`<tr><td><strong>Name</strong></td><td>${this.#row["OuterName"]}</td></tr>`)
         }
         rows.push(`<tr><td><strong>Height (Z)</strong></td><td>${this.sprite.z.toFixed(2)}</td></tr>`)
-        rows.push(`<tr><td><strong>Class</strong></td><td>${this.#class}</td></tr>`)
+        rows.push(`<tr><td><strong>Tags</strong></td><td>${[this.#class, ...this.#descriptors].join(", ")}</td></tr>`)
         if (this.#row.SpawnChance) {
             rows.push(`<tr><td><strong>Spawn Chance</strong></td><td>${this.#row.SpawnChance}% (${this.#row.ChanceType})</td></tr>`)
         }
@@ -203,6 +203,9 @@ export class Marker {
         }
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
+        }
+        if (this.#row.Visible === "False") {
+            rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row.Visible}</td></tr>`)
         }
         return `<div><h5>${this.#readable.displayName}</h5><table class="table table-sm table-striped" style="margin:0">${rows.join("")}</table></div>`
     }
@@ -275,10 +278,9 @@ export class Marker {
                 this.#class = "environment";
                 sprite.texture = textures.uncommon;
 
-                if (display_lower.includes("breakable")
-                    || display_lower.includes("door")
-                    || display_lower.includes("windowlarge")) {
+                if (this.#row.Health) {
                     this.#tint = 0x00D8FF
+                    this.#descriptors.push("breakable")
                 }
 
                 if (display_lower.includes("lift") || display_lower.includes("door")) {
@@ -312,7 +314,9 @@ export class Marker {
                 if (this.#row.OuterType.toLowerCase().includes("soundtrap")) {
                     sprite.texture = textures.sound;
                     this.#tint = 0xff0000;
-                    if (this.#row.OuterType.includes("Crow") || this.#row.OuterType.includes("Glass")) this.#tint = 0x888888;
+                    if (this.#row.OuterType.includes("Crow") || this.#row.OuterType.includes("Glass")
+                        || this.#row.OuterType.includes("Pottery"))
+                        this.#tint = 0x888888;
                     this.#zIndex = 50;
                 } else if (display_lower.includes("trap") && !display_lower.includes("trapdoor")) {
                     sprite.texture = textures.grenade;
@@ -347,6 +351,7 @@ export class Marker {
                     || this.#row.OuterType.includes("Loot_Melee")
                     || this.#row.OuterType.includes("Loot_Armor")
                     || display_lower.includes("strongbox")
+                    || display_lower.includes("fargot")
                     || this.#row.OuterType.includes("Loot_DungeonM")) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;

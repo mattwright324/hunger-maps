@@ -16,10 +16,11 @@ async function parseCSV(text) {
         const cols = line.split(",");
         if (cols.length < 6) continue;
 
-        const [RootType, OuterType, OuterName, X, Y, Z, DisplayName, SpawnChance, ChanceType, Health, Keyed, LootSource, AISpawner] = cols;
+        const [RootType, OuterType, OuterName, X, Y, Z, DisplayName, SpawnChance, ChanceType, Health, Keyed, LootSource, AISpawner, Visible] = cols;
 
-        //if (Type === "Type") continue;
         if (!X || !Y || !Z) continue;
+
+        //if (Visible === "False") continue;
 
         rows.push({
             RootType,
@@ -35,6 +36,7 @@ async function parseCSV(text) {
             Keyed,
             LootSource,
             AISpawner,
+            Visible,
         });
     }
     console.log("Parsed CSV data:", rows.length, text);
@@ -155,7 +157,7 @@ export const questItems = [
     "BP_LouisMothersNote2_C",
     "BP_LouisMothersNoteQ08_C",
     "BP_LouisQ7Corpse_C",
-    "BP_Mapzone_01b_C",
+    //"BP_Mapzone_01b_C",
     "BP_MortuaryRecord_C",
     "BP_P_CrowsCircle_01_C",
     "BP_PiroCorpsePile_01_C",
