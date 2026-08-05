@@ -27,7 +27,7 @@ h6 {
     position: absolute;
     background: rgba(0, 0, 0, 0.8);
     color: white;
-    padding: 4px 8px;
+    padding: 8px 8px;
     border-radius: 4px;
     font-size: 12px;
     pointer-events: none;

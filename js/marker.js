@@ -146,14 +146,7 @@ export class Marker {
             tooltip.style.display = "none";
         });
 
-        const copy = []
-        if (this.#row.ObjectName) {
-            copy.push("Name: " + this.#row.ObjectName);
-        }
-        if (this.#row.StaticMeshName) {
-            copy.push("Mesh: " + this.#row.StaticMeshName);
-        }
-        const copyDetails = copy.join("\n");
+        const copyDetails = `${this.#row.OuterType}'${this.#row.OuterName}'`;
 
         function onDoubleClick(e) {
             navigator.clipboard.writeText(copyDetails);
@@ -205,7 +198,7 @@ export class Marker {
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
         }
-        return `<div><h5>${this.#readable.displayName}</h5><table class="table table-sm table-striped">${rows.join("")}</table></div>`
+        return `<div><h5>${this.#readable.displayName}</h5><table class="table table-sm table-striped" style="margin:0">${rows.join("")}</table></div>`
     }
 
     #classify() {
