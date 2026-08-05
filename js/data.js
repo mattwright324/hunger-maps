@@ -108,6 +108,9 @@ export const environment = [
     "Door",
     "Window",
     "Stair",
+    "Lantern",
+    "BP_Dirigible",
+    "Guard_0"
 ]
 
 export const creatures = [

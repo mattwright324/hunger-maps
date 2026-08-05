@@ -123,6 +123,9 @@ export class Marker {
             this.#row.AISpawner = this.#makeReadable(aiSpawner.replace(/AISpawnerConfigSet'DA_AISpawner_(\w+)'/g, "$1"));
         }
         this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner || this.#row.LootSource || this.#row.OuterType
+        if (["StaticMesh"].includes(this.#row.OuterType)) {
+            this.#readable.displayName = this.#row.OuterName;
+        }
 
         // this.#colorMatrix.brightness(1.1, false);
         // this.#colorMatrix.saturate(1.05, false);
@@ -182,6 +185,9 @@ export class Marker {
     #tooltipText() {
         let rows = []
         rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
+        if (this.#class === "other") {
+            rows.push(`<tr><td><strong>Name</strong></td><td>${this.#row["OuterName"]}</td></tr>`)
+        }
         rows.push(`<tr><td><strong>Height (Z)</strong></td><td>${this.sprite.z.toFixed(2)}</td></tr>`)
         rows.push(`<tr><td><strong>Class</strong></td><td>${this.#class}</td></tr>`)
         if (this.#row.SpawnChance) {
@@ -228,11 +234,13 @@ export class Marker {
         console.log(display_lower)
         if (display_lower.includes("a0")) {
             sprite.texture = textures.pingGeneric;
-            this.#tint = 0xFFD800;
+            if (!display_lower.includes("hub")) {
+                this.#tint = 0xFFD800;
+            }
             this.#zIndex = 100;
             this.#descriptors.push("npc");
         }
-        if (display_lower.includes("gate a0")) {
+        if (display_lower.includes("gate_a0")) {
             sprite.texture = textures.door;
             this.#tint = 0x00D8FF
         }
@@ -314,7 +322,7 @@ export class Marker {
                     this.#zIndex = 50;
                 }
 
-                if (display_lower.includes("stair integrated")) {
+                if (display_lower.includes("stairintegrated")) {
                     sprite.texture = textures.stairs;
                     //this.#tint = 0x0000ff;
                     console.log(this.#texture)
