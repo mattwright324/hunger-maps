@@ -340,9 +340,14 @@ export class Marker {
                     sprite.texture = textures.egg;
                     this.tint = 0xffffff;
                     this.#descriptors.push("egg");
-                } else if (display_lower.includes("dungeon m") || display_lower.includes("bullion")
+                } else if (display_lower.includes("bullion") || display_lower.includes("jewelry")
                     || display_lower.includes("crate")
-                    || display_lower.includes("corpse") || display_lower.includes("clothes")) {
+                    || display_lower.includes("corpse") || display_lower.includes("clothes")
+                    || this.#row.OuterType.includes("Loot_Ranged")
+                    || this.#row.OuterType.includes("Loot_Melee")
+                    || this.#row.OuterType.includes("Loot_Armor")
+                    || display_lower.includes("strongbox")
+                    || this.#row.OuterType.includes("Loot_DungeonM")) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
