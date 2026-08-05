@@ -11,14 +11,14 @@ BP_FOLDERS = [
 
 OUTPUT_FOLDER = r"output/"
 PARSE_MAP = [
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
-    #     "output": "map01_components.csv"
-    # },
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
-    #     "output": "map02_components.csv"
-    # },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
+        "output": "map01_components.csv"
+    },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
+        "output": "map02_components.csv"
+    },
     {
         "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
         "output": "map03_components.csv"

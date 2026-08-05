@@ -192,8 +192,14 @@ export class Marker {
         if (this.#row.Keyed) {
             rows.push(`<tr><td><strong>Keyed</strong></td><td>${this.#row.Keyed}</td></tr>`)
         }
-        if (this.#row.LootSource) {
-            rows.push(`<tr><td><strong>LootSource</strong></td><td>${this.#row.LootSource}</td></tr>`)
+        const lootSource = this.#row.LootSource;
+        if (lootSource) {
+            const lootSourceMap = data.DT_LootSources[lootSource];
+            if (lootSourceMap) {
+                rows.push(`<tr><td><strong>LootSource</strong></td><td>${lootSource} → ${lootSourceMap["LootTable"]} (${lootSourceMap["MinEntries"]} - ${lootSourceMap["MaxEntries"]} items)</td></tr>`)
+            } else {
+                rows.push(`<tr><td><strong>LootSource</strong></td><td>${lootSource}</td></tr>`)
+            }
         }
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)

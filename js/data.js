@@ -257,3 +257,588 @@ export const professions = {
         "Node_Scav_SilkBanner_01c_C",
     ]
 }
+
+export const DT_LootSources = {
+    "Ammo_Large": {
+        "LootTable": "Ammunition",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Ammo_Medium": {
+        "LootTable": "Ammunition",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Ammo_Small": {
+        "LootTable": "Ammunition",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Ammo_Small_Crude": {
+        "LootTable": "Ammunition_Crude",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Ammo_Small_Heavy": {
+        "LootTable": "Ammunition_Heavy",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Amphora": {
+        "LootTable": "Amphora",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Armor_Medium": {
+        "LootTable": "Armor",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Armor_UREL": {
+        "LootTable": "Armor_UREL",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "AshPile": {
+        "LootTable": "AshPile",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Basket_Large": {
+        "LootTable": "Baskets",
+        "MinEntries": 3,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "Basket_Medium": {
+        "LootTable": "Baskets",
+        "MinEntries": 2,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Basket_Small": {
+        "LootTable": "Baskets",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Beehive": {
+        "LootTable": "Beehive",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Blacksmith_Medium": {
+        "LootTable": "Blacksmith",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "BullionBox": {
+        "LootTable": "BullionBox",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Cabinet_Wall_Small": {
+        "LootTable": "Church",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Chest_Global_Large": {
+        "LootTable": "Global",
+        "MinEntries": 3,
+        "MaxEntries": 6,
+        "BiasCurve": null
+    },
+    "Chest_Global_Medium": {
+        "LootTable": "Global",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Chest_Global_Small": {
+        "LootTable": "Global",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Chest_Valuable_Large": {
+        "LootTable": "Global_REL",
+        "MinEntries": 3,
+        "MaxEntries": 6,
+        "BiasCurve": null
+    },
+    "Chest_Valuable_Medium": {
+        "LootTable": "Global_REL",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Chest_Valuable_Small": {
+        "LootTable": "Global_REL",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "ChickenCoop": {
+        "LootTable": "ChickenCoop",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "ChinawareCupboard_Small": {
+        "LootTable": "Chinaware",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Civilian_Large": {
+        "LootTable": "Civilian",
+        "MinEntries": 3,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "Civilian_Medium": {
+        "LootTable": "Civilian",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Civilian_Small": {
+        "LootTable": "Civilian",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "CivilianCupboard_Large": {
+        "LootTable": "CivilianCupboard",
+        "MinEntries": 3,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "CivilianCupboard_Medium": {
+        "LootTable": "CivilianCupboard",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "CivilianCupboard_Small": {
+        "LootTable": "CivilianCupboard",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "CivilianCupboardDresser_Small": {
+        "LootTable": "CivilianCupboardDresser",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "CivilianDresser_Large": {
+        "LootTable": "CivilianDresser",
+        "MinEntries": 3,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "CivilianDresser_Medium": {
+        "LootTable": "CivilianDresser",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "CivilianDresser_Small": {
+        "LootTable": "CivilianDresser",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Clothes": {
+        "LootTable": "Clothes",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Coffin": {
+        "LootTable": "Global",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Corpse_Gavroche": {
+        "LootTable": "Corpse_Gavroche",
+        "MinEntries": 2,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Corpse_Military": {
+        "LootTable": "Military",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Corpse_Peasant": {
+        "LootTable": "Civilian",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Distillery_Small": {
+        "LootTable": "Drinks",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Dungeon_M01": {
+        "LootTable": "Dungeon_M01",
+        "MinEntries": 3,
+        "MaxEntries": 6,
+        "BiasCurve": null
+    },
+    "Dungeon_M02": {
+        "LootTable": "Dungeon_M02",
+        "MinEntries": 3,
+        "MaxEntries": 6,
+        "BiasCurve": null
+    },
+    "Dungeon_M03": {
+        "LootTable": "Dungeon_M03",
+        "MinEntries": 3,
+        "MaxEntries": 6,
+        "BiasCurve": null
+    },
+    "FancySewingBox": {
+        "LootTable": "FancySewingBox",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "FargothStump": {
+        "LootTable": "FargothStump",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Generic_Global_Medium": {
+        "LootTable": "Generic",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Grave_Large": {
+        "LootTable": "Graveyard",
+        "MinEntries": 1,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "Grave_Medium": {
+        "LootTable": "Graveyard",
+        "MinEntries": 1,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "HighClassCiv_Large": {
+        "LootTable": "HighClassCiv",
+        "MinEntries": 3,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "HighClassCiv_Medium": {
+        "LootTable": "HighClassCiv",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "HighClassCiv_Small": {
+        "LootTable": "HighClassCiv",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Hunger_Ash": {
+        "LootTable": "Hunger_Ash",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Hunger_Biter": {
+        "LootTable": "Hunger_Biter",
+        "MinEntries": 2,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Hunger_Biter_Elite": {
+        "LootTable": "Hunger_Biter_Elite",
+        "MinEntries": 2,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Hunger_Bloat": {
+        "LootTable": "Hunger_Bloat",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Hunger_Brute": {
+        "LootTable": "Hunger_Brute",
+        "MinEntries": 2,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Hunger_Brute_Elite": {
+        "LootTable": "Hunger_Brute_Elite",
+        "MinEntries": 2,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Hunger_Dreg": {
+        "LootTable": "Hunger_Dreg",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Hunger_DregFarmerUnique": {
+        "LootTable": "Hunger_FarmerDregUnique",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Hunger_Howler": {
+        "LootTable": "Hunger_Howler",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Hunger_Shambler": {
+        "LootTable": "Hunger_Shambler",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Hunger_Waif": {
+        "LootTable": "Hunger_Waif",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Hunger_Womb": {
+        "LootTable": "Hunger_Womb",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "KindlingPile": {
+        "LootTable": "KindlingPile",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Latrine": {
+        "LootTable": "Latrine",
+        "MinEntries": 1,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Ledger": {
+        "LootTable": "Ledger",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "M02_Boss": {
+        "LootTable": "Boss_M02",
+        "MinEntries": 5,
+        "MaxEntries": 8,
+        "BiasCurve": null
+    },
+    "Medical_Medium": {
+        "LootTable": "Medical",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Medical_UREL_Medium": {
+        "LootTable": "Medical_UREL",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "MedicalPhysicianDreg": {
+        "LootTable": "MedicalPhysicianDreg",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Military_Large": {
+        "LootTable": "Military",
+        "MinEntries": 3,
+        "MaxEntries": 5,
+        "BiasCurve": null
+    },
+    "Military_Medium": {
+        "LootTable": "Military",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Military_Small": {
+        "LootTable": "Military",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "MissivesCabinet": {
+        "LootTable": "Ledger",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Nest": {
+        "LootTable": "Valuables",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "OakBarrel": {
+        "LootTable": "OakBarrel",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "Old_Cairn": {
+        "LootTable": "Cairn",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "OldBucket": {
+        "LootTable": "OldBucket",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "OldSewingBox": {
+        "LootTable": "OldSewingBox",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "OpiumBox": {
+        "LootTable": "OpiumBox",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "Sack_Flour": {
+        "LootTable": "Sack_Flour",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Saddlebag": {
+        "LootTable": "Saddlebag",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Shop_Med_A01": {
+        "LootTable": "Global",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Stove": {
+        "LootTable": "Stove",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "TEST": {
+        "LootTable": "TEST",
+        "MinEntries": 1,
+        "MaxEntries": 3,
+        "BiasCurve": null
+    },
+    "ToolingBin": {
+        "LootTable": "ToolingBin",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "ValuablesBox": {
+        "LootTable": "ValuablesBox",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "Weapon": {
+        "LootTable": "Weapon",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Weapon_Melee": {
+        "LootTable": "Weapon_Melee",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Weapon_Melee_REL": {
+        "LootTable": "Weapon_Melee_REL",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Weapon_Ranged": {
+        "LootTable": "Weapon_Ranged",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Weapon_Ranged_REL": {
+        "LootTable": "Weapon_Ranged_REL",
+        "MinEntries": 1,
+        "MaxEntries": 1,
+        "BiasCurve": null
+    },
+    "Workbench_Small": {
+        "LootTable": "Workbench",
+        "MinEntries": 1,
+        "MaxEntries": 2,
+        "BiasCurve": null
+    },
+    "PowderLocker": {
+        "LootTable": "PowderLocker",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "SlopBin": {
+        "LootTable": "SlopBin",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "TinkerCase": {
+        "LootTable": "TinkerCase",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    },
+    "MannequinTrunk": {
+        "LootTable": "MannequinTrunk",
+        "MinEntries": 2,
+        "MaxEntries": 4,
+        "BiasCurve": null
+    }
+}
