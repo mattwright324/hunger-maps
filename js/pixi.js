@@ -5,8 +5,19 @@ await app.init({
     preference: "webgl",
     resizeTo: document.getElementById("view-container"),
     backgroundColor: 0x000000,
-    antialias: true
+    antialias: false,
+    autoDensity: true,
+    resolution: Math.min(window.devicePixelRatio || 1, 2),
+    powerPreference: "low-power",
 });
+
+app.ticker.stop();
+
+app.render();
+
+export function render() {
+    app.render();
+}
 
 document.getElementById("view-container").appendChild(app.canvas);
 
@@ -23,6 +34,8 @@ mapSprite.height = 4096;
 mapSprite.zIndex = -Infinity
 world.addChildAt(mapSprite, 0);
 
+render();
+
 export const mapOverlaySprite = new PIXI.Sprite();
 mapOverlaySprite._type = "overlay";
 mapOverlaySprite.x = 0;
@@ -31,6 +44,8 @@ mapOverlaySprite.width = 4096;
 mapOverlaySprite.height = 4596;
 mapOverlaySprite.zIndex = -9999
 world.addChildAt(mapOverlaySprite, 1);
+
+render();
 
 export function markerSprites() {
     return world.children.flatMap(e => e.children).filter(c => c._type === "marker");
@@ -46,10 +61,12 @@ export function sortSprites() {
             a.zIndex - b.zIndex ||
             a.z - b.z
     });
+    render();
 }
 
 export function clearMarkers() {
     markerSprites().forEach(c => c.destroy());
+    render();
 }
 
 export function fitMapSpriteToCanvas() {
@@ -59,6 +76,7 @@ export function fitMapSpriteToCanvas() {
     world.scale.set(scale);
     world.x = (app.renderer.width - mapSprite.width * scale) / 2;
     world.y = 0;
+    render();
 }
 
 export function scaleMarkersToZoom() {
@@ -68,6 +86,7 @@ export function scaleMarkersToZoom() {
         const baseScale = screenSize / sprite.texture.width;
         sprite.scale.set(baseScale * inverseWorldScale);
     })
+    render();
 }
 
 function simulateTouchPointer(e) {
@@ -108,6 +127,7 @@ function setupPanZoom() {
     app.canvas.addEventListener("pointerdown", e => {
         if (e.pointerType === "touch") {
             touches.set(e.pointerId, {x: e.clientX, y: e.clientY});
+            render();
 
             // If this is the FIRST and ONLY touch → start pan
             if (touches.size === 1) {
@@ -127,6 +147,7 @@ function setupPanZoom() {
         if (e.pointerType !== "touch") return;
 
         touches.set(e.pointerId, {x: e.clientX, y: e.clientY});
+        render();
 
         // -----------------------------
         // PINCH ZOOM (exactly 2 touches)
@@ -188,6 +209,7 @@ function setupPanZoom() {
 
     app.canvas.addEventListener("pointerup", e => {
         touches.delete(e.pointerId);
+        render();
 
         if (touches.size < 2) {
             lastDistance = null;
@@ -208,6 +230,7 @@ function setupPanZoom() {
         touches.delete(e.pointerId);
         lastDistance = null;
         panAnchor = null;
+        render();
     });
 
     // Desktop wheel zoom unchanged
