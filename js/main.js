@@ -101,6 +101,7 @@ import {controls, dom_ready} from "dom";
 
             const values = [
                 marker.readable.displayName,
+                marker.row.OuterType,
                 marker.class,
                 marker.descriptors
             ]
