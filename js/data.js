@@ -12,6 +12,8 @@ async function parseCSV(text) {
     const lines = text.split(/\r?\n/);
     const rows = [];
 
+    const xy = {}
+
     for (let line of lines) {
         const cols = line.split(",");
         if (cols.length < 6) continue;
@@ -21,6 +23,10 @@ async function parseCSV(text) {
         if (!X || !Y || !Z) continue;
 
         //if (Visible === "False") continue;
+
+        const key = X+","+Y;
+        if (!xy[key]) xy[key] = 1; else xy[key] += 1;
+        if (xy[key] > 1) console.log("Duplicate key: ", key, xy[key], OuterType, OuterName);
 
         rows.push({
             RootType,
@@ -39,6 +45,11 @@ async function parseCSV(text) {
             Visible,
         });
     }
+
+    for (const key in xy) {
+
+    }
+
     console.log("Parsed CSV data:", rows.length, text);
     return rows;
 }

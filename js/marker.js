@@ -335,7 +335,7 @@ export class Marker {
             }
         }
         for (const substr of data.containers) {
-            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
+            if (this.#row.LootSource || this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "container";
                 sprite.texture = textures.pingGeneric;
                 this.#zIndex = 50;
