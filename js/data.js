@@ -24,7 +24,7 @@ async function parseCSV(text) {
 
         //if (Visible === "False") continue;
 
-        const key = X+","+Y;
+        const key = X + "," + Y;
         if (!xy[key]) xy[key] = 1; else xy[key] += 1;
         if (xy[key] > 1) console.log("Duplicate key: ", key, xy[key], OuterType, OuterName);
 
@@ -57,6 +57,7 @@ async function parseCSV(text) {
 export const presets = {
     "map00": {
         texture: textures.mapChateau,
+        thumbnail: "./img/T_UI_BG_Chateau.png",
         rawData: await getCsvData("./map00_components.csv?v=" + elements.metaVersion),
         data: () => presets["map00"].rawData.map(row => new Marker(row)),
         scale: 0.17,
@@ -67,6 +68,7 @@ export const presets = {
     "map01": {
         texture: textures.mapSarlat,
         overlay: textures.mapSarlatOverlay,
+        thumbnail: "./img/T_UI_Thumbnail_Map01.png",
         rawData: await getCsvData("./map01_components.csv?v=" + elements.metaVersion),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
         scale: 0.0409,
@@ -77,6 +79,7 @@ export const presets = {
     "map02": {
         texture: textures.mapJacques,
         overlay: textures.mapJacquesOverlay,
+        thumbnail: "./img/T_UI_Thumbnail_Map02.png",
         rawData: await getCsvData("./map02_components.csv?v=" + elements.metaVersion),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
         scale: 0.03622,
@@ -87,6 +90,7 @@ export const presets = {
     "map03": {
         texture: textures.mapSombre,
         overlay: textures.mapSombreOverlay,
+        thumbnail: "./img/T_UI_Thumbnail_Map03.png",
         rawData: await getCsvData("./map03_components.csv?v=" + elements.metaVersion),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
         scale: 0.03051,
@@ -124,7 +128,7 @@ export const environment = [
     "Stair",
     "Lantern",
     "BP_Dirigible",
-    "Guard_0",
+    "Gate_A0",
     "BP_HangingHerbRope_C",
 ]
 

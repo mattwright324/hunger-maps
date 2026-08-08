@@ -1,4 +1,3 @@
-
 import {closeTooltip} from 'marker';
 
 export const app = new PIXI.Application();
@@ -18,6 +17,7 @@ app.ticker.stop();
 app.render();
 
 let _renderPending = false;
+
 export function render() {
     if (_renderPending) return;
     _renderPending = true;
@@ -232,4 +232,5 @@ function setupPanZoom() {
         scaleMarkersToZoom();
     }, {passive: false});
 }
+
 setupPanZoom();

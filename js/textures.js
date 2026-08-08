@@ -43,11 +43,6 @@ const texturePaths = {
     key_silver: "./img/T_UI_Item_Key_Silver.png",
     key_gold: "./img/T_UI_Item_Key_Gold.png",
     key_special: "./img/T_UI_Item_Key_Unique_Silver.png",
-
-    thumbChateau: "./img/T_UI_BG_Chateau.webp",
-    thumbSarlat: "./img/T_UI_Thumbnail_Map01.webp",
-    thumbJacques: "./img/T_UI_Thumbnail_Map02.webp",
-    thumbSombre: "./img/T_UI_Thumbnail_Map02.webp",
 };
 
 const loadedTextures = await Promise.all(

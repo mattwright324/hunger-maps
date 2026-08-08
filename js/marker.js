@@ -274,17 +274,14 @@ export class Marker {
         }
 
         // console.log(display_lower)
-        if (display_lower.includes("a0")) {
+        if (this.#row.OuterType.includes("Hub_C") || this.#row.OuterType.includes("Chateau_C")) {
+            this.#class = "npc";
             sprite.texture = textures.pingGeneric;
             if (!display_lower.includes("hub")) {
                 this.#tint = 0xFFD800;
             }
             this.#zIndex = 100;
-            this.#descriptors.push("npc");
-        }
-        if (display_lower.includes("gate_a0")) {
-            sprite.texture = textures.door;
-            this.#tint = 0x00D8FF
+            return
         }
 
         for (const substr of Object.keys(data.chateauProfessionNodes)) {
@@ -292,6 +289,7 @@ export class Marker {
                 sprite.texture = data.chateauProfessionNodes[substr];
                 this.#zIndex = 50;
                 this.#descriptors.push("profession");
+                this.#class = "environment";
             }
         }
 

@@ -25,6 +25,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
     async function loadMapAndPreset(mapId) {
         pixi.clearMarkers();
         const preset = data.presets[mapId];
+        document.getElementById('map-banner').style.backgroundImage = `url('${preset.thumbnail}')`;
         mapSprite.texture = preset.texture;
         mapOverlaySprite.texture = preset.overlay;
         pixi.fitMapSpriteToCanvas();
@@ -82,9 +83,11 @@ import {controls, dom_ready, refreshLabels} from "dom";
         }
 
         loadMultiselectF(controls.lootSourceSelect, marker => {
+            if (!(marker.row.LootSource || "containers" === marker.class)) return;
             return data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown"
         });
 
+        loadMultiselectClass(controls.npcSelect, "npc");
         loadMultiselectClass(controls.lootSelect, "container");
         loadMultiselectClass(controls.looseSelect, "loose");
         loadMultiselectClass(controls.creatureSelect, "creature");
@@ -94,13 +97,13 @@ import {controls, dom_ready, refreshLabels} from "dom";
         loadMultiselectClass(controls.otherSelect, "other");
 
         controls.creatureSelect.setValue(['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"], true);
-        [controls.lootSourceSelect, controls.lootSelect,
+        [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect,
             controls.looseSelect, controls.envSelect,
             controls.questSelect, controls.spawnsSelect,
             controls.otherSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
         refreshLabels();
 
-        [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+        [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
             controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
         ].forEach(ts => {
             ts.input.closest('.col-lg-12').hidden = Object.keys(ts.options).length === 0;
@@ -156,6 +159,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
             }
         });
 
+        const npcs = controls.lootSourceSelect.getValue();
         const lootSources = controls.lootSourceSelect.getValue();
         const containers = controls.lootSelect.getValue();
         const loose = controls.looseSelect.getValue();
@@ -171,6 +175,9 @@ import {controls, dom_ready, refreshLabels} from "dom";
             }
 
             const marker = sprite._marker;
+            if (marker.class === "npc") {
+                sprite.parent.visible = npcs.includes(marker.readable.displayName);
+            }
             const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
             if (lootTable) {
                 sprite.parent.visible = lootSources.includes(lootTable);
@@ -226,7 +233,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
     controls.checkShowOnlyMatches.addEventListener("change", applySearch);
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
-    [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
+    [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
         controls.spawnsSelect, controls.otherSelect].forEach(ts => ts.on('change', applySearch));
 
     [controls.inputScale, controls.inputOffsetX, controls.inputOffsetY, controls.inputRotation].forEach(control => {

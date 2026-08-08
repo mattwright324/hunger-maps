@@ -71,6 +71,21 @@ body {
     max-height: calc(100vh - 16px);
 }
 
+#map-banner {
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.map-banner-overlay {
+    padding: 2rem 1rem;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.55), transparent);
+}
+
+.form-check-label {
+    user-select: none
+}
+
 .filters img {
     width: 24px;
     height: 24px;

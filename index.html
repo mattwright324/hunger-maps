@@ -99,22 +99,24 @@
                 </div>
             </nav>
 
-            <div class="p-3 flex-grow-1 overflow-y-auto">
-                <div class="mb-3">
-                    <h6>Select Map</h6>
-                    <select class="form-select" id="mapSelect">
+            <div id="map-banner">
+                <div class="map-banner-overlay">
+                    <select class="form-select form-select-lg" id="mapSelect" style="background-color: rgba(0,0,0,0.5);">
                         <option value="map00">The Chateau</option>
                         <option value="map01" selected>Sarlat Farm</option>
                         <option value="map02">Jacques Bridge</option>
                         <option value="map03">Sombre Forest</option>
                     </select>
-                    <div class="form-check mt-1">
+                    <div class="form-check mt-2">
                         <input class="form-check-input" type="checkbox" value="" id="showOverlay" checked>
                         <label class="form-check-label" for="showOverlay">
                             Show overlay
                         </label>
                     </div>
                 </div>
+            </div>
+
+            <div class="p-3 flex-grow-1 overflow-y-auto">
 
                 <div class="mb-3">
                     <h6 class="mb-0">
@@ -153,10 +155,19 @@
                 </div>
 
                 <div class="row filters">
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
-                                Loot Source
+                                NPCs
+                                <img src="./img/T_UI_Icon_PingGeneric.png">
+                            </h6>
+                            <select id="npc-select" multiple="multiple" style="display:none"></select>
+                        </div>
+                    </div>
+                    <div class="col-lg-12" hidden>
+                        <div class="mb-3">
+                            <h6>
+                                Loot Table
                                 <img src="./img/T_UI_Icon_PingGeneric.png">
                             </h6>
                             <select id="loot-source-select" multiple="multiple" style="display:none"></select>
@@ -172,7 +183,7 @@
                             <select id="loot-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Loose Items
@@ -181,7 +192,7 @@
                             <select id="loose-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Environment
@@ -192,7 +203,7 @@
                             <select id="env-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Creatures
@@ -201,7 +212,7 @@
                             <select id="creature-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Quest
@@ -210,7 +221,7 @@
                             <select id="quest-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Spawns
@@ -220,7 +231,7 @@
                             <select id="spawns-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-12">
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Other
@@ -229,13 +240,6 @@
                             <select id="other-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-check" hidden>
-                    <input class="form-check-input" type="checkbox" value="" id="hideAiSpawner" checked>
-                    <label class="form-check-label" for="hideAiSpawner">
-                        Hide AISpawner
-                    </label>
                 </div>
             </div>
 

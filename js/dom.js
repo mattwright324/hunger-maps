@@ -2,7 +2,7 @@
  * Wait for the DOM to be ready.
  * Alternate to $(document).ready()
  */
-export const doc_ready =  async () => {
+export const doc_ready = async () => {
     return new Promise(resolve => {
         if (document.readyState !== "loading") {
             resolve();
@@ -89,16 +89,15 @@ const dom_load = async () => {
     controls.checkShowOnlyMatches = document.getElementById("showOnlyMatches");
     controls.enableHeightFilter = document.getElementById("filterZrange");
     controls.sliderHeight = document.getElementById("zRange");
-    controls.hideAiSpawner = document.getElementById("hideAiSpawner");
 
-    TomSelect.define('select_all', function() {
+    TomSelect.define('select_all', function () {
         const self = this;
-        self.on('dropdown_open', function(dropdown) {
+        self.on('dropdown_open', function (dropdown) {
             if (dropdown.querySelector('.ts-select-all')) return;
             const bar = document.createElement('div');
             bar.className = 'ts-select-all d-flex gap-1 p-1 border-bottom';
             bar.innerHTML = '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">All</button>'
-                          + '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">None</button>';
+                + '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">None</button>';
             bar.children[0].addEventListener('mousedown', e => {
                 e.preventDefault(); // keep dropdown open
                 self.setValue(Object.keys(self.options), true);
@@ -121,9 +120,9 @@ const dom_load = async () => {
         }
         const n = ts.getValue().length;
         const total = Object.keys(ts.options).length;
-        ts._label.textContent = n === 0      ? 'None selected'
-                              : n === total   ? 'All selected'
-                              : `${n} selected`;
+        ts._label.textContent = n === 0 ? 'None selected'
+            : n === total ? 'All selected'
+                : `${n} selected`;
         ts._label.classList.toggle('text-muted', n === 0);
     }
 
@@ -134,24 +133,29 @@ const dom_load = async () => {
         maxOptions: null,
         closeAfterSelect: false,
         hideSelected: false,
-        onInitialize() { syncLabel(this); },
-        onChange()      { syncLabel(this); },
+        onInitialize() {
+            syncLabel(this);
+        },
+        onChange() {
+            syncLabel(this);
+        },
     };
 
     controls.showAll = document.getElementById("showAll");
     controls.hideAll = document.getElementById("hideAll");
 
+    controls.npcSelect = new TomSelect('#npc-select', tsOptions);
     controls.lootSourceSelect = new TomSelect('#loot-source-select', tsOptions);
-    controls.lootSelect       = new TomSelect('#loot-select',        tsOptions);
-    controls.looseSelect      = new TomSelect('#loose-select',       tsOptions);
-    controls.envSelect        = new TomSelect('#env-select',         tsOptions);
-    controls.creatureSelect   = new TomSelect('#creature-select',    tsOptions);
-    controls.questSelect      = new TomSelect('#quest-select',       tsOptions);
-    controls.spawnsSelect     = new TomSelect('#spawns-select',      tsOptions);
-    controls.otherSelect      = new TomSelect('#other-select',       tsOptions);
+    controls.lootSelect = new TomSelect('#loot-select', tsOptions);
+    controls.looseSelect = new TomSelect('#loose-select', tsOptions);
+    controls.envSelect = new TomSelect('#env-select', tsOptions);
+    controls.creatureSelect = new TomSelect('#creature-select', tsOptions);
+    controls.questSelect = new TomSelect('#quest-select', tsOptions);
+    controls.spawnsSelect = new TomSelect('#spawns-select', tsOptions);
+    controls.otherSelect = new TomSelect('#other-select', tsOptions);
 
     const allSelects = () => [
-        controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+        controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
         controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
     ];
 
@@ -174,15 +178,15 @@ const dom_load = async () => {
 
 
 export function refreshLabels() {
-    [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+    [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
         controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
     ].forEach(ts => {
         if (!ts._label) return;
         const n = ts.getValue().length;
         const total = Object.keys(ts.options).length;
-        ts._label.textContent = n === 0     ? 'None selected'
-                              : n === total  ? 'All selected'
-                              : `${n} selected`;
+        ts._label.textContent = n === 0 ? 'None selected'
+            : n === total ? 'All selected'
+                : `${n} selected`;
         ts._label.classList.toggle('text-muted', n === 0);
     });
 }
