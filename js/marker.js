@@ -5,6 +5,11 @@ import {controls} from "dom";
 let stickyMarker = null;
 let justTapped = false;
 
+export function closeTooltip() {
+    stickyMarker = null;
+    document.getElementById('tooltip').style.display = 'none';
+}
+
 function isSidebarOpen() {
     return document.getElementById('sidebar')?.classList.contains('show') ?? false;
 }
@@ -393,7 +398,7 @@ export class Marker {
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
                 } else if (display_lower.includes("kindling")) {
-                    sprite.texture = textures.branch;
+                    sprite.texture = textures.kindling;
                     this.#descriptors.push("thick branch");
                 } else if (display_lower.includes("ash") || display_lower.includes("stove")) {
                     sprite.texture = textures.charcoal;

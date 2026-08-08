@@ -33,6 +33,7 @@ const texturePaths = {
     social: "./img/T_UI_Icon_Social.png",
     egg: "./img/T_UI_Item_FreshEgg.png",
     branch: "./img/T_UI_Item_SolidBranch.png",
+    kindling: "./img/KindlingPile.png",
     charcoal: "./img/T_UI_Item_Charcoal.png",
     quest: "./img/T_UI_Icon_TrackerHandIn.png",
     extract: "./img/T_UI_Icon_Extract_64.png",
@@ -43,6 +44,10 @@ const texturePaths = {
     key_gold: "./img/T_UI_Item_Key_Gold.png",
     key_special: "./img/T_UI_Item_Key_Unique_Silver.png",
 
+    thumbChateau: "./img/T_UI_BG_Chateau.webp",
+    thumbSarlat: "./img/T_UI_Thumbnail_Map01.webp",
+    thumbJacques: "./img/T_UI_Thumbnail_Map02.webp",
+    thumbSombre: "./img/T_UI_Thumbnail_Map02.webp",
 };
 
 const loadedTextures = await Promise.all(

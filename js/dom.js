@@ -124,6 +124,7 @@ const dom_load = async () => {
         ts._label.textContent = n === 0      ? 'None selected'
                               : n === total   ? 'All selected'
                               : `${n} selected`;
+        ts._label.classList.toggle('text-muted', n === 0);
     }
 
     const tsOptions = {
@@ -182,6 +183,7 @@ export function refreshLabels() {
         ts._label.textContent = n === 0     ? 'None selected'
                               : n === total  ? 'All selected'
                               : `${n} selected`;
+        ts._label.classList.toggle('text-muted', n === 0);
     });
 }
 

@@ -63,6 +63,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
                 const key = keyFunc(marker);
                 if (key && !options.includes(key)) options.push(key);
             });
+            ts.clear(true);
             ts.clearOptions();
             options.sort().forEach(opt => ts.addOption({value: opt, text: opt}));
         }
@@ -75,6 +76,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
                     options.push(displayName);
                 }
             });
+            ts.clear(true);
             ts.clearOptions();
             options.sort().forEach(opt => ts.addOption({value: opt, text: opt}));
         }
@@ -97,6 +99,12 @@ import {controls, dom_ready, refreshLabels} from "dom";
             controls.questSelect, controls.spawnsSelect,
             controls.otherSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
         refreshLabels();
+
+        [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+            controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
+        ].forEach(ts => {
+            ts.input.closest('.col-lg-12').hidden = Object.keys(ts.options).length === 0;
+        });
 
         await applySearch();
     }

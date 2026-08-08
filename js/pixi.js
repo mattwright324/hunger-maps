@@ -1,4 +1,6 @@
 
+import {closeTooltip} from 'marker';
+
 export const app = new PIXI.Application();
 
 await app.init({
@@ -103,6 +105,7 @@ function setupPanZoom() {
     app.canvas.addEventListener("pointerdown", e => {
         if (e.pointerType === 'mouse' && e.button !== 0) return;
         touches.set(e.pointerId, {x: e.clientX, y: e.clientY});
+        closeTooltip();
         render();
 
         if (touches.size === 1) {
