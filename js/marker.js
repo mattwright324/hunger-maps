@@ -273,15 +273,15 @@ export class Marker {
             this.#descriptors.push("locked");
         }
 
-        // console.log(display_lower)
         if (this.#row.OuterType.includes("Hub_C") || this.#row.OuterType.includes("Chateau_C")) {
             this.#class = "npc";
-            sprite.texture = textures.pingGeneric;
+            sprite.texture = textures.npcGeneric;
             if (!display_lower.includes("hub")) {
                 this.#tint = 0xFFD800;
+            } else {
+                this.#descriptors.push("vendor")
             }
             this.#zIndex = 100;
-            return
         }
 
         for (const substr of Object.keys(data.chateauProfessionNodes)) {
@@ -321,7 +321,7 @@ export class Marker {
                     this.#descriptors.push("breakable")
                 }
 
-                if (display_lower.includes("lift") || display_lower.includes("door")) {
+                if (display_lower.includes("lift") || display_lower.includes("door") || this.#row.OuterType.includes("Gate_A0")) {
                     sprite.texture = textures.door;
                 } else if (display_lower.includes("window")) {
                     sprite.texture = textures.window;

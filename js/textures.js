@@ -11,6 +11,7 @@ const texturePaths = {
     mapSombre: "./map03.webp",
     mapSombreOverlay: "./map03_overlay.webp",
 
+    npcGeneric: "./img/T_UI_NPCIndicator_Base_Generic.png",
     uncommon: "./img/T_UI_Icon_Rarity_Uncommon.png",
     pingGeneric: "./img/T_UI_Icon_PingGeneric.png",
     itemBag: "./img/T_UI_Icon_Equipment_Equipment_64.png",

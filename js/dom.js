@@ -146,7 +146,7 @@ const dom_load = async () => {
 
     controls.npcSelect = new TomSelect('#npc-select', tsOptions);
     controls.lootSourceSelect = new TomSelect('#loot-source-select', tsOptions);
-    controls.lootSelect = new TomSelect('#loot-select', tsOptions);
+    // controls.lootSelect = new TomSelect('#loot-select', tsOptions);
     controls.looseSelect = new TomSelect('#loose-select', tsOptions);
     controls.envSelect = new TomSelect('#env-select', tsOptions);
     controls.creatureSelect = new TomSelect('#creature-select', tsOptions);
@@ -155,7 +155,7 @@ const dom_load = async () => {
     controls.otherSelect = new TomSelect('#other-select', tsOptions);
 
     const allSelects = () => [
-        controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+        controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.envSelect,
         controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
     ];
 
@@ -178,7 +178,7 @@ const dom_load = async () => {
 
 
 export function refreshLabels() {
-    [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+    [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.envSelect,
         controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
     ].forEach(ts => {
         if (!ts._label) return;

@@ -88,7 +88,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
         });
 
         loadMultiselectClass(controls.npcSelect, "npc");
-        loadMultiselectClass(controls.lootSelect, "container");
+        //loadMultiselectClass(controls.lootSelect, "container");
         loadMultiselectClass(controls.looseSelect, "loose");
         loadMultiselectClass(controls.creatureSelect, "creature");
         loadMultiselectClass(controls.envSelect, "environment");
@@ -97,13 +97,12 @@ import {controls, dom_ready, refreshLabels} from "dom";
         loadMultiselectClass(controls.otherSelect, "other");
 
         controls.creatureSelect.setValue(['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"], true);
-        [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect,
+        [controls.npcSelect, controls.lootSourceSelect,
             controls.looseSelect, controls.envSelect,
-            controls.questSelect, controls.spawnsSelect,
-            controls.otherSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
+            controls.questSelect, controls.spawnsSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
         refreshLabels();
 
-        [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+        [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.envSelect,
             controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
         ].forEach(ts => {
             ts.input.closest('.col-lg-12').hidden = Object.keys(ts.options).length === 0;
@@ -159,9 +158,9 @@ import {controls, dom_ready, refreshLabels} from "dom";
             }
         });
 
-        const npcs = controls.lootSourceSelect.getValue();
+        const npcs = controls.npcSelect.getValue();
         const lootSources = controls.lootSourceSelect.getValue();
-        const containers = controls.lootSelect.getValue();
+        //const containers = controls.lootSelect.getValue();
         const loose = controls.looseSelect.getValue();
         const creature = controls.creatureSelect.getValue();
         const environment = controls.envSelect.getValue();
@@ -179,7 +178,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
                 sprite.parent.visible = npcs.includes(marker.readable.displayName);
             }
             const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
-            if (lootTable) {
+            if (marker.row.LootSource || "containers" === marker.class) {
                 sprite.parent.visible = lootSources.includes(lootTable);
             }
             // if (marker.class === "container") {
@@ -233,7 +232,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
     controls.checkShowOnlyMatches.addEventListener("change", applySearch);
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
-    [controls.npcSelect, controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
+    [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
         controls.spawnsSelect, controls.otherSelect].forEach(ts => ts.on('change', applySearch));
 
     [controls.inputScale, controls.inputOffsetX, controls.inputOffsetY, controls.inputRotation].forEach(control => {

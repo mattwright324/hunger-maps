@@ -127,7 +127,6 @@ export const environment = [
     "Window",
     "Stair",
     "Lantern",
-    "BP_Dirigible",
     "Gate_A0",
     "BP_HangingHerbRope_C",
 ]
