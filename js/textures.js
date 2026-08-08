@@ -28,6 +28,7 @@ const texturePaths = {
     profOutfitter: "./img/T_UI_Profession_Outfitter.png",
     profPhysician: "./img/T_UI_Profession_Physician.png",
     sound: "./img/T_UI_Icon_Mic_Transmitting.png",
+    caltrops: "./img/Caltrops.png",
     grenade: "./img/T_UI_Item_GrenadeCeramic.png",
     social: "./img/T_UI_Icon_Social.png",
     egg: "./img/T_UI_Item_FreshEgg.png",

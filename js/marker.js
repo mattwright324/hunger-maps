@@ -353,6 +353,7 @@ export class Marker {
                     this.#zIndex = 50;
                 } else if (display_lower.includes("trap") && !display_lower.includes("trapdoor")) {
                     sprite.texture = textures.grenade;
+                    if (display_lower.includes("ground_bleed")) sprite.texture = textures.caltrops;
                     this.#tint = 0xff0000;
                     if (display_lower.includes("poison")) this.#tint = 0x00ff00
                     this.#zIndex = 50;
