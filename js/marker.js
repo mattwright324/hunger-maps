@@ -367,7 +367,6 @@ export class Marker {
                 if (display_lower.includes("stairintegrated")) {
                     sprite.texture = textures.stairs;
                     //this.#tint = 0x0000ff;
-                    console.log(this.#texture)
                 }
 
                 return;

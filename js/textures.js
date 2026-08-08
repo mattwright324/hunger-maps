@@ -33,7 +33,6 @@ const texturePaths = {
     grenade: "./img/T_UI_Item_GrenadeCeramic.png",
     social: "./img/T_UI_Icon_Social.png",
     egg: "./img/T_UI_Item_FreshEgg.png",
-    branch: "./img/T_UI_Item_SolidBranch.png",
     kindling: "./img/KindlingPile.png",
     charcoal: "./img/T_UI_Item_Charcoal.png",
     quest: "./img/T_UI_Icon_TrackerHandIn.png",
