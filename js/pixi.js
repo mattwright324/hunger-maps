@@ -15,8 +15,14 @@ app.ticker.stop();
 
 app.render();
 
+let _renderPending = false;
 export function render() {
-    app.render();
+    if (_renderPending) return;
+    _renderPending = true;
+    requestAnimationFrame(() => {
+        app.render();
+        _renderPending = false;
+    });
 }
 
 document.getElementById("view-container").appendChild(app.canvas);

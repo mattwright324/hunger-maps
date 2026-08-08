@@ -102,10 +102,11 @@ import {controls, dom_ready, refreshLabels} from "dom";
     }
 
     async function applySearch() {
+        const sprites = markerSprites();
         const query = document.getElementById("searchBox").value.toLowerCase();
         const showOnlyMatches = document.getElementById("showOnlyMatches").checked;
 
-        markerSprites().forEach(sprite => {
+        sprites.forEach(sprite => {
             const marker = sprite._marker;
             if (!marker) {
                 return;
@@ -156,9 +157,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
         const spawns = controls.spawnsSelect.getValue();
         const other = controls.otherSelect.getValue();
 
-        console.log(lootSources)
-
-        markerSprites().filter(m => m._marker).forEach(sprite => {
+        sprites.filter(m => m._marker).forEach(sprite => {
             if (!sprite.parent.visible) {
                 return;
             }
@@ -166,7 +165,6 @@ import {controls, dom_ready, refreshLabels} from "dom";
             const marker = sprite._marker;
             const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
             if (lootTable) {
-                console.log("Filtering by loot source", lootTable);
                 sprite.parent.visible = lootSources.includes(lootTable);
             }
             // if (marker.class === "container") {
@@ -196,8 +194,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
         const heightEnabled = controls.enableHeightFilter.checked;
         const zValue = Number(controls.sliderHeight.value);
         if (heightEnabled) {
-            console.log("Filtering by height", zValue, step);
-            markerSprites().filter(m => m._marker).forEach(sprite => {
+            sprites.filter(m => m._marker).forEach(sprite => {
                 const marker = sprite._marker;
                 if (sprite.visible && !isNaN(marker.row.Z)) {
                     const inRange = Number(marker.row.Z) > zValue && Number(marker.row.Z) < (zValue + step);

@@ -45,14 +45,12 @@ export class Marker {
     #row;
     #readable = {};
     #descriptors = [];
-    #colorMatrix = new PIXI.ColorMatrixFilter();
     #texture = textures.uncommon;
     #container = new PIXI.Container();
     #sprite = new PIXI.Sprite(this.#texture);
     #class = "other";
 
     // Styles that get changed by filters to set back to default
-    #brightness = 1;
     #tint = 0xFFFFFF;
     #zIndex = 0;
 
@@ -139,7 +137,6 @@ export class Marker {
         sprite._marker = this;
         sprite.anchor.set(0.5); // Center on X,Y
         sprite.zIndex = 0;
-        sprite.filters = [this.#colorMatrix];
         this.#applyTransforms()
 
         this.#container.addChild(sprite);
@@ -160,10 +157,17 @@ export class Marker {
             this.#readable.displayName = this.#row.OuterName;
         }
 
-        // this.#colorMatrix.brightness(1.1, false);
-        // this.#colorMatrix.saturate(1.05, false);
-
         this.#classify();
+
+        const brightnessFactor = Math.min(1.0, (Number(this.#row.SpawnChance || '100') + 15) / 100);
+        if (brightnessFactor < 1.0) {
+            const t = this.#tint;
+            const r = Math.round(((t >> 16) & 0xFF) * brightnessFactor);
+            const g = Math.round(((t >> 8) & 0xFF) * brightnessFactor);
+            const b = Math.round((t & 0xFF) * brightnessFactor);
+            this.#tint = (r << 16) | (g << 8) | b;
+        }
+
         sprite.tint = this.#tint;
         sprite.zIndex = this.#zIndex;
         this.#container.zIndex = this.#zIndex;
@@ -246,8 +250,6 @@ export class Marker {
     #classify() {
         const sprite = this.#sprite;
         const display_lower = this.#readable.displayName.toLowerCase();
-
-        this.#colorMatrix.brightness((Number(this.#row.SpawnChance || "100.0") + 15) / 100, false);
 
         if (this.#row.Keyed) {
             let keyTexture = textures.key_special;
