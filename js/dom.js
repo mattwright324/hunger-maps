@@ -91,51 +91,97 @@ const dom_load = async () => {
     controls.sliderHeight = document.getElementById("zRange");
     controls.hideAiSpawner = document.getElementById("hideAiSpawner");
 
-    const options = {
-        enableFiltering: true,
-        enableCaseInsensitiveFiltering: true,
-        includeSelectAllOption: true,
-        buttonWidth: '100%',
-        maxHeight: 400,
+    TomSelect.define('select_all', function() {
+        const self = this;
+        self.on('dropdown_open', function(dropdown) {
+            if (dropdown.querySelector('.ts-select-all')) return;
+            const bar = document.createElement('div');
+            bar.className = 'ts-select-all d-flex gap-1 p-1 border-bottom';
+            bar.innerHTML = '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">All</button>'
+                          + '<button type="button" class="btn btn-sm btn-outline-secondary flex-fill">None</button>';
+            bar.children[0].addEventListener('mousedown', e => {
+                e.preventDefault(); // keep dropdown open
+                self.setValue(Object.keys(self.options), true);
+                self.trigger('change', self.getValue());
+            });
+            bar.children[1].addEventListener('mousedown', e => {
+                e.preventDefault();
+                self.clear(true);
+                self.trigger('change', self.getValue());
+            });
+            dropdown.prepend(bar);
+        });
+    });
+
+    function syncLabel(ts) {
+        if (!ts._label) {
+            ts._label = document.createElement('span');
+            ts._label.className = 'ts-summary';
+            ts.control.prepend(ts._label);
+        }
+        const n = ts.getValue().length;
+        const total = Object.keys(ts.options).length;
+        ts._label.textContent = n === 0      ? 'None selected'
+                              : n === total   ? 'All selected'
+                              : `${n} selected`;
     }
+
+    const tsOptions = {
+        plugins: ['checkbox_options', 'select_all'],
+        create: false,
+        persist: false,
+        maxOptions: null,
+        closeAfterSelect: false,
+        hideSelected: false,
+        onInitialize() { syncLabel(this); },
+        onChange()      { syncLabel(this); },
+    };
 
     controls.showAll = document.getElementById("showAll");
     controls.hideAll = document.getElementById("hideAll");
 
-    controls.lootSourceSelect = $("#loot-source-select").multiselect(options);
+    controls.lootSourceSelect = new TomSelect('#loot-source-select', tsOptions);
+    controls.lootSelect       = new TomSelect('#loot-select',        tsOptions);
+    controls.looseSelect      = new TomSelect('#loose-select',       tsOptions);
+    controls.envSelect        = new TomSelect('#env-select',         tsOptions);
+    controls.creatureSelect   = new TomSelect('#creature-select',    tsOptions);
+    controls.questSelect      = new TomSelect('#quest-select',       tsOptions);
+    controls.spawnsSelect     = new TomSelect('#spawns-select',      tsOptions);
+    controls.otherSelect      = new TomSelect('#other-select',       tsOptions);
 
-    controls.lootSelect = $("#loot-select").multiselect(options);
-    controls.looseSelect = $("#loose-select").multiselect(options);
-    controls.envSelect = $("#env-select").multiselect(options);
-    controls.creatureSelect = $("#creature-select").multiselect(options);
-    controls.questSelect = $("#quest-select").multiselect(options);
-    controls.spawnsSelect = $("#spawns-select").multiselect(options);
-    controls.otherSelect = $("#other-select").multiselect(options);
+    const allSelects = () => [
+        controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+        controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
+    ];
 
     controls.showAll.onclick = () => {
-        [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
-            controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
-            control.multiselect('selectAll', false)
-            control.multiselect('updateButtonText')
-        })
-        controls.lootSourceSelect.trigger('change')
-    }
+        allSelects().forEach(ts => {
+            ts.setValue(Object.keys(ts.options), true);
+            ts.trigger('change', ts.getValue())
+        });
+    };
 
     controls.hideAll.onclick = () => {
-        [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
-            controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
-            control.multiselect('deselectAll', false)
-            control.multiselect('updateButtonText')
-        })
-        controls.lootSourceSelect.trigger('change')
-    }
+        allSelects().forEach(ts => {
+            ts.clear(true);
+            ts.trigger('change', ts.getValue())
+        });
+    };
 
     console.log("Loaded [controls:", controls, "] [elements:", elements, "]")
 }
 
-export function rebuildSelects() {
-    [controls.lootSourceSelect, controls.looseSelect, controls.envSelect, controls.creatureSelect, controls.questSelect,
-        controls.spawnsSelect, controls.otherSelect].forEach(control => {
-        control.multiselect("rebuild");
-    })
+
+export function refreshLabels() {
+    [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+        controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
+    ].forEach(ts => {
+        if (!ts._label) return;
+        const n = ts.getValue().length;
+        const total = Object.keys(ts.options).length;
+        ts._label.textContent = n === 0     ? 'None selected'
+                              : n === total  ? 'All selected'
+                              : `${n} selected`;
+    });
 }
+

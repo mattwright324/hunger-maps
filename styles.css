@@ -17,26 +17,107 @@ h6 {
     height: 40px !important;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#appLayout {
+    min-height: 0;
+}
+
+@media (min-width: 768px) {
+    #sidebar {
+        width: 600px;
+        min-width: 300px;
+        height: 100%;
+        display: flex !important;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    #sidebar .offcanvas-body {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    #sidebar .offcanvas-body > .flex-grow-1 {
+        min-height: 0;
+    }
+}
+
 #view-container {
     width: 100%;
-    height: 100vh;
-    overflow:hidden;
+    height: 100%;
+    overflow: hidden;
+    min-width: 0;
 }
 
 #tooltip {
-    position: absolute;
-    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    background: rgba(0, 0, 0, 0.88);
     color: white;
-    padding: 8px 8px;
+    padding: 8px;
     border-radius: 4px;
     font-size: 12px;
-    pointer-events: none;
+    pointer-events: auto;
     display: none;
     z-index: 9999;
-    white-space: pre;
+    max-width: min(420px, calc(100vw - 16px));
+    overflow-y: auto;
+    max-height: calc(100vh - 16px);
 }
 
 .filters img {
     width: 24px;
     height: 24px;
+}
+
+.ts-dropdown .ts-dropdown-content {
+    max-height: 40vh;
+}
+
+.ts-control .item {
+    display: none !important;
+}
+.ts-control .ts-summary {
+    align-self: center;
+    padding: 0 2px;
+    pointer-events: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+[data-bs-theme="dark"] .ts-control,
+[data-bs-theme="dark"] .ts-control input {
+    background-color: var(--bs-body-bg);
+    color: var(--bs-body-color);
+    border-color: var(--bs-border-color);
+}
+[data-bs-theme="dark"] .ts-wrapper.focus .ts-control {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+[data-bs-theme="dark"] .ts-dropdown {
+    background-color: var(--bs-body-bg);
+    border-color: var(--bs-border-color);
+    color: var(--bs-body-color);
+}
+[data-bs-theme="dark"] .ts-dropdown .option,
+[data-bs-theme="dark"] .ts-dropdown .optgroup-header {
+    color: var(--bs-body-color);
+}
+[data-bs-theme="dark"] .ts-dropdown .option.active {
+    background-color: var(--bs-primary);
+    color: #fff;
+}
+[data-bs-theme="dark"] .ts-dropdown .option.selected {
+    background-color: var(--bs-secondary-bg);
+}
+[data-bs-theme="dark"] .ts-dropdown .option.selected.active {
+    background-color: var(--bs-primary);
+    color: #fff;
 }

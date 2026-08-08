@@ -2,8 +2,7 @@ import * as data from "data";
 import {spawns} from "data";
 import * as pixi from "pixi";
 import {mapOverlaySprite, mapSprite, markerSprites, world} from "pixi";
-import * as dom from "dom";
-import {controls, dom_ready} from "dom";
+import {controls, dom_ready, refreshLabels} from "dom";
 
 (async function () {
     'use strict';
@@ -58,41 +57,26 @@ import {controls, dom_ready} from "dom";
         controls.sliderHeight.min = minZ.toFixed(2);
         controls.sliderHeight.max = maxZ.toFixed(2) - 300;
 
-        function loadMultiselectF(select, keyFunc) {
-            const options = []
+        function loadMultiselectF(ts, keyFunc) {
+            const options = [];
             markers.forEach(marker => {
                 const key = keyFunc(marker);
-                console.log("F", key);
-                if (key && options.indexOf(key) === -1) {
-                    options.push(key);
-                }
-            })
-            options.sort();
-            select.empty();
-            options.forEach(container => {
-                select.append($("<option>", {
-                    value: container,
-                    text: container,
-                }))
-            })
+                if (key && !options.includes(key)) options.push(key);
+            });
+            ts.clearOptions();
+            options.sort().forEach(opt => ts.addOption({value: opt, text: opt}));
         }
 
-        function loadMultiselectClass(select, classType) {
-            const options = []
+        function loadMultiselectClass(ts, classType) {
+            const options = [];
             markers.forEach(marker => {
                 const displayName = marker.readable.displayName;
-                if (marker.class === classType && options.indexOf(displayName) === -1) {
+                if (marker.class === classType && !options.includes(displayName)) {
                     options.push(displayName);
                 }
-            })
-            options.sort();
-            select.empty();
-            options.forEach(container => {
-                select.append($("<option>", {
-                    value: container,
-                    text: container,
-                }))
-            })
+            });
+            ts.clearOptions();
+            options.sort().forEach(opt => ts.addOption({value: opt, text: opt}));
         }
 
         loadMultiselectF(controls.lootSourceSelect, marker => {
@@ -107,17 +91,12 @@ import {controls, dom_ready} from "dom";
         loadMultiselectClass(controls.spawnsSelect, "spawns");
         loadMultiselectClass(controls.otherSelect, "other");
 
-        dom.rebuildSelects();
-
-        controls.creatureSelect.multiselect('select', ['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"]);
+        controls.creatureSelect.setValue(['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"], true);
         [controls.lootSourceSelect, controls.lootSelect,
             controls.looseSelect, controls.envSelect,
             controls.questSelect, controls.spawnsSelect,
-            controls.otherSelect].forEach(control => {
-            control.multiselect('selectAll', false)
-            control.multiselect('updateButtonText')
-        });
-        controls.lootSourceSelect.trigger('change');
+            controls.otherSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
+        refreshLabels();
 
         await applySearch();
     }
@@ -168,14 +147,14 @@ import {controls, dom_ready} from "dom";
             }
         });
 
-        const lootSources = controls.lootSourceSelect.val();
-        const containers = controls.lootSelect.val();
-        const loose = controls.looseSelect.val();
-        const creature = controls.creatureSelect.val();
-        const environment = controls.envSelect.val();
-        const quest = controls.questSelect.val();
-        const spawns = controls.spawnsSelect.val();
-        const other = controls.otherSelect.val();
+        const lootSources = controls.lootSourceSelect.getValue();
+        const containers = controls.lootSelect.getValue();
+        const loose = controls.looseSelect.getValue();
+        const creature = controls.creatureSelect.getValue();
+        const environment = controls.envSelect.getValue();
+        const quest = controls.questSelect.getValue();
+        const spawns = controls.spawnsSelect.getValue();
+        const other = controls.otherSelect.getValue();
 
         console.log(lootSources)
 
@@ -243,9 +222,7 @@ import {controls, dom_ready} from "dom";
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
     [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
-        controls.spawnsSelect, controls.otherSelect].forEach(control => {
-        control.on("change", applySearch);
-    });
+        controls.spawnsSelect, controls.otherSelect].forEach(ts => ts.on('change', applySearch));
 
     [controls.inputScale, controls.inputOffsetX, controls.inputOffsetY, controls.inputRotation].forEach(control => {
         control.addEventListener("input", () => pixi.markerSprites()

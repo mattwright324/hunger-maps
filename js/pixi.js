@@ -89,62 +89,29 @@ export function scaleMarkersToZoom() {
     render();
 }
 
-function simulateTouchPointer(e) {
-    const typeMap = {
-        mousedown: "pointerdown",
-        mousemove: "pointermove",
-        mouseup: "pointerup"
-    };
-
-    const simulated = new PointerEvent(typeMap[e.type], {
-        bubbles: true,
-        cancelable: true,
-        pointerId: 999,          // any stable ID
-        pointerType: "touch",    // THIS is the magic
-        clientX: e.clientX,
-        clientY: e.clientY,
-        screenX: e.screenX,
-        screenY: e.screenY,
-        pageX: e.pageX,
-        pageY: e.pageY,
-        pressure: 0.5,           // touch-like
-        isPrimary: true
-    });
-
-    e.target.dispatchEvent(simulated);
-    e.preventDefault();
-}
-
 function setupPanZoom() {
     const touches = new Map();
     let lastDistance = null;
     let panAnchor = null;
 
-    app.canvas.addEventListener("mousedown", simulateTouchPointer, true);
-    app.canvas.addEventListener("mousemove", simulateTouchPointer, true);
-    app.canvas.addEventListener("mouseup", simulateTouchPointer, true);
-
     app.canvas.addEventListener("pointerdown", e => {
-        if (e.pointerType === "touch") {
-            touches.set(e.pointerId, {x: e.clientX, y: e.clientY});
-            render();
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        touches.set(e.pointerId, {x: e.clientX, y: e.clientY});
+        render();
 
-            // If this is the FIRST and ONLY touch → start pan
-            if (touches.size === 1) {
-                const t = touches.values().next().value;
-                panAnchor = {x: t.x, y: t.y};
-            }
+        if (touches.size === 1) {
+            const t = touches.values().next().value;
+            panAnchor = {x: t.x, y: t.y};
+        }
 
-            // If this is the SECOND touch → start pinch
-            if (touches.size === 2) {
-                lastDistance = null;
-                panAnchor = null; // disable pan
-            }
+        if (touches.size === 2) {
+            lastDistance = null;
+            panAnchor = null;
         }
     });
 
     app.canvas.addEventListener("pointermove", e => {
-        if (e.pointerType !== "touch") return;
+        if (!touches.has(e.pointerId)) return;
 
         touches.set(e.pointerId, {x: e.clientX, y: e.clientY});
         render();
@@ -208,6 +175,7 @@ function setupPanZoom() {
     });
 
     app.canvas.addEventListener("pointerup", e => {
+        if (!touches.has(e.pointerId)) return;
         touches.delete(e.pointerId);
         render();
 
@@ -227,9 +195,10 @@ function setupPanZoom() {
     });
 
     app.canvas.addEventListener("pointercancel", e => {
+        if (!touches.has(e.pointerId)) return;
         touches.delete(e.pointerId);
-        lastDistance = null;
-        panAnchor = null;
+        if (touches.size < 2) lastDistance = null;
+        if (touches.size === 0) panAnchor = null;
         render();
     });
 

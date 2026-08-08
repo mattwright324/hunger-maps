@@ -2,6 +2,39 @@ import {textures} from "textures";
 import * as data from "data";
 import {controls} from "dom";
 
+let stickyMarker = null;
+let justTapped = false;
+
+function isSidebarOpen() {
+    return document.getElementById('sidebar')?.classList.contains('show') ?? false;
+}
+
+function positionTooltip(tooltipEl, clientX, clientY) {
+    tooltipEl.style.display = 'block';
+    tooltipEl.style.left = '0px';
+    tooltipEl.style.top = '0px';
+    const rect = tooltipEl.getBoundingClientRect();
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    let left = clientX + 15;
+    let top = clientY - 15;
+    if (left + rect.width > vw - 8) left = clientX - rect.width - 15;
+    if (top + rect.height > vh - 8) top = clientY - rect.height + 15;
+    tooltipEl.style.left = Math.max(8, left) + 'px';
+    tooltipEl.style.top = Math.max(8, top) + 'px';
+}
+
+document.addEventListener('pointerup', e => {
+    if (!justTapped && stickyMarker) {
+        const tooltipEl = document.getElementById('tooltip');
+        if (!tooltipEl.contains(e.target)) {
+            stickyMarker = null;
+            tooltipEl.style.display = 'none';
+        }
+    }
+    justTapped = false;
+});
+
 export class Marker {
     constructor(row) {
         this.#row = row;
@@ -135,52 +168,52 @@ export class Marker {
         sprite.zIndex = this.#zIndex;
         this.#container.zIndex = this.#zIndex;
 
-        sprite.interactive = true;
-        sprite.on("pointerover", e => {
-            tooltip.style.display = "block";
-            tooltip.style.left = (e.clientX + 10) + "px";
-            tooltip.style.top = (e.clientY - 10) + "px";
-            tooltip.innerHTML = this.#tooltipText();
-        });
-        sprite.on("pointerout", () => {
-            tooltip.style.display = "none";
-        });
-
+        const tooltipEl = document.getElementById('tooltip');
         const copyDetails = `${this.#row.OuterType}'${this.#row.OuterName}'`;
 
-        function onDoubleClick(e) {
-            navigator.clipboard.writeText(copyDetails);
-        }
-
+        sprite.interactive = true;
         sprite.eventMode = "static";
         sprite.cursor = "pointer";
+
+        sprite.on("pointerover", e => {
+            if (e.pointerType !== 'mouse' || stickyMarker || isSidebarOpen()) return;
+            tooltipEl.innerHTML = this.#tooltipText();
+            positionTooltip(tooltipEl, e.clientX, e.clientY);
+        });
+        sprite.on("pointermove", e => {
+            if (e.pointerType !== 'mouse' || stickyMarker) return;
+            if (tooltipEl.style.display === 'block') positionTooltip(tooltipEl, e.clientX, e.clientY);
+        });
+        sprite.on("pointerout", e => {
+            if (e.pointerType !== 'mouse' || stickyMarker) return;
+            tooltipEl.style.display = 'none';
+        });
+
         let lastTapTime = 0;
-        const doubleTapDelay = 300; // ms
-        sprite.on("pointertap", (event) => {
+        const doubleTapDelay = 300;
+        sprite.on("pointertap", e => {
+            justTapped = true;
             const now = performance.now();
             if (now - lastTapTime <= doubleTapDelay) {
-                console.log("Double click / double tap detected", event);
-                onDoubleClick(event);
+                navigator.clipboard.writeText(copyDetails);
                 lastTapTime = 0;
+                return;
+            }
+            lastTapTime = now;
+            if (stickyMarker === this) {
+                stickyMarker = null;
+                tooltipEl.style.display = 'none';
             } else {
-                lastTapTime = now;
+                stickyMarker = this;
+                tooltipEl.innerHTML = this.#tooltipText();
+                positionTooltip(tooltipEl, e.clientX, e.clientY);
             }
         });
     }
 
-    #replacer(key, value) {
-        if (value === null || value === {} || !value)
-            return undefined;
-        else
-            return value;
-    };
-
     #tooltipText() {
         let rows = []
         rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
-        if (this.#class === "other") {
-            rows.push(`<tr><td><strong>Name</strong></td><td>${this.#row["OuterName"]}</td></tr>`)
-        }
         rows.push(`<tr><td><strong>Height (Z)</strong></td><td>${this.sprite.z.toFixed(2)}</td></tr>`)
         rows.push(`<tr><td><strong>Tags</strong></td><td>${[this.#class, ...this.#descriptors].join(", ")}</td></tr>`)
         if (this.#row.SpawnChance) {
@@ -207,7 +240,7 @@ export class Marker {
         if (this.#row.Visible === "False") {
             rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row.Visible}</td></tr>`)
         }
-        return `<div><h5>${this.#readable.displayName}</h5><table class="table table-sm table-striped" style="margin:0">${rows.join("")}</table></div>`
+        return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }
 
     #classify() {

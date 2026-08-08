@@ -16,12 +16,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@2.0.0/dist/css/bootstrap-multiselect.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap-multiselect@2.0.0/dist/js/bootstrap-multiselect.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.4.3/dist/js/tom-select.complete.min.js"></script>
     <script src="https://pixijs.download/release/pixi.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
 
@@ -43,35 +42,59 @@
 </head>
 <body>
 
-<div class="container-fluid">
-    <div id="data-adjust" class="row gy-2 gx-3 justify-content-center p-3" style="display: none;">
-        <div class="col-auto">
-            <label>Scale</label>
-            <input class="form-control" type="number" id="scale" value="0.05" step="0.0001">
-        </div>
-        <div class="col-auto">
-            <label>OffsetX</label>
-            <input class="form-control" type="number" id="offsetX" value="0" step="1">
-        </div>
-        <div class="col-auto">
-            <label>OffsetY</label>
-            <input class="form-control" type="number" id="offsetY" value="0" step="1">
-        </div>
-        <div class="col-auto">
-            <label>Rotation (degrees)</label>
-            <input class="form-control" type="number" id="rotation" value="0" step="1">
-        </div>
+<div id="data-adjust" class="row gy-2 gx-3 justify-content-center p-3" style="display: none;">
+    <div class="col-auto">
+        <label>Scale</label>
+        <input class="form-control" type="number" id="scale" value="0.05" step="0.0001">
     </div>
+    <div class="col-auto">
+        <label>OffsetX</label>
+        <input class="form-control" type="number" id="offsetX" value="0" step="1">
+    </div>
+    <div class="col-auto">
+        <label>OffsetY</label>
+        <input class="form-control" type="number" id="offsetY" value="0" step="1">
+    </div>
+    <div class="col-auto">
+        <label>Rotation (degrees)</label>
+        <input class="form-control" type="number" id="rotation" value="0" step="1">
+    </div>
+</div>
 
-    <div class="row">
-        <div class="col-md-3 m-0 p-0">
-            <nav class="navbar sticky-top bg-body-tertiary" style="z-index: 999999">
-                <div class="container-fluid d-flex justify-content-center">
+<!-- Mobile-only top navbar -->
+<nav class="navbar d-md-none bg-body-tertiary border-bottom" id="mobileNav">
+    <div class="container-fluid">
+        <button type="button" class="btn btn-link text-body p-1"
+                data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
+            <i class="bi bi-list fs-3"></i>
+        </button>
+        <a class="navbar-brand" href="#">
+            HUNGER
+            <img src="./icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+            MAPS
+        </a>
+        <div style="width:40px"></div>
+    </div>
+</nav>
+
+<div class="d-flex flex-grow-1 overflow-hidden" id="appLayout">
+    <div class="offcanvas-md offcanvas-start bg-body-tertiary border-end" id="sidebar" tabindex="-1" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header d-md-none">
+            <span class="navbar-brand mb-0" id="sidebarLabel">
+                HUNGER
+                <img src="./icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                MAPS
+            </span>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close"></button>
+        </div>
+
+        <div class="offcanvas-body p-0 d-flex flex-column">
+            <nav class="navbar bg-body-tertiary border-bottom d-none d-md-flex">
+                <div class="container-fluid justify-content-center">
                     <a class="navbar-brand" href="#">
                         HUNGER
                         <img src="./icon.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                         MAPS
-                        <sup class="text-muted" style="font-size:0.85rem;font-family:system-ui">TT3</sup>
                     </a>
                 </div>
             </nav>
@@ -130,7 +153,7 @@
                 </div>
 
                 <div class="row filters">
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Loot Source
@@ -139,7 +162,7 @@
                             <select id="loot-source-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6" hidden>
+                    <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
                                 Containers
@@ -149,7 +172,7 @@
                             <select id="loot-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Loose Items
@@ -158,7 +181,7 @@
                             <select id="loose-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Environment
@@ -169,7 +192,7 @@
                             <select id="env-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Creatures
@@ -178,7 +201,7 @@
                             <select id="creature-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Quest
@@ -187,7 +210,7 @@
                             <select id="quest-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Spawns
@@ -197,7 +220,7 @@
                             <select id="spawns-select" multiple="multiple" style="display:none"></select>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-12">
                         <div class="mb-3">
                             <h6>
                                 Other
@@ -214,16 +237,23 @@
                         Hide AISpawner
                     </label>
                 </div>
-
             </div>
-        </div>
-        <div class="col-md-9 p-0">
-            <div id="view-container"></div>
+
+            <footer class="bg-body-tertiary border-top p-3">
+                <div class="container-fluid text-center">
+                    <a href="/">Home</a> |
+                    <a target="_blank" href="https://discord.gg/VQ2hev7y">Join the Discord</a>
+                    <br>
+                    <small class="text-muted">This site was built with datamined content from a public build of the game (#44973 'Tech Test 3').</small>
+                </div>
+            </footer>
         </div>
     </div>
 
-    <div id="tooltip"></div>
+    <div id="view-container" class="flex-grow-1"></div>
 </div>
+
+<div id="tooltip"></div>
 
 </body>
 </html>
