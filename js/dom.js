@@ -102,6 +102,8 @@ const dom_load = async () => {
     controls.showAll = document.getElementById("showAll");
     controls.hideAll = document.getElementById("hideAll");
 
+    controls.lootSourceSelect = $("#loot-source-select").multiselect(options);
+
     controls.lootSelect = $("#loot-select").multiselect(options);
     controls.looseSelect = $("#loose-select").multiselect(options);
     controls.envSelect = $("#env-select").multiselect(options);
@@ -111,26 +113,28 @@ const dom_load = async () => {
     controls.otherSelect = $("#other-select").multiselect(options);
 
     controls.showAll.onclick = () => {
-        [controls.lootSelect, controls.looseSelect, controls.envSelect, controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
+        [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+            controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
             control.multiselect('selectAll', false)
             control.multiselect('updateButtonText')
         })
-        controls.lootSelect.trigger('change')
+        controls.lootSourceSelect.trigger('change')
     }
 
     controls.hideAll.onclick = () => {
-        [controls.lootSelect, controls.looseSelect, controls.envSelect, controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
+        [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.envSelect,
+            controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
             control.multiselect('deselectAll', false)
             control.multiselect('updateButtonText')
         })
-        controls.lootSelect.trigger('change')
+        controls.lootSourceSelect.trigger('change')
     }
 
     console.log("Loaded [controls:", controls, "] [elements:", elements, "]")
 }
 
 export function rebuildSelects() {
-    [controls.lootSelect, controls.looseSelect, controls.envSelect, controls.creatureSelect, controls.questSelect,
+    [controls.lootSourceSelect, controls.looseSelect, controls.envSelect, controls.creatureSelect, controls.questSelect,
         controls.spawnsSelect, controls.otherSelect].forEach(control => {
         control.multiselect("rebuild");
     })

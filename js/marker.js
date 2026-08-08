@@ -233,7 +233,7 @@ export class Marker {
             this.#descriptors.push("locked");
         }
 
-        console.log(display_lower)
+        // console.log(display_lower)
         if (display_lower.includes("a0")) {
             sprite.texture = textures.pingGeneric;
             if (!display_lower.includes("hub")) {

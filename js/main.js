@@ -58,7 +58,26 @@ import {controls, dom_ready} from "dom";
         controls.sliderHeight.min = minZ.toFixed(2);
         controls.sliderHeight.max = maxZ.toFixed(2) - 300;
 
-        function loadMultiselect(select, classType) {
+        function loadMultiselectF(select, keyFunc) {
+            const options = []
+            markers.forEach(marker => {
+                const key = keyFunc(marker);
+                console.log("F", key);
+                if (key && options.indexOf(key) === -1) {
+                    options.push(key);
+                }
+            })
+            options.sort();
+            select.empty();
+            options.forEach(container => {
+                select.append($("<option>", {
+                    value: container,
+                    text: container,
+                }))
+            })
+        }
+
+        function loadMultiselectClass(select, classType) {
             const options = []
             markers.forEach(marker => {
                 const displayName = marker.readable.displayName;
@@ -76,22 +95,29 @@ import {controls, dom_ready} from "dom";
             })
         }
 
-        loadMultiselect(controls.lootSelect, "container");
-        loadMultiselect(controls.looseSelect, "loose");
-        loadMultiselect(controls.creatureSelect, "creature");
-        loadMultiselect(controls.envSelect, "environment");
-        loadMultiselect(controls.questSelect, "quest");
-        loadMultiselect(controls.spawnsSelect, "spawns");
-        loadMultiselect(controls.otherSelect, "other");
+        loadMultiselectF(controls.lootSourceSelect, marker => {
+            return data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown"
+        });
+
+        loadMultiselectClass(controls.lootSelect, "container");
+        loadMultiselectClass(controls.looseSelect, "loose");
+        loadMultiselectClass(controls.creatureSelect, "creature");
+        loadMultiselectClass(controls.envSelect, "environment");
+        loadMultiselectClass(controls.questSelect, "quest");
+        loadMultiselectClass(controls.spawnsSelect, "spawns");
+        loadMultiselectClass(controls.otherSelect, "other");
 
         dom.rebuildSelects();
 
         controls.creatureSelect.multiselect('select', ['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"]);
-        [controls.lootSelect, controls.looseSelect, controls.envSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect].forEach(control => {
+        [controls.lootSourceSelect, controls.lootSelect,
+            controls.looseSelect, controls.envSelect,
+            controls.questSelect, controls.spawnsSelect,
+            controls.otherSelect].forEach(control => {
             control.multiselect('selectAll', false)
             control.multiselect('updateButtonText')
         });
-        controls.lootSelect.trigger('change');
+        controls.lootSourceSelect.trigger('change');
 
         await applySearch();
     }
@@ -142,6 +168,7 @@ import {controls, dom_ready} from "dom";
             }
         });
 
+        const lootSources = controls.lootSourceSelect.val();
         const containers = controls.lootSelect.val();
         const loose = controls.looseSelect.val();
         const creature = controls.creatureSelect.val();
@@ -150,15 +177,22 @@ import {controls, dom_ready} from "dom";
         const spawns = controls.spawnsSelect.val();
         const other = controls.otherSelect.val();
 
+        console.log(lootSources)
+
         markerSprites().filter(m => m._marker).forEach(sprite => {
             if (!sprite.parent.visible) {
                 return;
             }
 
             const marker = sprite._marker;
-            if (marker.class === "container") {
-                sprite.parent.visible = containers.includes(marker.readable.displayName);
+            const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
+            if (lootTable) {
+                console.log("Filtering by loot source", lootTable);
+                sprite.parent.visible = lootSources.includes(lootTable);
             }
+            // if (marker.class === "container") {
+            //     sprite.parent.visible = containers.includes(marker.readable.displayName);
+            // }
             if (marker.class === "loose") {
                 sprite.parent.visible = loose.includes(marker.readable.displayName);
             }
@@ -208,7 +242,7 @@ import {controls, dom_ready} from "dom";
     controls.checkShowOnlyMatches.addEventListener("change", applySearch);
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
-    [controls.lootSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
+    [controls.lootSourceSelect, controls.lootSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
         controls.spawnsSelect, controls.otherSelect].forEach(control => {
         control.on("change", applySearch);
     });
