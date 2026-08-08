@@ -83,7 +83,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
         }
 
         loadMultiselectF(controls.lootSourceSelect, marker => {
-            if (!(marker.row.LootSource || "containers" === marker.class)) return;
+            if (!(marker.row.LootSource || "container" === marker.class)) return;
             return data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown"
         });
 
@@ -178,7 +178,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
                 sprite.parent.visible = npcs.includes(marker.readable.displayName);
             }
             const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
-            if (marker.row.LootSource || "containers" === marker.class) {
+            if (marker.row.LootSource || "container" === marker.class) {
                 sprite.parent.visible = lootSources.includes(lootTable);
             }
             // if (marker.class === "container") {
