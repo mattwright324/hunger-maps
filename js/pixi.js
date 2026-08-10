@@ -33,14 +33,20 @@ export const world = new PIXI.Container();
 
 app.stage.addChild(world);
 
+export const mapSquare = new PIXI.Graphics();
+mapSquare.rect(0, 0, 4096, 4096);
+mapSquare.fill(0xE4DBD1);
+mapSquare.zIndex = -Infinity;
+world.addChildAt(mapSquare, 0);
+
 export const mapSprite = new PIXI.Sprite();
 mapSprite._type = "map";
 mapSprite.x = 0;
 mapSprite.y = 0;
 mapSprite.width = 4096;
 mapSprite.height = 4096;
-mapSprite.zIndex = -Infinity
-world.addChildAt(mapSprite, 0);
+mapSprite.zIndex = -99999
+world.addChildAt(mapSprite, 1);
 
 render();
 
@@ -51,7 +57,7 @@ mapOverlaySprite.y = -500;
 mapOverlaySprite.width = 4096;
 mapOverlaySprite.height = 4596;
 mapOverlaySprite.zIndex = -9999
-world.addChildAt(mapOverlaySprite, 1);
+world.addChildAt(mapOverlaySprite, 2);
 
 render();
 
