@@ -112,10 +112,13 @@ export class Marker {
             if (!lootTableData) {
                 let lookupKey = lootSourceMap?.["LootTable"] || lootSource;
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
-                    if (key.includes("_Map0")) {
+                    if (key.includes("_Map0") || key.includes("Tutorial")) {
                         continue;
                     }
-                    if (key.includes("LIT_" + lookupKey + "_")
+                    if (value.some(entry => entry?.ObjectName?.includes("Tutorial"))) {
+                        continue;
+                    }
+                    if (key.includes("LIT_" + lookupKey + "_0")
                         || key === "LIT_" + lookupKey
                         || key === "LIT_" + lookupKey.substring(0, lookupKey.length - 1)) {
                         lootTableData = value;
