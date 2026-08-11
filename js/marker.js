@@ -151,6 +151,9 @@ export class Marker {
                 if (lookupKey === "Blacksmith") {
                     lookupKey = "Workbench"
                 }
+                if (lookupKey === "Graveyard") {
+                    lookupKey = "Grave"
+                }
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
                     if (key.includes("_Map0") || key.includes("Tutorial")) {
                         continue;
@@ -184,7 +187,6 @@ export class Marker {
                         newTable[i].WeightPercent = (newTable[i].Weight / newWeightSum * 100).toFixed(4);
                     }
                     newTable.sort((a, b) => (Number(b.WeightPercent) || 0) - (Number(a.WeightPercent) || 0));
-                    console.log(name, newTable);
                     return newTable;
                 }
                 if (lookupKey === "CivilianCupboardDresser") {
