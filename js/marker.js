@@ -146,7 +146,7 @@ export class Marker {
                     lookupKey = "Crafting_Artificer_TinkerCase"
                 }
                 if (lookupKey === "SlopBin") {
-                    lookupKey = "LIT_Crafting_Cook_SlopBin"
+                    lookupKey = "Crafting_Cook_SlopBin"
                 }
                 if (lookupKey === "Blacksmith") {
                     lookupKey = "Workbench"
