@@ -127,6 +127,9 @@ export class Marker {
                 if (lookupKey === "Amphora") {
                     lookupKey = "Liquids"
                 }
+                if (lookupKey === "Drinks") {
+                    lookupKey = "Drinks_All"
+                }
                 if (lookupKey === "Ammunition") {
                     lookupKey = "Ammunition_ALL"
                 }
@@ -138,6 +141,15 @@ export class Marker {
                 }
                 if (lookupKey === "Corpse_Gavroche") {
                     lookupKey = "Key_Gavroche"
+                }
+                if (lookupKey === "TinkerCase") {
+                    lookupKey = "Crafting_Artificer_TinkerCase"
+                }
+                if (lookupKey === "SlopBin") {
+                    lookupKey = "LIT_Crafting_Cook_SlopBin"
+                }
+                if (lookupKey === "Blacksmith") {
+                    lookupKey = "Workbench"
                 }
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
                     if (key.includes("_Map0") || key.includes("Tutorial")) {
@@ -174,6 +186,9 @@ export class Marker {
                     newTable.sort((a, b) => (Number(b.WeightPercent) || 0) - (Number(a.WeightPercent) || 0));
                     console.log(name, newTable);
                     return newTable;
+                }
+                if (lookupKey === "CivilianCupboardDresser") {
+                    this.#table = combineTables("CivilianCupboardDresser", ["LIT_CivilianDresser", "LIT_CivilianCupboard"])
                 }
                 if (lookupKey === "Global") {
                     this.#table = combineTables("Global", [
