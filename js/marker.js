@@ -107,14 +107,23 @@ export class Marker {
         const lootSource = this.#row.LootSource;
         if (lootSource) {
             const lootSourceMap = data.DT_LootSources[lootSource];
-            let lootTableData = data.LOOT_TABLES[lootSource];
-            if (!lootTableData) {
+            this.#table = data.LOOT_TABLES[lootSource];
+            if (!this.#table) {
                 let lookupKey = lootSourceMap?.["LootTable"] || lootSource;
                 if (lookupKey === "Sack_Flour") {
                     lookupKey = "FlourBag"
                 }
                 if (lookupKey === "Amphora") {
                     lookupKey = "Liquids"
+                }
+                if (lookupKey === "Ammunition") {
+                    lookupKey = "Ammunition_ALL"
+                }
+                if (lookupKey === "Armor") {
+                    lookupKey = "Armor_ALL"
+                }
+                if (lookupKey === "Saddlebag") {
+                    lookupKey = "Civilian"
                 }
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
                     if (key.includes("_Map0") || key.includes("Tutorial")) {
@@ -126,12 +135,82 @@ export class Marker {
                     if (key.toUpperCase().includes("LIT_" + lookupKey.toUpperCase() + "_0")
                         || key.toUpperCase() === "LIT_" + lookupKey.toUpperCase()
                         || key.toUpperCase() === "LIT_" + lookupKey.toUpperCase().substring(0, lookupKey.length - 1)) {
-                        lootTableData = value;
+                        this.#table = value;
                         break;
                     }
                 }
+                function combineTables(name, tables) {
+                    let newTable = [];
+                    for (let i = 0; i < tables.length; i++) {
+                        const table = data.LOOT_TABLES[tables[i]];
+                        if (!table) {
+                            console.error(`Table not found: ${tables[i]}`);
+                            continue;
+                        }
+                        newTable.push(...table);
+                    }
+                    let newWeightSum = 0;
+                    for (let i = 0; i < newTable.length; i++) {
+                        newWeightSum += Number(newTable[i].Weight) || 0;
+                    }
+                    for (let i = 0; i < newTable.length; i++) {
+                        newTable[i].WeightSum = newWeightSum;
+                        newTable[i].WeightPercent = (newTable[i].Weight / newWeightSum * 100).toFixed(4);
+                    }
+                    newTable.sort((a, b) => (Number(b.WeightPercent) || 0) - (Number(a.WeightPercent) || 0));
+                    console.log(name, newTable);
+                    return newTable;
+                }
+                if (lookupKey === "Global") {
+                    this.#table = combineTables("Global", [
+                        "LIT_GlobalItems_01_Common",
+                        "LIT_GlobalItems_02_Uncommon",
+                        "LIT_GlobalItems_03_Rare",
+                        "LIT_GlobalItems_04_Epic",
+                        "LIT_GlobalItems_05_Legendary"
+                    ])
+                }
+                if (lookupKey === "Global_REL") {
+                    this.#table = combineTables("Global_UREL", [
+                        "LIT_GlobalItems_03_Rare",
+                        "LIT_GlobalItems_04_Epic",
+                        "LIT_GlobalItems_05_Legendary"
+                    ])
+                }
+                if (lookupKey === "Armor_UREL") {
+                    this.#table = combineTables("Armor_UREL", ["LIT_Armor_Uncommon", "LIT_Armor_Rare", "LIT_Armor_Epic", "LIT_Armor_Legendary"])
+                }
+                if (lookupKey === "Weapon_Melee") {
+                    this.#table = combineTables("Weapon_Melee", ["LIT_1HMelee_All", "LIT_2HMelee_All"])
+                }
+                if (lookupKey === "Weapon_Melee_REL") {
+                    this.#table = combineTables("Weapon_Melee_REL", [
+                        "LIT_1HMelee_Uncommon",
+                        "LIT_1HMelee_Rare",
+                        "LIT_1HMelee_Epic",
+                        "LIT_1HMelee_Legendary",
+                        "LIT_2HMelee_Uncommon",
+                        "LIT_2HMelee_Rare",
+                        "LIT_2HMelee_Epic",
+                        "LIT_2HMelee_Legendary",
+                    ])
+                }
+                if (lookupKey === "Weapon_Ranged") {
+                    this.#table = combineTables("Weapon_Ranged", ["LIT_Rifles_All", "LIT_Pistols_All"])
+                }
+                if (lookupKey === "Weapon_Ranged_REL") {
+                    this.#table = combineTables("Weapon_Ranged_REL", [
+                        "LIT_Uncommon_Weap_Pistols",
+                        "LIT_Rare_Weap_Pistols",
+                        "LIT_Epic_Weap_Pistols",
+                        "LIT_Legendary_Weap_Pistols",
+                        "LIT_Uncommon_Weap_Rifles",
+                        "LIT_Rare_Weap_Rifles",
+                        "LIT_Epic_Weap_Rifles",
+                        "LIT_Legendary_Weap_Rifles",
+                    ])
+                }
             }
-            this.#table = lootTableData;
         }
         if (this.#row.AISpawner) {
             const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
