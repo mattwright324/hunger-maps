@@ -50,6 +50,8 @@ export class Marker {
     #row;
     #readable = {};
     #descriptors = [];
+    #loot_table_lookup = false;
+    #loot_table;
     #texture = textures.uncommon;
     #container = new PIXI.Container();
     #sprite = new PIXI.Sprite(this.#texture);
@@ -69,6 +71,11 @@ export class Marker {
 
     get descriptors() {
         return this.#descriptors.join(" ").toLowerCase();
+    }
+
+    get lootTable() {
+        this.#lookupLootTable();
+        return this.#loot_table;
     }
 
     get container() {
@@ -93,6 +100,31 @@ export class Marker {
 
     get originalZIndex() {
         return this.#zIndex;
+    }
+
+    #lookupLootTable() {
+        if (this.#loot_table_lookup) return;
+        this.#loot_table_lookup = true;
+        const lootSource = this.#row.LootSource;
+        if (lootSource) {
+            const lootSourceMap = data.DT_LootSources[lootSource];
+            let lootTableData = data.LOOT_TABLES[lootSource];
+            if (!lootTableData) {
+                let lookupKey = lootSourceMap?.["LootTable"] || lootSource;
+                for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
+                    if (key.includes("_Map0")) {
+                        continue;
+                    }
+                    if (key.includes("LIT_" + lookupKey + "_")
+                        || key === "LIT_" + lookupKey
+                        || key === "LIT_" + lookupKey.substring(0, lookupKey.length - 1)) {
+                        lootTableData = value;
+                        break;
+                    }
+                }
+            }
+            this.#loot_table = lootTableData;
+        }
     }
 
     #makeReadable(text) {
@@ -242,6 +274,18 @@ export class Marker {
             } else {
                 rows.push(`<tr><td><strong>LootSource</strong></td><td>${lootSource}</td></tr>`)
             }
+            let lootTableData = this.lootTable;
+            if (lootTableData) {
+                this.#loot_table = lootTableData;
+                lootTableData.forEach(lootTableEntry => {
+                    const percent = lootTableEntry["WeightPercent"];
+                    let color = "green"
+                    if (Number(percent) < 10) color = "orange"
+                    if (Number(percent) < 5) color = "red"
+
+                    rows.push(`<tr><td><strong>${lootTableEntry["TableName"]}</strong></td><td><span style="color:${color}">${percent}%</span> ${lootTableEntry["ObjectName"]}</td></tr>`)
+                })
+            }
         }
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
@@ -249,7 +293,7 @@ export class Marker {
         if (this.#row.Visible === "False") {
             rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row.Visible}</td></tr>`)
         }
-        return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
+        return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }
 
     #classify() {

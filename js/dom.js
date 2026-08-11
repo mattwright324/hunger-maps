@@ -87,6 +87,7 @@ const dom_load = async () => {
     controls.showOverlay = document.getElementById("showOverlay");
     controls.searchBox = document.getElementById("searchBox");
     controls.checkShowOnlyMatches = document.getElementById("showOnlyMatches");
+    controls.includeLootItems = document.getElementById("includeLootItems");
     controls.enableHeightFilter = document.getElementById("filterZrange");
     controls.sliderHeight = document.getElementById("zRange");
 

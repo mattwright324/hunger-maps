@@ -143,6 +143,9 @@ import {controls, dom_ready, refreshLabels} from "dom";
             if (marker.row.AISpawner) {
                 values.push(marker.row.AISpawner)
             }
+            if (marker.lootTable && controls.includeLootItems.checked) {
+                marker.lootTable.forEach(loot => values.push(loot["ObjectName"]))
+            }
             const match = values.some(v => v.toLowerCase().includes(query));
 
             if (match) {
@@ -230,6 +233,7 @@ import {controls, dom_ready, refreshLabels} from "dom";
 
     controls.searchBox.addEventListener("input", applySearch);
     controls.checkShowOnlyMatches.addEventListener("change", applySearch);
+    controls.includeLootItems.addEventListener("change", applySearch);
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
     [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,

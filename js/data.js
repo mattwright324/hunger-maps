@@ -2,13 +2,13 @@ import {textures} from "textures";
 import {elements} from "dom";
 import {Marker} from "marker";
 
-async function getCsvData(url) {
+async function getMarkerCsvData(url) {
     return await fetch(url)
         .then(r => r.text())
-        .then(text => parseCSV(text));
+        .then(text => parseMarkerCSV(text));
 }
 
-async function parseCSV(text) {
+async function parseMarkerCSV(text) {
     const lines = text.split(/\r?\n/);
     const rows = [];
 
@@ -46,19 +46,47 @@ async function parseCSV(text) {
         });
     }
 
-    for (const key in xy) {
+    console.log("Parsed CSV data:", rows.length, text);
+    return rows;
+}
 
+async function getLootCsvData(url) {
+    return await fetch(url)
+        .then(r => r.text())
+        .then(text => parseLootCSV(text));
+}
+
+async function parseLootCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const rows = [];
+
+    for (let line of lines) {
+        const cols = line.split(",");
+
+        const [TableName, Weight, WeightSum, WeightPercent, ObjectName] = cols;
+
+        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName});
     }
 
     console.log("Parsed CSV data:", rows.length, text);
     return rows;
 }
 
+const lootTables = await getLootCsvData("./loot_tables.csv?v=" + elements.metaVersion);
+export const LOOT_TABLES = {}
+lootTables.forEach(row => {
+    console.log(row)
+    if (!LOOT_TABLES[row.TableName]) LOOT_TABLES[row.TableName] = [];
+    LOOT_TABLES[row.TableName].push(row);
+})
+
+console.log("Loaded loot tables:", LOOT_TABLES);
+
 export const presets = {
     "map00": {
         texture: textures.mapChateau,
         thumbnail: "./img/T_UI_BG_Chateau.png",
-        rawData: await getCsvData("./map00_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./map00_components.csv?v=" + elements.metaVersion),
         data: () => presets["map00"].rawData.map(row => new Marker(row)),
         scale: 0.17,
         offsetX: 1800,
@@ -69,7 +97,7 @@ export const presets = {
         texture: textures.mapSarlat,
         overlay: textures.mapSarlatOverlay,
         thumbnail: "./img/T_UI_Thumbnail_Map01.png",
-        rawData: await getCsvData("./map01_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./map01_components.csv?v=" + elements.metaVersion),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
         scale: 0.0409,
         offsetX: 2875,
@@ -80,7 +108,7 @@ export const presets = {
         texture: textures.mapJacques,
         overlay: textures.mapJacquesOverlay,
         thumbnail: "./img/T_UI_Thumbnail_Map02.png",
-        rawData: await getCsvData("./map02_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./map02_components.csv?v=" + elements.metaVersion),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
         scale: 0.03622,
         offsetX: 1978,
@@ -91,7 +119,7 @@ export const presets = {
         texture: textures.mapSombre,
         overlay: textures.mapSombreOverlay,
         thumbnail: "./img/T_UI_Thumbnail_Map03.png",
-        rawData: await getCsvData("./map03_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./map03_components.csv?v=" + elements.metaVersion),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
         scale: 0.03051,
         offsetX: 1424,
