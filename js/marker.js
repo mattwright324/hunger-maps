@@ -118,9 +118,9 @@ export class Marker {
                     if (value.some(entry => entry?.ObjectName?.includes("Tutorial"))) {
                         continue;
                     }
-                    if (key.includes("LIT_" + lookupKey + "_0")
-                        || key === "LIT_" + lookupKey
-                        || key === "LIT_" + lookupKey.substring(0, lookupKey.length - 1)) {
+                    if (key.toUpperCase().includes("LIT_" + lookupKey.toUpperCase() + "_0")
+                        || key.toUpperCase() === "LIT_" + lookupKey.toUpperCase()
+                        || key.toUpperCase() === "LIT_" + lookupKey.toUpperCase().substring(0, lookupKey.length - 1)) {
                         lootTableData = value;
                         break;
                     }
