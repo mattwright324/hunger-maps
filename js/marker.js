@@ -136,6 +136,9 @@ export class Marker {
                 if (lookupKey === "Saddlebag") {
                     lookupKey = "Civilian"
                 }
+                if (lookupKey === "Corpse_Gavroche") {
+                    lookupKey = "Key_Gavroche"
+                }
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
                     if (key.includes("_Map0") || key.includes("Tutorial")) {
                         continue;
