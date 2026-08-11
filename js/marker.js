@@ -305,7 +305,7 @@ export class Marker {
                 if (Number(percent) < 10) color = "orange"
                 if (Number(percent) < 5) color = "red"
 
-                rows.push(`<tr><td><strong>${row["TableName"]}</strong></td><td><span style="color:${color}">${percent}%</span> ${row["ObjectName"]}</td></tr>`)
+                rows.push(`<tr><td><strong>${row["TableName"].replace("DA_AISpawner_", "")}</strong></td><td><span style="color:${color}">${percent}%</span> ${row["ObjectName"]}</td></tr>`)
             })
         }
         return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
