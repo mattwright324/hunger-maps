@@ -157,7 +157,7 @@ export const presets = {
 };
 
 export const containers = [
-    "Loot_",
+    //"Loot_",
     "Chest",
     "Chest Drawers",
     "Wardrobe",
