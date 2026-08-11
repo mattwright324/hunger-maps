@@ -82,6 +82,15 @@ lootTables.forEach(row => {
 
 console.log("Loaded loot tables:", LOOT_TABLES);
 
+const aiTables = await getLootCsvData("./ai_tables.csv?v=" + elements.metaVersion);
+export const AI_TABLES = {}
+aiTables.forEach(row => {
+    if (!AI_TABLES[row.TableName]) AI_TABLES[row.TableName] = [];
+    AI_TABLES[row.TableName].push(row);
+})
+
+console.log("Loaded AI tables:", AI_TABLES);
+
 export const presets = {
     "map00": {
         texture: textures.mapChateau,

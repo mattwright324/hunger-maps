@@ -51,7 +51,7 @@ export class Marker {
     #readable = {};
     #descriptors = [];
     #loot_table_lookup = false;
-    #loot_table;
+    #table;
     #texture = textures.uncommon;
     #container = new PIXI.Container();
     #sprite = new PIXI.Sprite(this.#texture);
@@ -73,9 +73,9 @@ export class Marker {
         return this.#descriptors.join(" ").toLowerCase();
     }
 
-    get lootTable() {
-        this.#lookupLootTable();
-        return this.#loot_table;
+    get tableData() {
+        this.#lookupTable();
+        return this.#table;
     }
 
     get container() {
@@ -102,15 +102,20 @@ export class Marker {
         return this.#zIndex;
     }
 
-    #lookupLootTable() {
+    #lookupTable() {
         if (this.#loot_table_lookup) return;
-        this.#loot_table_lookup = true;
         const lootSource = this.#row.LootSource;
         if (lootSource) {
             const lootSourceMap = data.DT_LootSources[lootSource];
             let lootTableData = data.LOOT_TABLES[lootSource];
             if (!lootTableData) {
                 let lookupKey = lootSourceMap?.["LootTable"] || lootSource;
+                if (lookupKey === "Sack_Flour") {
+                    lookupKey = "FlourBag"
+                }
+                if (lookupKey === "Amphora") {
+                    lookupKey = "Liquids"
+                }
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
                     if (key.includes("_Map0") || key.includes("Tutorial")) {
                         continue;
@@ -126,8 +131,15 @@ export class Marker {
                     }
                 }
             }
-            this.#loot_table = lootTableData;
+            this.#table = lootTableData;
         }
+        if (this.#row.AISpawner) {
+            const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
+            if (spawnerTable) {
+                this.#table = spawnerTable;
+            }
+        }
+        this.#loot_table_lookup = true;
     }
 
     #makeReadable(text) {
@@ -190,9 +202,10 @@ export class Marker {
 
         let aiSpawner = this.#row.AISpawner;
         if (aiSpawner) {
-            this.#row.AISpawner = this.#makeReadable(aiSpawner.replace(/AISpawnerConfigSet'DA_AISpawner_(\w+)'/g, "$1"));
+            this.#row.AISpawner = aiSpawner.replace(/AISpawnerConfigSet'(\w+)'/g, "$1");
+            this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/AISpawnerConfigSet'DA_AISpawner_(\w+)'/g, "$1"));
         }
-        this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner || this.#row.LootSource || this.#row.OuterType
+        this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner2 || this.#row.LootSource || this.#row.OuterType
         if (["StaticMesh"].includes(this.#row.OuterType)) {
             this.#readable.displayName = this.#row.OuterName;
         }
@@ -277,24 +290,23 @@ export class Marker {
             } else {
                 rows.push(`<tr><td><strong>LootSource</strong></td><td>${lootSource}</td></tr>`)
             }
-            let lootTableData = this.lootTable;
-            if (lootTableData) {
-                this.#loot_table = lootTableData;
-                lootTableData.forEach(lootTableEntry => {
-                    const percent = lootTableEntry["WeightPercent"];
-                    let color = "green"
-                    if (Number(percent) < 10) color = "orange"
-                    if (Number(percent) < 5) color = "red"
-
-                    rows.push(`<tr><td><strong>${lootTableEntry["TableName"]}</strong></td><td><span style="color:${color}">${percent}%</span> ${lootTableEntry["ObjectName"]}</td></tr>`)
-                })
-            }
         }
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
         }
         if (this.#row.Visible === "False") {
             rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row.Visible}</td></tr>`)
+        }
+        let tableData = this.tableData;
+        if (tableData) {
+            tableData.forEach(row => {
+                const percent = row["WeightPercent"];
+                let color = "green"
+                if (Number(percent) < 10) color = "orange"
+                if (Number(percent) < 5) color = "red"
+
+                rows.push(`<tr><td><strong>${row["TableName"]}</strong></td><td><span style="color:${color}">${percent}%</span> ${row["ObjectName"]}</td></tr>`)
+            })
         }
         return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }

@@ -4,6 +4,7 @@ import csv
 import re
 import random
 
+AI_SPAWNER_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\AI\Spawner\SpawnerDataAssets"
 ITEM_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Loot\ItemTables"
 
 BP_FOLDERS = [
@@ -174,6 +175,54 @@ def main():
     #     writer.writerows(loot_csv_rows)
     #
     # return
+
+    ai_csv_rows = []
+    for root, _, files in os.walk(AI_SPAWNER_TABLES):
+        print(f"Reading files in {root}...")
+        for file in files:
+            if not file.lower().endswith(".json"):
+                continue
+            full_path = os.path.join(root, file)
+            try:
+                with open(full_path, "r", encoding="utf-8") as f:
+                    objects = json.load(f)
+                    for obj in objects:
+                        type = obj.get("Type")
+                        name = obj.get("Name")
+                        props = obj.get("Properties", {})
+                        if type != "AISpawnerConfigSet":
+                            print(f"Skipping non-AISpawnerConfigSet: {type}'{name}'")
+                            continue
+                        content = props.get("SpawnChances", [])
+                        weight_sum = 0
+                        for item in content:
+                            weight = item.get("Value", 0)
+                            weight_sum += weight
+                            obj_name = item.get("Key", "")
+                            if obj_name:
+                                matches = re.search(r"(\w+)'(?:/.*\.)?(\w+)(?:[:.]\w+)?'", obj_name)
+                                if matches:
+                                    obj_name = matches.group(2)
+                            if obj_name == "0":
+                                obj_name = "Nothing"
+                            print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
+                            item["CustomName"] = obj_name
+                        for item in content:
+                            name = obj.get("Name")
+                            weight = item.get("Value", 0)
+                            obj_name = item.get("CustomName", "")
+                            ai_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
+            except Exception as e:
+                print(f"Failed to parse {full_path}: {e}")
+
+    with open("output/ai_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
+        ai_csv_rows.sort()
+        ai_csv_rows.reverse()
+        writer.writerows(ai_csv_rows)
+
+    return
 
     bp_objects = []
     for bp_folder in BP_FOLDERS:

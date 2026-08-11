@@ -96,10 +96,10 @@ import {controls, dom_ready, refreshLabels} from "dom";
         loadMultiselectClass(controls.spawnsSelect, "spawns");
         loadMultiselectClass(controls.otherSelect, "other");
 
-        controls.creatureSelect.setValue(['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"], true);
+        //controls.creatureSelect.setValue(['Miniboss', 'Miniboss 01b', "Bloats", "Dreg Horde"], true);
         [controls.npcSelect, controls.lootSourceSelect,
             controls.looseSelect, controls.envSelect,
-            controls.questSelect, controls.spawnsSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
+            controls.questSelect, controls.spawnsSelect, controls.creatureSelect].forEach(ts => ts.setValue(Object.keys(ts.options), true));
         refreshLabels();
 
         [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.envSelect,
@@ -143,8 +143,8 @@ import {controls, dom_ready, refreshLabels} from "dom";
             if (marker.row.AISpawner) {
                 values.push(marker.row.AISpawner)
             }
-            if (marker.lootTable && controls.includeLootItems.checked) {
-                marker.lootTable.forEach(loot => values.push(loot["ObjectName"]))
+            if (marker.tableData && controls.includeLootItems.checked) {
+                marker.tableData.forEach(loot => values.push(loot["ObjectName"]))
             }
             const match = values.some(v => v.toLowerCase().includes(query));
 
