@@ -88,6 +88,8 @@ const dom_load = async () => {
     controls.searchBox = document.getElementById("searchBox");
     controls.checkShowOnlyMatches = document.getElementById("showOnlyMatches");
     controls.includeLootItems = document.getElementById("includeLootItems");
+    controls.chanceRange = document.getElementById("table-chance-range");
+    elements.divChanceRange = document.getElementById("rangeValue");
     controls.enableHeightFilter = document.getElementById("filterZrange");
     controls.sliderHeight = document.getElementById("zRange");
 

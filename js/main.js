@@ -1,8 +1,8 @@
 import * as data from "data";
 import {spawns} from "data";
 import * as pixi from "pixi";
-import {mapOverlaySprite, mapSprite, markerSprites, world} from "pixi";
-import {controls, dom_ready, refreshLabels} from "dom";
+import {app, mapOverlaySprite, mapSprite, markerSprites, world} from "pixi";
+import {controls, dom_ready, elements, refreshLabels} from "dom";
 
 (async function () {
     'use strict';
@@ -144,7 +144,12 @@ import {controls, dom_ready, refreshLabels} from "dom";
                 values.push(marker.row.AISpawner)
             }
             if (marker.tableData && controls.includeLootItems.checked) {
-                marker.tableData.forEach(loot => values.push(loot["ObjectName"]))
+                const rangeValue = Number(controls.chanceRange.value);
+                marker.tableData.forEach(loot => {
+                    if (Number(loot["WeightPercent"]) >= rangeValue) {
+                        values.push(loot["ObjectName"])
+                    }
+                })
             }
             const match = values.some(v => v.toLowerCase().includes(query));
 
@@ -234,6 +239,11 @@ import {controls, dom_ready, refreshLabels} from "dom";
     controls.searchBox.addEventListener("input", applySearch);
     controls.checkShowOnlyMatches.addEventListener("change", applySearch);
     controls.includeLootItems.addEventListener("change", applySearch);
+    controls.chanceRange.addEventListener("change", () => {
+        elements.divChanceRange.innerHTML = controls.chanceRange.value;
+        applySearch();
+    });
+    elements.divChanceRange.innerHTML = controls.chanceRange.value
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
     [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,
