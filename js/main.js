@@ -147,6 +147,9 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
                 const rangeValue = Number(controls.chanceRange.value);
                 marker.tableData.forEach(loot => {
                     if (Number(loot["WeightPercent"]) >= rangeValue) {
+                        if (loot["DisplayName"]) {
+                            values.push(loot["DisplayName"])
+                        }
                         values.push(loot["ObjectName"])
                     }
                 })

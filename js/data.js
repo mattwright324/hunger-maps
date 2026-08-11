@@ -2,6 +2,25 @@ import {textures} from "textures";
 import {elements} from "dom";
 import {Marker} from "marker";
 
+function splitCSVLine(line) {
+    const cols = [];
+    let cur = "";
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+        const ch = line[i];
+        if (ch === '"') {
+            if (inQuotes && line[i + 1] === '"') { cur += '"'; i++; }
+            else inQuotes = !inQuotes;
+        } else if (ch === ',' && !inQuotes) {
+            cols.push(cur); cur = "";
+        } else {
+            cur += ch;
+        }
+    }
+    cols.push(cur);
+    return cols;
+}
+
 async function getMarkerCsvData(url) {
     return await fetch(url)
         .then(r => r.text())
@@ -15,7 +34,7 @@ async function parseMarkerCSV(text) {
     const xy = {}
 
     for (let line of lines) {
-        const cols = line.split(",");
+        const cols = splitCSVLine(line);
         if (cols.length < 6) continue;
 
         const [RootType, OuterType, OuterName, X, Y, Z, DisplayName, SpawnChance, ChanceType, Health, Keyed, LootSource, AISpawner, Visible] = cols;
@@ -61,11 +80,11 @@ async function parseLootCSV(text) {
     const rows = [];
 
     for (let line of lines) {
-        const cols = line.split(",");
+        const cols = splitCSVLine(line);
 
-        const [TableName, Weight, WeightSum, WeightPercent, ObjectName] = cols;
+        const [TableName, Weight, WeightSum, WeightPercent, ObjectName, DisplayName, Rarity] = cols;
 
-        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName});
+        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName, DisplayName, Rarity});
     }
 
     console.log("Parsed CSV data:", rows.length, text);

@@ -40,6 +40,17 @@ document.addEventListener('pointerup', e => {
     justTapped = false;
 });
 
+function encodeHTML(str) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return str.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
 export class Marker {
     constructor(row) {
         this.#row = row;
@@ -384,7 +395,10 @@ export class Marker {
                 if (Number(percent) < 10) color = "orange"
                 if (Number(percent) < 5) color = "red"
 
-                rows.push(`<tr><td><strong>${row["TableName"].replace("DA_AISpawner_", "")}</strong></td><td><span style="color:${color}">${percent}%</span> ${row["ObjectName"]}</td></tr>`)
+                let displayName = row["ObjectName"];
+                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"]}" class="${row["Rarity"].replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["ObjectName"]}</small>`;
+
+                rows.push(`<tr><td><strong>${row["TableName"].replace("DA_AISpawner_", "")}</strong></td><td><span style="color:${color}">${percent}%</span> ${displayName}</td></tr>`)
             })
         }
         return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`

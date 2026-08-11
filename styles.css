@@ -136,3 +136,10 @@ body {
     background-color: var(--bs-primary);
     color: #fff;
 }
+
+
+.Rarity.Common {color: initial;}
+.Rarity.Uncommon {color: #7CFF90;}
+.Rarity.Rare {color: #4DC7FF;}
+.Rarity.Epic {color: #DE74FF;}
+.Rarity.Legendary {color: #FFBF7C;}
