@@ -1,6 +1,6 @@
 import {textures} from "textures";
 import {elements} from "dom";
-import {Marker} from "marker";
+import Marker from "marker";
 
 function splitCSVLine(line) {
     const cols = [];

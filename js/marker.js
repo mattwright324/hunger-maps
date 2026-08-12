@@ -51,7 +51,7 @@ function encodeHTML(str) {
     return str.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-export class Marker {
+class Marker {
     constructor(row) {
         this.#row = row;
         this.#init();
@@ -191,6 +191,14 @@ export class Marker {
                 }
                 if (lookupKey === "Medical") {
                     this.#table = combineTables("Medical", ["LIT_Medicine_Uncommon", "LIT_Medicine_Crafting", "LIT_Medicine_Common"])
+                }
+                if (lookupKey === "Medical_UREL") {
+                    this.#table = combineTables("Medical_UREL", [
+                        "LIT_Medicine_Uncommon",
+                        "LIT_Medicine_Rare",
+                        "LIT_Medicine_Epic",
+                        "LIT_Medicine_Legendary",
+                    ])
                 }
                 if (lookupKey === "CivilianCupboardDresser") {
                     this.#table = combineTables("CivilianCupboardDresser", ["LIT_CivilianDresser", "LIT_CivilianCupboard"])
@@ -619,3 +627,5 @@ export class Marker {
 
 
 }
+
+export default Marker
