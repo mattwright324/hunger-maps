@@ -189,6 +189,9 @@ export class Marker {
                     newTable.sort((a, b) => (Number(b.WeightPercent) || 0) - (Number(a.WeightPercent) || 0));
                     return newTable;
                 }
+                if (lookupKey === "Medical") {
+                    this.#table = combineTables("Medical", ["LIT_Medicine_Uncommon", "LIT_Medicine_Crafting", "LIT_Medicine_Common"])
+                }
                 if (lookupKey === "CivilianCupboardDresser") {
                     this.#table = combineTables("CivilianCupboardDresser", ["LIT_CivilianDresser", "LIT_CivilianCupboard"])
                 }
