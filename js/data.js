@@ -229,7 +229,7 @@ export const questItems = [
     "BP_LouisQ7Corpse_C",
     //"BP_Mapzone_01b_C",
     "BP_MortuaryRecord_C",
-    "BP_P_CrowsCircle_01_C",
+    //"BP_P_CrowsCircle_01_C",
     "BP_PiroCorpsePile_01_C",
     "BP_PiroCorpsePile_02_C",
     "BP_PiroCorpsePile_03_C",
