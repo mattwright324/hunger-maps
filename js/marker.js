@@ -168,7 +168,7 @@ class Marker {
                         break;
                     }
                 }
-                function combineTables(name, tables) {
+                function combineTables(name, tables, rarityFilter) {
                     let newTable = [];
                     for (let i = 0; i < tables.length; i++) {
                         const table = data.LOOT_TABLES[tables[i]];
@@ -178,6 +178,9 @@ class Marker {
                         }
                         newTable.push(...table);
                     }
+
+                    newTable = newTable.filter(entry => rarityFilter ? rarityFilter.some(r => entry?.Rarity?.includes(r)) : true);
+
                     let newWeightSum = 0;
                     for (let i = 0; i < newTable.length; i++) {
                         newWeightSum += Number(newTable[i].Weight) || 0;
@@ -220,37 +223,45 @@ class Marker {
                     ])
                 }
                 if (lookupKey === "Armor_UREL") {
-                    this.#table = combineTables("Armor_UREL", ["LIT_Armor_Uncommon", "LIT_Armor_Rare", "LIT_Armor_Epic", "LIT_Armor_Legendary"])
+                    this.#table = combineTables("Armor_UREL", ["LIT_Armor_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
+                    // this.#table = combineTables("Armor_UREL", [
+                    //     "LIT_Armor_Uncommon",
+                    //     "LIT_Armor_Rare",
+                    //     "LIT_Armor_Epic",
+                    //     "LIT_Armor_Legendary"
+                    // ])
                 }
                 if (lookupKey === "Weapon_Melee") {
                     this.#table = combineTables("Weapon_Melee", ["LIT_1HMelee_All", "LIT_2HMelee_All"])
                 }
                 if (lookupKey === "Weapon_Melee_REL") {
-                    this.#table = combineTables("Weapon_Melee_REL", [
-                        "LIT_1HMelee_Uncommon",
-                        "LIT_1HMelee_Rare",
-                        "LIT_1HMelee_Epic",
-                        "LIT_1HMelee_Legendary",
-                        "LIT_2HMelee_Uncommon",
-                        "LIT_2HMelee_Rare",
-                        "LIT_2HMelee_Epic",
-                        "LIT_2HMelee_Legendary",
-                    ])
+                    this.#table = combineTables("Weapon_Ranged", ["LIT_1HMelee_All", "LIT_2HMelee_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
+                    // this.#table = combineTables("Weapon_Melee_REL", [
+                    //     "LIT_1HMelee_Uncommon",
+                    //     "LIT_1HMelee_Rare",
+                    //     "LIT_1HMelee_Epic",
+                    //     "LIT_1HMelee_Legendary",
+                    //     "LIT_2HMelee_Uncommon",
+                    //     "LIT_2HMelee_Rare",
+                    //     "LIT_2HMelee_Epic",
+                    //     "LIT_2HMelee_Legendary",
+                    // ])
                 }
                 if (lookupKey === "Weapon_Ranged") {
                     this.#table = combineTables("Weapon_Ranged", ["LIT_Rifles_All", "LIT_Pistols_All"])
                 }
                 if (lookupKey === "Weapon_Ranged_REL") {
-                    this.#table = combineTables("Weapon_Ranged_REL", [
-                        "LIT_Uncommon_Weap_Pistols",
-                        "LIT_Rare_Weap_Pistols",
-                        "LIT_Epic_Weap_Pistols",
-                        "LIT_Legendary_Weap_Pistols",
-                        "LIT_Uncommon_Weap_Rifles",
-                        "LIT_Rare_Weap_Rifles",
-                        "LIT_Epic_Weap_Rifles",
-                        "LIT_Legendary_Weap_Rifles",
-                    ])
+                    this.#table = combineTables("Weapon_Ranged", ["LIT_Rifles_All", "LIT_Pistols_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
+                    // this.#table = combineTables("Weapon_Ranged_REL", [
+                    //     "LIT_Uncommon_Weap_Pistols",
+                    //     "LIT_Rare_Weap_Pistols",
+                    //     "LIT_Epic_Weap_Pistols",
+                    //     "LIT_Legendary_Weap_Pistols",
+                    //     "LIT_Uncommon_Weap_Rifles",
+                    //     "LIT_Rare_Weap_Rifles",
+                    //     "LIT_Epic_Weap_Rifles",
+                    //     "LIT_Legendary_Weap_Rifles",
+                    // ])
                 }
             }
         }
