@@ -9,28 +9,30 @@ ITEM_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exp
 INVENTORY_DEFS = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Inventory\Definitions"
 
 BP_FOLDERS = [
+    r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\ChateauNPCs",
+    r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Gameplay",
     r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Meshes\Blueprints",
     r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Blueprints",
 ]
 
 OUTPUT_FOLDER = r"output/"
 PARSE_MAP = [
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
-        "output": "map01_components.csv"
-    },
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
-        "output": "map02_components.csv"
-    },
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
-        "output": "map03_components.csv"
-    },
     # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
-    #     "output": "map00_components.csv"
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
+    #     "output": "map01_components.csv"
     # },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
+    #     "output": "map02_components.csv"
+    # },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
+    #     "output": "map03_components.csv"
+    # },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
+        "output": "map00_components.csv"
+    },
 ]
 
 class Resolver:
@@ -138,122 +140,122 @@ def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 
-    inventory_items = {}
-    for root, _, files in os.walk(INVENTORY_DEFS):
-        print(f"Reading files in {root}...")
-        for file in files:
-            if not file.lower().endswith(".json"):
-                continue
-            full_path = os.path.join(root, file)
-            try:
-                with open(full_path, "r", encoding="utf-8") as f:
-                    objects = json.load(f)
-                    for obj in objects:
-                        type = obj.get("Type")
-                        name = obj.get("Name")
-                        props = obj.get("Properties", {})
-                        if not type.startswith("Inv"):
-                            continue
-                        display_name = props.get("DisplayName", {}).get("SourceString", "")
-                        rarity = props.get("Rarity", {}).get("TagName", "")
-                        inventory_items[name] = {"DisplayName": display_name, "Rarity": rarity}
-            except Exception as e:
-                print(f"Failed to parse {full_path}: {e}")
+    # inventory_items = {}
+    # for root, _, files in os.walk(INVENTORY_DEFS):
+    #     print(f"Reading files in {root}...")
+    #     for file in files:
+    #         if not file.lower().endswith(".json"):
+    #             continue
+    #         full_path = os.path.join(root, file)
+    #         try:
+    #             with open(full_path, "r", encoding="utf-8") as f:
+    #                 objects = json.load(f)
+    #                 for obj in objects:
+    #                     type = obj.get("Type")
+    #                     name = obj.get("Name")
+    #                     props = obj.get("Properties", {})
+    #                     if not type.startswith("Inv"):
+    #                         continue
+    #                     display_name = props.get("DisplayName", {}).get("SourceString", "")
+    #                     rarity = props.get("Rarity", {}).get("TagName", "")
+    #                     inventory_items[name] = {"DisplayName": display_name, "Rarity": rarity}
+    #         except Exception as e:
+    #             print(f"Failed to parse {full_path}: {e}")
+    #
+    # print(inventory_items)
+    #
+    # loot_csv_rows = []
+    # for root, _, files in os.walk(ITEM_TABLES):
+    #     print(f"Reading files in {root}...")
+    #     for file in files:
+    #         if not file.lower().endswith(".json"):
+    #             continue
+    #         full_path = os.path.join(root, file)
+    #         try:
+    #             with open(full_path, "r", encoding="utf-8") as f:
+    #                 objects = json.load(f)
+    #                 for obj in objects:
+    #                     type = obj.get("Type")
+    #                     name = obj.get("Name")
+    #                     props = obj.get("Properties", {})
+    #                     if type != "LootItemTable":
+    #                         print(f"Skipping non-LootItemTable: {type}'{name}'")
+    #                         continue
+    #                     weight_sum = props.get("WeightSum", 0)
+    #                     content = props.get("Content", [])
+    #                     for item in content:
+    #                         weight = item.get("Weight", 0)
+    #                         obj_name = item.get("Item", {}).get("ObjectName", "")
+    #                         if obj_name:
+    #                             matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", obj_name)
+    #                             if matches:
+    #                                 obj_name = matches.group(2)
+    #                         display_name = None
+    #                         rarity = None
+    #                         if inventory_items.get(obj_name):
+    #                             display_name = inventory_items[obj_name]["DisplayName"]
+    #                             rarity = inventory_items[obj_name]["Rarity"]
+    #                         print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name} {display_name} {rarity}")
+    #                         loot_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name, display_name, rarity])
+    #         except Exception as e:
+    #             print(f"Failed to parse {full_path}: {e}")
+    #
+    # with open("output/loot_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName", "DisplayName", "Rarity"])
+    #     loot_csv_rows.sort()
+    #     loot_csv_rows.reverse()
+    #     writer.writerows(loot_csv_rows)
+    #
+    # return
 
-    print(inventory_items)
-
-    loot_csv_rows = []
-    for root, _, files in os.walk(ITEM_TABLES):
-        print(f"Reading files in {root}...")
-        for file in files:
-            if not file.lower().endswith(".json"):
-                continue
-            full_path = os.path.join(root, file)
-            try:
-                with open(full_path, "r", encoding="utf-8") as f:
-                    objects = json.load(f)
-                    for obj in objects:
-                        type = obj.get("Type")
-                        name = obj.get("Name")
-                        props = obj.get("Properties", {})
-                        if type != "LootItemTable":
-                            print(f"Skipping non-LootItemTable: {type}'{name}'")
-                            continue
-                        weight_sum = props.get("WeightSum", 0)
-                        content = props.get("Content", [])
-                        for item in content:
-                            weight = item.get("Weight", 0)
-                            obj_name = item.get("Item", {}).get("ObjectName", "")
-                            if obj_name:
-                                matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", obj_name)
-                                if matches:
-                                    obj_name = matches.group(2)
-                            display_name = None
-                            rarity = None
-                            if inventory_items.get(obj_name):
-                                display_name = inventory_items[obj_name]["DisplayName"]
-                                rarity = inventory_items[obj_name]["Rarity"]
-                            print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name} {display_name} {rarity}")
-                            loot_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name, display_name, rarity])
-            except Exception as e:
-                print(f"Failed to parse {full_path}: {e}")
-
-    with open("output/loot_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName", "DisplayName", "Rarity"])
-        loot_csv_rows.sort()
-        loot_csv_rows.reverse()
-        writer.writerows(loot_csv_rows)
-
-    return
-
-    ai_csv_rows = []
-    for root, _, files in os.walk(AI_SPAWNER_TABLES):
-        print(f"Reading files in {root}...")
-        for file in files:
-            if not file.lower().endswith(".json"):
-                continue
-            full_path = os.path.join(root, file)
-            try:
-                with open(full_path, "r", encoding="utf-8") as f:
-                    objects = json.load(f)
-                    for obj in objects:
-                        type = obj.get("Type")
-                        name = obj.get("Name")
-                        props = obj.get("Properties", {})
-                        if type != "AISpawnerConfigSet":
-                            print(f"Skipping non-AISpawnerConfigSet: {type}'{name}'")
-                            continue
-                        content = props.get("SpawnChances", [])
-                        weight_sum = 0
-                        for item in content:
-                            weight = item.get("Value", 0)
-                            weight_sum += weight
-                            obj_name = item.get("Key", "")
-                            if obj_name:
-                                matches = re.search(r"(\w+)'(?:/.*\.)?(\w+)(?:[:.]\w+)?'", obj_name)
-                                if matches:
-                                    obj_name = matches.group(2)
-                            if obj_name == "0":
-                                obj_name = "Nothing"
-                            print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
-                            item["CustomName"] = obj_name
-                        for item in content:
-                            name = obj.get("Name")
-                            weight = item.get("Value", 0)
-                            obj_name = item.get("CustomName", "")
-                            ai_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
-            except Exception as e:
-                print(f"Failed to parse {full_path}: {e}")
-
-    with open("output/ai_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
-        ai_csv_rows.sort()
-        ai_csv_rows.reverse()
-        writer.writerows(ai_csv_rows)
-
-    return
+    # ai_csv_rows = []
+    # for root, _, files in os.walk(AI_SPAWNER_TABLES):
+    #     print(f"Reading files in {root}...")
+    #     for file in files:
+    #         if not file.lower().endswith(".json"):
+    #             continue
+    #         full_path = os.path.join(root, file)
+    #         try:
+    #             with open(full_path, "r", encoding="utf-8") as f:
+    #                 objects = json.load(f)
+    #                 for obj in objects:
+    #                     type = obj.get("Type")
+    #                     name = obj.get("Name")
+    #                     props = obj.get("Properties", {})
+    #                     if type != "AISpawnerConfigSet":
+    #                         print(f"Skipping non-AISpawnerConfigSet: {type}'{name}'")
+    #                         continue
+    #                     content = props.get("SpawnChances", [])
+    #                     weight_sum = 0
+    #                     for item in content:
+    #                         weight = item.get("Value", 0)
+    #                         weight_sum += weight
+    #                         obj_name = item.get("Key", "")
+    #                         if obj_name:
+    #                             matches = re.search(r"(\w+)'(?:/.*\.)?(\w+)(?:[:.]\w+)?'", obj_name)
+    #                             if matches:
+    #                                 obj_name = matches.group(2)
+    #                         if obj_name == "0":
+    #                             obj_name = "Nothing"
+    #                         print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
+    #                         item["CustomName"] = obj_name
+    #                     for item in content:
+    #                         name = obj.get("Name")
+    #                         weight = item.get("Value", 0)
+    #                         obj_name = item.get("CustomName", "")
+    #                         ai_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
+    #         except Exception as e:
+    #             print(f"Failed to parse {full_path}: {e}")
+    #
+    # with open("output/ai_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
+    #     ai_csv_rows.sort()
+    #     ai_csv_rows.reverse()
+    #     writer.writerows(ai_csv_rows)
+    #
+    # return
 
     bp_objects = []
     for bp_folder in BP_FOLDERS:
@@ -331,10 +333,12 @@ def main():
             loot_source = None
             ai_spawn = None
             visible = None
+            harvestable_by = None
+            node_tag = None
 
             def walk_props(obj, parent=None, depth=0, search_text=None):
                 nonlocal read_count, read
-                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn, visible
+                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn, visible, harvestable_by, node_tag
 
                 # if obj.get("Type").startswith("Level"):
                 #     return
@@ -375,6 +379,8 @@ def main():
                     display_name = obj_props.get("DisplayName", {}).get("SourceString")
                 if "Name" in obj_props and not display_name:
                     display_name = obj_props.get("Name", {}).get("SourceString")
+                if "WorkbenchName" in obj_props and not display_name:
+                    display_name = obj_props.get("WorkbenchName", {}).get("SourceString")
                 if "KeyDefinition" in obj_props and not keyed:
                     keyed = obj_props.get("KeyDefinition", {}).get("ObjectName")
                 if "LootSource" in obj_props and not loot_source:
@@ -389,6 +395,10 @@ def main():
                     visible = obj_props.get("bVisible")
                 if "bHiddenInGame" in obj_props and visible is None:
                     visible = obj_props.get("bHiddenInGame")
+                if "HarvestableByProfession" in obj_props and harvestable_by is None:
+                    harvestable_by = obj_props.get("HarvestableByProfession")
+                if "NodeTag" in obj_props and node_tag is None:
+                    node_tag = obj_props.get("NodeTag")
 
                 for obj2 in resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
                     walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))
@@ -457,7 +467,7 @@ def main():
                 print(f"{display_name} {root_obj.get('CustomOuterType')}: {health}, {chance} ({chance_type}), {x}, {y}, {z}, {keyed}, {loot_source}, {ai_spawn}")
                 print()
 
-            csv_rows.append([root_obj.get("Type"), root_obj.get('CustomOuterType'), root_obj.get('CustomOuterName'), x, y, z, display_name, chance, chance_type, health, keyed, loot_source, ai_spawn, visible])
+            csv_rows.append([root_obj.get("Type"), root_obj.get('CustomOuterType'), root_obj.get('CustomOuterName'), x, y, z, display_name, chance, chance_type, health, keyed, loot_source, ai_spawn, visible, harvestable_by, node_tag])
 
         for root_obj in resolver.by_type.get("FastGeoContainer", []):
             for clusters in root_obj.get("ComponentClusters", []):
@@ -488,11 +498,11 @@ def main():
                         visible = obj.get("bVisible")
                     if "bHiddenInGame" in obj and visible is None:
                         visible = not obj.get("bHiddenInGame")
-                    csv_rows.append([root_obj.get("Type"), obj.get('CustomOuterType'), obj.get('CustomOuterName'), x, y, z, None, None, None, None, None, None, None, visible])
+                    csv_rows.append([root_obj.get("Type"), obj.get('CustomOuterType'), obj.get('CustomOuterName'), x, y, z, None, None, None, None, None, None, None, visible, None, None])
 
         with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "SpawnChance", "ChanceType", "Health", "Keyed", "LootSource", "AISpawner","Visible"])
+            writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "SpawnChance", "ChanceType", "Health", "Keyed", "LootSource", "AISpawner","Visible","HarvestableBy","NodeTag"])
             csv_rows.sort()
             writer.writerows(csv_rows)
 

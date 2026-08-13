@@ -468,14 +468,24 @@ class Marker {
         }
 
         if (this.#row.OuterType.includes("Hub_C") || this.#row.OuterType.includes("Chateau_C")) {
-            this.#class = "npc";
-            sprite.texture = textures.npcGeneric;
-            if (!display_lower.includes("hub")) {
-                this.#tint = 0xFFD800;
+            if (this.#row.OuterType.includes("Door") || this.#row.OuterType.includes("Window")
+                || this.#row.OuterType.includes("BP_MX") || this.#row.OuterType.startsWith("C_")) {
+                this.#class = "other";
             } else {
-                this.#descriptors.push("vendor")
+                this.#class = "npc";
+                sprite.texture = textures.npcGeneric;
+                if (!this.#row.OuterType.includes("Hub")) {
+                    this.#tint = 0xFFD800;
+                } else {
+                    this.#descriptors.push("vendor")
+                }
+                this.#zIndex = 100;
             }
-            this.#zIndex = 100;
+        }
+
+        if (this.#row.OuterType.startsWith("C_") && controls.mapSelect.value === "map00") {
+            this.#class = "other";
+            return
         }
 
         for (const substr of Object.keys(data.chateauProfessionNodes)) {
@@ -505,67 +515,71 @@ class Marker {
                 return;
             }
         }
-        for (const substr of data.environment) {
-            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
-                this.#class = "environment";
-                sprite.texture = textures.uncommon;
 
-                if (this.#row.Health) {
-                    this.#tint = 0x00D8FF
-                    this.#descriptors.push("breakable")
-                }
+        if (controls.mapSelect.value !== "map00") {
+            for (const substr of data.environment) {
+                if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
+                    this.#class = "environment";
+                    sprite.texture = textures.uncommon;
 
-                if (display_lower.includes("lift") || display_lower.includes("door") || this.#row.OuterType.includes("Gate_A0")) {
-                    sprite.texture = textures.door;
-                } else if (display_lower.includes("window")) {
-                    sprite.texture = textures.window;
-                }
-
-                for (const resourceNode of data.professions.conservatorTypes) {
-                    if (this.#row.OuterType.includes(resourceNode)) {
-                        sprite.texture = textures.profConservator;
-                        this.#descriptors.push("profession");
-                        break;
+                    if (this.#row.Health) {
+                        this.#tint = 0x00D8FF
+                        this.#descriptors.push("breakable")
                     }
-                }
-                for (const resourceNode of data.professions.naturalistTypes) {
-                    if (this.#row.OuterType.includes(resourceNode)) {
-                        sprite.texture = textures.profNaturalist;
-                        this.#descriptors.push("profession");
-                        break;
+
+                    if (display_lower.includes("lift") || display_lower.includes("door") || this.#row.OuterType.includes("Gate_A0")) {
+                        sprite.texture = textures.door;
+                    } else if (display_lower.includes("window")) {
+                        sprite.texture = textures.window;
                     }
-                }
-                for (const resourceNode of data.professions.scavengerTypes) {
-                    if (this.#row.OuterType.includes(resourceNode)) {
-                        sprite.texture = textures.profScavenger;
-                        this.#descriptors.push("profession");
-                        break;
+
+                    for (const resourceNode of data.professions.conservatorTypes) {
+                        if (this.#row.OuterType.includes(resourceNode)) {
+                            sprite.texture = textures.profConservator;
+                            this.#descriptors.push("profession");
+                            break;
+                        }
                     }
-                }
+                    for (const resourceNode of data.professions.naturalistTypes) {
+                        if (this.#row.OuterType.includes(resourceNode)) {
+                            sprite.texture = textures.profNaturalist;
+                            this.#descriptors.push("profession");
+                            break;
+                        }
+                    }
+                    for (const resourceNode of data.professions.scavengerTypes) {
+                        if (this.#row.OuterType.includes(resourceNode)) {
+                            sprite.texture = textures.profScavenger;
+                            this.#descriptors.push("profession");
+                            break;
+                        }
+                    }
 
-                if (this.#row.OuterType.toLowerCase().includes("soundtrap")) {
-                    sprite.texture = textures.sound;
-                    this.#tint = 0xff0000;
-                    if (this.#row.OuterType.includes("Crow") || this.#row.OuterType.includes("Glass")
-                        || this.#row.OuterType.includes("Pottery"))
-                        this.#tint = 0x888888;
-                    this.#zIndex = 50;
-                } else if (display_lower.includes("trap") && !display_lower.includes("trapdoor")) {
-                    sprite.texture = textures.grenade;
-                    if (display_lower.includes("ground_bleed")) sprite.texture = textures.caltrops;
-                    this.#tint = 0xff0000;
-                    if (display_lower.includes("poison")) this.#tint = 0x00ff00
-                    this.#zIndex = 50;
-                }
+                    if (this.#row.OuterType.toLowerCase().includes("soundtrap")) {
+                        sprite.texture = textures.sound;
+                        this.#tint = 0xff0000;
+                        if (this.#row.OuterType.includes("Crow") || this.#row.OuterType.includes("Glass")
+                            || this.#row.OuterType.includes("Pottery"))
+                            this.#tint = 0x888888;
+                        this.#zIndex = 50;
+                    } else if (display_lower.includes("trap") && !display_lower.includes("trapdoor")) {
+                        sprite.texture = textures.grenade;
+                        if (display_lower.includes("ground_bleed")) sprite.texture = textures.caltrops;
+                        this.#tint = 0xff0000;
+                        if (display_lower.includes("poison")) this.#tint = 0x00ff00
+                        this.#zIndex = 50;
+                    }
 
-                if (display_lower.includes("stairintegrated")) {
-                    sprite.texture = textures.stairs;
-                    //this.#tint = 0x0000ff;
-                }
+                    if (display_lower.includes("stairintegrated")) {
+                        sprite.texture = textures.stairs;
+                        //this.#tint = 0x0000ff;
+                    }
 
-                return;
+                    return;
+                }
             }
         }
+
         for (const substr of data.containers) {
             if (this.#row.LootSource || this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "container";
