@@ -37,7 +37,11 @@ async function parseMarkerCSV(text) {
         const cols = splitCSVLine(line);
         if (cols.length < 6) continue;
 
-        const [RootType, OuterType, OuterName, X, Y, Z, DisplayName, SpawnChance, ChanceType, Health, Keyed, LootSource, AISpawner, Visible] = cols;
+        const [
+            RootType, OuterType, OuterName, X, Y, Z, DisplayName,
+            SpawnChance, ChanceType, Health, Keyed, LootSource,
+            AISpawner, Visible, HarvestableBy, NodeTag
+        ] = cols;
 
         if (!X || !Y || !Z) continue;
 
@@ -62,6 +66,8 @@ async function parseMarkerCSV(text) {
             LootSource,
             AISpawner,
             Visible,
+            HarvestableBy,
+            NodeTag,
         });
     }
 
@@ -91,6 +97,28 @@ async function parseLootCSV(text) {
     return rows;
 }
 
+async function getNodeCsvData(url) {
+    return await fetch(url)
+        .then(r => r.text())
+        .then(text => parseNodeCSV(text));
+}
+
+async function parseNodeCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const rows = [];
+
+    for (let line of lines) {
+        const cols = splitCSVLine(line);
+
+        const [ResourceKey,RequiredLevel,SpawnChance,DisplayName,Item,MinAmount,MaxAmount] = cols;
+
+        rows.push({ResourceKey,RequiredLevel,SpawnChance,DisplayName,Item,MinAmount,MaxAmount});
+    }
+
+    console.log("Parsed CSV data:", rows.length, text);
+    return rows;
+}
+
 const lootTables = await getLootCsvData("./loot_tables.csv?v=" + elements.metaVersion);
 export const LOOT_TABLES = {}
 lootTables.forEach(row => {
@@ -108,7 +136,11 @@ aiTables.forEach(row => {
     AI_TABLES[row.TableName].push(row);
 })
 
-console.log("Loaded AI tables:", AI_TABLES);
+const resourceNodes = await getNodeCsvData("./resource_nodes.csv?v=" + elements.metaVersion);
+export const RESOURCE_NODES = {}
+resourceNodes.forEach(row => RESOURCE_NODES[row.ResourceKey] = row)
+
+console.log("Loaded resource nodes:", RESOURCE_NODES);
 
 export const presets = {
     "map00": {
@@ -273,62 +305,6 @@ export const chateauProfessionNodes = {
     "BP_Outfitter": textures.profOutfitter,
     "BP_Physician": textures.profPhysician,
     "BP_Scavenger": textures.profScavenger,
-}
-
-export const professions = {
-    conservatorTypes: [
-        "Node_Con_BarrelLathe_C",
-        "Node_Con_BlackenedStriker_C",
-        "Node_Con_BrokenRifle_C",
-        "Node_Con_Chronometer_C",
-        "Node_Con_ConvexGlass_C",
-        "Node_Con_CopperTwine_C",
-        "Node_Con_DamagedScrew_C",
-        "Node_Con_LeverArm_C",
-        "Node_Con_LodestoneSlag_C",
-        "Node_Con_OldGunpowder_C",
-        "Node_Con_PowderCake_C",
-        "Node_Con_TarnishedQuicksilver_01a_C",
-        "Node_Con_WhaleOil_C",
-    ],
-    naturalistTypes: [
-        "Node_Nat_Rosemary_C",
-        "Node_Nat_Lavender_C",
-        "Node_Nat_Garlic_C",
-        "Node_Nat_GarlicHanging_C",
-        "Node_Nat_Clove_C",
-        "Node_Nat_PinkYarrow_C",
-        "Node_Nat_PinkYarrowVase_C",
-        "Node_Nat_Cinnamon_C",
-        "Node_Nat_CinnamonBark_C",
-        "Node_Nat_Fungi_C",
-        "Node_Nat_Saffron_C",
-        "Node_Nat_SaffronBasket_C",
-        "Node_Nat_Pepper_C",
-        "Node_Nat_PepperPlate_C",
-        "Node_Nat_Poppy_C",
-        "Node_Nat_PoppyDried_01a_C",
-        "BP_HangingHerbRope_C",
-    ],
-    scavengerTypes: [
-        "Node_Scav_Wool_C",
-        "Node_Scav_WoolPillow_C",
-        "Node_Scav_Copper_C",
-        "Node_Scav_Cotton_C",
-        "Node_Scav_CottonBasket_C",
-        "Node_Scav_Flax_C",
-        "Node_Scav_Hemp_C",
-        "Node_Scav_Iron_C",
-        "Node_Scav_Lead_C",
-        "Node_Scav_Gold_C",
-        "Node_Scav_GoldBarrow_C",
-        "Node_Scav_Silver_C",
-        "Node_Scav_SilverBarrow_C",
-        "Node_Scav_Silk_C",
-        "Node_Scav_SilkBanner_01a_C",
-        "Node_Scav_SilkBanner_01b_C",
-        "Node_Scav_SilkBanner_01c_C",
-    ]
 }
 
 export const DT_LootSources = {

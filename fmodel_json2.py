@@ -7,6 +7,7 @@ import random
 AI_SPAWNER_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\AI\Spawner\SpawnerDataAssets"
 ITEM_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Loot\ItemTables"
 INVENTORY_DEFS = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Inventory\Definitions"
+RESOURCE_NODES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Resources\Nodes"
 
 BP_FOLDERS = [
     r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\ChateauNPCs",
@@ -17,22 +18,22 @@ BP_FOLDERS = [
 
 OUTPUT_FOLDER = r"output/"
 PARSE_MAP = [
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
-    #     "output": "map01_components.csv"
-    # },
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
-    #     "output": "map02_components.csv"
-    # },
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
-    #     "output": "map03_components.csv"
-    # },
     {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
-        "output": "map00_components.csv"
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
+        "output": "map01_components.csv"
     },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
+        "output": "map02_components.csv"
+    },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
+        "output": "map03_components.csv"
+    },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
+    #     "output": "map00_components.csv"
+    # },
 ]
 
 class Resolver:
@@ -206,6 +207,7 @@ def main():
     #     loot_csv_rows.sort()
     #     loot_csv_rows.reverse()
     #     writer.writerows(loot_csv_rows)
+    #     print(f"Wrote {len(loot_csv_rows)} rows to output/loot_tables.csv")
     #
     # return
 
@@ -254,6 +256,50 @@ def main():
     #     ai_csv_rows.sort()
     #     ai_csv_rows.reverse()
     #     writer.writerows(ai_csv_rows)
+    #     print(f"Wrote {len(ai_csv_rows)} rows to output/ai_tables.csv")
+    #
+    # return
+
+    # nodes_csv_rows = []
+    # for root, _, files in os.walk(RESOURCE_NODES):
+    #     print(f"Reading files in {root}...")
+    #     for file in files:
+    #         if not file.lower().endswith(".json"):
+    #             continue
+    #         full_path = os.path.join(root, file)
+    #         try:
+    #             with open(full_path, "r", encoding="utf-8") as f:
+    #                 objects = json.load(f)
+    #                 for obj in objects:
+    #                     type = obj.get("Type")
+    #                     name = obj.get("Name")
+    #                     rows = obj.get("Rows", [])
+    #                     for resource_key in rows:
+    #                         row = rows[resource_key]
+    #                         required_level = row.get("RequiredLevel")
+    #                         spawn_chance = row.get("ChanceToSpawn")
+    #                         display_name = row.get("DisplayName", {}).get("SourceString")
+    #                         item = row.get("Item", {}).get("ObjectName")
+    #
+    #                         matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", item)
+    #                         if matches:
+    #                             item = matches.group(2)
+    #
+    #                         min_amount = row.get("Quantities", {}).get("X")
+    #                         max_amount = row.get("Quantities", {}).get("Y")
+    #
+    #                         nodes_csv_rows.append([resource_key, required_level, spawn_chance, display_name, item, min_amount, max_amount])
+    #
+    #         except Exception as e:
+    #             print(f"Failed to parse {full_path}: {e}")
+    #
+    # with open("output/resource_nodes.csv", "w", newline="", encoding="utf-8") as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(["ResourceKey", "RequiredLevel", "SpawnChance", "DisplayName", "Item", "MinAmount", "MaxAmount"])
+    #     nodes_csv_rows.sort()
+    #     nodes_csv_rows.reverse()
+    #     writer.writerows(nodes_csv_rows)
+    #     print(f"Wrote {len(nodes_csv_rows)} rows to output/resource_nodes.csv")
     #
     # return
 
@@ -391,14 +437,17 @@ def main():
                     loot_source = obj_props.get("ItemTable", {}).get("AssetPathName", "").split(".")[::-1][0]
                 if "AISpawner" in obj.get("Type") and "SpawnChancesSet" in obj_props and not ai_spawn:
                     ai_spawn = obj_props.get("SpawnChancesSet", {}).get("ObjectName")
+                    matches = re.search(r"AISpawnerConfigSet'(\w+)'", ai_spawn)
+                    if matches:
+                        ai_spawn = matches.group(1)
                 if "bVisible" in obj_props and visible is None:
                     visible = obj_props.get("bVisible")
                 if "bHiddenInGame" in obj_props and visible is None:
                     visible = obj_props.get("bHiddenInGame")
                 if "HarvestableByProfession" in obj_props and harvestable_by is None:
-                    harvestable_by = obj_props.get("HarvestableByProfession")
-                if "NodeTag" in obj_props and node_tag is None:
-                    node_tag = obj_props.get("NodeTag")
+                    harvestable_by = obj_props.get("HarvestableByProfession", {}).get("TagName")
+                    if "AssetsHandle" in obj_props and node_tag is None:
+                        node_tag = obj_props.get("AssetsHandle", {}).get("RowName")
 
                 for obj2 in resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
                     walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))
@@ -463,6 +512,7 @@ def main():
 
             # Usually indicates a problem with filtering resolved things
             if read_count > 100:
+            # if "Node_" in root_obj.get("CustomOuterType"):
                 print(f"{read_count} {read}")
                 print(f"{display_name} {root_obj.get('CustomOuterType')}: {health}, {chance} ({chance_type}), {x}, {y}, {z}, {keyed}, {loot_source}, {ai_spawn}")
                 print()
@@ -505,6 +555,7 @@ def main():
             writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "SpawnChance", "ChanceType", "Health", "Keyed", "LootSource", "AISpawner","Visible","HarvestableBy","NodeTag"])
             csv_rows.sort()
             writer.writerows(csv_rows)
+            print(f"Wrote {len(csv_rows)} rows to {OUTPUT_CSV}")
 
     print("Done")
 

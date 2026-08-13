@@ -1,0 +1,48 @@
+ResourceKey,RequiredLevel,SpawnChance,DisplayName,Item,MinAmount,MaxAmount
+Resource.Scav.Ore.SilverBarrow_0,226,50.0,Silver Deposit,ID_Epic_OreSilver,4,8
+Resource.Scav.Ore.SilverBarrow,226,50.0,Silver Deposit,ID_Epic_OreSilver,4,8
+Resource.Scav.Ore.Silver,226,50.0,Silver Deposit,ID_Epic_OreSilver,4,8
+Resource.Scav.Ore.Lead,1,90.0,Lead Deposit,ID_Common_LeadOre,2,5
+Resource.Scav.Ore.Iron,151,60.0,Iron Deposit,ID_Rare_IronOre,3,7
+Resource.Scav.Ore.GoldBarrow,301,40.0,Gold Deposit,ID_Legendary_OreGold,6,9
+Resource.Scav.Ore.Gold,301,40.0,Gold Deposit,ID_Legendary_OreGold,6,9
+Resource.Scav.Ore.Copper,76,70.0,Copper Deposit,ID_Uncommon_CopperOre,2,7
+Resource.Scav.Cloth.Wool.Pillow,226,50.0,Wool Pillow,ID_Epic_Wool,4,8
+Resource.Scav.Cloth.Wool,226,50.0,Dead Sheep,ID_Epic_Wool,4,8
+Resource.Scav.Cloth.SilkBanner01c,301,40.0,Silk Banner,ID_Legendary_Silk,6,9
+Resource.Scav.Cloth.SilkBanner01b,301,40.0,Silk Banner,ID_Legendary_Silk,6,9
+Resource.Scav.Cloth.SilkBanner01a,301,40.0,Silk Banner,ID_Legendary_Silk,6,9
+Resource.Scav.Cloth.Silk,301,40.0,Silk Worms,ID_Legendary_Silk,6,9
+Resource.Scav.Cloth.Hemp,1,90.0,Hemp Plant,ID_Common_Burlap,2,5
+Resource.Scav.Cloth.Flax,76,70.0,Flax Plant,ID_Uncommon_Linen,2,7
+Resource.Scav.Cloth.CottonBasket,151,60.0,Cotton Basket,ID_Rare_Cotton,3,7
+Resource.Scav.Cloth.Cotton,151,60.0,Cotton Plant,ID_Rare_Cotton,3,7
+Resource.Nat.Spice.SaffronBasket,226,50.0,Saffron Basket,ID_Spice_04_SaffronFlower,4,10
+Resource.Nat.Spice.Saffron,226,50.0,Saffron Plant,ID_Spice_04_SaffronFlower,4,10
+Resource.Nat.Spice.PepperPlate,301,40.0,Harvested Peppercorn,ID_Spice_05_Peppercorn,5,12
+Resource.Nat.Spice.Pepper,301,40.0,Peppercorn Plant,ID_Spice_05_Peppercorn,5,12
+Resource.Nat.Spice.GarlicHanging,1,90.0,Hanging Garlic,ID_Spice_01_GarlicBulb,2,6
+Resource.Nat.Spice.Garlic,1,90.0,Garlic Plant,ID_Spice_01_GarlicBulb,2,6
+Resource.Nat.Spice.Clove,76,40.0,Clove Plant,ID_Spice_02_CloveBud,2,8
+Resource.Nat.Spice.CinnamonBark,151,60.0,Cinnamon Bark,ID_Spice_03_CinnamonBark,4,8
+Resource.Nat.Spice.Cinnamon,151,60.0,Cinnamon Tree,ID_Spice_03_CinnamonBark,4,8
+Resource.Herb.Rosemary,76,70.0,Rosemary Plant,ID_Herb_02_Rosemary,3,6
+Resource.Herb.PoppyDried01a,301,40.0,Dried Poppies,ID_Herb_05_Poppy,5,12
+Resource.Herb.Poppy,301,40.0,Poppy Plant,ID_Herb_05_Poppy,5,12
+Resource.Herb.PinkYarrowVase,151,60.0,Pink Yarrow Plant,ID_Herb_03_PinkYarrow,3,8
+Resource.Herb.PinkYarrow,151,60.0,Pink Yarrow Plant,ID_Herb_03_PinkYarrow,3,8
+Resource.Herb.Lavender,1,90.0,Lavender Plant,ID_Herb_01_Lavender,2,5
+Resource.Herb.Fungi,226,50.0,Fungi Growth,ID_Herb_04_Fungi,3,10
+Resource.Con.Mech.PowderCake,226,60.0,Powder Cake,ID_Epic_PowderCake,1,5
+Resource.Con.Mech.OldGunpowder,1,75.0,Gun Powder Keg,ID_Common_OldGunpowder,5,15
+Resource.Con.Mech.LeverArm,76,70.0,Broken Padlock,ID_Mech_02_LeverArm,1,1
+Resource.Con.Mech.DamagedScrew,1,90.0,Sextant,ID_Common_DamagedScrew,1,1
+Resource.Con.Mech.Chronometer,226,50.0,Marine Chronometer,ID_Epic_OiledSpring,1,1
+Resource.Con.Mech.BrokenRifle,301,40.0,Broken Rifle,ID_Legendary_SmoothBoreBarrel,1,1
+Resource.Con.Mech.BlackenedStriker,151,60.0,Cannon Striker,ID_Rare_BlackenedStriker,1,1
+Resource.Con.Mech.BarrelLathe,301,40.0,Barrel Lathe,ID_Legendary_SmoothBoreBarrel,1,1
+Resource.Con.Curio.WhaleOil,151,60.0,Oil Lamp,ID_Rare_WhaleOil,2,7
+Resource.Con.Curio.TarnishedQuicksilver,301,40.0,Thermometer,ID_Legendary_TarnishedQuicksilver,3,12
+Resource.Con.Curio.LodestoneSlag,76,70.0,Blacksmith's Bin,ID_Uncommon_LodestoneSlag,1,7
+Resource.Con.Curio.CopperTwine,1,90.0,Mandolin,ID_Common_CopperTwine,1,5
+Resource.Con.Curio.ChromaticLens,226,50.0,Telescope,ID_Epic_ConvexGlass,4,7

@@ -332,6 +332,15 @@ class Marker {
             this.#row.Keyed = this.#row.Keyed.replace(/InventoryDefinition_Key'ID_Key_(\w+)'/g, "$1 Key");
         }
 
+        if (this.#row.NodeTag) {
+            const resource = data.RESOURCE_NODES[this.#row.NodeTag];
+            if (resource) {
+                this.#row.DisplayName = resource.DisplayName;
+                this.#row.SpawnChance = resource.SpawnChance;
+                this.#row.ChanceType = "Resource"
+            }
+        }
+
         let aiSpawner = this.#row.AISpawner;
         if (aiSpawner) {
             this.#row.AISpawner = aiSpawner.replace(/AISpawnerConfigSet'(\w+)'/g, "$1");
@@ -429,6 +438,13 @@ class Marker {
         if (this.#row.Visible === "False") {
             rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row.Visible}</td></tr>`)
         }
+        if (this.#row.NodeTag) {
+            const resource = data.RESOURCE_NODES[this.#row.NodeTag];
+            if (resource) {
+                rows.push(`<tr><td><strong>Required Level</strong></td><td>${resource.RequiredLevel}</td></tr>`)
+                rows.push(`<tr><td><strong>Resource</strong></td><td>${resource.Item} (${resource.MinAmount} - ${resource.MaxAmount} items)</td></tr>`)
+            }
+        }
         let tableData = this.tableData;
         if (tableData) {
             tableData.forEach(row => {
@@ -469,7 +485,7 @@ class Marker {
 
         if (this.#row.OuterType.includes("Hub_C") || this.#row.OuterType.includes("Chateau_C")) {
             if (this.#row.OuterType.includes("Door") || this.#row.OuterType.includes("Window")
-                || this.#row.OuterType.includes("BP_MX") || this.#row.OuterType.startsWith("C_")) {
+                || this.#row.OuterType.includes("BP_MX") || this.#row.OuterType.startsWith("PG_")) {
                 this.#class = "other";
             } else {
                 this.#class = "npc";
@@ -533,26 +549,11 @@ class Marker {
                         sprite.texture = textures.window;
                     }
 
-                    for (const resourceNode of data.professions.conservatorTypes) {
-                        if (this.#row.OuterType.includes(resourceNode)) {
-                            sprite.texture = textures.profConservator;
-                            this.#descriptors.push("profession");
-                            break;
-                        }
-                    }
-                    for (const resourceNode of data.professions.naturalistTypes) {
-                        if (this.#row.OuterType.includes(resourceNode)) {
-                            sprite.texture = textures.profNaturalist;
-                            this.#descriptors.push("profession");
-                            break;
-                        }
-                    }
-                    for (const resourceNode of data.professions.scavengerTypes) {
-                        if (this.#row.OuterType.includes(resourceNode)) {
-                            sprite.texture = textures.profScavenger;
-                            this.#descriptors.push("profession");
-                            break;
-                        }
+                    if (this.#row.HarvestableBy) {
+                        this.#descriptors.push("profession");
+                        if (this.#row.HarvestableBy.includes("Conservator")) sprite.texture = textures.profConservator;
+                        else if (this.#row.HarvestableBy.includes("Naturalist")) sprite.texture = textures.profNaturalist;
+                        else if (this.#row.HarvestableBy.includes("Scavenger")) sprite.texture = textures.profScavenger;
                     }
 
                     if (this.#row.OuterType.toLowerCase().includes("soundtrap")) {
