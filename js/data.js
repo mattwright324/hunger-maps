@@ -216,6 +216,7 @@ export const environment = [
     "Stair",
     "Lantern",
     "BP_HangingHerbRope_C",
+    "DiscoverableLocationVolume",
 ]
 
 export const creatures = [

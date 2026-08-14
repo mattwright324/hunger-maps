@@ -10,7 +10,7 @@ INVENTORY_DEFS = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\
 RESOURCE_NODES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Resources\Nodes"
 
 BP_FOLDERS = [
-    r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\ChateauNPCs",
+    r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data",
     r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Gameplay",
     r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Meshes\Blueprints",
     r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Blueprints",
@@ -140,8 +140,9 @@ def contains_string(obj, needle):
 def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-
+    # TODO: Implement inventory item parsing
     # inventory_items = {}
+    # items_csv = []
     # for root, _, files in os.walk(INVENTORY_DEFS):
     #     print(f"Reading files in {root}...")
     #     for file in files:
@@ -157,12 +158,24 @@ def main():
     #                     props = obj.get("Properties", {})
     #                     if not type.startswith("Inv"):
     #                         continue
+    #                     namespace = props.get("DisplayName", {}).get("Namespace", "")
     #                     display_name = props.get("DisplayName", {}).get("SourceString", "")
     #                     rarity = props.get("Rarity", {}).get("TagName", "")
     #                     inventory_items[name] = {"DisplayName": display_name, "Rarity": rarity}
+    #
+    #                     items_csv.push([name, namespace, display_name, rarity, icon])
     #         except Exception as e:
     #             print(f"Failed to parse {full_path}: {e}")
+    # with open("output/inventory_items.csv", "w", newline="", encoding="utf-8") as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(["ResourceKey", "RequiredLevel", "SpawnChance", "DisplayName", "Item", "MinAmount", "MaxAmount"])
+    #     items_csv.sort()
+    #     items_csv.reverse()
+    #     writer.writerows(items_csv)
+    #     print(f"Wrote {len(items_csv)} rows to output/items_csv.csv")
     #
+    # return
+
     # print(inventory_items)
     #
     # loot_csv_rows = []
@@ -357,6 +370,14 @@ def main():
         objects = list(filter(has_coordinates, resolver.by_type.get("SceneComponent", [])))
         objects.extend(list(filter(has_coordinates, resolver.by_type.get("StaticMeshComponent", []))))
         objects.extend(list(filter(has_coordinates, resolver.by_type.get("SphereComponent", []))))
+        objects.extend(list(filter(has_coordinates, resolver.by_outer_type.get("DiscoverableLocationVolume", []))))
+
+        locations = {}
+        for obj in resolver.by_type.get("DiscoverableLocationsTable", []):
+            props = obj.get("Properties", {})
+            for loc in props.get("Locations2", []):
+                location_tag = loc.get("Tag", {}).get("TagName")
+                locations[location_tag] = loc
 
         for root_obj in objects:
             if root_obj.get("SourceFolder") == "Blueprints":
@@ -381,10 +402,12 @@ def main():
             visible = None
             harvestable_by = None
             node_tag = None
+            location_tag = None
 
             def walk_props(obj, parent=None, depth=0, search_text=None):
                 nonlocal read_count, read
-                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn, visible, harvestable_by, node_tag
+                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn, visible
+                nonlocal harvestable_by, node_tag, location_tag
 
                 # if obj.get("Type").startswith("Level"):
                 #     return
@@ -448,6 +471,11 @@ def main():
                     harvestable_by = obj_props.get("HarvestableByProfession", {}).get("TagName")
                     if "AssetsHandle" in obj_props and node_tag is None:
                         node_tag = obj_props.get("AssetsHandle", {}).get("RowName")
+
+                if "LocationTag" in obj_props and location_tag is None:
+                    location_tag = obj_props.get("LocationTag", {}).get("TagName")
+                    if location_tag in locations:
+                        display_name = locations[location_tag].get("DisplayName", {}).get("SourceString")
 
                 for obj2 in resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
                     walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))

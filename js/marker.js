@@ -343,8 +343,7 @@ class Marker {
 
         let aiSpawner = this.#row.AISpawner;
         if (aiSpawner) {
-            this.#row.AISpawner = aiSpawner.replace(/AISpawnerConfigSet'(\w+)'/g, "$1");
-            this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/AISpawnerConfigSet'DA_AISpawner_(\w+)'/g, "$1"));
+            this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/DA_AISpawner_(\w+)/g, "$1"));
         }
         this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner2 || this.#row.LootSource || this.#row.OuterType
         if (["StaticMesh"].includes(this.#row.OuterType)) {
@@ -451,12 +450,12 @@ class Marker {
                 const percent = row["WeightPercent"];
                 let color = "green"
                 if (Number(percent) < 10) color = "orange"
-                if (Number(percent) < 5) color = "red"
+                if (Number(percent) < 2.5) color = "red"
 
                 let displayName = row["ObjectName"];
-                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"]}" class="${row["Rarity"].replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["ObjectName"]}</small>`;
+                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"]}" class="${row["Rarity"].replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["ObjectName"]}</small> <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
 
-                rows.push(`<tr><td><strong>${row["TableName"].replace("DA_AISpawner_", "")}</strong></td><td><span style="color:${color}">${percent}%</span> ${displayName}</td></tr>`)
+                rows.push(`<tr><td style="text-align: right"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
             })
         }
         return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
@@ -554,6 +553,13 @@ class Marker {
                         if (this.#row.HarvestableBy.includes("Conservator")) sprite.texture = textures.profConservator;
                         else if (this.#row.HarvestableBy.includes("Naturalist")) sprite.texture = textures.profNaturalist;
                         else if (this.#row.HarvestableBy.includes("Scavenger")) sprite.texture = textures.profScavenger;
+                    }
+
+                    if (this.#row.OuterType.includes("DiscoverableLocationVolume")) {
+                        this.#descriptors.push("location")
+                        sprite.texture = textures.pingGeneric;
+                        this.#tint = 0xff7c7c;
+                        this.#zIndex = 200;
                     }
 
                     if (this.#row.OuterType.toLowerCase().includes("soundtrap")) {
