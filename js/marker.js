@@ -501,6 +501,7 @@ class Marker {
                 }
 
                 const hungerTableLookup = {
+                    "HighClassCiv_Small": "LIT_HighClassCiv", // Guessing
                     "Hunger_Biter": "LIT_Biter_01",
                     "Hunger_Biter_Elite": "LIT_Biter_Elite",
                     "Hunger_Bloat": "LIT_Bloat_01",
@@ -510,6 +511,7 @@ class Marker {
                     "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
                     "Hunger_Shambler": "LIT_Shambler_01",
                     "Hunger_Waif": "LIT_Waif_01",
+                    "MedicalPhysicianDreg": "LIT_Medicine_Crafting", // Guessing
                 }
                 const subrows = []
                 const realTable = hungerTableLookup[row["LootSource"]];
@@ -527,7 +529,7 @@ class Marker {
                             if (item) {
                                 displayName = `${this.#formatItem(row2["ObjectName"])} <small class="text-muted">${row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
                             }
-                            subrows.push(`<tr><td style="text-align: right"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
+                            subrows.push(`<tr><td style="text-align: right;width: 53px"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
                         });
                     }
                 }
@@ -536,7 +538,7 @@ class Marker {
                 let subTable = "";
                 if (subrows.length) {
                     subTable = `<div class="table-responsive"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></div>`
-                    rows.push(`<tr><td></td><td>${subTable}</td></tr>`)
+                    rows.push(`<tr><td></td><td style="padding: 0;">${subTable}</td></tr>`)
                 }
             })
         }
