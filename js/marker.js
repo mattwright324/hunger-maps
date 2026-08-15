@@ -412,7 +412,11 @@ class Marker {
         if (!item) {
             return itemId;
         }
-        return `<span class="item ${item.Rarity.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${item.DisplayName}</span></span>`
+        let amount = ""
+        const min = Number(item.LootGenMin) || 1
+        const max = Number(item.LootGenMax) || 1
+        if (min > 1 || max > 1) amount = `(${min}-${max} items)`;
+        return `<span class="item ${item.Rarity.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${item.DisplayName}</span> ${amount}</span>`
     }
 
     #tooltipText() {
@@ -448,7 +452,7 @@ class Marker {
             const resource = data.RESOURCE_NODES[this.#row.CsvJson.node_tag];
             if (resource) {
                 rows.push(`<tr><td><strong>Required Level</strong></td><td>${resource.RequiredLevel}</td></tr>`)
-                rows.push(`<tr><td><strong>Resource</strong></td><td>${this.#formatItem(resource.Item)} (${resource.MinAmount} - ${resource.MaxAmount} items)</td></tr>`)
+                rows.push(`<tr><td><strong>Resource</strong></td><td>${this.#formatItem(resource.Item)}</td></tr>`)
             }
         }
         if (this.#row?.CsvJson?.quest_id) {
