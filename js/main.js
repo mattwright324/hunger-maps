@@ -131,26 +131,50 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
             if (marker.row.SpawnChance) {
                 values.push(marker.row.SpawnChance + " (" + marker.row.ChanceType + ")")
             }
-            if (marker.row.Health) {
-                values.push(marker.row.Health)
-            }
-            if (marker.row.Keyed) {
-                values.push(marker.row.Keyed)
-            }
             if (marker.row.LootSource) {
                 values.push(marker.row.LootSource)
             }
             if (marker.row.AISpawner) {
                 values.push(marker.row.AISpawner)
             }
+            if (marker.row.CsvJson?.node_tag) {
+                const resource = data.RESOURCE_NODES[marker.row.CsvJson.node_tag];
+                if (resource) {
+                    values.push(resource.Item)
+                    const item = data.ITEMS[resource.Item]
+                    if (item) {
+                        values.push(item["DisplayName"])
+                    }
+                }
+
+            }
             if (marker.tableData && controls.includeLootItems.checked) {
                 const rangeValue = Number(controls.chanceRange.value);
                 marker.tableData.forEach(loot => {
                     if (Number(loot["WeightPercent"]) >= rangeValue) {
-                        if (loot["DisplayName"]) {
-                            values.push(loot["DisplayName"])
-                        }
                         values.push(loot["ObjectName"])
+                        const item = data.ITEMS[loot["ObjectName"]]
+                        if (item) {
+                            values.push(item["DisplayName"])
+                        }
+                    }
+                })
+            }
+            if (marker.row?.CsvJson?.health) {
+                values.push(marker.row.CsvJson.health)
+            }
+            if (marker.row?.CsvJson?.keyed) {
+                values.push(marker.row.CsvJson.keyed)
+            }
+            if (marker.row?.CsvJson?.instruction) {
+                values.push(marker.row.CsvJson.instruction)
+            }
+            if (marker.row?.CsvJson?.grant_items) {
+                Object.keys(marker.row.CsvJson.grant_items).forEach(item_id => {
+                    values.push(item_id)
+                    const item = data.ITEMS[item_id]
+                    if (item) {
+                        values.push(item["DisplayName"])
                     }
                 })
             }

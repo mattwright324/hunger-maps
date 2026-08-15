@@ -38,9 +38,8 @@ async function parseMarkerCSV(text) {
         if (cols.length < 6) continue;
 
         const [
-            RootType, OuterType, OuterName, X, Y, Z, DisplayName,
-            SpawnChance, ChanceType, Health, Keyed, LootSource,
-            AISpawner, Visible, HarvestableBy, NodeTag
+            RootType,OuterType,OuterName,X,Y,Z,
+            DisplayName,LootSource,SpawnChance,ChanceType,AISpawner,CsvJson
         ] = cols;
 
         if (!X || !Y || !Z) continue;
@@ -51,6 +50,11 @@ async function parseMarkerCSV(text) {
         if (!xy[key]) xy[key] = 1; else xy[key] += 1;
         if (xy[key] > 1) console.log("Duplicate key: ", key, xy[key], OuterType, OuterName);
 
+        let json = {}
+        try {json = JSON.parse(CsvJson || "{}")} catch (e) {
+            console.log("Error parsing JSON:", CsvJson, e);
+        }
+
         rows.push({
             RootType,
             OuterType,
@@ -59,15 +63,11 @@ async function parseMarkerCSV(text) {
             Y: parseFloat(Y),
             Z: parseFloat(Z),
             DisplayName,
+            LootSource,
             SpawnChance,
             ChanceType,
-            Health,
-            Keyed,
-            LootSource,
             AISpawner,
-            Visible,
-            HarvestableBy,
-            NodeTag,
+            CsvJson: json
         });
     }
 
@@ -119,6 +119,28 @@ async function parseNodeCSV(text) {
     return rows;
 }
 
+async function getItemsCsvData(url) {
+    return await fetch(url)
+        .then(r => r.text())
+        .then(text => parseItemsCSV(text));
+}
+
+async function parseItemsCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const rows = [];
+
+    for (let line of lines) {
+        const cols = splitCSVLine(line);
+
+        const [ItemType,ItemName,BrushID,Icon,IconSrc,DisplayName,Value,Rarity,Capacity,MaxStackSize,LootGenMin,LootGenMax] = cols;
+
+        rows.push({ItemType,ItemName,BrushID,Icon,IconSrc,DisplayName,Value,Rarity,Capacity,MaxStackSize,LootGenMin,LootGenMax});
+    }
+
+    console.log("Parsed CSV data:", rows.length, text);
+    return rows;
+}
+
 const lootTables = await getLootCsvData("./loot_tables.csv?v=" + elements.metaVersion);
 export const LOOT_TABLES = {}
 lootTables.forEach(row => {
@@ -140,7 +162,11 @@ const resourceNodes = await getNodeCsvData("./resource_nodes.csv?v=" + elements.
 export const RESOURCE_NODES = {}
 resourceNodes.forEach(row => RESOURCE_NODES[row.ResourceKey] = row)
 
-console.log("Loaded resource nodes:", RESOURCE_NODES);
+const inventoryItems = await getItemsCsvData("./inventory_items.csv?v=" + elements.metaVersion);
+export const ITEMS = {}
+inventoryItems.forEach(row => ITEMS[row.ItemName] = row)
+
+console.log("Loaded inventory items:", ITEMS);
 
 export const presets = {
     "map00": {

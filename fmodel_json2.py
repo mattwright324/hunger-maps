@@ -6,6 +6,7 @@ import random
 
 AI_SPAWNER_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\AI\Spawner\SpawnerDataAssets"
 ITEM_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Loot\ItemTables"
+SMART_BRUSHES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\UI\Styling\Brushes"
 INVENTORY_DEFS = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Inventory\Definitions"
 RESOURCE_NODES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Resources\Nodes"
 
@@ -45,6 +46,8 @@ class Resolver:
         self.by_outer_full = {}
         self.by_outer_name = {}
         self.by_outer_type = {}
+        self.by_target_full = {}
+        self.by_target_name = {}
         self.index_objects(all_objects, folder_name)
 
     def index_objects(self, objects, folder_name):
@@ -55,6 +58,7 @@ class Resolver:
             type = obj.get("Type")
             name = obj.get("Name")
             clazz = obj.get("Class")
+            props = obj.get("Properties", {})
 
             outer_full = obj.get("Outer", {}).get("ObjectName")
             outer_type = None
@@ -67,6 +71,31 @@ class Resolver:
                 outer_name = match.group(2)
                 obj["CustomOuterType"] = outer_type
                 obj["CustomOuterName"] = outer_name
+
+            target_full = props.get("TargetItem", {}).get("ObjectName")
+            target_name = None
+            if target_full:
+                match = re.search(r"(.+)'(.+)'", target_full)
+                if match:
+                    target_name = match.group(2)
+                    obj["CustomTargetName"] = target_name
+
+            for stage in props.get("QuestStages", []):
+                for objective in stage.get("Objectives", []):
+                    target_full = objective.get("Objective", {}).get("ObjectName")
+                    if target_full:
+                        if target_full not in self.by_target_full:
+                            self.by_target_full[target_full] = []
+                        self.by_target_full[target_full].append(obj)
+                    if target_full:
+                        match = re.search(r"(.+)'(.+)'", target_full)
+                        if match:
+                            target_name = match.group(2)
+                            obj["CustomTargetName"] = target_name
+                            if target_name:
+                                if target_name not in self.by_target_name:
+                                    self.by_target_name[target_name] = []
+                                self.by_target_name[target_name].append(obj)
 
             custom_ref = None
             if folder_name.startswith("map"):
@@ -102,23 +131,36 @@ class Resolver:
                 if outer_type not in self.by_outer_type:
                     self.by_outer_type[outer_type] = []
                 self.by_outer_type[outer_type].append(obj)
+            if target_full:
+                if target_full not in self.by_target_full:
+                    self.by_target_full[target_full] = []
+                self.by_target_full[target_full].append(obj)
+            if target_name:
+                if target_name not in self.by_target_name:
+                    self.by_target_name[target_name] = []
+                self.by_target_name[target_name].append(obj)
 
     def resolve_all(self, ref):
+        results = []
         if ref in self.by_type:
-            return self.by_type[ref]
+            results.extend(self.by_type[ref])
         if ref in self.by_name:
-            return self.by_name[ref]
+            results.extend(self.by_name[ref])
         if ref in self.by_class:
-            return self.by_class[ref]
+            results.extend(self.by_class[ref])
         if ref in self.by_custom_ref:
-            return self.by_custom_ref[ref]
+            results.extend(self.by_custom_ref[ref])
         if ref in self.by_outer_full:
-            return self.by_outer_full[ref]
+            results.extend(self.by_outer_full[ref])
         if ref in self.by_outer_name:
-            return self.by_outer_name[ref]
+            results.extend(self.by_outer_name[ref])
         if ref in self.by_outer_type:
-            return self.by_outer_type[ref]
-        return None
+            results.extend(self.by_outer_type[ref])
+        if ref in self.by_target_full:
+            results.extend(self.by_target_full[ref])
+        if ref in self.by_target_name:
+            results.extend(self.by_target_name[ref])
+        return results
 
     def resolve_first(self, ref):
         all_refs = self.resolve_all(ref)
@@ -140,41 +182,85 @@ def contains_string(obj, needle):
 def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-    # TODO: Implement inventory item parsing
-    # inventory_items = {}
-    # items_csv = []
-    # for root, _, files in os.walk(INVENTORY_DEFS):
-    #     print(f"Reading files in {root}...")
-    #     for file in files:
-    #         if not file.lower().endswith(".json"):
-    #             continue
-    #         full_path = os.path.join(root, file)
-    #         try:
-    #             with open(full_path, "r", encoding="utf-8") as f:
-    #                 objects = json.load(f)
-    #                 for obj in objects:
-    #                     type = obj.get("Type")
-    #                     name = obj.get("Name")
-    #                     props = obj.get("Properties", {})
-    #                     if not type.startswith("Inv"):
-    #                         continue
-    #                     namespace = props.get("DisplayName", {}).get("Namespace", "")
-    #                     display_name = props.get("DisplayName", {}).get("SourceString", "")
-    #                     rarity = props.get("Rarity", {}).get("TagName", "")
-    #                     inventory_items[name] = {"DisplayName": display_name, "Rarity": rarity}
-    #
-    #                     items_csv.push([name, namespace, display_name, rarity, icon])
-    #         except Exception as e:
-    #             print(f"Failed to parse {full_path}: {e}")
-    # with open("output/inventory_items.csv", "w", newline="", encoding="utf-8") as csvfile:
-    #     writer = csv.writer(csvfile)
-    #     writer.writerow(["ResourceKey", "RequiredLevel", "SpawnChance", "DisplayName", "Item", "MinAmount", "MaxAmount"])
-    #     items_csv.sort()
-    #     items_csv.reverse()
-    #     writer.writerows(items_csv)
-    #     print(f"Wrote {len(items_csv)} rows to output/items_csv.csv")
-    #
-    # return
+    inventory_items = {}
+    items_csv = []
+
+    item_objects = []
+    for folder in [INVENTORY_DEFS, SMART_BRUSHES]:
+        for root, _, files in os.walk(folder):
+            print(f"Reading files in {root}...")
+            for file in files:
+                if not file.lower().endswith(".json"):
+                    continue
+                if file.startswith("LI_"): # Skip blueprint "world" files
+                    continue
+                full_path = os.path.join(root, file)
+                try:
+                    with open(full_path, "r", encoding="utf-8") as f:
+                        objects = json.load(f)
+                        for obj in objects:
+                            obj["SourceFile"] = file
+                    item_objects.extend(objects)
+                except Exception as e:
+                    print(f"Failed to parse {full_path}: {e}")
+    item_resolver = Resolver(item_objects, "Inventory")
+
+    brushes = {}
+    for obj in item_resolver.by_name["DT_SmartBrushes_Inventory"] + item_resolver.by_name["DT_SmartBrushes_Weapons"]:
+        for item_tag in obj.get("Rows", {}):
+            item_obj = obj.get("Rows")[item_tag].get("Default", {}).get("Default", {})
+            image = item_obj.get("Image", {}).get("AssetPathName")
+            if image:
+                matches = re.search(r"(?:/.*\.)?(\w+)(?:[:.]\w+)?", image)
+                if matches:
+                    image = matches.group(1)
+                brushes[item_tag] = image
+            else:
+                print(f"No image for {item_tag}")
+
+    items_csv = []
+    for obj_type in item_resolver.by_type:
+        for obj in item_resolver.by_type[obj_type]:
+            if obj_type == "DataTable":
+                continue
+            type = obj.get("Type")
+            name = obj.get("Name")
+            props = obj.get("Properties", {})
+
+            value = props.get("Value")
+            rarity = props.get("Rarity", {}).get("TagName")
+            capacity = props.get("Capacity")
+            max_stack_size = props.get("MaxStackSize")
+            loot_gen_min = props.get("LootGenerationMin")
+            loot_gen_max = props.get("LootGenerationMax")
+            display_name = props.get("DisplayName", {}).get("SourceString")
+
+            icon_src = None
+            icon = None
+            brush = props.get("BrushSetID", {}).get("ItemName")
+            for key in props:
+                if "Icon" in key:
+                    icon = props.get(key).get("AssetPathName")
+                    icon_src = "Def"
+                    matches = re.search(r"(?:/.*\.)?(\w+)(?:[:.]\w+)?", icon)
+                    if matches:
+                        icon = matches.group(1)
+                    break
+            if brush and brush in brushes:
+                icon = brushes[brush]
+                icon_src = "Smart Brush"
+
+            items_csv.append([type, name, brush, icon, icon_src, display_name, value, rarity, capacity, max_stack_size, loot_gen_min, loot_gen_max])
+
+    with open("output/inventory_items.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["ItemType", "ItemName", "BrushID", "Icon", "IconSrc", "DisplayName", "Value", "Rarity", "Capacity", "MaxStackSize", "LootGenMin", "LootGenMax"])
+        items_csv.sort()
+        items_csv.reverse()
+        writer.writerows(items_csv)
+        print(f"Wrote {len(items_csv)} rows to output/inventory_items.csv")
+
+    return
 
     # print(inventory_items)
     #
@@ -379,6 +465,8 @@ def main():
                 location_tag = loc.get("Tag", {}).get("TagName")
                 locations[location_tag] = loc
 
+        print(resolver.by_target_name)
+
         for root_obj in objects:
             if root_obj.get("SourceFolder") == "Blueprints":
                 continue
@@ -392,22 +480,24 @@ def main():
             x = None
             y = None
             z = None
+            csv_json = {}
+            display_name = None
+            loot_source = None
             chance = None
             chance_type = None
-            health = None
-            display_name = None
-            keyed = None
-            loot_source = None
             ai_spawn = None
-            visible = None
-            harvestable_by = None
-            node_tag = None
-            location_tag = None
+            # health = None
+            # keyed = None
+            # visible = None
+            # harvestable_by = None
+            # node_tag = None
+            # location_tag = None
 
             def walk_props(obj, parent=None, depth=0, search_text=None):
                 nonlocal read_count, read
-                nonlocal x, y, z, chance, chance_type, health, display_name, keyed, loot_source, ai_spawn, visible
-                nonlocal harvestable_by, node_tag, location_tag
+                nonlocal x, y, z, csv_json
+                nonlocal display_name, loot_source, chance, chance_type, ai_spawn
+                # nonlocal health, keyed, visible, harvestable_by, node_tag, location_tag
 
                 # if obj.get("Type").startswith("Level"):
                 #     return
@@ -426,6 +516,8 @@ def main():
 
                 obj_props = obj.get("Properties", {})
 
+                ### Find data points
+
                 if "RelativeLocation" in obj_props and not x:
                     x = obj_props.get("RelativeLocation", {}).get("X")
                     y = obj_props.get("RelativeLocation", {}).get("Y")
@@ -442,16 +534,19 @@ def main():
                         chance_type = "Blueprint"
                     else:
                         chance_type = "Custom"
-                if "Health" in obj_props and not health:
-                    health = str(obj_props.get("Health")) + " HP"
+                if "Health" in obj_props and not csv_json.get("health"):
+                    csv_json["health"] = str(obj_props.get("Health")) + " HP"
                 if "DisplayName" in obj_props and not display_name:
                     display_name = obj_props.get("DisplayName", {}).get("SourceString")
                 if "Name" in obj_props and not display_name:
                     display_name = obj_props.get("Name", {}).get("SourceString")
                 if "WorkbenchName" in obj_props and not display_name:
                     display_name = obj_props.get("WorkbenchName", {}).get("SourceString")
-                if "KeyDefinition" in obj_props and not keyed:
-                    keyed = obj_props.get("KeyDefinition", {}).get("ObjectName")
+                if "KeyDefinition" in obj_props and not csv_json.get("keyed"):
+                    csv_json["keyed"] = obj_props.get("KeyDefinition", {}).get("ObjectName")
+                    matches = re.search(r"(\w)+'(\w+)'", csv_json["keyed"])
+                    if matches:
+                        csv_json["keyed"] = matches.group(2)
                 if "LootSource" in obj_props and not loot_source:
                     loot_source = obj_props.get("LootSource")
                 if "LootSourceID" in obj_props and not loot_source:
@@ -463,19 +558,36 @@ def main():
                     matches = re.search(r"AISpawnerConfigSet'(\w+)'", ai_spawn)
                     if matches:
                         ai_spawn = matches.group(1)
-                if "bVisible" in obj_props and visible is None:
-                    visible = obj_props.get("bVisible")
-                if "bHiddenInGame" in obj_props and visible is None:
-                    visible = obj_props.get("bHiddenInGame")
-                if "HarvestableByProfession" in obj_props and harvestable_by is None:
-                    harvestable_by = obj_props.get("HarvestableByProfession", {}).get("TagName")
-                    if "AssetsHandle" in obj_props and node_tag is None:
-                        node_tag = obj_props.get("AssetsHandle", {}).get("RowName")
+                if "bVisible" in obj_props and csv_json.get("visible") is None:
+                    csv_json["visible"] = obj_props.get("bVisible")
+                if "bHiddenInGame" in obj_props and csv_json.get("visible") is None:
+                    csv_json["visible"] = obj_props.get("bHiddenInGame")
+                if "HarvestableByProfession" in obj_props and csv_json.get("harvestable_by") is None:
+                    csv_json["harvestable_by"] = obj_props.get("HarvestableByProfession", {}).get("TagName")
+                    if "AssetsHandle" in obj_props and csv_json.get("node_tag") is None:
+                        csv_json["node_tag"] = obj_props.get("AssetsHandle", {}).get("RowName")
+                if "LocationTag" in obj_props and csv_json.get("location_tag") is None:
+                    csv_json["location_tag"] = obj_props.get("LocationTag", {}).get("TagName")
+                    if csv_json["location_tag"] in locations:
+                        display_name = locations[csv_json["location_tag"]].get("DisplayName", {}).get("SourceString")
+                if "QuestId" in obj_props and csv_json.get("quest_id") is None:
+                    csv_json["quest_id"] = obj_props.get("QuestId", {}).get("TagName")
+                if "QuestGiver" in obj_props and csv_json.get("quest_giver") is None:
+                    csv_json["quest_giver"] = obj_props.get("QuestGiver", {}).get("TagName")
+                if "InteractionText" in obj_props and csv_json.get("interaction") is None:
+                    csv_json["interaction"] = obj_props.get("InteractionText", {}).get("SourceString")
+                if "ObjectiveInstruction" in obj_props and csv_json.get("instruction") is None:
+                    csv_json["instruction"] = obj_props.get("ObjectiveInstruction", {}).get("SourceString")
+                if "GrantItems" in obj_props and csv_json.get("grant_items") is None:
+                    csv_json["grant_items"] = {}
+                    for item in obj_props.get("GrantItems", []):
+                        item_name = item.get("Key")
+                        matches = re.search(r"(\w+)'.+\.(\w+)'", item_name)
+                        if matches:
+                            item_name = matches.group(2)
+                        csv_json["grant_items"][item_name] = item.get("Value")
 
-                if "LocationTag" in obj_props and location_tag is None:
-                    location_tag = obj_props.get("LocationTag", {}).get("TagName")
-                    if location_tag in locations:
-                        display_name = locations[location_tag].get("DisplayName", {}).get("SourceString")
+                ### Look for more linked objects
 
                 for obj2 in resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
                     walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))
@@ -488,6 +600,10 @@ def main():
                 if obj.get("CustomOuterType") and "Component" not in obj.get("CustomOuterType"):
                     for obj2 in resolver.resolve_all(obj.get("CustomOuterType")) or []:
                         walk_props(obj2, "CustomOuterType", depth + 1, obj.get("CustomOuterType"))
+
+                if "Component" not in obj.get("Type"):
+                    for obj2 in resolver.by_target_name.get(obj.get("Type"), []):
+                        walk_props(obj2, "Type-TargetName", depth + 1, obj.get("Type"))
 
                 if "Template" in obj:
                     template_full = obj.get("Template", {}).get("ObjectName")
@@ -538,14 +654,16 @@ def main():
             if not x:
                 continue
 
-            # Usually indicates a problem with filtering resolved things
-            if read_count > 100:
-            # if "Node_" in root_obj.get("CustomOuterType"):
-                print(f"{read_count} {read}")
-                print(f"{display_name} {root_obj.get('CustomOuterType')}: {health}, {chance} ({chance_type}), {x}, {y}, {z}, {keyed}, {loot_source}, {ai_spawn}")
-                print()
+            row = [root_obj.get("Type"), root_obj.get('CustomOuterType'), root_obj.get('CustomOuterName'), x, y, z, display_name, loot_source, chance, chance_type, ai_spawn, json.dumps(csv_json)]
 
-            csv_rows.append([root_obj.get("Type"), root_obj.get('CustomOuterType'), root_obj.get('CustomOuterName'), x, y, z, display_name, chance, chance_type, health, keyed, loot_source, ai_spawn, visible, harvestable_by, node_tag])
+            # Usually indicates a problem with filtering resolved things
+            # if read_count > 100:
+            # if "BP_Q0" in root_obj.get("CustomOuterType"):
+            #     print(f"{read}")
+            #     print(f"{read_count} {row}")
+            #     print()
+
+            csv_rows.append(row)
 
         for root_obj in resolver.by_type.get("FastGeoContainer", []):
             for clusters in root_obj.get("ComponentClusters", []):
@@ -571,16 +689,16 @@ def main():
                         z = translation.get("Z")
                     if not x:
                         continue
-                    visible = None
-                    if "bVisible" in obj and visible is None:
-                        visible = obj.get("bVisible")
-                    if "bHiddenInGame" in obj and visible is None:
-                        visible = not obj.get("bHiddenInGame")
-                    csv_rows.append([root_obj.get("Type"), obj.get('CustomOuterType'), obj.get('CustomOuterName'), x, y, z, None, None, None, None, None, None, None, visible, None, None])
+                    csv_json = {}
+                    if "bVisible" in obj and csv_json.get("visible") is None:
+                        csv_json["visible"] = obj.get("bVisible")
+                    if "bHiddenInGame" in obj and csv_json.get("visible") is None:
+                        csv_json["visible"] = not obj.get("bHiddenInGame")
+                    csv_rows.append([root_obj.get("Type"), obj.get('CustomOuterType'), obj.get('CustomOuterName'), x, y, z, None, None, None, None, None, csv_json])
 
         with open(OUTPUT_CSV, "w", newline="", encoding="utf-8") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "SpawnChance", "ChanceType", "Health", "Keyed", "LootSource", "AISpawner","Visible","HarvestableBy","NodeTag"])
+            writer.writerow(["RootType", "OuterType", "OuterName", "X", "Y", "Z", "DisplayName", "LootSource", "Chance", "ChanceType", "AISpawner", "JSON"])
             csv_rows.sort()
             writer.writerows(csv_rows)
             print(f"Wrote {len(csv_rows)} rows to {OUTPUT_CSV}")

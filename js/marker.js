@@ -332,18 +332,17 @@ class Marker {
             this.#row.Keyed = this.#row.Keyed.replace(/InventoryDefinition_Key'ID_Key_(\w+)'/g, "$1 Key");
         }
 
-        if (this.#row.NodeTag) {
-            const resource = data.RESOURCE_NODES[this.#row.NodeTag];
+        let aiSpawner = this.#row.AISpawner;
+        if (aiSpawner) {
+            this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/DA_AISpawner_(\w+)/g, "$1"));
+        }
+        if (this.#row?.CsvJson?.node_tag) {
+            const resource = data.RESOURCE_NODES[this.#row.CsvJson.node_tag];
             if (resource) {
                 this.#row.DisplayName = resource.DisplayName;
                 this.#row.SpawnChance = resource.SpawnChance;
                 this.#row.ChanceType = "Resource"
             }
-        }
-
-        let aiSpawner = this.#row.AISpawner;
-        if (aiSpawner) {
-            this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/DA_AISpawner_(\w+)/g, "$1"));
         }
         this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner2 || this.#row.LootSource || this.#row.OuterType
         if (["StaticMesh"].includes(this.#row.OuterType)) {
@@ -408,19 +407,27 @@ class Marker {
         });
     }
 
+    #formatItem(itemId) {
+        const item = data.ITEMS[itemId];
+        if (!item) {
+            return itemId;
+        }
+        return `<span class="item ${item.Rarity.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${item.DisplayName}</span></span>`
+    }
+
     #tooltipText() {
         let rows = []
-        rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
+        // rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
         rows.push(`<tr><td><strong>Height (Z)</strong></td><td>${this.sprite.z.toFixed(2)}</td></tr>`)
-        rows.push(`<tr><td><strong>Tags</strong></td><td>${[this.#class, ...this.#descriptors].join(", ")}</td></tr>`)
+        // rows.push(`<tr><td><strong>Tags</strong></td><td>${[this.#class, ...this.#descriptors].join(", ")}</td></tr>`)
         if (this.#row.SpawnChance) {
             rows.push(`<tr><td><strong>Spawn Chance</strong></td><td>${this.#row.SpawnChance}% (${this.#row.ChanceType})</td></tr>`)
         }
-        if (this.#row.Health) {
-            rows.push(`<tr><td><strong>Health</strong></td><td>${this.#row.Health}</td></tr>`)
+        if (this.#row?.CsvJson?.health) {
+            rows.push(`<tr><td><strong>Health</strong></td><td>${this.#row.CsvJson.health}</td></tr>`)
         }
-        if (this.#row.Keyed) {
-            rows.push(`<tr><td><strong>Keyed</strong></td><td>${this.#row.Keyed}</td></tr>`)
+        if (this.#row?.CsvJson?.keyed) {
+            rows.push(`<tr><td><strong>Keyed</strong></td><td>${this.#row.CsvJson.keyed}</td></tr>`)
         }
         const lootSource = this.#row.LootSource;
         if (lootSource) {
@@ -434,15 +441,32 @@ class Marker {
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
         }
-        if (this.#row.Visible === "False") {
-            rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row.Visible}</td></tr>`)
+        if (this.#row?.CsvJson?.visible === "False") {
+            rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row?.CsvJson?.visible}</td></tr>`)
         }
-        if (this.#row.NodeTag) {
-            const resource = data.RESOURCE_NODES[this.#row.NodeTag];
+        if (this.#row?.CsvJson?.node_tag) {
+            const resource = data.RESOURCE_NODES[this.#row.CsvJson.node_tag];
             if (resource) {
                 rows.push(`<tr><td><strong>Required Level</strong></td><td>${resource.RequiredLevel}</td></tr>`)
-                rows.push(`<tr><td><strong>Resource</strong></td><td>${resource.Item} (${resource.MinAmount} - ${resource.MaxAmount} items)</td></tr>`)
+                rows.push(`<tr><td><strong>Resource</strong></td><td>${this.#formatItem(resource.Item)} (${resource.MinAmount} - ${resource.MaxAmount} items)</td></tr>`)
             }
+        }
+        if (this.#row?.CsvJson?.quest_id) {
+            rows.push(`<tr><td><strong>Quest ID</strong></td><td>${this.#row.CsvJson.quest_id}</td></tr>`)
+        }
+        if (this.#row?.CsvJson?.quest_giver) {
+            rows.push(`<tr><td><strong>Quest Giver</strong></td><td>${this.#row.CsvJson.quest_giver}</td></tr>`)
+        }
+        if (this.#row?.CsvJson?.interaction) {
+            rows.push(`<tr><td><strong>Interaction</strong></td><td>${this.#row.CsvJson.interaction}</td></tr>`)
+        }
+        if (this.#row?.CsvJson?.instruction) {
+            rows.push(`<tr><td><strong>Instructions</strong></td><td>${this.#row.CsvJson.instruction}</td></tr>`)
+        }
+        if (this.#row?.CsvJson?.grant_items) {
+            Object.keys(this.#row.CsvJson.grant_items).forEach(key => {
+                rows.push(`<tr><td><strong>Grants</strong></td><td>${this.#formatItem(key)}</td></tr>`)
+            })
         }
         let tableData = this.tableData;
         if (tableData) {
@@ -453,23 +477,27 @@ class Marker {
                 if (Number(percent) < 2.5) color = "red"
 
                 let displayName = row["ObjectName"];
-                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"]}" class="${row["Rarity"].replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["ObjectName"]}</small> <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"]}" class="${row["Rarity"].replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                const item = data.ITEMS[row["ObjectName"]];
+                if (item) {
+                    displayName = `${this.#formatItem(row["ObjectName"])} <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                }
 
                 rows.push(`<tr><td style="text-align: right"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
             })
         }
-        return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
+        return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }
 
     #classify() {
         const sprite = this.#sprite;
         const display_lower = this.#readable.displayName.toLowerCase();
 
-        if (this.#row.Keyed) {
+        if (this.#row?.CsvJson?.keyed) {
             let keyTexture = textures.key_special;
-            if (this.#row.Keyed.includes("Bronze")) keyTexture = textures.key_bronze;
-            if (this.#row.Keyed.includes("Silver")) keyTexture = textures.key_silver;
-            if (this.#row.Keyed.includes("Gold")) keyTexture = textures.key_gold;
+            if (this.#row.CsvJson.keyed.includes("Bronze")) keyTexture = textures.key_bronze;
+            if (this.#row.CsvJson.keyed.includes("Silver")) keyTexture = textures.key_silver;
+            if (this.#row.CsvJson.keyed.includes("Gold")) keyTexture = textures.key_gold;
             const child = new PIXI.Sprite(keyTexture);
             child._type = "marker";
             child.anchor.set(0.5);
@@ -548,11 +576,11 @@ class Marker {
                         sprite.texture = textures.window;
                     }
 
-                    if (this.#row.HarvestableBy) {
+                    if (this.#row?.CsvJson?.harvestable_by) {
                         this.#descriptors.push("profession");
-                        if (this.#row.HarvestableBy.includes("Conservator")) sprite.texture = textures.profConservator;
-                        else if (this.#row.HarvestableBy.includes("Naturalist")) sprite.texture = textures.profNaturalist;
-                        else if (this.#row.HarvestableBy.includes("Scavenger")) sprite.texture = textures.profScavenger;
+                        if (this.#row.CsvJson.harvestable_by.includes("Conservator")) sprite.texture = textures.profConservator;
+                        else if (this.#row.CsvJson.harvestable_by.includes("Naturalist")) sprite.texture = textures.profNaturalist;
+                        else if (this.#row.CsvJson.harvestable_by.includes("Scavenger")) sprite.texture = textures.profScavenger;
                     }
 
                     if (this.#row.OuterType.includes("DiscoverableLocationVolume")) {
