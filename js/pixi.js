@@ -1,4 +1,5 @@
-import {closeTooltip} from 'marker';
+let closeTooltip = () => {};
+import('marker').then(m => { closeTooltip = m.closeTooltip; });
 
 export const app = new PIXI.Application();
 
@@ -35,7 +36,7 @@ app.stage.addChild(world);
 
 export const mapSquare = new PIXI.Graphics();
 mapSquare.rect(0, 0, 4096, 4096);
-mapSquare.fill(0xE4DBD1);
+mapSquare.fill(0x777777);
 mapSquare.zIndex = -Infinity;
 world.addChildAt(mapSquare, 0);
 
@@ -48,6 +49,7 @@ mapSprite.height = 4096;
 mapSprite.zIndex = -99999
 world.addChildAt(mapSprite, 1);
 
+fitMapSpriteToCanvas()
 render();
 
 export const mapOverlaySprite = new PIXI.Sprite();
