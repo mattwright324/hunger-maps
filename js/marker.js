@@ -269,6 +269,21 @@ class Marker {
             const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
             if (spawnerTable) {
                 this.#table = spawnerTable;
+                console.log(this.#row.AISpawner, this.#table);
+                const reduced = {}
+                spawnerTable.forEach(entry => {
+                    let key = entry.DisplayName + entry.LootSource;
+                    if (!reduced[key]) reduced[key] = {};
+                    reduced[key]["TableName"] = entry.TableName;
+                    reduced[key]["ObjectName"] = entry.ObjectName;
+                    reduced[key]["Weight"] = (Number(reduced[key]["Weight"]) || 0) + Number(entry.Weight);
+                    reduced[key]["WeightSum"] = Number(entry.WeightSum);
+                    reduced[key]["WeightPercent"] = 100 * (Number(reduced[key]["Weight"]) || 0) / Number(entry.WeightSum);
+                    reduced[key]["DisplayName"] = entry.DisplayName;
+                    reduced[key]["LootSource"] = entry.LootSource;
+                })
+                this.#table = [...Object.values(reduced)];
+                console.log(this.#row.AISpawner, this.#table);
             }
         }
         this.#loot_table_lookup = true;
@@ -457,14 +472,12 @@ class Marker {
         }
         if (this.#row?.CsvJson?.quest_id) {
             rows.push(`<tr><td><strong>Quest ID</strong></td><td>${this.#row.CsvJson.quest_id}</td></tr>`)
-        }
-        if (this.#row?.CsvJson?.quest_giver) {
+        } else if (this.#row?.CsvJson?.quest_giver) {
             rows.push(`<tr><td><strong>Quest Giver</strong></td><td>${this.#row.CsvJson.quest_giver}</td></tr>`)
         }
         if (this.#row?.CsvJson?.interaction) {
             rows.push(`<tr><td><strong>Interaction</strong></td><td>${this.#row.CsvJson.interaction}</td></tr>`)
-        }
-        if (this.#row?.CsvJson?.instruction) {
+        } else if (this.#row?.CsvJson?.instruction) {
             rows.push(`<tr><td><strong>Instructions</strong></td><td>${this.#row.CsvJson.instruction}</td></tr>`)
         }
         if (this.#row?.CsvJson?.grant_items) {
@@ -481,13 +494,50 @@ class Marker {
                 if (Number(percent) < 2.5) color = "red"
 
                 let displayName = row["ObjectName"];
-                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"]}" class="${row["Rarity"].replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"] || row["ObjectName"]}" class="${row["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["LootSource"] || row["TableName"].replace("DA_AISpawner_", "")}</small>`;
                 const item = data.ITEMS[row["ObjectName"]];
                 if (item) {
                     displayName = `${this.#formatItem(row["ObjectName"])} <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
                 }
 
+                const hungerTableLookup = {
+                    "Hunger_Biter": "LIT_Biter_01",
+                    "Hunger_Biter_Elite": "LIT_Biter_Elite",
+                    "Hunger_Bloat": "LIT_Bloat_01",
+                    "Hunger_Brute": "LIT_Brute_01",
+                    "Hunger_Brute_Elite": "LIT_Brute_Elite",
+                    "Hunger_Dreg": "LIT_Dreg_01",
+                    "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
+                    "Hunger_Shambler": "LIT_Shambler_01",
+                    "Hunger_Waif": "LIT_Waif_01",
+                }
+                const subrows = []
+                const realTable = hungerTableLookup[row["LootSource"]];
+                if (realTable) {
+                    if (data.LOOT_TABLES[realTable]) {
+                        data.LOOT_TABLES[realTable].forEach((row2) => {
+                            const percent = row2["WeightPercent"];
+                            let color = "green"
+                            if (Number(percent) < 10) color = "orange"
+                            if (Number(percent) < 2.5) color = "red"
+
+                            let displayName = row2["ObjectName"];
+                            if (row2["DisplayName"]) displayName = `<span title="${row2["Rarity"] || row2["ObjectName"]}" class="${row2["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row2["DisplayName"])}</span> <small class="text-muted">${row2["LootSource"] || row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                            const item = data.ITEMS[row2["ObjectName"]];
+                            if (item) {
+                                displayName = `${this.#formatItem(row2["ObjectName"])} <small class="text-muted">${row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                            }
+                            subrows.push(`<tr><td style="text-align: right"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
+                        });
+                    }
+                }
+
                 rows.push(`<tr><td style="text-align: right"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
+                let subTable = "";
+                if (subrows.length) {
+                    subTable = `<div class="table-responsive"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></div>`
+                    rows.push(`<tr><td></td><td>${subTable}</td></tr>`)
+                }
             })
         }
         return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`

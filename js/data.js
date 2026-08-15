@@ -97,6 +97,28 @@ async function parseLootCSV(text) {
     return rows;
 }
 
+async function getAiCsvData(url) {
+    return await fetch(url)
+        .then(r => r.text())
+        .then(text => parseAiCSV(text));
+}
+
+async function parseAiCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const rows = [];
+
+    for (let line of lines) {
+        const cols = splitCSVLine(line);
+
+        const [TableName,Weight,WeightSum,WeightPercent,ObjectName,DisplayName,LootSource] = cols;
+
+        rows.push({TableName,Weight,WeightSum,WeightPercent,ObjectName,DisplayName,LootSource});
+    }
+
+    console.log("Parsed CSV data:", rows.length, text);
+    return rows;
+}
+
 async function getNodeCsvData(url) {
     return await fetch(url)
         .then(r => r.text())
@@ -151,7 +173,7 @@ lootTables.forEach(row => {
 
 console.log("Loaded loot tables:", LOOT_TABLES);
 
-const aiTables = await getLootCsvData("./ai_tables.csv?v=" + elements.metaVersion);
+const aiTables = await getAiCsvData("./ai_tables.csv?v=" + elements.metaVersion);
 export const AI_TABLES = {}
 aiTables.forEach(row => {
     if (!AI_TABLES[row.TableName]) AI_TABLES[row.TableName] = [];

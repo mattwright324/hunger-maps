@@ -145,12 +145,24 @@ body {
     --artifact: #ff7c7c;
 }
 
-.Rarity.Common {color: initial;}
-.Rarity.Uncommon {color: var(--uncommon);}
-.Rarity.Rare {color: var(--rare);}
-.Rarity.Epic {color: var(--epic);}
-.Rarity.Legendary {color: var(--legendary);}
-.Rarity.Artifact {color: var(--artifact);}
+.Rarity.Common {
+    color: initial;
+}
+.Rarity.Uncommon {
+    color: var(--uncommon);
+}
+.Rarity.Rare {
+    color: var(--rare);
+}
+.Rarity.Epic {
+    color: var(--epic);
+}
+.Rarity.Legendary {
+    color: var(--legendary);
+}
+.Rarity.Artifact {
+    color: var(--artifact);
+}
 
 .marker-info-table td {
     vertical-align: middle;
@@ -163,19 +175,30 @@ body {
     border-width: 2px;
     border-style: solid;
     padding: 2px;
+    filter: saturate(1.5);
 }
+.item .name {
+    font-weight: bold;
+    text-shadow: 0 0 25px black;
+}
+
 .item.Rarity.Uncommon img {
     border-color: var(--uncommon);
+    box-shadow: 0 0 3px var(--uncommon);
 }
 .item.Rarity.Rare img {
     border-color: var(--rare);
+    box-shadow: 0 0 3px var(--rare);
 }
 .item.Rarity.Epic img {
     border-color: var(--epic);
+    box-shadow: 0 0 3px var(--epic);
 }
 .item.Rarity.Legendary img {
     border-color: var(--legendary);
+    box-shadow: 0 0 3px var(--legendary);
 }
 .item.Rarity.Artifact img {
     border-color: var(--artifact);
+    box-shadow: 0 0 3px var(--artifact);
 }
