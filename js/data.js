@@ -188,7 +188,6 @@ async function parseVendorCSV(text) {
 const lootTables = await getLootCsvData("./data/loot_tables.csv?v=" + elements.metaVersion);
 export const LOOT_TABLES = {}
 lootTables.forEach(row => {
-    console.log(row)
     if (!LOOT_TABLES[row.TableName]) LOOT_TABLES[row.TableName] = [];
     LOOT_TABLES[row.TableName].push(row);
 })

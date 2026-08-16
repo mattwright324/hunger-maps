@@ -300,7 +300,6 @@ class Marker {
             const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
             if (spawnerTable) {
                 this.#table = spawnerTable;
-                console.log(this.#row.AISpawner, this.#table);
                 const reduced = {}
                 spawnerTable.forEach(entry => {
                     let key = entry.DisplayName + entry.LootSource;
@@ -314,7 +313,6 @@ class Marker {
                     reduced[key]["LootSource"] = entry.LootSource;
                 })
                 this.#table = [...Object.values(reduced)];
-                console.log(this.#row.AISpawner, this.#table);
             }
         }
         if (this.#row.CsvJson?.vendor_data) {
@@ -501,7 +499,6 @@ class Marker {
             let loot = 0;
             tableData.forEach(row => {
                 loot += this.#itemAvgValue(row["ObjectName"], Number(row["WeightPercent"]));
-                // AISpawner entries are monsters, their own drops carry the value
                 const subTable = data.LOOT_TABLES[hungerTableLookup[row["LootSource"]]];
                 if (subTable) {
                     subTable.forEach(row2 => loot += this.#itemAvgValue(row2["ObjectName"], Number(row2["WeightPercent"])));
@@ -730,8 +727,8 @@ class Marker {
                 this.#tint = 0xFFFFFF;
                 this.#zIndex = 60;
 
-                // Greater than 7 silver mark as good
-                if (this.estValue > 700) {
+                // Greater than 6 silver mark as good
+                if (this.estValue > 600) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
@@ -810,8 +807,8 @@ class Marker {
                 sprite.texture = textures.charcoal;
             }
 
-            // Greater than 7 silver mark as good
-            if (this.estValue > 700) {
+            // Greater than 6 silver mark as good
+            if (this.estValue > 600) {
                 this.#tint = 0xFFD800;
                 this.#zIndex = 100;
                 this.#descriptors.push("good");
