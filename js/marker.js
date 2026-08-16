@@ -689,7 +689,7 @@ class Marker {
                     this.#class = "environment";
                     sprite.texture = textures.uncommon;
 
-                    if (this.#row.Health) {
+                    if (this.#row.CsvJson?.health) {
                         this.#tint = 0x00D8FF
                         this.#descriptors.push("breakable")
                     }
