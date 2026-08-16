@@ -828,11 +828,11 @@ class Marker {
             if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "spawns";
 
-                if (display_lower.includes("raidspawn")) {
+                if (this.#row.OuterType.includes("RaidSpawn")) {
                     sprite.texture = textures.social;
                     this.#tint = 0xff00ff;
                     this.zIndex = 200;
-                } else if (display_lower.includes("dirigible")) {
+                } else if (this.#row.OuterType.includes("Dirigible")) {
                     sprite.texture = textures.extract;
                     this.zIndex = 200;
                 }
