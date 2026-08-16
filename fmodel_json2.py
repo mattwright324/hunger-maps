@@ -610,7 +610,7 @@ def main():
                     if obj.get("SourceFolder") == "Blueprints":
                         chance_type = "Blueprint"
                     else:
-                        chance_type = "Custom)"
+                        chance_type = "Custom"
                 if "InitialSpawnChance" in obj_props and not chance:
                     chance = str(obj_props.get("InitialSpawnChance"))
                     if obj.get("SourceFolder") == "Blueprints":

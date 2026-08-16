@@ -349,6 +349,31 @@ class Marker {
         this.#readable.name = this.#makeReadable(this.#row.OuterType || "");
         this.#readable.mesh = this.#makeReadable(this.#row.OuterName || "");
 
+        if (this.#row.OuterType.includes("Door_Cage")) {
+            this.#row.DisplayName = "Cage Door";
+        } else if (this.#row.OuterType.includes("Trapdoor")) {
+            this.#row.DisplayName = "Trapdoor";
+        } else if (this.#row.OuterType.includes("Door")) {
+            this.#row.DisplayName = "Door";
+        } else if (this.#row.OuterType.includes("Window")) {
+            this.#row.DisplayName = "Window";
+        } else if (this.#row.OuterType.includes("SoundTrap_Corpse")) {
+            this.#row.DisplayName = "Sound Trap (Corpse)";
+        } else if (this.#row.OuterType.includes("SoundTrap_Crow")) {
+            this.#row.DisplayName = "Sound Trap (Crow)";
+        } else if (this.#row.OuterType.includes("SoundTrap_Ground_Glass")) {
+            this.#row.DisplayName = "Sound Trap (Glass)";
+        }  else if (this.#row.OuterType.includes("SoundTrap_Ground_Pottery")) {
+            this.#row.DisplayName = "Sound Trap (Pottery)";
+        } else if (this.#row.OuterType.includes("Trap_Ground_Bleed")) {
+            this.#row.DisplayName = "Trap (Caltrops, Bleed)";
+        } else if (this.#row.OuterType.includes("Trap_Ground_ExplosiveBleed")) {
+            this.#row.DisplayName = "Trap (Tripwire, Explosive, Bleed)";
+        } else if (this.#row.OuterType.includes("Trap_Ground_Explosive")) {
+            this.#row.DisplayName = "Trap (Tripwire, Explosive)";
+        } else if (this.#row.OuterType.includes("Trap_Ground_Poison")) {
+            this.#row.DisplayName = "Trap (Pressure, Poison)";
+        }
         let aiSpawner = this.#row.AISpawner;
         if (aiSpawner) {
             this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/DA_AISpawner_(\w+)/g, "$1"));
