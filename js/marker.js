@@ -326,6 +326,7 @@ class Marker {
             .replaceAll(/.*\.LIT_/g, "")
             .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
+            .replaceAll(/\b(C|C LI|BP|SM|DA|PG|SC|LIT|ID|Item|Loose)\b/g, "") // Remove prefix/suffix chars
             .replaceAll(/Chateau .*/g, "")
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
@@ -408,7 +409,7 @@ class Marker {
                 this.#row.ChanceType = "Resource"
             }
         }
-        this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner2 || this.#row.LootSource || this.#row.OuterType
+        this.#readable.displayName = this.#row.DisplayName || this.#row.AISpawner2 || this.#makeReadable(this.#row.LootSource) || this.#makeReadable(this.#row.OuterType)
         if (["StaticMesh"].includes(this.#row.OuterType)) {
             this.#readable.displayName = this.#row.OuterName;
         }
@@ -515,7 +516,7 @@ class Marker {
         return value * (Number(item.LootGenMax) || 1);
     }
 
-    #formatCoins(copperValue) {
+    formatCoins(copperValue) {
         const copper = Math.trunc(copperValue);
         const silver = Math.trunc(copper / 100);
         const gold = Math.trunc(silver / 100);
@@ -533,6 +534,9 @@ class Marker {
 
     #itemLine(percent, itemHtml, value) {
         let multiplier = 1;
+        // Rough estimate for vendor markup multiplier. Could not find data confirming.
+        // Measured from TT3 shop prices from videos/screenshots vs item value from the game data.
+        // However, the multiplier appears to vary a lot (x5 - x4) and it is unknown how much reputation affects it.
         if (this.#class === "npc") multiplier = 4.277
         value = value * multiplier;
         const percentHtml = percent === null || percent === undefined || percent === ""
@@ -540,7 +544,7 @@ class Marker {
             : `<span class="loot-percent" style="color:${this.#percentColor(percent)}">${Number.isFinite(Number(percent)) ? Number(percent).toFixed(2) + "%" : ""}</span>`;
         const valueHtml = value === null || value === undefined
             ? ""
-            : `<span class="loot-value" title="Total: ${Number(value).toLocaleString()}\nWeighted: ${Number(value * (Number(percent) / 100)).toLocaleString()}">${this.#formatCoins(value)}</span>`;
+            : `<span class="loot-value" title="Total: ${Number(value).toLocaleString()}\nWeighted: ${Number(value * (Number(percent) / 100)).toLocaleString()}">${this.formatCoins(value)}</span>`;
         return `<div class="loot-row">${percentHtml}<span class="loot-item">${itemHtml}</span>${valueHtml}</div>`;
     }
 

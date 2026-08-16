@@ -142,6 +142,14 @@ const dom_load = async () => {
         onChange() {
             syncLabel(this);
         },
+        render: {
+            option: function(data, escape) {
+                return '<div>' + data.text + '</div>';
+            },
+            item: function(data, escape) {
+                return '<div>' + data.text + '</div>';
+            }
+        }
     };
 
     controls.showAll = document.getElementById("showAll");

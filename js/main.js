@@ -58,7 +58,7 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
         controls.sliderHeight.min = minZ.toFixed(2);
         controls.sliderHeight.max = maxZ.toFixed(2) - 300;
 
-        function loadMultiselectF(ts, keyFunc) {
+        function loadMultiselectF(ts, keyFunc, textFunc) {
             const options = [];
             markers.forEach(marker => {
                 const key = keyFunc(marker);
@@ -66,10 +66,13 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
             });
             ts.clear(true);
             ts.clearOptions();
-            options.sort().forEach(opt => ts.addOption({value: opt, text: opt}));
+            options.sort().forEach(opt => ts.addOption({
+                value: opt,
+                text: textFunc ? textFunc(opt) : opt
+            }));
         }
 
-        function loadMultiselectClass(ts, classType) {
+        function loadMultiselectClass(ts, classType, textFunc) {
             const options = [];
             markers.forEach(marker => {
                 const displayName = marker.readable.displayName;
@@ -79,17 +82,34 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
             });
             ts.clear(true);
             ts.clearOptions();
-            options.sort().forEach(opt => ts.addOption({value: opt, text: opt}));
+            options.sort().forEach(opt => ts.addOption({
+                value: opt,
+                text: textFunc ? textFunc(opt) : opt
+            }));
         }
 
         loadMultiselectF(controls.lootSourceSelect, marker => {
             if (!(marker.row.LootSource || "container" === marker.class)) return;
             return data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown"
+        }, lootTable => {
+            const first = markers.filter(marker => data.DT_LootSources[marker.row.LootSource]?.["LootTable"] === lootTable)?.[0];
+            if (first && first.estValue) {
+                return `${lootTable} <small class="text-muted">(Avg: ${first.formatCoins(first.estValue)})</small>`;
+            } else {
+                return lootTable;
+            }
         });
 
         loadMultiselectClass(controls.npcSelect, "npc");
         //loadMultiselectClass(controls.lootSelect, "container");
-        loadMultiselectClass(controls.looseSelect, "loose");
+        loadMultiselectClass(controls.looseSelect, "loose", looseName => {
+            const first = markers.filter(marker => marker.readable.displayName === looseName)?.[0];
+            if (first && first.estValue) {
+                return `${looseName} <small class="text-muted">(Avg: ${first.formatCoins(first.estValue)})</small>`;
+            } else {
+                return looseName;
+            }
+        });
         loadMultiselectClass(controls.creatureSelect, "creature");
         loadMultiselectClass(controls.envSelect, "environment");
         loadMultiselectClass(controls.questSelect, "quest");
