@@ -88,9 +88,9 @@ async function parseLootCSV(text) {
     for (let line of lines) {
         const cols = splitCSVLine(line);
 
-        const [TableName, Weight, WeightSum, WeightPercent, ObjectName, DisplayName, Rarity] = cols;
+        const [TableName, Weight, WeightSum, WeightPercent, ObjectName] = cols;
 
-        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName, DisplayName, Rarity});
+        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName});
     }
 
     console.log("Parsed CSV data:", rows.length, text);
