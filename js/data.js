@@ -163,7 +163,29 @@ async function parseItemsCSV(text) {
     return rows;
 }
 
-const lootTables = await getLootCsvData("./loot_tables.csv?v=" + elements.metaVersion);
+async function getVendorCsvData(url) {
+    return await fetch(url)
+        .then(r => r.text())
+        .then(text => parseVendorCSV(text));
+}
+
+async function parseVendorCSV(text) {
+    const lines = text.split(/\r?\n/);
+    const rows = [];
+
+    for (let line of lines) {
+        const cols = splitCSVLine(line);
+
+        const [TableName,Weight,WeightSum,WeightPercent,ObjectName] = cols;
+
+        rows.push({TableName,Weight,WeightSum,WeightPercent,ObjectName});
+    }
+
+    console.log("Parsed CSV data:", rows.length, text);
+    return rows;
+}
+
+const lootTables = await getLootCsvData("./data/loot_tables.csv?v=" + elements.metaVersion);
 export const LOOT_TABLES = {}
 lootTables.forEach(row => {
     console.log(row)
@@ -173,20 +195,30 @@ lootTables.forEach(row => {
 
 console.log("Loaded loot tables:", LOOT_TABLES);
 
-const aiTables = await getAiCsvData("./ai_tables.csv?v=" + elements.metaVersion);
+const aiTables = await getAiCsvData("./data/ai_tables.csv?v=" + elements.metaVersion);
 export const AI_TABLES = {}
 aiTables.forEach(row => {
     if (!AI_TABLES[row.TableName]) AI_TABLES[row.TableName] = [];
     AI_TABLES[row.TableName].push(row);
 })
 
-const resourceNodes = await getNodeCsvData("./resource_nodes.csv?v=" + elements.metaVersion);
+const resourceNodes = await getNodeCsvData("./data/resource_nodes.csv?v=" + elements.metaVersion);
 export const RESOURCE_NODES = {}
 resourceNodes.forEach(row => RESOURCE_NODES[row.ResourceKey] = row)
 
-const inventoryItems = await getItemsCsvData("./inventory_items.csv?v=" + elements.metaVersion);
+const vendorData = await getVendorCsvData("./data/vendor_data.csv?v=" + elements.metaVersion);
+export const VENDOR_DATA = {}
+vendorData.forEach(row => {
+    if (!VENDOR_DATA[row.TableName]) VENDOR_DATA[row.TableName] = [];
+    VENDOR_DATA[row.TableName].push(row);
+})
+
+const inventoryItems = await getItemsCsvData("./data/inventory_items.csv?v=" + elements.metaVersion);
 export const ITEMS = {}
 inventoryItems.forEach(row => ITEMS[row.ItemName] = row)
+ITEMS["ID_Money_Silver"].Value = 100
+ITEMS["ID_Money_Gold"].Value = 10000
+ITEMS["ID_Fargoth"].Value = 10000
 
 console.log("Loaded inventory items:", ITEMS);
 
@@ -194,7 +226,7 @@ export const presets = {
     "map00": {
         texture: textures.mapChateau,
         thumbnail: "./img/T_UI_BG_Chateau.png",
-        rawData: await getMarkerCsvData("./map00_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./data/map00_components.csv?v=" + elements.metaVersion),
         data: () => presets["map00"].rawData.map(row => new Marker(row)),
         scale: 0.17,
         offsetX: 1800,
@@ -205,7 +237,7 @@ export const presets = {
         texture: textures.mapSarlat,
         overlay: textures.mapSarlatOverlay,
         thumbnail: "./img/T_UI_Thumbnail_Map01.png",
-        rawData: await getMarkerCsvData("./map01_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./data/map01_components.csv?v=" + elements.metaVersion),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
         scale: 0.0409,
         offsetX: 2875,
@@ -216,7 +248,7 @@ export const presets = {
         texture: textures.mapJacques,
         overlay: textures.mapJacquesOverlay,
         thumbnail: "./img/T_UI_Thumbnail_Map02.png",
-        rawData: await getMarkerCsvData("./map02_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./data/map02_components.csv?v=" + elements.metaVersion),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
         scale: 0.03622,
         offsetX: 1978,
@@ -227,7 +259,7 @@ export const presets = {
         texture: textures.mapSombre,
         overlay: textures.mapSombreOverlay,
         thumbnail: "./img/T_UI_Thumbnail_Map03.png",
-        rawData: await getMarkerCsvData("./map03_components.csv?v=" + elements.metaVersion),
+        rawData: await getMarkerCsvData("./data/map03_components.csv?v=" + elements.metaVersion),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
         scale: 0.03051,
         offsetX: 1424,
@@ -275,73 +307,6 @@ export const creatures = [
 export const spawns = [
     "RaidExtraction",
     "RaidSpawn",
-]
-
-export const questItems = [
-    "BP_BloodSample01_C",
-    "BP_BloodSample02_C",
-    "BP_BloodSample03_C",
-    "BP_BloodSample04_C",
-    "BP_BloodSample05_C",
-    "BP_BloodSample06_C",
-    "BP_ChristianDoctrine_C",
-    "BP_CleansingMark_C",
-    "BP_DispatchRider_C",
-    "BP_DirigibleFlare_C",
-    "BP_DQ05_Safebox_C",
-    "BP_Etienne_C",
-    "BP_ExtractorsCache_M01_C",
-    "BP_ExtractorsCache_M02_C",
-    "BP_ExtractorsCache_M03_C",
-    "BP_FamilyRegister_C",
-    "BP_FortificationBlueprint_C",
-    "BP_GrainRecord_C",
-    "BP_Interact01_C",
-    "BP_Interact02_C",
-    "BP_Interact03_C",
-    "BP_LouisFather_C",
-    "BP_LouisFathersNote_C",
-    "BP_LouisHandkerchief_C",
-    "BP_LouisMother_C",
-    "BP_LouisMothersNote_C",
-    "BP_LouisMothersNote2_C",
-    "BP_LouisMothersNoteQ08_C",
-    "BP_LouisQ7Corpse_C",
-    //"BP_Mapzone_01b_C",
-    "BP_MortuaryRecord_C",
-    //"BP_P_CrowsCircle_01_C",
-    "BP_PiroCorpsePile_01_C",
-    "BP_PiroCorpsePile_02_C",
-    "BP_PiroCorpsePile_03_C",
-    "BP_PreservedHand_C",
-    "BP_Q03_RatsNest01_C",
-    "BP_Q04_Gravestone_C",
-    "BP_Q04_Interact02_C",
-    "BP_Q05_DiaryBishop_C",
-    "BP_Q05_Water01_C",
-    "BP_Q05_Water02_C",
-    "BP_Q05_Water03_C",
-    "BP_Q06_BodyBeads_C",
-    "BP_Q07_LacourtsLedger_C",
-    "BP_Q08_Sylvette_C",
-    "BP_Q10_GoldenLeafTobacco_C",
-    "BP_QIS_Reynauld_WQ04_C",
-    "BP_QIS_Reynauld07_C",
-    "BP_QuarantineDiary_C",
-    "BP_RedCandle_C",
-    "BP_RedRibbon_C",
-    "BP_Reynauld_FrancoisDiary_C",
-    "BP_SawmillReport_C",
-    "BP_SignalHorn_M01_C",
-    "BP_SignalHorn_M02_C",
-    "BP_SignalHorn_M03_C",
-    "BP_SouthwestDefenseMap_C",
-    "BP_TitheLedgerofProvisions_C",
-    "BP_WeaponCache01_C",
-    "BP_WeaponCache02_C",
-    "BP_WeaponCache03_C",
-    "BP_WeaponCache04_C",
-    "BP_WeaponCache05_C",
 ]
 
 export const chateauProfessionNodes = {

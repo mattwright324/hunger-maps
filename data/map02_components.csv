@@ -26,26 +26,26 @@ BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_ce721cab090
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_d40d86cadf850e91_1,-50407.89,-31382.986,7462.075,Piro's Convoy,,,,,"{""location_tag"": ""DiscoverableLocation.M02CampMassacre01""}"
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_d675ac69400b5c24_0,-3583.649,2906.2292,894.10254,Carriage House,,,,,"{""location_tag"": ""DiscoverableLocation.Stable02""}"
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_e52402bc25166cd3_0,-3786.4858,-38397.28,829.47266,Isidore's Retreat,,,,,"{""location_tag"": ""DiscoverableLocation.M02SmallCamp03""}"
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-69179.84,5625.047,-979.2397,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-65666.49,-13616.552,777.8049,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-59223.723,-15221.666,2038.506,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-47647.152,-18158.225,3185.7952,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-36534.477,-13153.144,765.6604,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-27439.387,-42905.105,1549.3907,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-25747.42,43705.414,391.1004,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-19736.592,-48496.92,1398.5198,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-11587.638,-9659.182,-1442.5765,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-6182.2417,-11636.196,-2655.077,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-1331.5986,-12694.544,-1257.3333,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,2482.3953,20934.627,-1878.3401,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,12614.427,2254.9546,-1152.024,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,13642.347,28132.191,-1354.4147,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,21658.615,-14064.054,-191.1247,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,23287.072,6851.556,-13219.875,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-58508.793,-18151.229,5550.8955,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-7908.7407,-20283.3,-309.6143,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,22530.326,5978.901,1833.0793,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,24180.248,-262.30698,1829.0391,,,,,,{'visible': True}
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-69179.84,5625.047,-979.2397,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-65666.49,-13616.552,777.8049,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-59223.723,-15221.666,2038.506,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-47647.152,-18158.225,3185.7952,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-36534.477,-13153.144,765.6604,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-27439.387,-42905.105,1549.3907,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-25747.42,43705.414,391.1004,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-19736.592,-48496.92,1398.5198,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-11587.638,-9659.182,-1442.5765,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-6182.2417,-11636.196,-2655.077,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-1331.5986,-12694.544,-1257.3333,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,2482.3953,20934.627,-1878.3401,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,12614.427,2254.9546,-1152.024,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,13642.347,28132.191,-1354.4147,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,21658.615,-14064.054,-191.1247,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,23287.072,6851.556,-13219.875,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-58508.793,-18151.229,5550.8955,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-7908.7407,-20283.3,-309.6143,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,22530.326,5978.901,1833.0793,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,24180.248,-262.30698,1829.0391,,,,,,"{""visible"": true}"
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD4207C402_700315af74d79223_1655319628,26689.0,33918.0,4351.0,,,,,,{}
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD4207C402_700315af74d79223_1703745629,12842.0,40698.0,2519.0,,,,,,{}
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD4207C402_700315af74d79223_1732746630,31039.0,1694.0,-10.0,,,,,,{}
@@ -1231,7 +1231,7 @@ SceneComponent,BP_Door_MedCart_01a_C,UNP_BP_Door_MedCart_01a_UAID_046874882494AD
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7833802_5bfd8886d610c4d5_2109961727,2454482.8,564250.94,2360292.2,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7833802_cf7cc99b57fa7ef6_2082918701,1341588.6,275542.66,461387.44,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7833802_cf7cc99b57fa7ef6_2082921702,1341598.6,275552.66,461387.44,,,,,,{}
-SceneComponent,BP_ExtractorsCache_M02_C,BP_ExtractorsCache_M02_C_UAID_D843AE1A93E5AFE502_1657872660,-58236.105,20318.99,-445.03958,,,,,,{}
+SceneComponent,BP_ExtractorsCache_M02_C,BP_ExtractorsCache_M02_C_UAID_D843AE1A93E5AFE502_1657872660,-58236.105,20318.99,-445.03958,The Extractor's Cache,,,,,"{""instruction"": ""Deposit 1x Robust Ampoule, 1x Fresh Baguette, 1x Boiled Water in the Jacques Bridge strongbox"", ""quest_id"": ""Quest.Eloise.MQ01"", ""quest_giver"": ""Character.NPC.Eloise""}"
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_10FFE0F0DC0E25E602_afe4a3bbeb7c2068_1760180213,3555.7524,-12517.798,890.3291,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E5D2E302_16430dedd3080722_1476450709,34055.58,-12204.121,715.648,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E5D2E302_16430dedd3080722_1938088192,21163.102,-6408.389,858.2835,,,,,,{}

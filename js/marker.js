@@ -154,6 +154,9 @@ class Marker {
                 if (lookupKey === "Graveyard") {
                     lookupKey = "Grave"
                 }
+                if (lookupKey === "PowderLocker") {
+                    lookupKey = "Crafting_Gunsmith_PowderLocker"
+                }
                 for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
                     if (key.includes("_Map0") || key.includes("Tutorial")) {
                         continue;
@@ -285,6 +288,9 @@ class Marker {
                 this.#table = [...Object.values(reduced)];
                 console.log(this.#row.AISpawner, this.#table);
             }
+        }
+        if (this.#row.CsvJson?.vendor_data) {
+            this.#table = data.VENDOR_DATA[this.#row.CsvJson.vendor_data];
         }
         this.#loot_table_lookup = true;
     }
@@ -422,7 +428,7 @@ class Marker {
         });
     }
 
-    #formatItem(itemId) {
+    #formatItem(itemId, percent, totalValue) {
         const item = data.ITEMS[itemId];
         if (!item) {
             return itemId;
@@ -431,7 +437,12 @@ class Marker {
         const min = Number(item.LootGenMin) || 1
         const max = Number(item.LootGenMax) || 1
         if (min > 1 || max > 1) amount = `(${min}-${max} items)`;
-        return `<span class="item ${item.Rarity.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${item.DisplayName}</span> ${amount}</span>`
+        if (percent && totalValue) totalValue.value += (percent / 100) * (Number(item.Value || 0) * max)
+        // let copper = Math.trunc(Number(item.Value || 0) * max);
+        // let silver = Math.trunc(copper / 100);
+        // let gold = Math.trunc(silver / 100);
+        // let cost = gold ? gold + "g" : silver ? silver + "s" : copper + "c";
+        return `<span class="item ${item?.Rarity?.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${item.DisplayName}</span> ${amount}</span>`
     }
 
     #tooltipText() {
@@ -457,21 +468,40 @@ class Marker {
                 rows.push(`<tr><td><strong>LootSource</strong></td><td>${lootSource}</td></tr>`)
             }
         }
-        if (this.#row.AISpawner) {
-            rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
-        }
         if (this.#row?.CsvJson?.visible === "False") {
             rows.push(`<tr><td><strong>Visible</strong></td><td>${this.#row?.CsvJson?.visible}</td></tr>`)
         }
         if (this.#row?.CsvJson?.node_tag) {
             const resource = data.RESOURCE_NODES[this.#row.CsvJson.node_tag];
             if (resource) {
+                let totalValue = {value: 0};
                 rows.push(`<tr><td><strong>Required Level</strong></td><td>${resource.RequiredLevel}</td></tr>`)
-                rows.push(`<tr><td><strong>Resource</strong></td><td>${this.#formatItem(resource.Item)}</td></tr>`)
+                rows.push(`<tr><td><strong>Resource</strong></td><td>${this.#formatItem(resource.Item, 100, totalValue)}</td></tr>`)
+
+                let copper = Math.trunc(totalValue.value);
+                let silver = Math.trunc(copper / 100);
+                let gold = Math.trunc(silver / 100);
+                rows.push(`<tr><td><strong>Est. Avg. Value</strong></td><td>${gold}g ${silver % 100}s ${copper % 100}c</td></tr>`)
+
             }
         }
         if (this.#row?.CsvJson?.quest_id) {
-            rows.push(`<tr><td><strong>Quest ID</strong></td><td>${this.#row.CsvJson.quest_id}</td></tr>`)
+            const matches = this.#row.CsvJson.quest_id.match(/Quest\.(.*)\.([A-Z]+)(\d+)/);
+            let parts = [matches[1]]
+            let p2 = matches[2];
+            if (p2 === "Q") {
+                parts.push("Main Quest");
+            } else if (p2 === "DQ") {
+                parts.push("Daily Quest");
+            }  else if (p2 === "WQ") {
+                parts.push("Weekly Quest");
+            } else if (p2 === "MQ") {
+                parts.push("Monthly Quest");
+            } else {
+                parts.push(p2);
+            }
+            parts.push("#" + matches[3]);
+            rows.push(`<tr><td><strong>Quest</strong></td><td>${parts.join(" ")}</td></tr>`)
         } else if (this.#row?.CsvJson?.quest_giver) {
             rows.push(`<tr><td><strong>Quest Giver</strong></td><td>${this.#row.CsvJson.quest_giver}</td></tr>`)
         }
@@ -481,23 +511,33 @@ class Marker {
             rows.push(`<tr><td><strong>Instructions</strong></td><td>${this.#row.CsvJson.instruction}</td></tr>`)
         }
         if (this.#row?.CsvJson?.grant_items) {
+            let totalValue = {value: 0};
             Object.keys(this.#row.CsvJson.grant_items).forEach(key => {
-                rows.push(`<tr><td><strong>Grants</strong></td><td>${this.#formatItem(key)}</td></tr>`)
+                rows.push(`<tr><td><strong>Grants</strong></td><td>${this.#formatItem(key, 100, totalValue)}</td></tr>`)
             })
+            let copper = Math.trunc(totalValue.value);
+            let silver = Math.trunc(copper / 100);
+            let gold = Math.trunc(silver / 100);
+
+            rows.push(`<tr><td><strong>Est. Avg. Value</strong></td><td>${gold}g ${silver % 100}s ${copper % 100}c</td></tr>`)
+        }
+        if (this.#row.AISpawner) {
+            rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
         }
         let tableData = this.tableData;
         if (tableData) {
+            let totalValue = {value: 0};
             tableData.forEach(row => {
                 const percent = row["WeightPercent"];
-                let color = "green"
-                if (Number(percent) < 10) color = "orange"
-                if (Number(percent) < 2.5) color = "red"
+                let color = "var(--uncommon)"
+                if (Number(percent) < 10) color = "var(--legendary)"
+                if (Number(percent) < 2.5) color = "var(--artifact)"
 
                 let displayName = row["ObjectName"];
                 if (row["DisplayName"]) displayName = `<span title="${row["Rarity"] || row["ObjectName"]}" class="${row["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["LootSource"] || row["TableName"].replace("DA_AISpawner_", "")}</small>`;
                 const item = data.ITEMS[row["ObjectName"]];
                 if (item) {
-                    displayName = `${this.#formatItem(row["ObjectName"])} <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                    displayName = `${this.#formatItem(row["ObjectName"], Number(row["WeightPercent"]), totalValue)} <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
                 }
 
                 const hungerTableLookup = {
@@ -527,20 +567,27 @@ class Marker {
                             if (row2["DisplayName"]) displayName = `<span title="${row2["Rarity"] || row2["ObjectName"]}" class="${row2["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row2["DisplayName"])}</span> <small class="text-muted">${row2["LootSource"] || row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
                             const item = data.ITEMS[row2["ObjectName"]];
                             if (item) {
-                                displayName = `${this.#formatItem(row2["ObjectName"])} <small class="text-muted">${row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
+                                displayName = `${this.#formatItem(row2["ObjectName"], Number(row2["WeightPercent"]), totalValue)} <small class="text-muted">${row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
                             }
-                            subrows.push(`<tr><td style="text-align: right;width: 53px"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
+                            subrows.push(`<tr><td colspan="2"><span style="display:inline-block;width:40px;text-align:right;margin-right:5px"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></span>${displayName}</td></tr>`)
                         });
                     }
                 }
 
-                rows.push(`<tr><td style="text-align: right"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></td><td>${displayName}</td></tr>`)
+                rows.push(`<tr><td colspan="2"><span style="display:inline-block;width:40px;text-align:right;margin-right:5px"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></span>${displayName}</td></tr>`)
                 let subTable = "";
                 if (subrows.length) {
                     subTable = `<div class="table-responsive"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></div>`
-                    rows.push(`<tr><td></td><td style="padding: 0;">${subTable}</td></tr>`)
+                    rows.push(`<tr><td colspan="2" style="padding: 0 0 0 40px;">${subTable}</td></tr>`)
                 }
             })
+
+            const maxEntries = Number(data.DT_LootSources[this.#row.LootSource]?.MaxEntries) || 1;
+            let copper = Math.trunc(totalValue.value) * maxEntries;
+            let silver = Math.trunc(copper / 100);
+            let gold = Math.trunc(silver / 100);
+
+            rows.push(`<tr><td><strong>Est. Avg. Value</strong></td><td>${gold}g ${silver % 100}s ${copper % 100}c</td></tr>`)
         }
         return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }
@@ -729,15 +776,24 @@ class Marker {
                 return;
             }
         }
-        for (const substr of data.questItems) {
-            if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
-                this.#class = "quest";
-                sprite.texture = textures.quest;
-                this.#tint = 0x00ff00;
-                this.#zIndex = 200;
-                this.#descriptors.push("quest");
-                return;
+        if (this.#row.CsvJson?.quest_id) {
+            this.#class = "quest";
+            sprite.texture = textures.quest;
+            this.#tint = 0x00ff00;
+            this.#zIndex = 200;
+            this.#descriptors.push("quest");
+            if (this.#row.CsvJson?.quest_id) {
+                const matches = this.#row.CsvJson.quest_id.match(/Quest\.(.*)\.([A-Z]+)(\d+)/);
+                const questType = matches[2];
+                if (questType === "DQ") {
+                    this.#tint = 0xFF00DC
+                } else if (questType === "WQ") {
+                    this.#tint = 0xFF6A00
+                } else if (questType === "MQ") {
+                    this.#tint = 0xFF0000
+                }
             }
+            return;
         }
     }
 

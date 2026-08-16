@@ -24,19 +24,19 @@ BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_bd5daacc1e7
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_c8640519c857a009_0,-11868.678,-459.9862,2317.9875,Diocletian Tower,,,,,"{""location_tag"": ""DiscoverableLocation.M03StoneTower01""}"
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_fe09a22b3614186e_0,41085.008,32267.252,-3435.9934,Basin Bridge Redoubt,,,,,"{""location_tag"": ""DiscoverableLocation.M03MilitaryCheckpoint01""}"
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_fea4b5c59189294b_1,4061.0925,41838.703,-2994.2002,Barrel Cart,,,,,"{""location_tag"": ""DiscoverableLocation.M03BarrelCart01""}"
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-5376.9375,38372.703,-18190.045,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,35109.395,20827.146,-1705.5745,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,40498.53,-11899.369,-7154.728,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,43017.34,36492.586,-5877.301,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,52644.953,24303.83,-6709.5635,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,27352.621,16127.476,-2267.941,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,31211.465,14046.681,-3700.969,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,39709.008,15369.758,646.86694,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-5200.7866,40363.688,-5906.2446,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-5200.7866,40363.688,-5906.2446,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,22720.525,-4015.8997,-3306.356,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,44832.52,20461.822,-3449.1628,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,58543.773,12499.449,-3012.9302,,,,,,{'visible': True}
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-5376.9375,38372.703,-18190.045,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,35109.395,20827.146,-1705.5745,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,40498.53,-11899.369,-7154.728,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,43017.34,36492.586,-5877.301,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,52644.953,24303.83,-6709.5635,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,27352.621,16127.476,-2267.941,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,31211.465,14046.681,-3700.969,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,39709.008,15369.758,646.86694,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-5200.7866,40363.688,-5906.2446,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,-5200.7866,40363.688,-5906.2446,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,22720.525,-4015.8997,-3306.356,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,44832.52,20461.822,-3449.1628,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,58543.773,12499.449,-3012.9302,,,,,,"{""visible"": true}"
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD425EB302_f557d925b58a3824_1113851188,5920.0,-4275.0,40.0,,,,,,{}
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD425EB302_f557d925b58a3824_1155962189,-12835.0,32440.0,-1610.0,,,,,,{}
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD425EB302_f557d925b58a3824_1187051190,11475.0,31890.0,-590.0,,,,,,{}
@@ -1061,7 +1061,7 @@ SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7772E02_4cbed4e5a689032
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7782E02_4b21edfab64d74c7_1508726198,1341588.6,275542.66,461387.44,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7782E02_4b21edfab64d74c7_1508727199,1341598.6,275552.66,461387.44,,,,,,{}
 SceneComponent,BP_Etienne_C,BP_Etienne_C_UAID_D843AE1A93E5C0BD02_6eba12598bb1f39f_1593979557,36893.098,14210.943,-7263.2334,The Shako,,,,,"{""instruction"": ""Search for Etienne."", ""grant_items"": {""ID_Lore_Common_ReynauldBP04EtiennesLastNote_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q04"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Search Etienne""}"
-SceneComponent,BP_ExtractorsCache_M03_C,BP_ExtractorsCache_M03_C_UAID_D843AE1A93E5AFE502_1871298156,38444.473,-14458.04,-5351.628,,,,,,{}
+SceneComponent,BP_ExtractorsCache_M03_C,BP_ExtractorsCache_M03_C_UAID_D843AE1A93E5AFE502_1871298156,38444.473,-14458.04,-5351.628,The Extractor's Cache,,,,,"{""instruction"": ""Deposit 1x Robust Ampoule, 1x Fresh Baguette, 1x Boiled Water in the Sombre Forest strongbox"", ""quest_id"": ""Quest.Eloise.MQ01"", ""quest_giver"": ""Character.NPC.Eloise""}"
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_581CF8D81CD7B8A302_12e65868fd8f26ee_1362814441,35886.805,19191.395,-5833.2007,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E530E302_12e65868fd8f26ee_1379521144,40285.523,15601.011,-4866.706,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E530E302_12e65868fd8f26ee_1425647145,29874.896,18122.533,-6199.808,,,,,,{}
@@ -1088,11 +1088,11 @@ SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1242125
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1273695453,3798.6287,3963.9636,-592.53076,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1364742455,13435.403,4495.826,-631.6051,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1464491457,9444.889,3835.8215,-589.2058,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1516902804,-8204.943,4948.557,-2507.4722,,,,,DA_AISpawner_Miniboss,{}
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1553699878,-3325.683,3796.4854,-2489.703,,,,,DA_AISpawner_Miniboss,{}
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1580733991,1170.3278,3840.6057,-2221.872,,,,,DA_AISpawner_Miniboss,{}
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1613566057,9706.538,8162.6333,-1914.7163,,,,,DA_AISpawner_Miniboss,{}
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1642605116,17763.824,2875.7183,-1855.5833,,,,,DA_AISpawner_Miniboss,{}
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1516902804,-8204.943,4948.557,-2507.4722,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1553699878,-3325.683,3796.4854,-2489.703,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1580733991,1170.3278,3840.6057,-2221.872,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1613566057,9706.538,8162.6333,-1914.7163,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1642605116,17763.824,2875.7183,-1855.5833,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_0,31869.445,51315.08,-6111.028,,,,,,{}
 SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_1,20023.096,53911.59,-3714.776,,,,,,{}
 SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_10,-13120.095,45233.76,-2594.2734,,,,,,{}
@@ -1491,7 +1491,7 @@ SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a1_U
 SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a2_UAID_046874882494928402_29fb098085780a4e_1954953242,27771.805,18419.623,210.83133,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a_UAID_046874882494928402_29fb098085780a4e_1954947240,27527.809,17717.652,215.38287,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_0,56004.17,29844.652,-4738.2324,,,,,,{}
-SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_1,56193.633,29519.838,-4738.2324,,,,,,{}
+SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_1,56193.633,29519.838,-4738.2324,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_10,55142.668,29132.955,-4719.2046,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_13,57366.754,29049.025,-5200.3335,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_2,56419.258,29655.072,-4738.2324,,,,,,{}

@@ -20,21 +20,21 @@ BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_d0b10c54376
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_daf5f81d78f399cc_0,39871.43,16043.935,-1418.3889,Dupont Farrier,,,,,"{""location_tag"": ""DiscoverableLocation.M01Blacksmith01""}"
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_e9710943a2517302_0,11853.497,20253.162,-1624.4658,Sarlat Village,,,,,"{""location_tag"": ""DiscoverableLocation.M01Hamlet01""}"
 BrushComponent,DiscoverableLocationVolume,DiscoverableLocationVolume_eb580424d23ccad1_0,47469.312,-6835.603,687.77313,Mr Sweet's Woodland Residence,,,,,"{""location_tag"": ""DiscoverableLocation.M01SmallCamp04""}"
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,37645.086,-11599.223,-5589.4414,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,37325.562,-17543.318,-6321.7383,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,37338.19,-20500.25,-8667.751,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,37645.086,-11599.223,-5589.4414,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,38909.207,-21192.82,-7063.098,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,39671.844,-16743.78,-6866.853,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,43113.31,-18671.129,-10520.465,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,43487.74,-23428.21,-6569.136,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,45653.426,-15514.503,-7126.302,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_02a,43113.31,-18671.129,-10520.465,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_02a,48453.926,-17124.56,-8222.252,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,28616.625,-1926.4612,-911.42114,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,37645.086,-11599.223,-5589.4414,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03b,33855.773,-14854.391,-6182.672,,,,,,{'visible': True}
-FastGeoContainer,StaticMesh,SM_StairIntegrated_03b,43113.31,-18671.129,-10520.465,,,,,,{'visible': True}
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,37645.086,-11599.223,-5589.4414,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,37325.562,-17543.318,-6321.7383,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,37338.19,-20500.25,-8667.751,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,37645.086,-11599.223,-5589.4414,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,38909.207,-21192.82,-7063.098,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,39671.844,-16743.78,-6866.853,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,43113.31,-18671.129,-10520.465,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,43487.74,-23428.21,-6569.136,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01b,45653.426,-15514.503,-7126.302,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_02a,43113.31,-18671.129,-10520.465,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_02a,48453.926,-17124.56,-8222.252,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,28616.625,-1926.4612,-911.42114,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03a,37645.086,-11599.223,-5589.4414,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03b,33855.773,-14854.391,-6182.672,,,,,,"{""visible"": true}"
+FastGeoContainer,StaticMesh,SM_StairIntegrated_03b,43113.31,-18671.129,-10520.465,,,,,,"{""visible"": true}"
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD42A1BF02_3517a8fe10f6fa8e_1185959978,-14340.0,55225.0,2955.0,,,,,,{}
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD42A1BF02_3517a8fe10f6fa8e_1225440979,-34585.0,22380.0,-90.0,,,,,,{}
 SceneComponent,AGV_Biomme_C,AGV_Biomme_C_UAID_107C614ADD42A1BF02_3517a8fe10f6fa8e_1230651980,-13985.0,6390.0,-1395.0,,,,,,{}
@@ -691,7 +691,7 @@ SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7223802_0e4a4cb4ab76a68
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7223802_60e189acded2d404_2086474613,1341588.6,275542.66,461387.44,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7223802_60e189acded2d404_2086475614,1341598.6,275552.66,461387.44,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7223802_da00f1e630e0f1af_2054469604,2454482.8,564250.94,2360292.2,,,,,,{}
-SceneComponent,BP_ExtractorsCache_M01_C,BP_ExtractorsCache_M01_C_UAID_D843AE1A93E5AEE502_1860531288,37576.984,24486.057,-2078.4106,,,,,,{}
+SceneComponent,BP_ExtractorsCache_M01_C,BP_ExtractorsCache_M01_C_UAID_D843AE1A93E5AEE502_1860531288,37576.984,24486.057,-2078.4106,The Extractor's Cache,,,,,"{""instruction"": ""Deposit 1x Robust Ampoule, 1x Fresh Baguette, 1x Boiled Water in the Sarlat Farm strongbox"", ""quest_id"": ""Quest.Eloise.MQ01"", ""quest_giver"": ""Character.NPC.Eloise""}"
 SceneComponent,BP_FamilyRegister_C,BP_FamilyRegister_C_UAID_04D9F5F93AD5735A02_1004ba2f6eb96028_1966739715,-4968.6772,10426.008,-1451.4277,Down From Mount Sinai,,,,,"{""instruction"": ""Find the Census of 1806."", ""grant_items"": {""ID_Uncommon_FamilyRegister"": 1}, ""quest_id"": ""Quest.Eloise.Q10"", ""quest_giver"": ""Character.NPC.Eloise"", ""interaction"": ""Take the 1806 Census""}"
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_10FFE0F0DC0E25E602_68479541b25a7529_1760180213,25330.908,44880.59,-2652.266,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_581CF8D81CD7B9A302_fee95617eaee0162_1527387047,43083.508,-16168.066,-8065.7583,,,,,,{}
