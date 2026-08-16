@@ -785,7 +785,8 @@ class Marker {
 
                     if (this.#row.OuterName.includes("StairIntegrated")) {
                         sprite.texture = textures.stairs;
-                        //this.#tint = 0x0000ff;
+                    } else if (this.#row.OuterName.includes("Lantern")) {
+                        sprite.texture = textures.lantern;
                     }
 
                     return;
