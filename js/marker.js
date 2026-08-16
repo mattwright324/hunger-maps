@@ -747,7 +747,6 @@ class Marker {
             if (display_lower.includes("coop")) {
                 sprite.texture = textures.egg;
                 this.tint = 0xffffff;
-                this.#descriptors.push("egg");
             } else if (display_lower.includes("bullion") || display_lower.includes("jewelry")
                 || display_lower.includes("crate")
                 || display_lower.includes("corpse") || display_lower.includes("clothes")
@@ -762,10 +761,8 @@ class Marker {
                 this.#descriptors.push("good");
             } else if (display_lower.includes("kindling")) {
                 sprite.texture = textures.kindling;
-                this.#descriptors.push("thick branch");
             } else if (display_lower.includes("ash") || display_lower.includes("stove")) {
                 sprite.texture = textures.charcoal;
-                this.#descriptors.push("charcoal");
             }
             return;
         }
