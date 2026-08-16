@@ -326,10 +326,6 @@ class Marker {
             .replaceAll(/.*\.LIT_/g, "")
             .replaceAll(/[\W_]/g, " ") // Special chars to spaces
             .replaceAll(/([a-z])([A-Z])/g, "$1 $2") // Spaces between camel case words
-            // .replaceAll(/(^(C|C LI|BP|SM|DA|PG|SC|LI) ?|(Loot|AISpawner|Node|Static Mesh SM|Config Set DA))/g, "") // Remove prefix/suffix chars
-            //.replaceAll(/(Loot|AISpawner|Node|Static Mesh SM)/g, "") // Remove prefix/suffix chars
-            // .replaceAll(/(\W0\d.*)/g, "") // Remove prefix/suffix chars
-            // .replaceAll(/( (UREL|REL|C)$)/g, "") // Remove prefix/suffix chars
             .replaceAll(/Chateau .*/g, "")
             .replaceAll(/Scav /g, "Scavenger ")
             .replaceAll(/Nat /g, "Naturalist ")
@@ -480,7 +476,7 @@ class Marker {
     #itemAvgValue(itemId, percent) {
         const item = data.ITEMS[itemId];
         if (!item || !Number.isFinite(percent) || !percent) return 0;
-        return (percent / 100) * (Number(item.Value) || 0) * (Number(item.LootGenMax) || 1);
+        return (percent / 100) * (Number(item.Value) || 0) * ((Number(item.LootGenMax) || 1));
     }
 
     #calculateEstValue() {
@@ -525,8 +521,8 @@ class Marker {
         const gold = Math.trunc(silver / 100);
 
         return `<span class="coin gold" ${gold > 0 ? "" : "style='display:none;'"}>${gold} <img src="img/Currency_GoldCoin.png" alt="G" width="16" height="16" loading="lazy"/></span>` +
-                `<span class="coin silver" ${(silver  % 100) > 0 ? "" : "style='display:none;'"}>${silver % 100} <img src="img/Currency_SilverCoin.png" alt="S" width="16" height="16" loading="lazy"/></span>` +
-                `<span class="coin copper" ${(copper % 100) > 0 ? "" : "style='display:none;'"}>${copper % 100} <img src="img/Currency_CopperCoin.png" alt="C" width="16" height="16" loading="lazy"/></span>`;
+                `<span class="coin silver" ${(silver  % 100) > 0 && gold < 5 ? "" : "style='display:none;'"}>${silver % 100} <img src="img/Currency_SilverCoin.png" alt="S" width="16" height="16" loading="lazy"/></span>` +
+                `<span class="coin copper" ${(copper % 100) > 0 && gold < 2 ? "" : "style='display:none;'"}>${copper % 100} <img src="img/Currency_CopperCoin.png" alt="C" width="16" height="16" loading="lazy"/></span>`;
     }
 
     #percentColor(percent) {
@@ -536,6 +532,9 @@ class Marker {
     }
 
     #itemLine(percent, itemHtml, value) {
+        let multiplier = 1;
+        if (this.#class === "npc") multiplier = 4.277
+        value = value * multiplier;
         const percentHtml = percent === null || percent === undefined || percent === ""
             ? ""
             : `<span class="loot-percent" style="color:${this.#percentColor(percent)}">${Number.isFinite(Number(percent)) ? Number(percent).toFixed(2) + "%" : ""}</span>`;
@@ -653,6 +652,9 @@ class Marker {
         }
         let tableData = this.tableData;
         if (tableData) {
+            if (this.#class === "npc") {
+                rows.push(`<tr><td style="text-wrap:nowrap"><strong>Est. Markup</strong></td><td>x4.2</td></tr>`)
+            }
             tableData.forEach(row => {
                 rows.push(`<tr><td colspan="2">${this.#formatLootEntry(row)}</td></tr>`)
 
