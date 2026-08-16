@@ -210,7 +210,10 @@ class Marker {
                         newTable.push(...table);
                     }
 
-                    newTable = newTable.filter(entry => rarityFilter ? rarityFilter.some(r => entry?.Rarity?.includes(r)) : true);
+                    newTable = newTable.filter(entry => rarityFilter ? rarityFilter.some(r => {
+                        const item = data.ITEMS[entry.ObjectName];
+                        return item?.Rarity?.includes(r)
+                    }) : true);
 
                     let newWeightSum = 0;
                     for (let i = 0; i < newTable.length; i++) {
@@ -266,7 +269,7 @@ class Marker {
                     this.#table = combineTables("Weapon_Melee", ["LIT_1HMelee_All", "LIT_2HMelee_All"])
                 }
                 if (lookupKey === "Weapon_Melee_REL") {
-                    this.#table = combineTables("Weapon_Ranged", ["LIT_1HMelee_All", "LIT_2HMelee_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
+                    this.#table = combineTables("Weapon_Melee_REL", ["LIT_1HMelee_All", "LIT_2HMelee_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
                     // this.#table = combineTables("Weapon_Melee_REL", [
                     //     "LIT_1HMelee_Uncommon",
                     //     "LIT_1HMelee_Rare",
@@ -282,7 +285,7 @@ class Marker {
                     this.#table = combineTables("Weapon_Ranged", ["LIT_Rifles_All", "LIT_Pistols_All"])
                 }
                 if (lookupKey === "Weapon_Ranged_REL") {
-                    this.#table = combineTables("Weapon_Ranged", ["LIT_Rifles_All", "LIT_Pistols_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
+                    this.#table = combineTables("Weapon_Ranged_REL", ["LIT_Rifles_All", "LIT_Pistols_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
                     // this.#table = combineTables("Weapon_Ranged_REL", [
                     //     "LIT_Uncommon_Weap_Pistols",
                     //     "LIT_Rare_Weap_Pistols",
