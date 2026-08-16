@@ -798,30 +798,30 @@ def main():
             writer.writerows(csv_rows)
             print(f"Wrote {len(csv_rows)} rows to {OUTPUT_CSV}")
 
-        vendor_csv = []
-        for obj in resolver.by_type.get("VendorData", []):
-            props = obj.get("Properties", {})
-            root_outer_name = obj.get("Outer", {}).get("ObjectName")
-            matches = re.search(r"(\w+)'(\w+)'", root_outer_name)
-            if matches:
-                root_outer_name = matches.group(2)
-            weight_sum = 0
-            for item in props.get("VendorItems", []):
-                weight_sum += item.get("Weight")
-            for item in props.get("VendorItems", []):
-                item_name = item.get("Item", {}).get("ObjectName")
-                matches = re.search(r"(\w+)'(\w+)'", item_name)
-                if matches:
-                    item_name = matches.group(2)
-                vendor_csv.append([root_outer_name, item.get("Weight"), weight_sum, 100 * item.get("Weight") / weight_sum, item_name])
-
-        with open("output/vendor_data.csv", "w", newline="", encoding="utf-8") as csvfile:
-            writer = csv.writer(csvfile)
-            writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
-            vendor_csv.sort()
-            vendor_csv.reverse()
-            writer.writerows(vendor_csv)
-            print(f"Wrote {len(vendor_csv)} rows to output/vendor_data.csv")
+        # vendor_csv = []
+        # for obj in resolver.by_type.get("VendorData", []):
+        #     props = obj.get("Properties", {})
+        #     root_outer_name = obj.get("Outer", {}).get("ObjectName")
+        #     matches = re.search(r"(\w+)'(\w+)'", root_outer_name)
+        #     if matches:
+        #         root_outer_name = matches.group(2)
+        #     weight_sum = 0
+        #     for item in props.get("VendorItems", []):
+        #         weight_sum += item.get("Weight")
+        #     for item in props.get("VendorItems", []):
+        #         item_name = item.get("Item", {}).get("ObjectName")
+        #         matches = re.search(r"(\w+)'(\w+)'", item_name)
+        #         if matches:
+        #             item_name = matches.group(2)
+        #         vendor_csv.append([root_outer_name, item.get("Weight"), weight_sum, 100 * item.get("Weight") / weight_sum, item_name])
+        #
+        # with open("output/vendor_data.csv", "w", newline="", encoding="utf-8") as csvfile:
+        #     writer = csv.writer(csvfile)
+        #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
+        #     vendor_csv.sort()
+        #     vendor_csv.reverse()
+        #     writer.writerows(vendor_csv)
+        #     print(f"Wrote {len(vendor_csv)} rows to output/vendor_data.csv")
 
 
     print("Done")

@@ -268,17 +268,6 @@ export const presets = {
     }
 };
 
-export const containers = [
-    //"Loot_",
-    "Chest",
-    "Chest Drawers",
-    "Wardrobe",
-    "Workbench",
-    "StoneTomb",
-    "Cabinet",
-    "Dungeon_M",
-]
-
 export const looseItems = [
     "LootNode",
     "Loose",

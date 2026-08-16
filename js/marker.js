@@ -349,10 +349,6 @@ class Marker {
         this.#readable.name = this.#makeReadable(this.#row.OuterType || "");
         this.#readable.mesh = this.#makeReadable(this.#row.OuterName || "");
 
-        if (this.#row.Keyed) {
-            this.#row.Keyed = this.#row.Keyed.replace(/InventoryDefinition_Key'ID_Key_(\w+)'/g, "$1 Key");
-        }
-
         let aiSpawner = this.#row.AISpawner;
         if (aiSpawner) {
             this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/DA_AISpawner_(\w+)/g, "$1"));
@@ -457,7 +453,7 @@ class Marker {
             rows.push(`<tr><td><strong>Health</strong></td><td>${this.#row.CsvJson.health}</td></tr>`)
         }
         if (this.#row?.CsvJson?.keyed) {
-            rows.push(`<tr><td><strong>Keyed</strong></td><td>${this.#row.CsvJson.keyed}</td></tr>`)
+            rows.push(`<tr><td><strong>Locked</strong></td><td>${this.#formatItem(this.#row.CsvJson.keyed)}</td></tr>`)
         }
         const lootSource = this.#row.LootSource;
         if (lootSource) {
@@ -559,9 +555,9 @@ class Marker {
                     if (data.LOOT_TABLES[realTable]) {
                         data.LOOT_TABLES[realTable].forEach((row2) => {
                             const percent = row2["WeightPercent"];
-                            let color = "green"
-                            if (Number(percent) < 10) color = "orange"
-                            if (Number(percent) < 2.5) color = "red"
+                            let color = "var(--uncommon)"
+                            if (Number(percent) < 10) color = "var(--legendary)"
+                            if (Number(percent) < 2.5) color = "var(--artifact)"
 
                             let displayName = row2["ObjectName"];
                             if (row2["DisplayName"]) displayName = `<span title="${row2["Rarity"] || row2["ObjectName"]}" class="${row2["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row2["DisplayName"])}</span> <small class="text-muted">${row2["LootSource"] || row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
@@ -673,9 +669,9 @@ class Marker {
                         this.#descriptors.push("breakable")
                     }
 
-                    if (display_lower.includes("lift") || display_lower.includes("door") || this.#row.OuterType.includes("Gate_A0")) {
+                    if (this.#row.OuterType.includes("Lift") || this.#row.OuterType.toLowerCase().includes("door") || this.#row.OuterType.includes("Gate_A0")) {
                         sprite.texture = textures.door;
-                    } else if (display_lower.includes("window")) {
+                    } else if (this.#row.OuterType.includes("Window")) {
                         sprite.texture = textures.window;
                     }
 
@@ -700,15 +696,15 @@ class Marker {
                             || this.#row.OuterType.includes("Pottery"))
                             this.#tint = 0x888888;
                         this.#zIndex = 50;
-                    } else if (display_lower.includes("trap") && !display_lower.includes("trapdoor")) {
+                    } else if (this.#row.OuterType.includes("Trap") && !this.#row.OuterType.includes("Trapdoor")) {
                         sprite.texture = textures.grenade;
-                        if (display_lower.includes("ground_bleed")) sprite.texture = textures.caltrops;
+                        if (this.#row.OuterType.includes("Ground_Bleed")) sprite.texture = textures.caltrops;
                         this.#tint = 0xff0000;
-                        if (display_lower.includes("poison")) this.#tint = 0x00ff00
+                        if (this.#row.OuterType.includes("Poison")) this.#tint = 0x00ff00
                         this.#zIndex = 50;
                     }
 
-                    if (display_lower.includes("stairintegrated")) {
+                    if (this.#row.OuterType.includes("StairIntegrated")) {
                         sprite.texture = textures.stairs;
                         //this.#tint = 0x0000ff;
                     }
@@ -718,38 +714,37 @@ class Marker {
             }
         }
 
-        for (const substr of data.containers) {
-            if (this.#row.LootSource || this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
-                this.#class = "container";
-                sprite.texture = textures.pingGeneric;
-                this.#zIndex = 50;
+        if (this.#row.LootSource) {
+            this.#class = "container";
+            sprite.texture = textures.pingGeneric;
+            this.#zIndex = 50;
 
-                if (display_lower.includes("coop")) {
-                    sprite.texture = textures.egg;
-                    this.tint = 0xffffff;
-                    this.#descriptors.push("egg");
-                } else if (display_lower.includes("bullion") || display_lower.includes("jewelry")
-                    || display_lower.includes("crate")
-                    || display_lower.includes("corpse") || display_lower.includes("clothes")
-                    || this.#row.OuterType.includes("Loot_Ranged")
-                    || this.#row.OuterType.includes("Loot_Melee")
-                    || this.#row.OuterType.includes("Loot_Armor")
-                    || display_lower.includes("strongbox")
-                    || display_lower.includes("fargot")
-                    || this.#row.OuterType.includes("Loot_DungeonM")) {
-                    this.#tint = 0xFFD800;
-                    this.#zIndex = 100;
-                    this.#descriptors.push("good");
-                } else if (display_lower.includes("kindling")) {
-                    sprite.texture = textures.kindling;
-                    this.#descriptors.push("thick branch");
-                } else if (display_lower.includes("ash") || display_lower.includes("stove")) {
-                    sprite.texture = textures.charcoal;
-                    this.#descriptors.push("charcoal");
-                }
-                return;
+            if (display_lower.includes("coop")) {
+                sprite.texture = textures.egg;
+                this.tint = 0xffffff;
+                this.#descriptors.push("egg");
+            } else if (display_lower.includes("bullion") || display_lower.includes("jewelry")
+                || display_lower.includes("crate")
+                || display_lower.includes("corpse") || display_lower.includes("clothes")
+                || this.#row.OuterType.includes("Loot_Ranged")
+                || this.#row.OuterType.includes("Loot_Melee")
+                || this.#row.OuterType.includes("Loot_Armor")
+                || display_lower.includes("strongbox")
+                || display_lower.includes("fargot")
+                || this.#row.OuterType.includes("Loot_DungeonM")) {
+                this.#tint = 0xFFD800;
+                this.#zIndex = 100;
+                this.#descriptors.push("good");
+            } else if (display_lower.includes("kindling")) {
+                sprite.texture = textures.kindling;
+                this.#descriptors.push("thick branch");
+            } else if (display_lower.includes("ash") || display_lower.includes("stove")) {
+                sprite.texture = textures.charcoal;
+                this.#descriptors.push("charcoal");
             }
+            return;
         }
+
         for (const substr of data.spawns) {
             if (this.#row.OuterType.match(substr) || this.#row.OuterName.match(substr)) {
                 this.#class = "spawns";
@@ -786,11 +781,11 @@ class Marker {
                 const matches = this.#row.CsvJson.quest_id.match(/Quest\.(.*)\.([A-Z]+)(\d+)/);
                 const questType = matches[2];
                 if (questType === "DQ") {
-                    this.#tint = 0xFF00DC
+                    this.#tint = 0x68D9FE
                 } else if (questType === "WQ") {
-                    this.#tint = 0xFF6A00
+                    this.#tint = 0x68D9FE
                 } else if (questType === "MQ") {
-                    this.#tint = 0xFF0000
+                    this.#tint = 0x68D9FE
                 }
             }
             return;

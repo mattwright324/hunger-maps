@@ -151,6 +151,33 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
             if (marker.tableData && controls.includeLootItems.checked) {
                 const rangeValue = Number(controls.chanceRange.value);
                 marker.tableData.forEach(loot => {
+                    const hungerTableLookup = {
+                        "HighClassCiv_Small": "LIT_HighClassCiv", // Guessing
+                        "Hunger_Biter": "LIT_Biter_01",
+                        "Hunger_Biter_Elite": "LIT_Biter_Elite",
+                        "Hunger_Bloat": "LIT_Bloat_01",
+                        "Hunger_Brute": "LIT_Brute_01",
+                        "Hunger_Brute_Elite": "LIT_Brute_Elite",
+                        "Hunger_Dreg": "LIT_Dreg_01",
+                        "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
+                        "Hunger_Shambler": "LIT_Shambler_01",
+                        "Hunger_Waif": "LIT_Waif_01",
+                        "MedicalPhysicianDreg": "LIT_Medicine_Crafting", // Guessing
+                    }
+                    const realTable = hungerTableLookup[loot["LootSource"]];
+                    if (realTable) {
+                        if (data.LOOT_TABLES[realTable]) {
+                            data.LOOT_TABLES[realTable].forEach((row2) => {
+                                if (Number(row2["WeightPercent"]) >= rangeValue) {
+                                    values.push(row2["ObjectName"])
+                                    const item = data.ITEMS[row2["ObjectName"]]
+                                    if (item) {
+                                        values.push(item["DisplayName"])
+                                    }
+                                }
+                            });
+                        }
+                    }
                     if (Number(loot["WeightPercent"]) >= rangeValue) {
                         values.push(loot["ObjectName"])
                         const item = data.ITEMS[loot["ObjectName"]]
@@ -213,12 +240,9 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
                 sprite.parent.visible = npcs.includes(marker.readable.displayName);
             }
             const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
-            if (marker.row.LootSource || "container" === marker.class) {
+            if (marker.row.LootSource) {
                 sprite.parent.visible = lootSources.includes(lootTable);
             }
-            // if (marker.class === "container") {
-            //     sprite.parent.visible = containers.includes(marker.readable.displayName);
-            // }
             if (marker.class === "loose") {
                 sprite.parent.visible = loose.includes(marker.readable.displayName);
             }
