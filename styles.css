@@ -167,8 +167,64 @@ body {
 .marker-info-table td {
     vertical-align: middle;
 }
+.marker-info-table {
+    width: 100%;
+}
+.marker-info-table td.loot-subtable {
+    padding: 0 0 0 20px;
+}
+
+.marker-tooltip.has-items {
+    width: min(404px, calc(100vw - 32px));
+}
+.marker-tooltip.has-items .marker-info-table {
+    table-layout: fixed;
+}
+.marker-tooltip.has-items .marker-info-table td:first-child:not([colspan]) {
+    width: 33%;
+}
+
+.loot-row {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 100%;
+}
+.loot-percent {
+    flex: 0 0 auto;
+    width: 48px;
+    text-align: right;
+    white-space: nowrap;
+}
+.loot-item {
+    flex: 1 1 0;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.loot-value {
+    flex: 0 0 auto;
+    margin-left: auto;
+    white-space: nowrap;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+.coin + .coin {
+    margin-left: 3px;
+}
+.coin.gold {
+    color: #ffd257;
+}
+.coin.silver {
+    color: #cfd6dd;
+}
+.coin.copper {
+    color: #e08a5b;
+}
 
 .item img {
+    vertical-align: middle;
     margin-right: 5px;
     background-color: black;
     border-color: transparent;

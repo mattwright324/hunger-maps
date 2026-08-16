@@ -51,6 +51,21 @@ function encodeHTML(str) {
     return str.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
+// AISpawner loot sources that point at a monster whose own drops live in another table
+const hungerTableLookup = {
+    "HighClassCiv_Small": "LIT_HighClassCiv", // Guessing
+    "Hunger_Biter": "LIT_Biter_01",
+    "Hunger_Biter_Elite": "LIT_Biter_Elite",
+    "Hunger_Bloat": "LIT_Bloat_01",
+    "Hunger_Brute": "LIT_Brute_01",
+    "Hunger_Brute_Elite": "LIT_Brute_Elite",
+    "Hunger_Dreg": "LIT_Dreg_01",
+    "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
+    "Hunger_Shambler": "LIT_Shambler_01",
+    "Hunger_Waif": "LIT_Waif_01",
+    "MedicalPhysicianDreg": "LIT_Medicine_Crafting", // Guessing
+}
+
 class Marker {
     constructor(row) {
         this.#row = row;
@@ -63,6 +78,9 @@ class Marker {
     #descriptors = [];
     #loot_table_lookup = false;
     #table;
+    // Estimated average copper this marker yields, by source. Calculated once at init
+    // so it can be styled, classified and filtered on without building a tooltip.
+    #estValue = {resource: 0, grants: 0, loot: 0, total: 0};
     #texture = textures.uncommon;
     #container = new PIXI.Container();
     #sprite = new PIXI.Sprite(this.#texture);
@@ -87,6 +105,16 @@ class Marker {
     get tableData() {
         this.#lookupTable();
         return this.#table;
+    }
+
+    // Estimated average copper value of everything this marker yields
+    get estValue() {
+        return this.#estValue.total;
+    }
+
+    // Same estimate split by source: {resource, grants, loot, total}
+    get estValues() {
+        return {...this.#estValue};
     }
 
     get container() {
@@ -391,6 +419,8 @@ class Marker {
             this.#readable.displayName = this.#row.OuterName;
         }
 
+        this.#estValue = this.#calculateEstValue();
+
         this.#classify();
 
         const brightnessFactor = Math.min(1.0, (Number(this.#row.SpawnChance || '100') + 15) / 100);
@@ -449,27 +479,119 @@ class Marker {
         });
     }
 
-    #formatItem(itemId, percent, totalValue) {
+    #itemAvgValue(itemId, percent) {
         const item = data.ITEMS[itemId];
-        if (!item) {
-            return itemId;
+        if (!item || !Number.isFinite(percent) || !percent) return 0;
+        return (percent / 100) * (Number(item.Value) || 0) * (Number(item.LootGenMax) || 1);
+    }
+
+    #calculateEstValue() {
+        const estValue = {resource: 0, grants: 0, loot: 0, total: 0};
+
+        const resource = data.RESOURCE_NODES[this.#row?.CsvJson?.node_tag];
+        if (resource) {
+            estValue.resource = this.#itemAvgValue(resource.Item, 100);
         }
-        let amount = ""
+        if (this.#row?.CsvJson?.grant_items) {
+            estValue.grants = Object.keys(this.#row.CsvJson.grant_items)
+                .reduce((sum, itemId) => sum + this.#itemAvgValue(itemId, 100), 0);
+        }
+        const tableData = this.tableData;
+        if (tableData) {
+            let loot = 0;
+            tableData.forEach(row => {
+                loot += this.#itemAvgValue(row["ObjectName"], Number(row["WeightPercent"]));
+                // AISpawner entries are monsters, their own drops carry the value
+                const subTable = data.LOOT_TABLES[hungerTableLookup[row["LootSource"]]];
+                if (subTable) {
+                    subTable.forEach(row2 => loot += this.#itemAvgValue(row2["ObjectName"], Number(row2["WeightPercent"])));
+                }
+            })
+            estValue.loot = loot * (Number(data.DT_LootSources[this.#row.LootSource]?.MaxEntries) || 1);
+        }
+
+        estValue.total = estValue.resource + estValue.grants + estValue.loot;
+        return estValue;
+    }
+
+    #itemValue(itemId) {
+        const item = data.ITEMS[itemId];
+        if (!item) return null;
+        const value = Number(item.Value) || 0;
+        if (!value) return null;
+        return value * (Number(item.LootGenMax) || 1);
+    }
+
+    #formatCoins(copperValue) {
+        const copper = Math.trunc(copperValue);
+        const silver = Math.trunc(copper / 100);
+        const gold = Math.trunc(silver / 100);
+
+        return `<span class="coin gold" ${copperValue >= 10000 ? "" : "style='display:none;'"}>${gold} <img src="img/Currency_GoldCoin.png" alt="G" width="16" height="16" loading="lazy"/></span>` +
+                `<span class="coin silver" ${copperValue >= 100 ? "" : "style='display:none;'"}>${silver % 100} <img src="img/Currency_SilverCoin.png" alt="S" width="16" height="16" loading="lazy"/></span>` +
+                `<span class="coin copper" ${copperValue >= 0 ? "" : "style='display:none;'"}>${copper % 100} <img src="img/Currency_CopperCoin.png" alt="C" width="16" height="16" loading="lazy"/></span>`;
+    }
+
+    #percentColor(percent) {
+        if (Number(percent) < 2.5) return "var(--artifact)";
+        if (Number(percent) < 10) return "var(--legendary)";
+        return "var(--uncommon)";
+    }
+
+    #itemLine(percent, itemHtml, value) {
+        const percentHtml = percent === null || percent === undefined || percent === ""
+            ? ""
+            : `<span class="loot-percent" style="color:${this.#percentColor(percent)}">${Number.isFinite(Number(percent)) ? Number(percent).toFixed(2) + "%" : ""}</span>`;
+        const valueHtml = value === null || value === undefined
+            ? ""
+            : `<span class="loot-value" title="Total: ${Number(value).toLocaleString()}\nWeighted: ${Number(value * (Number(percent) / 100)).toLocaleString()}">${this.#formatCoins(value)}</span>`;
+        return `<div class="loot-row">${percentHtml}<span class="loot-item">${itemHtml}</span>${valueHtml}</div>`;
+    }
+
+    #formatItem(itemId, muted) {
+        const item = data.ITEMS[itemId];
+        const notes = [];
+        if (!item) {
+            if (muted) notes.push(muted);
+            return `<span class="name">${encodeHTML(itemId)}</span>${this.#formatNotes(notes)}`;
+        }
         const min = Number(item.LootGenMin) || 1
         const max = Number(item.LootGenMax) || 1
-        if (min > 1 || max > 1) amount = `(${min}-${max} items)`;
-        if (percent && totalValue) totalValue.value += (percent / 100) * (Number(item.Value || 0) * max)
-        // let copper = Math.trunc(Number(item.Value || 0) * max);
-        // let silver = Math.trunc(copper / 100);
-        // let gold = Math.trunc(silver / 100);
-        // let cost = gold ? gold + "g" : silver ? silver + "s" : copper + "c";
-        return `<span class="item ${item?.Rarity?.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${item.DisplayName}</span> ${amount}</span>`
+        if (min > 1 || max > 1) notes.push(`(${min}-${max} items)`);
+        if (muted) notes.push(muted);
+        return `<span class="item ${item?.Rarity?.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${encodeHTML(item.DisplayName)}</span></span>${this.#formatNotes(notes)}`
+    }
+
+    #formatNotes(notes) {
+        return notes.length ? ` <small class="text-muted">${notes.join(" ")}</small>` : "";
+    }
+
+    #valueRow(label, copperValue) {
+        return `<tr><td><strong>${label}</strong></td><td>${this.#itemLine(null, "", copperValue)}</td></tr>`;
+    }
+
+    #itemRow(label, itemId) {
+        return `<tr><td><strong>${label}</strong></td><td>${this.#itemLine(null, this.#formatItem(itemId), this.#itemValue(itemId))}</td></tr>`;
+    }
+
+    #formatLootEntry(row) {
+        const percent = Number(row["WeightPercent"]);
+        const tableName = row["TableName"]?.replace("DA_AISpawner_", "");
+        const objectName = row["ObjectName"];
+        if (data.ITEMS[objectName]) {
+            return this.#itemLine(percent, this.#formatItem(objectName, tableName), this.#itemValue(objectName));
+        }
+        let name = `<span class="name">${encodeHTML(objectName || "")}</span>`;
+        if (row["DisplayName"]) {
+            name = `<span title="${row["Rarity"] || objectName}" class="name ${row["Rarity"]?.replaceAll(".", " ") || ""}">${encodeHTML(row["DisplayName"])}</span>`;
+        }
+        return this.#itemLine(percent, `${name}${this.#formatNotes([row["LootSource"] || tableName].filter(Boolean))}`, null);
     }
 
     #tooltipText() {
         let rows = []
         // rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
-        rows.push(`<tr><td><strong>Height (Z)</strong></td><td>${this.sprite.z.toFixed(2)}</td></tr>`)
+        rows.push(`<tr><td style="text-wrap:nowrap"><strong>Height (Z)</strong></td><td style="width: 100%;">${this.sprite.z.toFixed(2)}</td></tr>`)
         // rows.push(`<tr><td><strong>Tags</strong></td><td>${[this.#class, ...this.#descriptors].join(", ")}</td></tr>`)
         if (this.#row.SpawnChance) {
             rows.push(`<tr><td><strong>Spawn Chance</strong></td><td>${this.#row.SpawnChance}% (${this.#row.ChanceType})</td></tr>`)
@@ -478,7 +600,7 @@ class Marker {
             rows.push(`<tr><td><strong>Health</strong></td><td>${this.#row.CsvJson.health}</td></tr>`)
         }
         if (this.#row?.CsvJson?.keyed) {
-            rows.push(`<tr><td><strong>Locked</strong></td><td>${this.#formatItem(this.#row.CsvJson.keyed)}</td></tr>`)
+            rows.push(this.#itemRow("Locked", this.#row.CsvJson.keyed))
         }
         const lootSource = this.#row.LootSource;
         if (lootSource) {
@@ -495,15 +617,8 @@ class Marker {
         if (this.#row?.CsvJson?.node_tag) {
             const resource = data.RESOURCE_NODES[this.#row.CsvJson.node_tag];
             if (resource) {
-                let totalValue = {value: 0};
                 rows.push(`<tr><td><strong>Required Level</strong></td><td>${resource.RequiredLevel}</td></tr>`)
-                rows.push(`<tr><td><strong>Resource</strong></td><td>${this.#formatItem(resource.Item, 100, totalValue)}</td></tr>`)
-
-                let copper = Math.trunc(totalValue.value);
-                let silver = Math.trunc(copper / 100);
-                let gold = Math.trunc(silver / 100);
-                rows.push(`<tr><td><strong>Est. Avg. Value</strong></td><td>${gold}g ${silver % 100}s ${copper % 100}c</td></tr>`)
-
+                rows.push(this.#itemRow("Resource", resource.Item))
             }
         }
         if (this.#row?.CsvJson?.quest_id) {
@@ -532,85 +647,29 @@ class Marker {
             rows.push(`<tr><td><strong>Instructions</strong></td><td>${this.#row.CsvJson.instruction}</td></tr>`)
         }
         if (this.#row?.CsvJson?.grant_items) {
-            let totalValue = {value: 0};
             Object.keys(this.#row.CsvJson.grant_items).forEach(key => {
-                rows.push(`<tr><td><strong>Grants</strong></td><td>${this.#formatItem(key, 100, totalValue)}</td></tr>`)
+                rows.push(this.#itemRow("Grants", key))
             })
-            let copper = Math.trunc(totalValue.value);
-            let silver = Math.trunc(copper / 100);
-            let gold = Math.trunc(silver / 100);
-
-            rows.push(`<tr><td><strong>Est. Avg. Value</strong></td><td>${gold}g ${silver % 100}s ${copper % 100}c</td></tr>`)
         }
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
         }
         let tableData = this.tableData;
         if (tableData) {
-            let totalValue = {value: 0};
             tableData.forEach(row => {
-                const percent = row["WeightPercent"];
-                let color = "var(--uncommon)"
-                if (Number(percent) < 10) color = "var(--legendary)"
-                if (Number(percent) < 2.5) color = "var(--artifact)"
+                rows.push(`<tr><td colspan="2">${this.#formatLootEntry(row)}</td></tr>`)
 
-                let displayName = row["ObjectName"];
-                if (row["DisplayName"]) displayName = `<span title="${row["Rarity"] || row["ObjectName"]}" class="${row["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row["DisplayName"])}</span> <small class="text-muted">${row["LootSource"] || row["TableName"].replace("DA_AISpawner_", "")}</small>`;
-                const item = data.ITEMS[row["ObjectName"]];
-                if (item) {
-                    displayName = `${this.#formatItem(row["ObjectName"], Number(row["WeightPercent"]), totalValue)} <small class="text-muted">${row["TableName"].replace("DA_AISpawner_", "")}</small>`;
-                }
-
-                const hungerTableLookup = {
-                    "HighClassCiv_Small": "LIT_HighClassCiv", // Guessing
-                    "Hunger_Biter": "LIT_Biter_01",
-                    "Hunger_Biter_Elite": "LIT_Biter_Elite",
-                    "Hunger_Bloat": "LIT_Bloat_01",
-                    "Hunger_Brute": "LIT_Brute_01",
-                    "Hunger_Brute_Elite": "LIT_Brute_Elite",
-                    "Hunger_Dreg": "LIT_Dreg_01",
-                    "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
-                    "Hunger_Shambler": "LIT_Shambler_01",
-                    "Hunger_Waif": "LIT_Waif_01",
-                    "MedicalPhysicianDreg": "LIT_Medicine_Crafting", // Guessing
-                }
-                const subrows = []
-                const realTable = hungerTableLookup[row["LootSource"]];
-                if (realTable) {
-                    if (data.LOOT_TABLES[realTable]) {
-                        data.LOOT_TABLES[realTable].forEach((row2) => {
-                            const percent = row2["WeightPercent"];
-                            let color = "var(--uncommon)"
-                            if (Number(percent) < 10) color = "var(--legendary)"
-                            if (Number(percent) < 2.5) color = "var(--artifact)"
-
-                            let displayName = row2["ObjectName"];
-                            if (row2["DisplayName"]) displayName = `<span title="${row2["Rarity"] || row2["ObjectName"]}" class="${row2["Rarity"]?.replaceAll(".", " ")}">${encodeHTML(row2["DisplayName"])}</span> <small class="text-muted">${row2["LootSource"] || row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
-                            const item = data.ITEMS[row2["ObjectName"]];
-                            if (item) {
-                                displayName = `${this.#formatItem(row2["ObjectName"], Number(row2["WeightPercent"]), totalValue)} <small class="text-muted">${row2["TableName"].replace("DA_AISpawner_", "")}</small>`;
-                            }
-                            subrows.push(`<tr><td colspan="2"><span style="display:inline-block;width:40px;text-align:right;margin-right:5px"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></span>${displayName}</td></tr>`)
-                        });
-                    }
-                }
-
-                rows.push(`<tr><td colspan="2"><span style="display:inline-block;width:40px;text-align:right;margin-right:5px"><span style="color:${color}">${Number(percent).toFixed(2)}%</span></span>${displayName}</td></tr>`)
-                let subTable = "";
-                if (subrows.length) {
-                    subTable = `<div class="table-responsive"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></div>`
-                    rows.push(`<tr><td colspan="2" style="padding: 0 0 0 40px;">${subTable}</td></tr>`)
+                const subTableData = data.LOOT_TABLES[hungerTableLookup[row["LootSource"]]];
+                if (subTableData) {
+                    const subrows = subTableData.map(row2 =>
+                        `<tr><td colspan="2">${this.#formatLootEntry(row2)}</td></tr>`);
+                    rows.push(`<tr><td colspan="2" class="loot-subtable"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></td></tr>`)
                 }
             })
-
-            const maxEntries = Number(data.DT_LootSources[this.#row.LootSource]?.MaxEntries) || 1;
-            let copper = Math.trunc(totalValue.value) * maxEntries;
-            let silver = Math.trunc(copper / 100);
-            let gold = Math.trunc(silver / 100);
-
-            rows.push(`<tr><td><strong>Est. Avg. Value</strong></td><td>${gold}g ${silver % 100}s ${copper % 100}c</td></tr>`)
+            rows.push(this.#valueRow("Est. Avg. Value", this.#estValue.loot))
         }
-        return `<div><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
+        const hasItems = rows.some(row => row.includes('class="loot-row"'));
+        return `<div class="marker-tooltip${hasItems ? " has-items" : ""}"><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }
 
     #classify() {
@@ -671,10 +730,8 @@ class Marker {
                 this.#tint = 0xFFFFFF;
                 this.#zIndex = 60;
 
-                if (display_lower.includes("rare") || display_lower.includes("legendary")
-                    || display_lower.includes("loose") || display_lower.includes("ampoule")
-                    || display_lower.includes("key_ring") || display_lower.includes("keys_m0")
-                    || display_lower.includes("recip")) {
+                // Greater than 7 silver mark as good
+                if (this.estValue > 700) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
@@ -747,23 +804,19 @@ class Marker {
             if (display_lower.includes("coop")) {
                 sprite.texture = textures.egg;
                 this.tint = 0xffffff;
-            } else if (display_lower.includes("bullion") || display_lower.includes("jewelry")
-                || display_lower.includes("crate")
-                || display_lower.includes("corpse") || display_lower.includes("clothes")
-                || this.#row.OuterType.includes("Loot_Ranged")
-                || this.#row.OuterType.includes("Loot_Melee")
-                || this.#row.OuterType.includes("Loot_Armor")
-                || display_lower.includes("strongbox")
-                || display_lower.includes("fargot")
-                || this.#row.OuterType.includes("Loot_DungeonM")) {
-                this.#tint = 0xFFD800;
-                this.#zIndex = 100;
-                this.#descriptors.push("good");
             } else if (display_lower.includes("kindling")) {
                 sprite.texture = textures.kindling;
             } else if (display_lower.includes("ash") || display_lower.includes("stove")) {
                 sprite.texture = textures.charcoal;
             }
+
+            // Greater than 7 silver mark as good
+            if (this.estValue > 700) {
+                this.#tint = 0xFFD800;
+                this.#zIndex = 100;
+                this.#descriptors.push("good");
+            }
+
             return;
         }
 
