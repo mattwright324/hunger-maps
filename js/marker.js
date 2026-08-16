@@ -783,7 +783,7 @@ class Marker {
                         this.#zIndex = 50;
                     }
 
-                    if (this.#row.OuterType.includes("StairIntegrated")) {
+                    if (this.#row.OuterName.includes("StairIntegrated")) {
                         sprite.texture = textures.stairs;
                         //this.#tint = 0x0000ff;
                     }
