@@ -298,6 +298,16 @@ class Marker {
                     // ])
                 }
             }
+            const item = data.ITEMS[this.#row.LootSource]
+            if (item) {
+                this.#table = [{
+                    TableName: this.#row.LootSource,
+                    Weight: 100,
+                    WeightSum: 100,
+                    WeightPercent: 100,
+                    ObjectName: this.#row.LootSource,
+                }]
+            }
         }
         if (this.#row.AISpawner) {
             const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
