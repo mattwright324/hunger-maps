@@ -258,3 +258,18 @@ body {
     border-color: var(--artifact);
     box-shadow: 0 0 3px var(--artifact);
 }
+
+.ts-dropdown-content .option {
+    display: flex;
+}
+
+.ts-dropdown-content .option .text {
+    text-wrap: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+.ts-dropdown-content .option small {
+    text-wrap: nowrap;
+    margin-left: auto;
+}

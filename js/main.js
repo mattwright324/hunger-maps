@@ -94,7 +94,7 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
         }, lootTable => {
             const first = markers.filter(marker => data.DT_LootSources[marker.row.LootSource]?.["LootTable"] === lootTable)?.[0];
             if (first && first.estValue) {
-                return `${lootTable} <small class="text-muted">(Avg: ${first.formatCoins(first.estValue)})</small>`;
+                return `<span class="text">${lootTable}</span> <small class="text-muted">Avg: ${first.formatCoins(first.estValue)}</small>`;
             } else {
                 return lootTable;
             }
@@ -105,7 +105,7 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
         loadMultiselectClass(controls.looseSelect, "loose", looseName => {
             const first = markers.filter(marker => marker.readable.displayName === looseName)?.[0];
             if (first && first.estValue) {
-                return `${looseName} <small class="text-muted">(Avg: ${first.formatCoins(first.estValue)})</small>`;
+                return `<span class="text">${looseName}</span> <small class="text-muted">Avg: ${first.formatCoins(first.estValue)}</small>`;
             } else {
                 return looseName;
             }
