@@ -95,13 +95,16 @@ export function fitMapSpriteToCanvas() {
     render();
 }
 
-export function scaleMarkersToZoom() {
+function applyMarkerScale(worldScale, multiplier = 1) {
     markerSprites().forEach(sprite => {
         const screenSize = sprite._screenSize || 24;
-        const inverseWorldScale = 1 / world.scale.x;
-        const baseScale = screenSize / sprite.texture.width;
-        sprite.scale.set(baseScale * inverseWorldScale);
+        const baseScale = (screenSize * multiplier) / sprite.texture.width;
+        sprite.scale.set(baseScale / worldScale);
     })
+}
+
+export function scaleMarkersToZoom() {
+    applyMarkerScale(world.scale.x);
     render();
 }
 
@@ -242,3 +245,74 @@ function setupPanZoom() {
 }
 
 setupPanZoom();
+
+export async function exportRegion({
+       x = mapOverlaySprite.x,
+       y = mapOverlaySprite.y,
+       width = mapOverlaySprite.width,
+       height = mapOverlaySprite.height,
+       markerScale = 0.5,
+       resolution = 1,
+       quality = 0.92,
+       background = app.renderer.background.color,
+       antialias = false,
+       filename,
+} = {}) {
+    if (!(width > 0) || !(height > 0)) {
+        throw new Error(`exportRegion: width and height must be positive, got ${width}x${height}`);
+    }
+
+    // A single texture holds the whole export, so keep it inside what the GPU allows.
+    const gl = app.renderer.gl;
+    const maxTextureSize = gl ? gl.getParameter(gl.MAX_TEXTURE_SIZE) : Infinity;
+    const longestSide = Math.max(width, height) * resolution;
+    if (longestSide > maxTextureSize) {
+        const capped = Math.max(maxTextureSize / Math.max(width, height), 1 / Math.max(width, height));
+        console.warn(`exportRegion: ${Math.round(longestSide)}px exceeds the max texture size `
+            + `(${maxTextureSize}px), lowering resolution ${resolution} to ${capped}`);
+        resolution = capped;
+    }
+
+    const frame = new PIXI.Rectangle(x, y, width, height);
+
+    let canvas;
+    applyMarkerScale(1, markerScale);
+    try {
+        canvas = app.renderer.extract.canvas({
+            target: world,
+            frame,
+            resolution,
+            antialias,
+            // Normalized to an rgba array, a plain 0x000000 would be treated as transparent.
+            clearColor: background == null ? [0, 0, 0, 0] : new PIXI.Color(background).toArray(),
+        });
+    } finally {
+        // Put the markers back at whatever the user's zoom needs and repaint the view.
+        scaleMarkersToZoom();
+    }
+
+    const blob = await new Promise((resolve, reject) => {
+        canvas.toBlob(
+            result => result ? resolve(result) : reject(new Error("exportRegion: canvas.toBlob() failed")),
+            "image/webp",
+            quality
+        );
+    });
+
+    if (blob.type !== "image/webp") {
+        console.warn(`exportRegion: browser encoded ${blob.type} instead of image/webp`);
+    }
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = filename || `map-export_${Math.round(x)}-${Math.round(y)}_${Math.round(width)}x${Math.round(height)}.webp`;
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+
+    return blob;
+}
+
+window.exportRegion = exportRegion;
