@@ -19,18 +19,18 @@ BP_FOLDERS = [
 
 OUTPUT_FOLDER = r"output/"
 PARSE_MAP = [
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
-    #     "output": "map01_components.csv"
-    # },
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
-    #     "output": "map02_components.csv"
-    # },
-    # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
-    #     "output": "map03_components.csv"
-    # },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
+        "output": "map01_components.csv"
+    },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
+        "output": "map02_components.csv"
+    },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
+        "output": "map03_components.csv"
+    },
     {
         "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
         "output": "map00_components.csv"
@@ -254,49 +254,49 @@ def main():
     #     items_csv.reverse()
     #     writer.writerows(items_csv)
     #     print(f"Wrote {len(items_csv)} rows to output/inventory_items.csv")
-    #
+
     # return
 
-    loot_csv_rows = []
-    for root, _, files in os.walk(ITEM_TABLES):
-        print(f"Reading files in {root}...")
-        for file in files:
-            if not file.lower().endswith(".json"):
-                continue
-            full_path = os.path.join(root, file)
-            try:
-                with open(full_path, "r", encoding="utf-8") as f:
-                    objects = json.load(f)
-                    for obj in objects:
-                        type = obj.get("Type")
-                        name = obj.get("Name")
-                        props = obj.get("Properties", {})
-                        if type != "LootItemTable":
-                            print(f"Skipping non-LootItemTable: {type}'{name}'")
-                            continue
-                        weight_sum = props.get("WeightSum", 0)
-                        content = props.get("Content", [])
-                        for item in content:
-                            weight = item.get("Weight", 0)
-                            obj_name = (item.get("Item") or {}).get("ObjectName", "Nothing")
-                            if obj_name:
-                                matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", obj_name)
-                                if matches:
-                                    obj_name = matches.group(2)
-                            print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
-                            loot_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
-            except Exception as e:
-                print(f"Failed to parse {full_path}: {e}")
+    # loot_csv_rows = []
+    # for root, _, files in os.walk(ITEM_TABLES):
+    #     print(f"Reading files in {root}...")
+    #     for file in files:
+    #         if not file.lower().endswith(".json"):
+    #             continue
+    #         full_path = os.path.join(root, file)
+    #         try:
+    #             with open(full_path, "r", encoding="utf-8") as f:
+    #                 objects = json.load(f)
+    #                 for obj in objects:
+    #                     type = obj.get("Type")
+    #                     name = obj.get("Name")
+    #                     props = obj.get("Properties", {})
+    #                     if type != "LootItemTable":
+    #                         print(f"Skipping non-LootItemTable: {type}'{name}'")
+    #                         continue
+    #                     weight_sum = props.get("WeightSum", 0)
+    #                     content = props.get("Content", [])
+    #                     for item in content:
+    #                         weight = item.get("Weight", 0)
+    #                         obj_name = (item.get("Item") or {}).get("ObjectName", "Nothing")
+    #                         if obj_name:
+    #                             matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", obj_name)
+    #                             if matches:
+    #                                 obj_name = matches.group(2)
+    #                         print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
+    #                         loot_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
+    #         except Exception as e:
+    #             print(f"Failed to parse {full_path}: {e}")
+    #
+    # with open("output/loot_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
+    #     writer = csv.writer(csvfile)
+    #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
+    #     loot_csv_rows.sort()
+    #     loot_csv_rows.reverse()
+    #     writer.writerows(loot_csv_rows)
+    #     print(f"Wrote {len(loot_csv_rows)} rows to output/loot_tables.csv")
 
-    with open("output/loot_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
-        writer = csv.writer(csvfile)
-        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
-        loot_csv_rows.sort()
-        loot_csv_rows.reverse()
-        writer.writerows(loot_csv_rows)
-        print(f"Wrote {len(loot_csv_rows)} rows to output/loot_tables.csv")
-
-    return
+    # return
 
     # ai_objects = []
     # for folder in [AI_SPAWNER_TABLES]:
@@ -447,8 +447,8 @@ def main():
     #     ai_csv.reverse()
     #     writer.writerows(ai_csv)
     #     print(f"Wrote {len(ai_csv)} rows to output/ai_tables.csv")
-    #
-    #
+
+
     # return
 
     # nodes_csv_rows = []
@@ -491,7 +491,7 @@ def main():
     #     nodes_csv_rows.reverse()
     #     writer.writerows(nodes_csv_rows)
     #     print(f"Wrote {len(nodes_csv_rows)} rows to output/resource_nodes.csv")
-    #
+
     # return
 
     bp_objects = []
@@ -822,7 +822,6 @@ def main():
         #     vendor_csv.reverse()
         #     writer.writerows(vendor_csv)
         #     print(f"Wrote {len(vendor_csv)} rows to output/vendor_data.csv")
-
 
     print("Done")
 
