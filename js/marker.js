@@ -207,13 +207,15 @@ class Marker {
                             console.error(`Table not found: ${tables[i]}`);
                             continue;
                         }
-                        newTable.push(...table);
+                        newTable.push(...table.map(entry => ({ ...entry })));
                     }
 
-                    newTable = newTable.filter(entry => rarityFilter ? rarityFilter.some(r => {
-                        const item = data.ITEMS[entry.ObjectName];
-                        return item?.Rarity?.includes(r)
-                    }) : true);
+                    if (rarityFilter) {
+                        newTable = newTable.filter(entry => rarityFilter.some(r => {
+                            const item = data.ITEMS[entry.ObjectName];
+                            return item?.Rarity?.includes(r)
+                        }));
+                    }
 
                     let newWeightSum = 0;
                     for (let i = 0; i < newTable.length; i++) {
@@ -748,9 +750,13 @@ class Marker {
 
                 // Greater than 6 silver mark as good
                 if (this.estValue > 600) {
-                    this.#tint = 0xFFD800;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
+                }
+                if (this.estValue > 2000) {
+                    this.#tint = 0xFFD800;
+                    this.#zIndex = 110;
+                    this.#descriptors.push("great");
                 }
                 return;
             }
@@ -829,9 +835,13 @@ class Marker {
 
             // Greater than 6 silver mark as good
             if (this.estValue > 600) {
-                this.#tint = 0xFFD800;
                 this.#zIndex = 100;
                 this.#descriptors.push("good");
+            }
+            if (this.estValue > 2000) {
+                this.#tint = 0xFFD800;
+                this.#zIndex = 110;
+                this.#descriptors.push("great");
             }
 
             return;
