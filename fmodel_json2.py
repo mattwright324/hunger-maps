@@ -486,39 +486,35 @@ def export_resource_nodes():
         writer.writerows(nodes_csv_rows)
         print(f"Wrote {len(nodes_csv_rows)} rows to output/resource_nodes.csv")
 
-def main():
-    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+def export_vendor_tables(bp_objects):
+    resolver = Resolver(bp_objects, "Blueprints")
 
-    # export_loot_tables()
-    # export_ai_tables()
-    # export_inventory_items()
-    # export_resource_nodes()
-    # export_vendor_tables()
+    vendor_csv = []
+    for obj in resolver.by_type.get("VendorData", []):
+        props = obj.get("Properties", {})
+        root_outer_name = obj.get("Outer", {}).get("ObjectName")
+        matches = re.search(r"(\w+)'(\w+)'", root_outer_name)
+        if matches:
+            root_outer_name = matches.group(2)
+        weight_sum = 0
+        for item in props.get("VendorItems", []):
+            weight_sum += item.get("Weight")
+        for item in props.get("VendorItems", []):
+            item_name = item.get("Item", {}).get("ObjectName")
+            matches = re.search(r"(\w+)'(\w+)'", item_name)
+            if matches:
+                item_name = matches.group(2)
+            vendor_csv.append([root_outer_name, item.get("Weight"), weight_sum, 100 * item.get("Weight") / weight_sum, item_name])
 
-    # return
+    with open("output/vendor_data.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
+        vendor_csv.sort()
+        vendor_csv.reverse()
+        writer.writerows(vendor_csv)
+        print(f"Wrote {len(vendor_csv)} rows to output/vendor_data.csv")
 
-    bp_objects = []
-    for bp_folder in BP_FOLDERS:
-        for root, _, files in os.walk(bp_folder):
-            print(f"Reading files in {root}...")
-            for file in files:
-                if not file.lower().endswith(".json"):
-                    continue
-                if file.startswith("LI_"): # Skip blueprint "world" files
-                    continue
-                full_path = os.path.join(root, file)
-                try:
-                    with open(full_path, "r", encoding="utf-8") as f:
-                        objects = json.load(f)
-                        for obj in objects:
-                            obj["SourceFile"] = file
-                    bp_objects.extend(objects)
-                except Exception as e:
-                    print(f"Failed to parse {full_path}: {e}")
-
-    # for type in bp_resolver.by_type:
-    #     print(type, len(bp_resolver.by_type[type]))
-
+def export_map_data(bp_objects):
     for map in PARSE_MAP:
         INPUT_FOLDER = map["folder"]
         OUTPUT_CSV = os.path.join(OUTPUT_FOLDER, map["output"])
@@ -540,9 +536,6 @@ def main():
                     resolver.index_objects(objects, map_folder_name)
                 except Exception as e:
                     print(f"Failed to parse {full_path}: {e}")
-
-        # for type in map_resolver.by_type:
-        #     print(type, len(map_resolver.by_type[type]))
 
         def has_coordinates(obj):
             return obj.get("Properties", {}).get("RelativeLocation", {}).get("X") is not None
@@ -801,30 +794,40 @@ def main():
             writer.writerows(csv_rows)
             print(f"Wrote {len(csv_rows)} rows to {OUTPUT_CSV}")
 
-        # vendor_csv = []
-        # for obj in resolver.by_type.get("VendorData", []):
-        #     props = obj.get("Properties", {})
-        #     root_outer_name = obj.get("Outer", {}).get("ObjectName")
-        #     matches = re.search(r"(\w+)'(\w+)'", root_outer_name)
-        #     if matches:
-        #         root_outer_name = matches.group(2)
-        #     weight_sum = 0
-        #     for item in props.get("VendorItems", []):
-        #         weight_sum += item.get("Weight")
-        #     for item in props.get("VendorItems", []):
-        #         item_name = item.get("Item", {}).get("ObjectName")
-        #         matches = re.search(r"(\w+)'(\w+)'", item_name)
-        #         if matches:
-        #             item_name = matches.group(2)
-        #         vendor_csv.append([root_outer_name, item.get("Weight"), weight_sum, 100 * item.get("Weight") / weight_sum, item_name])
-        #
-        # with open("output/vendor_data.csv", "w", newline="", encoding="utf-8") as csvfile:
-        #     writer = csv.writer(csvfile)
-        #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
-        #     vendor_csv.sort()
-        #     vendor_csv.reverse()
-        #     writer.writerows(vendor_csv)
-        #     print(f"Wrote {len(vendor_csv)} rows to output/vendor_data.csv")
+def get_bp_objects():
+    bp_objects = []
+    for bp_folder in BP_FOLDERS:
+        for root, _, files in os.walk(bp_folder):
+            print(f"Reading files in {root}...")
+            for file in files:
+                if not file.lower().endswith(".json"):
+                    continue
+                if file.startswith("LI_"): # Skip blueprint "world" files
+                    continue
+                full_path = os.path.join(root, file)
+                try:
+                    with open(full_path, "r", encoding="utf-8") as f:
+                        objects = json.load(f)
+                        for obj in objects:
+                            obj["SourceFile"] = file
+                    bp_objects.extend(objects)
+                except Exception as e:
+                    print(f"Failed to parse {full_path}: {e}")
+    # for type in bp_resolver.by_type:
+    #     print(type, len(bp_resolver.by_type[type]))
+    return bp_objects
+
+def main():
+    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+
+    # export_loot_tables()
+    # export_ai_tables()
+    # export_inventory_items()
+    # export_resource_nodes()
+
+    bp_objects = get_bp_objects()
+    # export_vendor_tables(bp_objects)
+    export_map_data(bp_objects)
 
     print("Done")
 
