@@ -39,6 +39,7 @@ const texturePaths = {
     extract: "./img/T_UI_Icon_Extract_64.png",
     stairs: "./img/StairIntegrated.png",
     lantern: "./img/lantern.png",
+    padlock: "./img/padlock.png",
 
     key_bronze: "./img/T_UI_Item_Key_Bronze.png",
     key_silver: "./img/T_UI_Item_Key_Silver.png",

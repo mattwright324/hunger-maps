@@ -83,12 +83,12 @@ SceneComponent,BP_FishCrate_01_c_C,UNP_BP_FishCrate_01_c1_bcb2f72933d94da3_1,-22
 SceneComponent,BP_FishCrate_01_c_C,UNP_BP_FishCrate_01_c_bcb2f72933d94da3_0,-2220.9546,-3963.5007,11116.8955,,,,,,{}
 SceneComponent,BP_FishCrate_02_c_C,UNP_BP_FishCrate_02_c_bcb2f72933d94da3_0,-2208.6184,-3900.2727,11116.8955,,,,,,{}
 SceneComponent,BP_FishCrate_03_b_C,UNP_BP_FishCrate_03_b_bcb2f72933d94da3_0,-2090.6682,-3708.681,11063.234,,,,,,{}
-SceneComponent,BP_Gate_A01_A02_C,BP_Gate_A01_A02_C_UAID_04D9F5F93AD50A5602_1749294116,1715.1162,4024.2595,10900.723,,,,,,{}
-SceneComponent,BP_Gate_A02_A01_C,BP_Gate_A02_A01_C_UAID_04D9F5F93AD50A5602_2144300162,1538.5276,3882.7554,10915.062,,,,,,{}
-SceneComponent,BP_Gate_A02_A03_C,BP_Gate_A02_A03_C_UAID_04D9F5F93AD50B5602_1197880339,-2532.807,-2631.613,11206.655,,,,,,{}
-SceneComponent,BP_Gate_A03_A02_C,BP_Gate_A03_A02_C_UAID_04D9F5F93AD50B5602_1314220340,-2566.4756,-2949.4233,11191.005,,,,,,{}
-SceneComponent,BP_Gate_A03_A04_C,BP_Gate_A03_A04_C_UAID_04D9F5F93AD50B5602_1751312342,-1211.4575,-4848.7983,11184.37,,,,,,{}
-SceneComponent,BP_Gate_A04_A03_C,BP_Gate_A04_A03_C_UAID_04D9F5F93AD50B5602_1511601341,-1050.9564,-4834.4316,11227.636,,,,,,{}
+SceneComponent,BP_Gate_A01_A02_C,BP_Gate_A01_A02_C_UAID_04D9F5F93AD50A5602_1749294116,1715.1162,4024.2595,10900.723,,,,,,"{""area_name"": ""Cauldron"", ""required_quests"": [""Quest.Eloise.Q10""]}"
+SceneComponent,BP_Gate_A02_A01_C,BP_Gate_A02_A01_C_UAID_04D9F5F93AD50A5602_2144300162,1538.5276,3882.7554,10915.062,,,,,,"{""area_name"": ""Outer Ramparts"", ""required_quests"": [""Quest.Eloise.Q01""]}"
+SceneComponent,BP_Gate_A02_A03_C,BP_Gate_A02_A03_C_UAID_04D9F5F93AD50B5602_1197880339,-2532.807,-2631.613,11206.655,,,,,,"{""area_name"": ""The Galleries"", ""required_quests"": [""Quest.Hector.Q04""]}"
+SceneComponent,BP_Gate_A03_A02_C,BP_Gate_A03_A02_C_UAID_04D9F5F93AD50B5602_1314220340,-2566.4756,-2949.4233,11191.005,,,,,,"{""area_name"": ""Cauldron"", ""required_quests"": [""Quest.Hector.Q02""]}"
+SceneComponent,BP_Gate_A03_A04_C,BP_Gate_A03_A04_C_UAID_04D9F5F93AD50B5602_1751312342,-1211.4575,-4848.7983,11184.37,,,,,,"{""area_name"": ""The Heavenly Reaches"", ""required_quests"": [""Quest.Eloise.Q01""]}"
+SceneComponent,BP_Gate_A04_A03_C,BP_Gate_A04_A03_C_UAID_04D9F5F93AD50B5602_1511601341,-1050.9564,-4834.4316,11227.636,,,,,,"{""area_name"": ""The Galleries"", ""required_quests"": [""Quest.Eloise.Q01""]}"
 SceneComponent,BP_HerbsRack_01a_C,BP_HerbsRack_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798212490,-577.3223,-962.6777,11770.0,,,,,,{}
 SceneComponent,BP_HerbsRack_02a_C,BP_HerbsRack_02a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798209489,-771.8629,-852.07104,12070.0,,,,,,{}
 SceneComponent,BP_LevelManager_C,BP_LevelManager_C_1,1280.0,11160.0,10949.127,,,,,,{}

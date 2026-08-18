@@ -19,22 +19,22 @@ BP_FOLDERS = [
 
 OUTPUT_FOLDER = r"output/"
 PARSE_MAP = [
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
-        "output": "map01_components.csv"
-    },
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
-        "output": "map02_components.csv"
-    },
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
-        "output": "map03_components.csv"
-    },
     # {
-    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP",
-    #     "output": "map00_components.csv"
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map01\map01_p_WP",
+    #     "output": "map01_components.csv"
     # },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map02\map02_p_WP",
+    #     "output": "map02_components.csv"
+    # },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
+    #     "output": "map03_components.csv"
+    # },
+    {
+        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP",
+        "output": "map00_components.csv"
+    },
 ]
 
 class Resolver:
@@ -653,6 +653,13 @@ def export_map_data(bp_objects):
                     csv_json["quest_id"] = obj_props.get("QuestId", {}).get("TagName")
                 if "QuestGiver" in obj_props and csv_json.get("quest_giver") is None:
                     csv_json["quest_giver"] = obj_props.get("QuestGiver", {}).get("TagName")
+                if "Requirement" in obj_props and csv_json.get("required_quests") is None:
+                    csv_json["area_name"] = obj_props.get("AreaName")
+                    if "RequiredQuests" in obj_props.get("Requirement", {}):
+                        required_quests = []
+                        for quest in obj_props.get("Requirement", {}).get("RequiredQuests", []):
+                            required_quests.append(quest.get("TagName"))
+                        csv_json["required_quests"] = required_quests
                 if "InteractionText" in obj_props and csv_json.get("interaction") is None:
                     csv_json["interaction"] = obj_props.get("InteractionText", {}).get("SourceString")
                 if "ObjectiveInstruction" in obj_props and csv_json.get("instruction") is None:

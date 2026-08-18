@@ -412,6 +412,9 @@ class Marker {
         } else if (this.#row.OuterType.includes("Trap_Ground_Poison")) {
             this.#row.DisplayName = "Trap (Pressure, Poison)";
         }
+        if (this.#row.OuterType.includes("Gate_A")) {
+            this.#row.DisplayName = "Gate (to " + this.#row.CsvJson.area_name + ")";
+        }
         let aiSpawner = this.#row.AISpawner;
         if (aiSpawner) {
             this.#row.AISpawner2 = this.#makeReadable(aiSpawner.replace(/DA_AISpawner_(\w+)/g, "$1"));
@@ -617,6 +620,9 @@ class Marker {
         if (this.#row?.CsvJson?.keyed) {
             rows.push(this.#itemRow("Locked", this.#row.CsvJson.keyed))
         }
+        if (this.#row?.CsvJson?.required_quests) {
+            rows.push(`<tr><td><strong>Requirements</strong></td><td>${this.#row.CsvJson.required_quests.join("<br>")}</td></tr>`)
+        }
         const lootSource = this.#row.LootSource;
         if (lootSource) {
             const lootSourceMap = data.DT_LootSources[lootSource];
@@ -816,6 +822,12 @@ class Marker {
 
                     return;
                 }
+            }
+        } else {
+            if (this.#row.OuterType.includes("Gate")) {
+                this.#class = "environment";
+                sprite.texture = textures.padlock;
+                this.#zIndex = 50;
             }
         }
 
