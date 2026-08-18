@@ -31,10 +31,10 @@ PARSE_MAP = [
         "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Map03\map03_p_WP",
         "output": "map03_components.csv"
     },
-    {
-        "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP\_Generated_",
-        "output": "map00_components.csv"
-    },
+    # {
+    #     "folder": r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Levels\Chateau\Chateau_p_WP",
+    #     "output": "map00_components.csv"
+    # },
 ]
 
 class Resolver:
@@ -179,318 +179,321 @@ def contains_string(obj, needle):
         return True
     return False
 
+def export_inventory_items():
+    item_objects = []
+    for folder in [INVENTORY_DEFS, SMART_BRUSHES]:
+        for root, _, files in os.walk(folder):
+            print(f"Reading files in {root}...")
+            for file in files:
+                if not file.lower().endswith(".json"):
+                    continue
+                if file.startswith("LI_"): # Skip blueprint "world" files
+                    continue
+                full_path = os.path.join(root, file)
+                try:
+                    with open(full_path, "r", encoding="utf-8") as f:
+                        objects = json.load(f)
+                        for obj in objects:
+                            obj["SourceFile"] = file
+                    item_objects.extend(objects)
+                except Exception as e:
+                    print(f"Failed to parse {full_path}: {e}")
+    item_resolver = Resolver(item_objects, "Inventory")
+    brushes = {}
+    for obj in item_resolver.by_name["DT_SmartBrushes_Inventory"] + item_resolver.by_name["DT_SmartBrushes_Weapons"]:
+        for item_tag in obj.get("Rows", {}):
+            item_obj = obj.get("Rows")[item_tag].get("Default", {}).get("Default", {})
+            image = item_obj.get("Image", {}).get("AssetPathName")
+            if image:
+                matches = re.search(r"(?:/.*\.)?(\w+)(?:[:.]\w+)?", image)
+                if matches:
+                    image = matches.group(1)
+                brushes[item_tag] = image
+            else:
+                print(f"No image for {item_tag}")
+    items_csv = []
+    for obj_type in item_resolver.by_type:
+        for obj in item_resolver.by_type[obj_type]:
+            if obj_type == "DataTable":
+                continue
+            type = obj.get("Type")
+            name = obj.get("Name")
+            props = obj.get("Properties", {})
+
+            value = props.get("Value")
+            rarity = props.get("Rarity", {}).get("TagName")
+            capacity = props.get("Capacity")
+            max_stack_size = props.get("MaxStackSize")
+            loot_gen_min = props.get("LootGenerationMin")
+            loot_gen_max = props.get("LootGenerationMax")
+            display_name = props.get("DisplayName", {}).get("SourceString")
+
+            icon_src = None
+            icon = None
+            brush = props.get("BrushSetID", {}).get("ItemName")
+            for key in props:
+                if "Icon" in key:
+                    icon = props.get(key).get("AssetPathName")
+                    icon_src = "Def"
+                    matches = re.search(r"(?:/.*\.)?(\w+)(?:[:.]\w+)?", icon)
+                    if matches:
+                        icon = matches.group(1)
+                    break
+            if brush and brush in brushes:
+                icon = brushes[brush]
+                icon_src = "Smart Brush"
+
+            items_csv.append([type, name, brush, icon, icon_src, display_name, value, rarity, capacity, max_stack_size, loot_gen_min, loot_gen_max])
+
+    with open("output/inventory_items.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["ItemType", "ItemName", "BrushID", "Icon", "IconSrc", "DisplayName", "Value", "Rarity", "Capacity", "MaxStackSize", "LootGenMin", "LootGenMax"])
+        items_csv.sort()
+        items_csv.reverse()
+        writer.writerows(items_csv)
+        print(f"Wrote {len(items_csv)} rows to output/inventory_items.csv")
+
+def export_loot_tables():
+    loot_csv_rows = []
+    for root, _, files in os.walk(ITEM_TABLES):
+        print(f"Reading files in {root}...")
+        for file in files:
+            if not file.lower().endswith(".json"):
+                continue
+            full_path = os.path.join(root, file)
+            try:
+                with open(full_path, "r", encoding="utf-8") as f:
+                    objects = json.load(f)
+                    for obj in objects:
+                        type = obj.get("Type")
+                        name = obj.get("Name")
+                        props = obj.get("Properties", {})
+                        if type != "LootItemTable":
+                            print(f"Skipping non-LootItemTable: {type}'{name}'")
+                            continue
+                        weight_sum = props.get("WeightSum", 0)
+                        content = props.get("Content", [])
+                        for item in content:
+                            weight = item.get("Weight", 0)
+                            obj_name = (item.get("Item") or {}).get("ObjectName", "Nothing")
+                            if obj_name:
+                                matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", obj_name)
+                                if matches:
+                                    obj_name = matches.group(2)
+                            print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
+                            loot_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
+            except Exception as e:
+                print(f"Failed to parse {full_path}: {e}")
+
+    with open("output/loot_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
+        loot_csv_rows.sort()
+        loot_csv_rows.reverse()
+        writer.writerows(loot_csv_rows)
+        print(f"Wrote {len(loot_csv_rows)} rows to output/loot_tables.csv")
+
+def export_ai_tables():
+    ai_objects = []
+    for folder in [AI_SPAWNER_TABLES]:
+        for root, _, files in os.walk(folder):
+            print(f"Reading files in {root}...")
+            for file in files:
+                if not file.lower().endswith(".json"):
+                    continue
+                if file.startswith("LI_"): # Skip blueprint "world" files
+                    continue
+                full_path = os.path.join(root, file)
+                try:
+                    with open(full_path, "r", encoding="utf-8") as f:
+                        objects = json.load(f)
+                        for obj in objects:
+                            obj["SourceFile"] = file
+                    ai_objects.extend(objects)
+                except Exception as e:
+                    print(f"Failed to parse {full_path}: {e}")
+    ai_resolver = Resolver(ai_objects, "AI")
+
+    ai_csv = []
+    for root_obj in ai_resolver.by_type.get("AISpawnerConfigSet") or []:
+        type = root_obj.get("Type")
+        name = root_obj.get("Name")
+        props = root_obj.get("Properties", {})
+        chances = props.get("SpawnChances", [])
+        weight_sum = 0
+        for item in chances:
+            obj_name = item.get("Key", "0")
+            if obj_name:
+                matches = re.search(r"(\w+)'(?:/.*\.)?(\w+)(?:[:.]\w+)?'", obj_name)
+                if matches:
+                    obj_name = matches.group(2)
+            if obj_name == "0":
+                obj_name = "Nothing"
+            item["Key"] = obj_name
+
+            weight = item.get("Value", 0)
+            weight_sum += weight
+
+            read_hash = random.getrandbits(128)
+            read_count = 0
+            read = []
+
+            display_name = None
+            loot_source = None
+            def walk_props(obj, parent=None, depth=0, search_text=None):
+                nonlocal read_count, read
+                nonlocal display_name, loot_source
+
+                if depth > 30:
+                    return
+
+                if obj.get("ReadHash") == read_hash:
+                    return
+                obj["ReadHash"] = read_hash
+                read_count += 1
+                read.append(f"{depth} {parent} {obj.get("SourceFolder")}/{obj.get("SourceFile")} {search_text} {obj.get('Type')}'{obj.get("Name")}'")
+
+                obj_props = obj.get("Properties", {})
+
+                if "DisplayName" in obj_props and not display_name:
+                    display_name = obj_props.get("DisplayName", {}).get("SourceString")
+                if "LootSource" in obj_props and not loot_source:
+                    loot_source = obj_props.get("LootSource")
+                if "LootSourceID" in obj_props and not loot_source:
+                    loot_source = obj_props.get("LootSourceID")
+
+                ### Look for more linked objects
+
+                for obj2 in ai_resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
+                    walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))
+
+                # Get spawn chance here first (custom)
+                if obj.get("CustomOuterName"):
+                    for obj2 in ai_resolver.resolve_all(obj.get("CustomOuterName")) or []:
+                        walk_props(obj2, "CustomOuterName", depth + 1, obj.get("CustomOuterName"))
+
+                if obj.get("CustomOuterType") and "Component" not in obj.get("CustomOuterType"):
+                    for obj2 in ai_resolver.resolve_all(obj.get("CustomOuterType")) or []:
+                        walk_props(obj2, "CustomOuterType", depth + 1, obj.get("CustomOuterType"))
+
+                custom_outer_full = f"{obj.get("Type")}'{obj.get("Name")}'"
+                for obj2 in ai_resolver.resolve_all(custom_outer_full):
+                    walk_props(obj2, "CustomOuterFull", depth + 1, custom_outer_full)
+
+                if "Component" not in obj.get("Type"):
+                    for obj2 in ai_resolver.by_target_name.get(obj.get("Type"), []):
+                        walk_props(obj2, "Type", depth + 1, obj.get("Type"))
+
+                if "Template" in obj:
+                    template_full = obj.get("Template", {}).get("ObjectName")
+                    for obj2 in ai_resolver.resolve_all(template_full) or []:
+                        walk_props(obj2, "TemplateFull", depth + 1, template_full)
+
+                if obj.get("Class", "").startswith("BlueprintGeneratedClass"):
+                    for bp in ai_resolver.resolve_all(obj.get("Class")) or []:
+                        if bp.get("SourceFolder") != 'Blueprints':
+                            continue
+                        walk_props(bp, "ClassBP", depth + 1, obj.get("Class"))
+
+                for key in obj_props:
+                    if isinstance(obj_props.get(key), dict) and "ObjectName" in obj_props.get(key):
+                        prop_obj_name = obj_props.get(key).get("ObjectName")
+                        matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", prop_obj_name)
+                        if matches:
+                            prop_type = matches.group(1)
+                            prop_name = matches.group(2)
+
+                            if prop_type == "BlueprintGeneratedClass":
+                                for bp in ai_resolver.by_outer_full.get(prop_obj_name, []):
+                                    if bp.get("SourceFolder") != 'Blueprints':
+                                        continue
+                                    walk_props(bp, "PropFullBP", depth + 1, prop_obj_name)
+                                for bp in ai_resolver.by_type.get(prop_name, []):
+                                    if bp.get("SourceFolder") != 'Blueprints':
+                                        continue
+                                    walk_props(bp, "PropBP", depth + 1, prop_name)
+                            else:
+                                for obj2 in ai_resolver.resolve_all(prop_name) or []:
+                                    walk_props(obj2, "PropName", depth + 1, prop_name)
+
+            if obj_name != "Nothing":
+                print(f"Walking {obj_name}...")
+                for spawner_obj in ai_resolver.resolve_all(obj_name):
+                    walk_props(spawner_obj, "Spawner", 0)
+
+            item["DisplayName"] = display_name
+            item["LootSource"] = loot_source
+
+        for item in chances:
+            weight = item.get("Value", 0)
+            obj_name = item.get("Key")
+            display_name = item.get("DisplayName")
+            loot_source = item.get("LootSource")
+
+            row = [name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name, display_name, loot_source]
+            print(row)
+            print(read_count, read)
+            print()
+            ai_csv.append(row)
+
+    with open("output/ai_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName", "DisplayName", "LootSource"])
+        ai_csv.sort()
+        ai_csv.reverse()
+        writer.writerows(ai_csv)
+        print(f"Wrote {len(ai_csv)} rows to output/ai_tables.csv")
+
+def export_resource_nodes():
+    nodes_csv_rows = []
+    for root, _, files in os.walk(RESOURCE_NODES):
+        print(f"Reading files in {root}...")
+        for file in files:
+            if not file.lower().endswith(".json"):
+                continue
+            full_path = os.path.join(root, file)
+            try:
+                with open(full_path, "r", encoding="utf-8") as f:
+                    objects = json.load(f)
+                    for obj in objects:
+                        type = obj.get("Type")
+                        name = obj.get("Name")
+                        rows = obj.get("Rows", [])
+                        for resource_key in rows:
+                            row = rows[resource_key]
+                            required_level = row.get("RequiredLevel")
+                            spawn_chance = row.get("ChanceToSpawn")
+                            display_name = row.get("DisplayName", {}).get("SourceString")
+                            item = row.get("Item", {}).get("ObjectName")
+
+                            matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", item)
+                            if matches:
+                                item = matches.group(2)
+
+                            min_amount = row.get("Quantities", {}).get("X")
+                            max_amount = row.get("Quantities", {}).get("Y")
+
+                            nodes_csv_rows.append([resource_key, required_level, spawn_chance, display_name, item, min_amount, max_amount])
+
+            except Exception as e:
+                print(f"Failed to parse {full_path}: {e}")
+
+    with open("output/resource_nodes.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["ResourceKey", "RequiredLevel", "SpawnChance", "DisplayName", "Item", "MinAmount", "MaxAmount"])
+        nodes_csv_rows.sort()
+        nodes_csv_rows.reverse()
+        writer.writerows(nodes_csv_rows)
+        print(f"Wrote {len(nodes_csv_rows)} rows to output/resource_nodes.csv")
+
 def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-    # item_objects = []
-    # for folder in [INVENTORY_DEFS, SMART_BRUSHES]:
-    #     for root, _, files in os.walk(folder):
-    #         print(f"Reading files in {root}...")
-    #         for file in files:
-    #             if not file.lower().endswith(".json"):
-    #                 continue
-    #             if file.startswith("LI_"): # Skip blueprint "world" files
-    #                 continue
-    #             full_path = os.path.join(root, file)
-    #             try:
-    #                 with open(full_path, "r", encoding="utf-8") as f:
-    #                     objects = json.load(f)
-    #                     for obj in objects:
-    #                         obj["SourceFile"] = file
-    #                 item_objects.extend(objects)
-    #             except Exception as e:
-    #                 print(f"Failed to parse {full_path}: {e}")
-    # item_resolver = Resolver(item_objects, "Inventory")
-    # brushes = {}
-    # for obj in item_resolver.by_name["DT_SmartBrushes_Inventory"] + item_resolver.by_name["DT_SmartBrushes_Weapons"]:
-    #     for item_tag in obj.get("Rows", {}):
-    #         item_obj = obj.get("Rows")[item_tag].get("Default", {}).get("Default", {})
-    #         image = item_obj.get("Image", {}).get("AssetPathName")
-    #         if image:
-    #             matches = re.search(r"(?:/.*\.)?(\w+)(?:[:.]\w+)?", image)
-    #             if matches:
-    #                 image = matches.group(1)
-    #             brushes[item_tag] = image
-    #         else:
-    #             print(f"No image for {item_tag}")
-    # items_csv = []
-    # for obj_type in item_resolver.by_type:
-    #     for obj in item_resolver.by_type[obj_type]:
-    #         if obj_type == "DataTable":
-    #             continue
-    #         type = obj.get("Type")
-    #         name = obj.get("Name")
-    #         props = obj.get("Properties", {})
-    #
-    #         value = props.get("Value")
-    #         rarity = props.get("Rarity", {}).get("TagName")
-    #         capacity = props.get("Capacity")
-    #         max_stack_size = props.get("MaxStackSize")
-    #         loot_gen_min = props.get("LootGenerationMin")
-    #         loot_gen_max = props.get("LootGenerationMax")
-    #         display_name = props.get("DisplayName", {}).get("SourceString")
-    #
-    #         icon_src = None
-    #         icon = None
-    #         brush = props.get("BrushSetID", {}).get("ItemName")
-    #         for key in props:
-    #             if "Icon" in key:
-    #                 icon = props.get(key).get("AssetPathName")
-    #                 icon_src = "Def"
-    #                 matches = re.search(r"(?:/.*\.)?(\w+)(?:[:.]\w+)?", icon)
-    #                 if matches:
-    #                     icon = matches.group(1)
-    #                 break
-    #         if brush and brush in brushes:
-    #             icon = brushes[brush]
-    #             icon_src = "Smart Brush"
-    #
-    #         items_csv.append([type, name, brush, icon, icon_src, display_name, value, rarity, capacity, max_stack_size, loot_gen_min, loot_gen_max])
-    #
-    # with open("output/inventory_items.csv", "w", newline="", encoding="utf-8") as csvfile:
-    #     writer = csv.writer(csvfile)
-    #     writer.writerow(["ItemType", "ItemName", "BrushID", "Icon", "IconSrc", "DisplayName", "Value", "Rarity", "Capacity", "MaxStackSize", "LootGenMin", "LootGenMax"])
-    #     items_csv.sort()
-    #     items_csv.reverse()
-    #     writer.writerows(items_csv)
-    #     print(f"Wrote {len(items_csv)} rows to output/inventory_items.csv")
-
-    # return
-
-    # loot_csv_rows = []
-    # for root, _, files in os.walk(ITEM_TABLES):
-    #     print(f"Reading files in {root}...")
-    #     for file in files:
-    #         if not file.lower().endswith(".json"):
-    #             continue
-    #         full_path = os.path.join(root, file)
-    #         try:
-    #             with open(full_path, "r", encoding="utf-8") as f:
-    #                 objects = json.load(f)
-    #                 for obj in objects:
-    #                     type = obj.get("Type")
-    #                     name = obj.get("Name")
-    #                     props = obj.get("Properties", {})
-    #                     if type != "LootItemTable":
-    #                         print(f"Skipping non-LootItemTable: {type}'{name}'")
-    #                         continue
-    #                     weight_sum = props.get("WeightSum", 0)
-    #                     content = props.get("Content", [])
-    #                     for item in content:
-    #                         weight = item.get("Weight", 0)
-    #                         obj_name = (item.get("Item") or {}).get("ObjectName", "Nothing")
-    #                         if obj_name:
-    #                             matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", obj_name)
-    #                             if matches:
-    #                                 obj_name = matches.group(2)
-    #                         print(f"{file} {name} {weight} {weight_sum} {weight / weight_sum} {obj_name}")
-    #                         loot_csv_rows.append([name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name])
-    #         except Exception as e:
-    #             print(f"Failed to parse {full_path}: {e}")
-    #
-    # with open("output/loot_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
-    #     writer = csv.writer(csvfile)
-    #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName"])
-    #     loot_csv_rows.sort()
-    #     loot_csv_rows.reverse()
-    #     writer.writerows(loot_csv_rows)
-    #     print(f"Wrote {len(loot_csv_rows)} rows to output/loot_tables.csv")
-
-    # return
-
-    # ai_objects = []
-    # for folder in [AI_SPAWNER_TABLES]:
-    #     for root, _, files in os.walk(folder):
-    #         print(f"Reading files in {root}...")
-    #         for file in files:
-    #             if not file.lower().endswith(".json"):
-    #                 continue
-    #             if file.startswith("LI_"): # Skip blueprint "world" files
-    #                 continue
-    #             full_path = os.path.join(root, file)
-    #             try:
-    #                 with open(full_path, "r", encoding="utf-8") as f:
-    #                     objects = json.load(f)
-    #                     for obj in objects:
-    #                         obj["SourceFile"] = file
-    #                 ai_objects.extend(objects)
-    #             except Exception as e:
-    #                 print(f"Failed to parse {full_path}: {e}")
-    # ai_resolver = Resolver(ai_objects, "AI")
-    #
-    # ai_csv = []
-    # for root_obj in ai_resolver.by_type.get("AISpawnerConfigSet") or []:
-    #     type = root_obj.get("Type")
-    #     name = root_obj.get("Name")
-    #     props = root_obj.get("Properties", {})
-    #     chances = props.get("SpawnChances", [])
-    #     weight_sum = 0
-    #     for item in chances:
-    #         obj_name = item.get("Key", "0")
-    #         if obj_name:
-    #             matches = re.search(r"(\w+)'(?:/.*\.)?(\w+)(?:[:.]\w+)?'", obj_name)
-    #             if matches:
-    #                 obj_name = matches.group(2)
-    #         if obj_name == "0":
-    #             obj_name = "Nothing"
-    #         item["Key"] = obj_name
-    #
-    #         weight = item.get("Value", 0)
-    #         weight_sum += weight
-    #
-    #         read_hash = random.getrandbits(128)
-    #         read_count = 0
-    #         read = []
-    #
-    #         display_name = None
-    #         loot_source = None
-    #         def walk_props(obj, parent=None, depth=0, search_text=None):
-    #             nonlocal read_count, read
-    #             nonlocal display_name, loot_source
-    #
-    #             if depth > 30:
-    #                 return
-    #
-    #             if obj.get("ReadHash") == read_hash:
-    #                 return
-    #             obj["ReadHash"] = read_hash
-    #             read_count += 1
-    #             read.append(f"{depth} {parent} {obj.get("SourceFolder")}/{obj.get("SourceFile")} {search_text} {obj.get('Type')}'{obj.get("Name")}'")
-    #
-    #             obj_props = obj.get("Properties", {})
-    #
-    #             if "DisplayName" in obj_props and not display_name:
-    #                 display_name = obj_props.get("DisplayName", {}).get("SourceString")
-    #             if "LootSource" in obj_props and not loot_source:
-    #                 loot_source = obj_props.get("LootSource")
-    #             if "LootSourceID" in obj_props and not loot_source:
-    #                 loot_source = obj_props.get("LootSourceID")
-    #
-    #             ### Look for more linked objects
-    #
-    #             for obj2 in ai_resolver.by_outer_full.get(obj.get("Outer", {}).get("ObjectName"), []):
-    #                 walk_props(obj2, "OuterNameFull", depth + 1, obj.get("Outer", {}).get("ObjectName"))
-    #
-    #             # Get spawn chance here first (custom)
-    #             if obj.get("CustomOuterName"):
-    #                 for obj2 in ai_resolver.resolve_all(obj.get("CustomOuterName")) or []:
-    #                     walk_props(obj2, "CustomOuterName", depth + 1, obj.get("CustomOuterName"))
-    #
-    #             if obj.get("CustomOuterType") and "Component" not in obj.get("CustomOuterType"):
-    #                 for obj2 in ai_resolver.resolve_all(obj.get("CustomOuterType")) or []:
-    #                     walk_props(obj2, "CustomOuterType", depth + 1, obj.get("CustomOuterType"))
-    #
-    #             custom_outer_full = f"{obj.get("Type")}'{obj.get("Name")}'"
-    #             for obj2 in ai_resolver.resolve_all(custom_outer_full):
-    #                 walk_props(obj2, "CustomOuterFull", depth + 1, custom_outer_full)
-    #
-    #             if "Component" not in obj.get("Type"):
-    #                 for obj2 in ai_resolver.by_target_name.get(obj.get("Type"), []):
-    #                     walk_props(obj2, "Type", depth + 1, obj.get("Type"))
-    #
-    #             if "Template" in obj:
-    #                 template_full = obj.get("Template", {}).get("ObjectName")
-    #                 for obj2 in ai_resolver.resolve_all(template_full) or []:
-    #                     walk_props(obj2, "TemplateFull", depth + 1, template_full)
-    #
-    #             if obj.get("Class", "").startswith("BlueprintGeneratedClass"):
-    #                 for bp in ai_resolver.resolve_all(obj.get("Class")) or []:
-    #                     if bp.get("SourceFolder") != 'Blueprints':
-    #                         continue
-    #                     walk_props(bp, "ClassBP", depth + 1, obj.get("Class"))
-    #
-    #             for key in obj_props:
-    #                 if isinstance(obj_props.get(key), dict) and "ObjectName" in obj_props.get(key):
-    #                     prop_obj_name = obj_props.get(key).get("ObjectName")
-    #                     matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", prop_obj_name)
-    #                     if matches:
-    #                         prop_type = matches.group(1)
-    #                         prop_name = matches.group(2)
-    #
-    #                         if prop_type == "BlueprintGeneratedClass":
-    #                             for bp in ai_resolver.by_outer_full.get(prop_obj_name, []):
-    #                                 if bp.get("SourceFolder") != 'Blueprints':
-    #                                     continue
-    #                                 walk_props(bp, "PropFullBP", depth + 1, prop_obj_name)
-    #                             for bp in ai_resolver.by_type.get(prop_name, []):
-    #                                 if bp.get("SourceFolder") != 'Blueprints':
-    #                                     continue
-    #                                 walk_props(bp, "PropBP", depth + 1, prop_name)
-    #                         else:
-    #                             for obj2 in ai_resolver.resolve_all(prop_name) or []:
-    #                                 walk_props(obj2, "PropName", depth + 1, prop_name)
-    #
-    #         if obj_name != "Nothing":
-    #             print(f"Walking {obj_name}...")
-    #             for spawner_obj in ai_resolver.resolve_all(obj_name):
-    #                 walk_props(spawner_obj, "Spawner", 0)
-    #
-    #         item["DisplayName"] = display_name
-    #         item["LootSource"] = loot_source
-    #
-    #     for item in chances:
-    #         weight = item.get("Value", 0)
-    #         obj_name = item.get("Key")
-    #         display_name = item.get("DisplayName")
-    #         loot_source = item.get("LootSource")
-    #
-    #         row = [name, weight, weight_sum, '%.4f'%(100 * (weight / weight_sum)), obj_name, display_name, loot_source]
-    #         print(row)
-    #         print(read_count, read)
-    #         print()
-    #         ai_csv.append(row)
-    #
-    # with open("output/ai_tables.csv", "w", newline="", encoding="utf-8") as csvfile:
-    #     writer = csv.writer(csvfile)
-    #     writer.writerow(["TableName", "Weight", "WeightSum", "WeightPercent", "ObjectName", "DisplayName", "LootSource"])
-    #     ai_csv.sort()
-    #     ai_csv.reverse()
-    #     writer.writerows(ai_csv)
-    #     print(f"Wrote {len(ai_csv)} rows to output/ai_tables.csv")
-
-
-    # return
-
-    # nodes_csv_rows = []
-    # for root, _, files in os.walk(RESOURCE_NODES):
-    #     print(f"Reading files in {root}...")
-    #     for file in files:
-    #         if not file.lower().endswith(".json"):
-    #             continue
-    #         full_path = os.path.join(root, file)
-    #         try:
-    #             with open(full_path, "r", encoding="utf-8") as f:
-    #                 objects = json.load(f)
-    #                 for obj in objects:
-    #                     type = obj.get("Type")
-    #                     name = obj.get("Name")
-    #                     rows = obj.get("Rows", [])
-    #                     for resource_key in rows:
-    #                         row = rows[resource_key]
-    #                         required_level = row.get("RequiredLevel")
-    #                         spawn_chance = row.get("ChanceToSpawn")
-    #                         display_name = row.get("DisplayName", {}).get("SourceString")
-    #                         item = row.get("Item", {}).get("ObjectName")
-    #
-    #                         matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", item)
-    #                         if matches:
-    #                             item = matches.group(2)
-    #
-    #                         min_amount = row.get("Quantities", {}).get("X")
-    #                         max_amount = row.get("Quantities", {}).get("Y")
-    #
-    #                         nodes_csv_rows.append([resource_key, required_level, spawn_chance, display_name, item, min_amount, max_amount])
-    #
-    #         except Exception as e:
-    #             print(f"Failed to parse {full_path}: {e}")
-    #
-    # with open("output/resource_nodes.csv", "w", newline="", encoding="utf-8") as csvfile:
-    #     writer = csv.writer(csvfile)
-    #     writer.writerow(["ResourceKey", "RequiredLevel", "SpawnChance", "DisplayName", "Item", "MinAmount", "MaxAmount"])
-    #     nodes_csv_rows.sort()
-    #     nodes_csv_rows.reverse()
-    #     writer.writerows(nodes_csv_rows)
-    #     print(f"Wrote {len(nodes_csv_rows)} rows to output/resource_nodes.csv")
+    # export_loot_tables()
+    # export_ai_tables()
+    # export_inventory_items()
+    # export_resource_nodes()
+    # export_vendor_tables()
 
     # return
 
@@ -753,7 +756,7 @@ def main():
 
             # Usually indicates a problem with filtering resolved things
             # if read_count > 100:
-            if "Extractors" in root_obj.get("CustomOuterType"):
+            if "Town_0" in root_obj.get("CustomOuterType"):
                 print(f"{read}")
                 print(f"{read_count} {row}")
                 print()
