@@ -92,9 +92,11 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
             if (!(marker.row.LootSource || "container" === marker.class)) return;
             return data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown"
         }, lootTable => {
-            const first = markers.filter(marker => data.DT_LootSources[marker.row.LootSource]?.["LootTable"] === lootTable)?.[0];
-            if (first && first.estValue) {
-                return `<span class="text">${lootTable}</span> <small class="text-muted">Avg: ${first.formatCoins(first.estValue)}</small>`;
+            const largest = markers
+                .filter(marker => data.DT_LootSources[marker.row.LootSource]?.["LootTable"] === lootTable)
+                .sort((a, b) => (Number(b.estValue) || 0) - (Number(a.estValue) || 0))[0];
+            if (largest && largest.estValue) {
+                return `<span class="text">${lootTable}</span> <small class="text-muted">Avg: ${largest.formatCoins(largest.estValue)}</small>`;
             } else {
                 return lootTable;
             }
@@ -103,9 +105,11 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
         loadMultiselectClass(controls.npcSelect, "npc");
         //loadMultiselectClass(controls.lootSelect, "container");
         loadMultiselectClass(controls.looseSelect, "loose", looseName => {
-            const first = markers.filter(marker => marker.readable.displayName === looseName)?.[0];
-            if (first && first.estValue) {
-                return `<span class="text">${looseName}</span> <small class="text-muted">Avg: ${first.formatCoins(first.estValue)}</small>`;
+            const largest = markers
+                .filter(marker => marker.readable.displayName === looseName)
+                .sort((a, b) => (Number(b.estValue) || 0) - (Number(a.estValue) || 0))[0];
+            if (largest && largest.estValue) {
+                return `<span class="text">${looseName}</span> <small class="text-muted">Avg: ${largest.formatCoins(largest.estValue)}</small>`;
             } else {
                 return looseName;
             }
