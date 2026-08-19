@@ -827,6 +827,7 @@ class Marker {
             if (this.#row.OuterType.includes("Gate")) {
                 this.#class = "environment";
                 sprite.texture = textures.padlock;
+                this.#tint = 0xff7c7c;
                 this.#zIndex = 50;
             }
         }
