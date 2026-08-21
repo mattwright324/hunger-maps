@@ -192,8 +192,9 @@ body {
 }
 .loot-percent {
     flex: 0 0 auto;
-    width: 48px;
-    text-align: right;
+    width: 58px;
+    text-align: center;
+    font-weight: bold;
     white-space: nowrap;
 }
 .loot-item {

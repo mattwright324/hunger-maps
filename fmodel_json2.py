@@ -6,6 +6,8 @@ import random
 
 AI_SPAWNER_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\AI"
 ITEM_TABLES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Loot\ItemTables"
+LOOT_SOURCES_JSON = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Loot\DT_LootSources.json"
+LOOT_TABLES_JSON = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Loot\DT_LootTables.json"
 SMART_BRUSHES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\UI\Styling\Brushes"
 INVENTORY_DEFS = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Inventory\Definitions"
 RESOURCE_NODES = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content\Data\Resources\Nodes"
@@ -292,6 +294,36 @@ def export_loot_tables():
         loot_csv_rows.reverse()
         writer.writerows(loot_csv_rows)
         print(f"Wrote {len(loot_csv_rows)} rows to output/loot_tables.csv")
+
+def export_loot_sources():
+    loot_sources = None
+    loot_tables = None
+    with open(LOOT_SOURCES_JSON, "r", encoding="utf-8") as f:
+        loot_sources = json.load(f)
+    with open(LOOT_TABLES_JSON, "r", encoding="utf-8") as f:
+        loot_tables = json.load(f)
+
+    tables = loot_tables.get("tables", {})
+    sources = loot_sources[0].get("Rows", {})
+
+    csv_rows = []
+    for source_name in sources:
+        source = sources[source_name]
+        item_tables = tables.get(source.get("LootTable"), {})
+        if item_tables:
+            for table in item_tables.get("entries", []):
+                csv_rows.append([source_name, source.get("MinEntries"), source.get("MaxEntries"), source.get("LootTable"), table.get("item_table"), table.get("weight"), item_tables.get("weight_sum"), table.get("pct"), table.get("always_spawn")])
+        else:
+            csv_rows.append([source_name, source.get("MinEntries"), source.get("MaxEntries"), source.get("LootTable"), None, 100, 100, 100, None])
+
+    with open("output/loot_sources.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["SourceName", "MinEntries", "MaxEntries", "LootTable", "TableName", "Weight", "WeightSum", "WeightPercent", "AlwaysSpawn"])
+        csv_rows.sort()
+        csv_rows.reverse()
+        writer.writerows(csv_rows)
+        print(f"Wrote {len(csv_rows)} rows to output/loot_sources.csv")
+
 
 def export_ai_tables():
     ai_objects = []
@@ -827,14 +859,15 @@ def get_bp_objects():
 def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
+    export_loot_sources()
     # export_loot_tables()
     # export_ai_tables()
     # export_inventory_items()
     # export_resource_nodes()
 
-    bp_objects = get_bp_objects()
+    # bp_objects = get_bp_objects()
     # export_vendor_tables(bp_objects)
-    export_map_data(bp_objects)
+    # export_map_data(bp_objects)
 
     print("Done")
 

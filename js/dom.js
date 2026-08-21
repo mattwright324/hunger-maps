@@ -87,8 +87,9 @@ const dom_load = async () => {
     controls.showOverlay = document.getElementById("showOverlay");
     controls.searchBox = document.getElementById("searchBox");
     controls.checkShowOnlyMatches = document.getElementById("showOnlyMatches");
-    controls.includeLootItems = document.getElementById("includeLootItems");
+    controls.includeChanceItems = document.getElementById("includeChanceItems");
     controls.chanceRange = document.getElementById("table-chance-range");
+    controls.filterChanceItems = document.getElementById("filterChanceItems");
     elements.divChanceRange = document.getElementById("rangeValue");
     controls.enableHeightFilter = document.getElementById("filterZrange");
     controls.sliderHeight = document.getElementById("zRange");

@@ -41,6 +41,7 @@ document.addEventListener('pointerup', e => {
 });
 
 function encodeHTML(str) {
+    if (!str) return ""
     const map = {
         '&': '&amp;',
         '<': '&lt;',
@@ -49,21 +50,6 @@ function encodeHTML(str) {
         "'": '&#039;'
     };
     return str.replace(/[&<>"']/g, function(m) { return map[m]; });
-}
-
-// AISpawner loot sources that point at a monster whose own drops live in another table
-const hungerTableLookup = {
-    "HighClassCiv_Small": "LIT_HighClassCiv", // Guessing
-    "Hunger_Biter": "LIT_Biter_01",
-    "Hunger_Biter_Elite": "LIT_Biter_Elite",
-    "Hunger_Bloat": "LIT_Bloat_01",
-    "Hunger_Brute": "LIT_Brute_01",
-    "Hunger_Brute_Elite": "LIT_Brute_Elite",
-    "Hunger_Dreg": "LIT_Dreg_01",
-    "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
-    "Hunger_Shambler": "LIT_Shambler_01",
-    "Hunger_Waif": "LIT_Waif_01",
-    "MedicalPhysicianDreg": "LIT_Medicine_Crafting", // Guessing
 }
 
 class Marker {
@@ -144,172 +130,21 @@ class Marker {
     #lookupTable() {
         if (this.#loot_table_lookup) return;
         const lootSource = this.#row.LootSource;
-        if (lootSource) {
-            const lootSourceMap = data.DT_LootSources[lootSource];
-            this.#table = data.LOOT_TABLES[lootSource];
-            if (!this.#table) {
-                let lookupKey = lootSourceMap?.["LootTable"] || lootSource;
-                if (lookupKey === "Sack_Flour") {
-                    lookupKey = "FlourBag"
-                }
-                if (lookupKey === "Amphora") {
-                    lookupKey = "Liquids"
-                }
-                if (lookupKey === "Drinks") {
-                    lookupKey = "Drinks_All"
-                }
-                if (lookupKey === "Ammunition") {
-                    lookupKey = "Ammunition_ALL"
-                }
-                if (lookupKey === "Armor") {
-                    lookupKey = "Armor_ALL"
-                }
-                if (lookupKey === "Saddlebag") {
-                    lookupKey = "Civilian"
-                }
-                if (lookupKey === "Corpse_Gavroche") {
-                    lookupKey = "Key_Gavroche"
-                }
-                if (lookupKey === "TinkerCase") {
-                    lookupKey = "Crafting_Artificer_TinkerCase"
-                }
-                if (lookupKey === "SlopBin") {
-                    lookupKey = "Crafting_Cook_SlopBin"
-                }
-                if (lookupKey === "Blacksmith") {
-                    lookupKey = "Workbench"
-                }
-                if (lookupKey === "Graveyard") {
-                    lookupKey = "Grave"
-                }
-                if (lookupKey === "PowderLocker") {
-                    lookupKey = "Crafting_Gunsmith_PowderLocker"
-                }
-                for (const [key, value] of Object.entries(data.LOOT_TABLES)) {
-                    if (key.includes("_Map0") || key.includes("Tutorial")) {
-                        continue;
-                    }
-                    if (value.some(entry => entry?.ObjectName?.includes("Tutorial"))) {
-                        continue;
-                    }
-                    if (key.toUpperCase().includes("LIT_" + lookupKey.toUpperCase() + "_0")
-                        || key.toUpperCase() === "LIT_" + lookupKey.toUpperCase()
-                        || key.toUpperCase() === "LIT_" + lookupKey.toUpperCase().substring(0, lookupKey.length - 1)) {
-                        this.#table = value;
-                        break;
-                    }
-                }
-                function combineTables(name, tables, rarityFilter) {
-                    let newTable = [];
-                    for (let i = 0; i < tables.length; i++) {
-                        const table = data.LOOT_TABLES[tables[i]];
-                        if (!table) {
-                            console.error(`Table not found: ${tables[i]}`);
-                            continue;
-                        }
-                        newTable.push(...table.map(entry => ({ ...entry })));
-                    }
-
-                    if (rarityFilter) {
-                        newTable = newTable.filter(entry => rarityFilter.some(r => {
-                            const item = data.ITEMS[entry.ObjectName];
-                            return item?.Rarity?.includes(r)
-                        }));
-                    }
-
-                    let newWeightSum = 0;
-                    for (let i = 0; i < newTable.length; i++) {
-                        newWeightSum += Number(newTable[i].Weight) || 0;
-                    }
-                    for (let i = 0; i < newTable.length; i++) {
-                        newTable[i].WeightSum = newWeightSum;
-                        newTable[i].WeightPercent = (newTable[i].Weight / newWeightSum * 100).toFixed(4);
-                    }
-                    newTable.sort((a, b) => (Number(b.WeightPercent) || 0) - (Number(a.WeightPercent) || 0));
-                    return newTable;
-                }
-                if (lookupKey === "Medical") {
-                    this.#table = combineTables("Medical", ["LIT_Medicine_Uncommon", "LIT_Medicine_Crafting", "LIT_Medicine_Common"])
-                }
-                if (lookupKey === "Medical_UREL") {
-                    this.#table = combineTables("Medical_UREL", [
-                        "LIT_Medicine_Uncommon",
-                        "LIT_Medicine_Rare",
-                        "LIT_Medicine_Epic",
-                        "LIT_Medicine_Legendary",
-                    ])
-                }
-                if (lookupKey === "CivilianCupboardDresser") {
-                    this.#table = combineTables("CivilianCupboardDresser", ["LIT_CivilianDresser", "LIT_CivilianCupboard"])
-                }
-                if (lookupKey === "Global") {
-                    this.#table = combineTables("Global", [
-                        "LIT_GlobalItems_01_Common",
-                        "LIT_GlobalItems_02_Uncommon",
-                        "LIT_GlobalItems_03_Rare",
-                        "LIT_GlobalItems_04_Epic",
-                        "LIT_GlobalItems_05_Legendary"
-                    ])
-                }
-                if (lookupKey === "Global_REL") {
-                    this.#table = combineTables("Global_UREL", [
-                        "LIT_GlobalItems_03_Rare",
-                        "LIT_GlobalItems_04_Epic",
-                        "LIT_GlobalItems_05_Legendary"
-                    ])
-                }
-                if (lookupKey === "Armor_UREL") {
-                    this.#table = combineTables("Armor_UREL", ["LIT_Armor_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
-                    // this.#table = combineTables("Armor_UREL", [
-                    //     "LIT_Armor_Uncommon",
-                    //     "LIT_Armor_Rare",
-                    //     "LIT_Armor_Epic",
-                    //     "LIT_Armor_Legendary"
-                    // ])
-                }
-                if (lookupKey === "Weapon_Melee") {
-                    this.#table = combineTables("Weapon_Melee", ["LIT_1HMelee_All", "LIT_2HMelee_All"])
-                }
-                if (lookupKey === "Weapon_Melee_REL") {
-                    this.#table = combineTables("Weapon_Melee_REL", ["LIT_1HMelee_All", "LIT_2HMelee_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
-                    // this.#table = combineTables("Weapon_Melee_REL", [
-                    //     "LIT_1HMelee_Uncommon",
-                    //     "LIT_1HMelee_Rare",
-                    //     "LIT_1HMelee_Epic",
-                    //     "LIT_1HMelee_Legendary",
-                    //     "LIT_2HMelee_Uncommon",
-                    //     "LIT_2HMelee_Rare",
-                    //     "LIT_2HMelee_Epic",
-                    //     "LIT_2HMelee_Legendary",
-                    // ])
-                }
-                if (lookupKey === "Weapon_Ranged") {
-                    this.#table = combineTables("Weapon_Ranged", ["LIT_Rifles_All", "LIT_Pistols_All"])
-                }
-                if (lookupKey === "Weapon_Ranged_REL") {
-                    this.#table = combineTables("Weapon_Ranged_REL", ["LIT_Rifles_All", "LIT_Pistols_All"], ["Uncommon", "Rare", "Epic", "Legendary", "Artifact"])
-                    // this.#table = combineTables("Weapon_Ranged_REL", [
-                    //     "LIT_Uncommon_Weap_Pistols",
-                    //     "LIT_Rare_Weap_Pistols",
-                    //     "LIT_Epic_Weap_Pistols",
-                    //     "LIT_Legendary_Weap_Pistols",
-                    //     "LIT_Uncommon_Weap_Rifles",
-                    //     "LIT_Rare_Weap_Rifles",
-                    //     "LIT_Epic_Weap_Rifles",
-                    //     "LIT_Legendary_Weap_Rifles",
-                    // ])
-                }
-            }
-            const item = data.ITEMS[this.#row.LootSource]
-            if (item) {
-                this.#table = [{
-                    TableName: this.#row.LootSource,
-                    Weight: 100,
-                    WeightSum: 100,
-                    WeightPercent: 100,
-                    ObjectName: this.#row.LootSource,
-                }]
-            }
+        const sources = data.LOOT_SOURCE_TABLES[lootSource];
+        const table = data.LOOT_TABLES[lootSource];
+        const item = data.ITEMS[lootSource]
+        if (sources) {
+            this.#table = sources
+        } else if (table) {
+            this.#table = table;
+        } else if (item) {
+            this.#table = [{
+                TableName: lootSource,
+                Weight: 100,
+                WeightSum: 100,
+                WeightPercent: 100,
+                ObjectName: lootSource,
+            }]
         }
         if (this.#row.AISpawner) {
             const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
@@ -334,6 +169,23 @@ class Marker {
             this.#table = data.VENDOR_DATA[this.#row.CsvJson.vendor_data];
         }
         this.#loot_table_lookup = true;
+    }
+
+    tooltipFilter() {
+        if (controls.includeChanceItems.checked && controls.filterChanceItems.checked) {
+            let hidden = 0;
+            document.querySelectorAll("#tooltip .filterable[data-item]").forEach(el => {
+                const query = controls.searchBox.value.toLowerCase();
+                const rangeValue = [1/32, 1/128, 1/1000, 1/10000, 1/Infinity][controls.chanceRange.value];
+                const item = data.ITEMS[el.dataset.item];
+                if ((item?.DisplayName?.toLowerCase()?.includes(query) || item?.ItemName?.toLowerCase()?.includes(query))
+                     && Number(el.dataset.percent) / 100 >= rangeValue) {
+                } else {
+                    el.style.display = "none";
+                    hidden++;
+                }
+            });
+        }
     }
 
     #makeReadable(text) {
@@ -459,6 +311,7 @@ class Marker {
         sprite.on("pointerover", e => {
             if (e.pointerType !== 'mouse' || stickyMarker || isSidebarOpen()) return;
             tooltipEl.innerHTML = this.#tooltipText();
+            this.tooltipFilter()
             positionTooltip(tooltipEl, e.clientX, e.clientY);
         });
         sprite.on("pointermove", e => {
@@ -487,6 +340,7 @@ class Marker {
             } else {
                 stickyMarker = this;
                 tooltipEl.innerHTML = this.#tooltipText();
+                this.tooltipFilter()
                 positionTooltip(tooltipEl, e.clientX, e.clientY);
             }
         });
@@ -514,12 +368,12 @@ class Marker {
             let loot = 0;
             tableData.forEach(row => {
                 loot += this.#itemAvgValue(row["ObjectName"], Number(row["WeightPercent"]));
-                const subTable = data.LOOT_TABLES[hungerTableLookup[row["LootSource"]]];
+                const subTable = data.LOOT_SOURCE_TABLES[row["LootSource"]];
                 if (subTable) {
                     subTable.forEach(row2 => loot += this.#itemAvgValue(row2["ObjectName"], Number(row2["WeightPercent"])));
                 }
             })
-            estValue.loot = loot * (Number(data.DT_LootSources[this.#row.LootSource]?.MaxEntries) || 1);
+            estValue.loot = loot * (Number(data.LOOT_SOURCES[this.#row.LootSource]?.[0]?.MaxEntries) || 1);
         }
 
         estValue.total = estValue.resource + estValue.grants + estValue.loot;
@@ -545,9 +399,30 @@ class Marker {
     }
 
     #percentColor(percent) {
-        if (Number(percent) < 2.5) return "var(--artifact)";
-        if (Number(percent) < 10) return "var(--legendary)";
-        return "var(--uncommon)";
+        const ratio = Math.trunc(100 / Number(percent));
+        if (isNaN(ratio) || !isFinite(ratio)) return "rgb(0, 0, 0)";
+        if (ratio >= 10000) return "rgb(181 0 0)"; // Extremely rare
+        if (ratio >= 1000) return "rgb(255, 98, 98)"; // Very rare
+        if (ratio >= 128) return "rgb(255, 134, 60)"; // Rare
+        if (ratio >= 32) return "rgb(255, 237, 76)"; // Uncommon
+        return "rgb(86, 225, 86)"; // Common
+    }
+
+    #readableNumber(n) {
+        if (n < 100) {
+            const s = n.toFixed(n < 10 ? 2 : 1);
+            return s.replace(/\.?0+$/, "");
+        }
+        if (n < 10000) return Math.trunc(n).toLocaleString();
+        if (n < 1000000) return this.#formatSuffix(n, 1000, "k");
+        if (n < 1000000000) return this.#formatSuffix(n, 1000000, "m");
+        return this.#formatSuffix(n, 1000000000, "b");
+    }
+
+    #formatSuffix(n, div, suffix) {
+        const v = n / div;
+        const whole = Number.isInteger(v);
+        return whole ? `${v}${suffix}` : `${v.toFixed(1)}${suffix}`;
     }
 
     #itemLine(percent, itemHtml, value) {
@@ -559,7 +434,7 @@ class Marker {
         value = value * multiplier;
         const percentHtml = percent === null || percent === undefined || percent === ""
             ? ""
-            : `<span class="loot-percent" style="color:${this.#percentColor(percent)}">${Number.isFinite(Number(percent)) ? Number(percent).toFixed(2) + "%" : ""}</span>`;
+            : `<span class="loot-percent" title='${Number(percent)}' style="color:${this.#percentColor(percent)}">${percent === 100 ? "Always" : Number.isFinite(Number(percent)) ? `1/${this.#readableNumber(100 / Number(percent))}` : Number(percent)}</span>`;
         const valueHtml = value === null || value === undefined
             ? ""
             : `<span class="loot-value" title="Total: ${Number(value).toLocaleString()}\nWeighted: ${Number(value * (Number(percent) / 100)).toLocaleString()}">${this.formatCoins(value)}</span>`;
@@ -577,7 +452,7 @@ class Marker {
         const max = Number(item.LootGenMax) || 1
         if (min > 1 || max > 1) notes.push(`(${min}-${max} items)`);
         if (muted) notes.push(muted);
-        return `<span class="item ${item?.Rarity?.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon}.png" height="30" loading="lazy"><span class="name">${encodeHTML(item.DisplayName)}</span></span>${this.#formatNotes(notes)}`
+        return `<span class="item ${item?.Rarity?.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon || "Placeholder"}.png" height="30" loading="lazy"><span class="name">${encodeHTML(item.DisplayName)}</span></span>${this.#formatNotes(notes)}`
     }
 
     #formatNotes(notes) {
@@ -625,7 +500,7 @@ class Marker {
         }
         const lootSource = this.#row.LootSource;
         if (lootSource) {
-            const lootSourceMap = data.DT_LootSources[lootSource];
+            const lootSourceMap = data.LOOT_SOURCES[lootSource]?.[0];
             if (lootSourceMap) {
                 rows.push(`<tr><td><strong>LootSource</strong></td><td>${lootSource} → ${lootSourceMap["LootTable"]} (${lootSourceMap["MinEntries"]} - ${lootSourceMap["MaxEntries"]} items)</td></tr>`)
             } else {
@@ -681,12 +556,12 @@ class Marker {
                 rows.push(`<tr><td style="text-wrap:nowrap"><strong>Est. Markup</strong></td><td>x4.2</td></tr>`)
             }
             tableData.forEach(row => {
-                rows.push(`<tr><td colspan="2">${this.#formatLootEntry(row)}</td></tr>`)
+                rows.push(`<tr><td colspan="2" class="${row["TableName"].startsWith("DA_AI") ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${row["WeightPercent"]}">${this.#formatLootEntry(row)}</td></tr>`)
 
-                const subTableData = data.LOOT_TABLES[hungerTableLookup[row["LootSource"]]];
+                const subTableData = data.LOOT_SOURCE_TABLES[row["LootSource"]];
                 if (subTableData) {
                     const subrows = subTableData.map(row2 =>
-                        `<tr><td colspan="2">${this.#formatLootEntry(row2)}</td></tr>`);
+                        `<tr><td colspan="2" class="filterable" data-item="${row2["ObjectName"]}" data-percent="${row2["WeightPercent"]}">${this.#formatLootEntry(row2)}</td></tr>`);
                     rows.push(`<tr><td colspan="2" class="loot-subtable"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></td></tr>`)
                 }
             })

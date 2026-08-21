@@ -90,10 +90,10 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
 
         loadMultiselectF(controls.lootSourceSelect, marker => {
             if (!(marker.row.LootSource || "container" === marker.class)) return;
-            return data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown"
+            return marker.row.LootSource
         }, lootTable => {
             const largest = markers
-                .filter(marker => data.DT_LootSources[marker.row.LootSource]?.["LootTable"] === lootTable)
+                .filter(marker => marker.row.LootSource === lootTable)
                 .sort((a, b) => (Number(b.estValue) || 0) - (Number(a.estValue) || 0))[0];
             if (largest && largest.estValue) {
                 return `<span class="text">${lootTable}</span> <small class="text-muted">Avg: ${largest.formatCoins(largest.estValue)}</small>`;
@@ -172,37 +172,22 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
                 }
 
             }
-            if (marker.tableData && controls.includeLootItems.checked) {
-                const rangeValue = Number(controls.chanceRange.value);
+            if (marker.tableData && controls.includeChanceItems.checked) {
+                const rangeValue = [1/32, 1/128, 1/1000, 1/10000, 1/Infinity][controls.chanceRange.value];
                 marker.tableData.forEach(loot => {
-                    const hungerTableLookup = {
-                        "HighClassCiv_Small": "LIT_HighClassCiv", // Guessing
-                        "Hunger_Biter": "LIT_Biter_01",
-                        "Hunger_Biter_Elite": "LIT_Biter_Elite",
-                        "Hunger_Bloat": "LIT_Bloat_01",
-                        "Hunger_Brute": "LIT_Brute_01",
-                        "Hunger_Brute_Elite": "LIT_Brute_Elite",
-                        "Hunger_Dreg": "LIT_Dreg_01",
-                        "Hunger_DregFarmerUnique": "LIT_FarmerDregUnique",
-                        "Hunger_Shambler": "LIT_Shambler_01",
-                        "Hunger_Waif": "LIT_Waif_01",
-                        "MedicalPhysicianDreg": "LIT_Medicine_Crafting", // Guessing
-                    }
-                    const realTable = hungerTableLookup[loot["LootSource"]];
+                    const realTable = data.LOOT_SOURCE_TABLES[loot["LootSource"]];
                     if (realTable) {
-                        if (data.LOOT_TABLES[realTable]) {
-                            data.LOOT_TABLES[realTable].forEach((row2) => {
-                                if (Number(row2["WeightPercent"]) >= rangeValue) {
-                                    values.push(row2["ObjectName"])
-                                    const item = data.ITEMS[row2["ObjectName"]]
-                                    if (item) {
-                                        values.push(item["DisplayName"])
-                                    }
+                        realTable.forEach((row2) => {
+                            if (Number(row2["WeightPercent"]) / 100 >= rangeValue) {
+                                values.push(row2["ObjectName"])
+                                const item = data.ITEMS[row2["ObjectName"]]
+                                if (item) {
+                                    values.push(item["DisplayName"])
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
-                    if (Number(loot["WeightPercent"]) >= rangeValue) {
+                    if (Number(loot["WeightPercent"]) / 100 >= rangeValue) {
                         values.push(loot["ObjectName"])
                         const item = data.ITEMS[loot["ObjectName"]]
                         if (item) {
@@ -263,9 +248,8 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
             if (marker.class === "npc") {
                 sprite.parent.visible = npcs.includes(marker.readable.displayName);
             }
-            const lootTable = data.DT_LootSources[marker.row.LootSource]?.["LootTable"] || "Unknown";
             if (marker.row.LootSource) {
-                sprite.parent.visible = lootSources.includes(lootTable);
+                sprite.parent.visible = lootSources.includes(marker.row.LootSource);
             }
             if (marker.class === "loose") {
                 sprite.parent.visible = loose.includes(marker.readable.displayName);
@@ -313,12 +297,14 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
 
     controls.searchBox.addEventListener("input", applySearch);
     controls.checkShowOnlyMatches.addEventListener("change", applySearch);
-    controls.includeLootItems.addEventListener("change", applySearch);
+    controls.includeChanceItems.addEventListener("change", applySearch);
     controls.chanceRange.addEventListener("change", () => {
-        elements.divChanceRange.innerHTML = controls.chanceRange.value;
+        updateChanceText();
         applySearch();
     });
-    elements.divChanceRange.innerHTML = controls.chanceRange.value
+    const chanceText = ["Common <= 1/32", "Uncommon <= 1/128", "Rare <= 1/1,000", "Very Rare <= 1/10k", "Everything"]
+    const updateChanceText = () => elements.divChanceRange.innerHTML = chanceText[controls.chanceRange.value]
+    updateChanceText()
     controls.enableHeightFilter.addEventListener("change", applySearch);
     controls.sliderHeight.addEventListener("input", applySearch);
     [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.creatureSelect, controls.envSelect, controls.questSelect,

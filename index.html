@@ -132,12 +132,18 @@
                         </label>
                     </div>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="includeLootItems">
-                        <label class="form-check-label" for="includeLootItems">
-                            Include chance table items (>= <span id="rangeValue"></span>%)
+                        <input class="form-check-input" type="checkbox" value="" id="includeChanceItems">
+                        <label class="form-check-label" for="includeChanceItems">
+                            Include chance table items (<span id="rangeValue"></span>)
                         </label>
                     </div>
-                    <input type="range" class="form-range" min="0" max="25" value="1.5" step="0.5" id="table-chance-range">
+                    <input type="range" class="form-range" min="0" max="4" value="3" step="1" id="table-chance-range">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="filterChanceItems" checked>
+                        <label class="form-check-label" for="filterChanceItems">
+                            Filter chance table items
+                        </label>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -174,7 +180,7 @@
                     <div class="col-lg-12" hidden>
                         <div class="mb-3">
                             <h6>
-                                Loot Table
+                                Loot Sources
                                 <img src="./img/T_UI_Icon_PingGeneric.png">
                             </h6>
                             <select id="loot-source-select" multiple="multiple" style="display:none"></select>
