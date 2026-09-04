@@ -221,7 +221,7 @@ lootTables.forEach(row => {
 
 console.log("Loaded loot tables:", LOOT_TABLES);
 
-function combineTables(sources) {
+function combineTables(sourceName, sources) {
     const combinedByObjectName = new Map()
 
     sources.forEach(source => {
@@ -233,6 +233,7 @@ function combineTables(sources) {
         const copy = []
         copy.push(...table.map(entry => ({ ...entry })));
         copy.forEach(entry => {
+            const percentNote = Number(source["WeightPercent"]).toFixed(2) + "% " + Number(entry["WeightPercent"]).toFixed(2) + "% " + source["TableName"];
             const weight = 1000 * (Number(entry["WeightPercent"] || 1) / 100) * ((Number(source["WeightPercent"]) || 1) / 100)
             const objectName = entry["ObjectName"]
 
@@ -240,7 +241,8 @@ function combineTables(sources) {
                 combinedByObjectName.set(objectName, {
                     ...entry,
                     Weight: weight,
-                    TableName: entry["TableName"] ? [entry["TableName"]] : []
+                    TableName: entry["TableName"] ? [entry["TableName"]] : [],
+                    Notes: percentNote ? [percentNote] : [],
                 })
                 return
             }
@@ -249,7 +251,7 @@ function combineTables(sources) {
             existing["Weight"] = (Number(existing["Weight"]) || 0) + weight
 
             if (entry["TableName"] && !existing["TableName"].includes(entry["TableName"])) {
-                existing["TableName"].push(entry["TableName"])
+                existing["Notes"].push(entry["Notes"])
             }
         })
     })
@@ -282,7 +284,7 @@ lootSources.forEach(row => {
 lootSources.forEach(row => {
     if (!row.SourceName) return;
     console.log("Processing loot source:", row.SourceName);
-    if (!LOOT_SOURCE_TABLES[row.SourceName]) LOOT_SOURCE_TABLES[row.SourceName] = combineTables(LOOT_SOURCES[row.SourceName]);
+    if (!LOOT_SOURCE_TABLES[row.SourceName]) LOOT_SOURCE_TABLES[row.SourceName] = combineTables(row.SourceName, LOOT_SOURCES[row.SourceName]);
 })
 
 const aiTables = await getAiCsvData("./data/ai_tables.csv?v=" + elements.metaVersion);

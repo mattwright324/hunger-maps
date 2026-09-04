@@ -90,6 +90,7 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
 
         loadMultiselectF(controls.lootSourceSelect, marker => {
             if (!(marker.row.LootSource || "container" === marker.class)) return;
+            if ("loose" === marker.class) return;
             return marker.row.LootSource
         }, lootTable => {
             const largest = markers
@@ -302,7 +303,7 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
         updateChanceText();
         applySearch();
     });
-    const chanceText = ["Common <= 1/32", "Uncommon <= 1/128", "Rare <= 1/1,000", "Very Rare <= 1/10k", "Everything"]
+    const chanceText = ["Common <= 1/32", "Uncommon <= 1/128", "Rare <= 1/1,024", "Very Rare <= 1/8,192", "Everything"]
     const updateChanceText = () => elements.divChanceRange.innerHTML = chanceText[controls.chanceRange.value]
     updateChanceText()
     controls.enableHeightFilter.addEventListener("change", applySearch);

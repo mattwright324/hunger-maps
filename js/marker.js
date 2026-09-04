@@ -176,7 +176,7 @@ class Marker {
             let hidden = 0;
             document.querySelectorAll("#tooltip .filterable[data-item]").forEach(el => {
                 const query = controls.searchBox.value.toLowerCase();
-                const rangeValue = [1/32, 1/128, 1/1000, 1/10000, 1/Infinity][controls.chanceRange.value];
+                const rangeValue = [1/32, 1/128, 1/1024, 1/8192, 1/Infinity][controls.chanceRange.value];
                 const item = data.ITEMS[el.dataset.item];
                 if ((item?.DisplayName?.toLowerCase()?.includes(query) || item?.ItemName?.toLowerCase()?.includes(query))
                      && Number(el.dataset.percent) / 100 >= rangeValue) {
@@ -399,10 +399,11 @@ class Marker {
     }
 
     #percentColor(percent) {
-        const ratio = Math.trunc(100 / Number(percent));
+        const ratio = 100 / Number(percent);
         if (isNaN(ratio) || !isFinite(ratio)) return "rgb(0, 0, 0)";
-        if (ratio >= 10000) return "rgb(181 0 0)"; // Extremely rare
-        if (ratio >= 1000) return "rgb(255, 98, 98)"; // Very rare
+        if (ratio === 1) return "rgb(175, 238, 238)"; // Always
+        if (ratio >= 8192) return "rgb(181 0 0)"; // Extremely rare
+        if (ratio >= 1024) return "rgb(255, 98, 98)"; // Very rare
         if (ratio >= 128) return "rgb(255, 134, 60)"; // Rare
         if (ratio >= 32) return "rgb(255, 237, 76)"; // Uncommon
         return "rgb(86, 225, 86)"; // Common
@@ -550,7 +551,7 @@ class Marker {
         if (this.#row.AISpawner) {
             rows.push(`<tr><td><strong>AISpawner</strong></td><td>${this.#row.AISpawner}</td></tr>`)
         }
-        let tableData = this.tableData;
+        const tableData = this.tableData;
         if (tableData) {
             if (this.#class === "npc") {
                 rows.push(`<tr><td style="text-wrap:nowrap"><strong>Est. Markup</strong></td><td>x4.2</td></tr>`)
@@ -565,7 +566,9 @@ class Marker {
                     rows.push(`<tr><td colspan="2" class="loot-subtable"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></td></tr>`)
                 }
             })
-            rows.push(this.#valueRow("Est. Avg. Value", this.#estValue.loot))
+        }
+        if (this.estValue) {
+            rows.push(this.#valueRow("Est. Avg. Value", this.estValue))
         }
         const hasItems = rows.some(row => row.includes('class="loot-row"'));
         return `<div class="marker-tooltip${hasItems ? " has-items" : ""}"><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
@@ -585,7 +588,7 @@ class Marker {
             child.anchor.set(0.5);
             child.x = sprite.x;
             child.y = sprite.y;
-            child.zIndex = sprite.zIndex + 1;
+            child.zIndex = 1000;
             child._screenSize = 48
             this.#container.addChild(child);
 
@@ -631,6 +634,7 @@ class Marker {
 
                 // Greater than 6 silver mark as good
                 if (this.estValue > 600) {
+                    this.#tint = 0xFFF0B2;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
                 }
