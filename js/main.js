@@ -3,6 +3,7 @@ import {spawns} from "data";
 import * as pixi from "pixi";
 import {app, mapOverlaySprite, mapSprite, markerSprites, world} from "pixi";
 import {controls, dom_ready, elements, refreshLabels} from "dom";
+import {loadTexture} from "textures";
 
 (async function () {
     'use strict';
@@ -22,12 +23,20 @@ import {controls, dom_ready, elements, refreshLabels} from "dom";
         pixi.render();
     })
 
+    async function loadMapTextures(mapId, preset) {
+        const [texture, overlay] = await Promise.all([loadTexture(preset.texture), loadTexture(preset.overlay)]);
+        mapSprite.texture = texture;
+        mapOverlaySprite.texture = overlay;
+        pixi.render();
+    }
+
     async function loadMapAndPreset(mapId) {
         pixi.clearMarkers();
         const preset = data.presets[mapId];
         document.getElementById('map-banner').style.backgroundImage = `url('${preset.thumbnail}')`;
-        mapSprite.texture = preset.texture;
-        mapOverlaySprite.texture = preset.overlay;
+        mapSprite.texture = null;
+        mapOverlaySprite.texture = null;
+        loadMapTextures(mapId, preset);
         pixi.fitMapSpriteToCanvas();
 
         document.getElementById("scale").value = preset.scale;

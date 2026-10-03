@@ -1,3 +1,5 @@
+import {onTextureLoaded} from "textures";
+
 let closeTooltip = () => {};
 import('marker').then(m => { closeTooltip = m.closeTooltip; });
 
@@ -95,8 +97,8 @@ export function fitMapSpriteToCanvas() {
     render();
 }
 
-function applyMarkerScale(worldScale, multiplier = 1) {
-    markerSprites().forEach(sprite => {
+function applyMarkerScale(worldScale, multiplier = 1, sprites = markerSprites()) {
+    sprites.forEach(sprite => {
         const screenSize = sprite._screenSize || 24;
         const baseScale = (screenSize * multiplier) / sprite.texture.width;
         sprite.scale.set(baseScale / worldScale);
@@ -107,6 +109,13 @@ export function scaleMarkersToZoom() {
     applyMarkerScale(world.scale.x);
     render();
 }
+
+onTextureLoaded((key, texture) => {
+    const sprites = markerSprites().filter(sprite => sprite.texture === texture);
+    if (!sprites.length) return;
+    applyMarkerScale(world.scale.x, 1, sprites);
+    render();
+});
 
 function setupPanZoom() {
     const touches = new Map();

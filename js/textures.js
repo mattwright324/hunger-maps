@@ -47,10 +47,42 @@ const texturePaths = {
     key_special: "./img/T_UI_Item_Key_Unique_Silver.png",
 };
 
-const loadedTextures = await Promise.all(
-    Object.entries(texturePaths).map(async ([key, path]) => {
-        return [key, await PIXI.Assets.load(path + "?v=" + elements.metaVersion)];
-    })
-);
+const placeholders = {};
+const loading = {};
+const loadedListeners = [];
 
-export const textures = Object.fromEntries(loadedTextures);
+export function onTextureLoaded(listener) {
+    loadedListeners.push(listener);
+}
+
+export function loadTexture(key) {
+    if (!key || !texturePaths[key]) return Promise.resolve(undefined);
+    if (!loading[key]) {
+        loading[key] = PIXI.Assets.load(texturePaths[key] + "?v=" + elements.metaVersion).then(loaded => {
+            const placeholder = placeholders[key];
+            if (placeholder) {
+                placeholder.source = loaded.source;
+                placeholder.update();
+            }
+            loadedListeners.forEach(listener => listener(key, placeholder));
+            return loaded;
+        }).catch(e => {
+            console.error(`Failed to load texture '${key}':`, e);
+            delete loading[key];
+        });
+    }
+    return loading[key];
+}
+
+function getTexture(key) {
+    if (!texturePaths[key]) return undefined;
+    if (!placeholders[key]) {
+        placeholders[key] = new PIXI.Texture({dynamic: true});
+        loadTexture(key);
+    }
+    return placeholders[key];
+}
+
+export const textures = new Proxy({}, {
+    get: (target, key) => typeof key === "string" ? getTexture(key) : undefined,
+});

@@ -618,7 +618,7 @@ class Marker {
 
         for (const substr of Object.keys(data.chateauProfessionNodes)) {
             if (this.#row.OuterType.startsWith(substr)) {
-                sprite.texture = data.chateauProfessionNodes[substr];
+                sprite.texture = textures[data.chateauProfessionNodes[substr]];
                 this.#zIndex = 50;
                 this.#descriptors.push("profession");
                 this.#class = "environment";

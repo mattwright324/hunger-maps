@@ -1,4 +1,3 @@
-import {textures} from "textures";
 import {elements} from "dom";
 import Marker from "marker";
 
@@ -316,7 +315,7 @@ console.log("Loaded inventory items:", ITEMS);
 
 export const presets = {
     "map00": {
-        texture: textures.mapChateau,
+        texture: "mapChateau",
         thumbnail: "./img/T_UI_BG_Chateau.png",
         rawData: await getMarkerCsvData("./data/map00_components.csv?v=" + elements.metaVersion),
         data: () => presets["map00"].rawData.map(row => new Marker(row)),
@@ -326,8 +325,8 @@ export const presets = {
         rotation: 0
     },
     "map01": {
-        texture: textures.mapSarlat,
-        overlay: textures.mapSarlatOverlay,
+        texture: "mapSarlat",
+        overlay: "mapSarlatOverlay",
         thumbnail: "./img/T_UI_Thumbnail_Map01.png",
         rawData: await getMarkerCsvData("./data/map01_components.csv?v=" + elements.metaVersion),
         data: () => presets["map01"].rawData.map(row => new Marker(row)),
@@ -337,8 +336,8 @@ export const presets = {
         rotation: 90
     },
     "map02": {
-        texture: textures.mapJacques,
-        overlay: textures.mapJacquesOverlay,
+        texture: "mapJacques",
+        overlay: "mapJacquesOverlay",
         thumbnail: "./img/T_UI_Thumbnail_Map02.png",
         rawData: await getMarkerCsvData("./data/map02_components.csv?v=" + elements.metaVersion),
         data: () => presets["map02"].rawData.map(row => new Marker(row)),
@@ -348,8 +347,8 @@ export const presets = {
         rotation: 270
     },
     "map03": {
-        texture: textures.mapSombre,
-        overlay: textures.mapSombreOverlay,
+        texture: "mapSombre",
+        overlay: "mapSombreOverlay",
         thumbnail: "./img/T_UI_Thumbnail_Map03.png",
         rawData: await getMarkerCsvData("./data/map03_components.csv?v=" + elements.metaVersion),
         data: () => presets["map03"].rawData.map(row => new Marker(row)),
@@ -391,13 +390,13 @@ export const spawns = [
 ]
 
 export const chateauProfessionNodes = {
-    "BP_Artificer": textures.profArtificer,
-    "BP_Conservator": textures.profConservator,
-    "BP_Cook": textures.profCook,
-    "BP_Gunsmith": textures.profGunsmith,
-    "BP_Metallurgist": textures.profMetallurgist,
-    "BP_Naturalist": textures.profNaturalist,
-    "BP_Outfitter": textures.profOutfitter,
-    "BP_Physician": textures.profPhysician,
-    "BP_Scavenger": textures.profScavenger,
+    "BP_Artificer": "profArtificer",
+    "BP_Conservator": "profConservator",
+    "BP_Cook": "profCook",
+    "BP_Gunsmith": "profGunsmith",
+    "BP_Metallurgist": "profMetallurgist",
+    "BP_Naturalist": "profNaturalist",
+    "BP_Outfitter": "profOutfitter",
+    "BP_Physician": "profPhysician",
+    "BP_Scavenger": "profScavenger",
 }
