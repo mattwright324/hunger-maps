@@ -5,6 +5,9 @@ import {controls} from "dom";
 let stickyMarker = null;
 let justTapped = false;
 
+const tableRowsCache = new WeakMap();
+const reducedAiTables = {};
+
 export function closeTooltip() {
     stickyMarker = null;
     document.getElementById('tooltip').style.display = 'none';
@@ -14,11 +17,16 @@ function isSidebarOpen() {
     return document.getElementById('sidebar')?.classList.contains('show') ?? false;
 }
 
-function positionTooltip(tooltipEl, clientX, clientY) {
-    tooltipEl.style.display = 'block';
-    tooltipEl.style.left = '0px';
-    tooltipEl.style.top = '0px';
-    const rect = tooltipEl.getBoundingClientRect();
+let tooltipRect = null;
+
+function positionTooltip(tooltipEl, clientX, clientY, measure = true) {
+    if (measure || !tooltipRect) {
+        tooltipEl.style.display = 'block';
+        tooltipEl.style.left = '0px';
+        tooltipEl.style.top = '0px';
+        tooltipRect = tooltipEl.getBoundingClientRect();
+    }
+    const rect = tooltipRect;
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     let left = clientX + 15;
@@ -148,7 +156,9 @@ class Marker {
         }
         if (this.#row.AISpawner) {
             const spawnerTable = data.AI_TABLES[this.#row.AISpawner];
-            if (spawnerTable) {
+            if (reducedAiTables[this.#row.AISpawner]) {
+                this.#table = reducedAiTables[this.#row.AISpawner];
+            } else if (spawnerTable) {
                 this.#table = spawnerTable;
                 const reduced = {}
                 spawnerTable.forEach(entry => {
@@ -162,7 +172,7 @@ class Marker {
                     reduced[key]["DisplayName"] = entry.DisplayName;
                     reduced[key]["LootSource"] = entry.LootSource;
                 })
-                this.#table = [...Object.values(reduced)];
+                this.#table = reducedAiTables[this.#row.AISpawner] = [...Object.values(reduced)];
             }
         }
         if (this.#row.CsvJson?.vendor_data) {
@@ -174,9 +184,9 @@ class Marker {
     tooltipFilter() {
         if (controls.includeChanceItems.checked && controls.filterChanceItems.checked) {
             let hidden = 0;
+            const query = controls.searchBox.value.toLowerCase();
+            const rangeValue = [1/32, 1/128, 1/1024, 1/8192, 1/Infinity][controls.chanceRange.value];
             document.querySelectorAll("#tooltip .filterable[data-item]").forEach(el => {
-                const query = controls.searchBox.value.toLowerCase();
-                const rangeValue = [1/32, 1/128, 1/1024, 1/8192, 1/Infinity][controls.chanceRange.value];
                 const item = data.ITEMS[el.dataset.item];
                 if ((item?.DisplayName?.toLowerCase()?.includes(query) || item?.ItemName?.toLowerCase()?.includes(query))
                      && Number(el.dataset.percent) / 100 >= rangeValue) {
@@ -316,7 +326,7 @@ class Marker {
         });
         sprite.on("pointermove", e => {
             if (e.pointerType !== 'mouse' || stickyMarker) return;
-            if (tooltipEl.style.display === 'block') positionTooltip(tooltipEl, e.clientX, e.clientY);
+            if (tooltipEl.style.display === 'block') positionTooltip(tooltipEl, e.clientX, e.clientY, false);
         });
         sprite.on("pointerout", e => {
             if (e.pointerType !== 'mouse' || stickyMarker) return;
@@ -482,6 +492,23 @@ class Marker {
         return this.#itemLine(percent, `${name}${this.#formatNotes([row["LootSource"] || tableName].filter(Boolean))}`, null);
     }
 
+   #tableRows(tableData) {
+        let cached = tableRowsCache.get(tableData);
+        if (!cached) tableRowsCache.set(tableData, cached = {});
+        const key = this.#class === "npc" ? "npc" : "other";
+        return cached[key] ??= tableData.map(row => {
+            let html = `<tr><td colspan="2" class="${row["TableName"].startsWith("DA_AI") ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${row["WeightPercent"]}">${this.#formatLootEntry(row)}</td></tr>`;
+
+            const subTableData = data.LOOT_SOURCE_TABLES[row["LootSource"]];
+            if (subTableData) {
+                const subrows = subTableData.map(row2 =>
+                    `<tr><td colspan="2" class="filterable" data-item="${row2["ObjectName"]}" data-percent="${row2["WeightPercent"]}">${this.#formatLootEntry(row2)}</td></tr>`);
+                html += `<tr><td colspan="2" class="loot-subtable"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></td></tr>`;
+            }
+            return html;
+        }).join("");
+    }
+
     #tooltipText() {
         let rows = []
         // rows.push(`<tr><td><strong>Type</strong></td><td>${this.#row["OuterType"]}</td></tr>`)
@@ -556,22 +583,14 @@ class Marker {
             if (this.#class === "npc") {
                 rows.push(`<tr><td style="text-wrap:nowrap"><strong>Est. Markup</strong></td><td>x4.2</td></tr>`)
             }
-            tableData.forEach(row => {
-                rows.push(`<tr><td colspan="2" class="${row["TableName"].startsWith("DA_AI") ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${row["WeightPercent"]}">${this.#formatLootEntry(row)}</td></tr>`)
-
-                const subTableData = data.LOOT_SOURCE_TABLES[row["LootSource"]];
-                if (subTableData) {
-                    const subrows = subTableData.map(row2 =>
-                        `<tr><td colspan="2" class="filterable" data-item="${row2["ObjectName"]}" data-percent="${row2["WeightPercent"]}">${this.#formatLootEntry(row2)}</td></tr>`);
-                    rows.push(`<tr><td colspan="2" class="loot-subtable"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></td></tr>`)
-                }
-            })
+            rows.push(this.#tableRows(tableData));
         }
         if (this.estValue) {
             rows.push(this.#valueRow("Est. Avg. Value", this.estValue))
         }
         const hasItems = rows.some(row => row.includes('class="loot-row"'));
-        return `<div class="marker-tooltip${hasItems ? " has-items" : ""}"><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
+        const longList = hasItems && (tableData?.length || 0) > 20;
+        return `<div class="marker-tooltip${hasItems ? " has-items" : ""}${longList ? " long-list" : ""}"><h5>${this.#readable.displayName}</h5><div class="table-responsive" style="max-height: 200px"><table class="marker-info-table table table-sm table-striped mb-0">${rows.join("")}</table></div></div>`
     }
 
     #classify() {
