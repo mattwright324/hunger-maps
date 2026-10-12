@@ -8,6 +8,8 @@ import {loadTexture} from "textures";
 (async function () {
     'use strict';
 
+    const debug = new URLSearchParams(window.location.search).has("debug");
+
     try {
         await dom_ready();
     } catch (e) {
@@ -139,7 +141,7 @@ import {loadTexture} from "textures";
         [controls.npcSelect, controls.lootSourceSelect, controls.looseSelect, controls.envSelect,
             controls.creatureSelect, controls.questSelect, controls.spawnsSelect, controls.otherSelect
         ].forEach(ts => {
-            ts.input.closest('.col-lg-12').hidden = Object.keys(ts.options).length === 0;
+            ts.input.closest('.col-lg-12').hidden = Object.keys(ts.options).length === 0 || (ts === controls.otherSelect && !debug);
         });
 
         await applySearch();
@@ -273,7 +275,7 @@ import {loadTexture} from "textures";
                 sprite.parent.visible = spawns.includes(marker.readable.displayName);
             }
             if (marker.class === "other") {
-                sprite.parent.visible = other.includes(marker.readable.displayName);
+                sprite.parent.visible = debug && other.includes(marker.readable.displayName);
             }
         })
 
