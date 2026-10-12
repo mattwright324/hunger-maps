@@ -380,7 +380,9 @@ class Marker {
                 loot += this.#itemAvgValue(row["ObjectName"], Number(row["WeightPercent"]));
                 const subTable = data.LOOT_SOURCE_TABLES[row["LootSource"]];
                 if (subTable) {
-                    subTable.forEach(row2 => loot += this.#itemAvgValue(row2["ObjectName"], Number(row2["WeightPercent"])));
+                    const subLoot = subTable.reduce((sum, row2) => sum + this.#itemAvgValue(row2["ObjectName"], Number(row2["WeightPercent"])), 0)
+                        * (Number(data.LOOT_SOURCES[row["LootSource"]]?.[0]?.MaxEntries) || 1);
+                    loot += subLoot * (Number(row["WeightPercent"]) || 0) / 100;
                 }
             })
             estValue.loot = loot * (Number(data.LOOT_SOURCES[this.#row.LootSource]?.[0]?.MaxEntries) || 1);
