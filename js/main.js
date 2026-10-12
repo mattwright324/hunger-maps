@@ -148,7 +148,6 @@ import {loadTexture} from "textures";
     async function applySearch() {
         const sprites = markerSprites();
         const query = document.getElementById("searchBox").value.toLowerCase();
-        const showOnlyMatches = document.getElementById("showOnlyMatches").checked;
 
         sprites.forEach(sprite => {
             const marker = sprite._marker;
@@ -232,10 +231,7 @@ import {loadTexture} from "textures";
                 sprite.parent.alpha = 1.0;
                 sprite.parent.visible = true;
             } else {
-                sprite.tint = 0x808080;
-                sprite.parent.alpha = 0.2;
-                sprite.parent.zIndex -= 1000;
-                sprite.parent.visible = !showOnlyMatches;
+                sprite.parent.visible = false;
             }
         });
 
@@ -306,7 +302,6 @@ import {loadTexture} from "textures";
     }
 
     controls.searchBox.addEventListener("input", applySearch);
-    controls.checkShowOnlyMatches.addEventListener("change", applySearch);
     controls.includeChanceItems.addEventListener("change", applySearch);
     controls.chanceRange.addEventListener("change", () => {
         updateChanceText();

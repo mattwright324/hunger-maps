@@ -86,7 +86,6 @@ const dom_load = async () => {
     controls.mapSelect = document.getElementById("mapSelect");
     controls.showOverlay = document.getElementById("showOverlay");
     controls.searchBox = document.getElementById("searchBox");
-    controls.checkShowOnlyMatches = document.getElementById("showOnlyMatches");
     controls.includeChanceItems = document.getElementById("includeChanceItems");
     controls.chanceRange = document.getElementById("table-chance-range");
     controls.filterChanceItems = document.getElementById("filterChanceItems");
