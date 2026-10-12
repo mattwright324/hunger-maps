@@ -405,6 +405,10 @@ class Marker {
         const silver = Math.trunc(copper / 100);
         const gold = Math.trunc(silver / 100);
 
+        if (copper === 0 && copperValue > 0) {
+            return `<span class="coin copper">&lt;1 <img src="img/Currency_CopperCoin.png" alt="C" width="16" height="16" loading="lazy"/></span>`;
+        }
+
         return `<span class="coin gold" ${gold > 0 ? "" : "style='display:none;'"}>${gold} <img src="img/Currency_GoldCoin.png" alt="G" width="16" height="16" loading="lazy"/></span>` +
                 `<span class="coin silver" ${(silver  % 100) > 0 && gold < 5 ? "" : "style='display:none;'"}>${silver % 100} <img src="img/Currency_SilverCoin.png" alt="S" width="16" height="16" loading="lazy"/></span>` +
                 `<span class="coin copper" ${(copper % 100) > 0 && gold < 2 ? "" : "style='display:none;'"}>${copper % 100} <img src="img/Currency_CopperCoin.png" alt="C" width="16" height="16" loading="lazy"/></span>`;

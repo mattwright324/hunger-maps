@@ -116,17 +116,18 @@ import {loadTexture} from "textures";
 
         loadMultiselectClass(controls.npcSelect, "npc");
         //loadMultiselectClass(controls.lootSelect, "container");
-        loadMultiselectClass(controls.looseSelect, "loose", looseName => {
+        const displayNameAvgText = displayName => {
             const largest = markers
-                .filter(marker => marker.readable.displayName === looseName)
+                .filter(marker => marker.readable.displayName === displayName)
                 .sort((a, b) => (Number(b.estValue) || 0) - (Number(a.estValue) || 0))[0];
             if (largest && largest.estValue) {
-                return `<span class="text">${looseName}</span> <small class="text-muted">Avg: ${largest.formatCoins(largest.estValue)}</small>`;
+                return `<span class="text">${displayName}</span> <small class="text-muted">Avg: ${largest.formatCoins(largest.estValue)}</small>`;
             } else {
-                return looseName;
+                return displayName;
             }
-        });
-        loadMultiselectClass(controls.creatureSelect, "creature");
+        };
+        loadMultiselectClass(controls.looseSelect, "loose", displayNameAvgText);
+        loadMultiselectClass(controls.creatureSelect, "creature", displayNameAvgText);
         loadMultiselectClass(controls.envSelect, "environment");
         loadMultiselectClass(controls.questSelect, "quest");
         loadMultiselectClass(controls.spawnsSelect, "spawns");
