@@ -183,7 +183,7 @@ import {loadTexture} from "textures";
 
             }
             if (marker.tableData && controls.includeChanceItems.checked) {
-                const rangeValue = [1/32, 1/128, 1/1000, 1/10000, 1/Infinity][controls.chanceRange.value];
+                const rangeValue = [1/32, 1/128, 1/1024, 1/8192, 1/Infinity][controls.chanceRange.value];
                 marker.tableData.forEach(loot => {
                     const realTable = data.LOOT_SOURCE_TABLES[loot["LootSource"]];
                     if (realTable) {
@@ -312,7 +312,7 @@ import {loadTexture} from "textures";
         updateChanceText();
         applySearch();
     });
-    const chanceText = ["Common <= 1/32", "Uncommon <= 1/128", "Rare <= 1/1,024", "Very Rare <= 1/8,192", "Everything"]
+    const chanceText = ["Common ≥ 1/32", "Uncommon ≥ 1/128", "Rare ≥ 1/1,024", "Very Rare ≥ 1/8,192", "Everything"]
     const updateChanceText = () => elements.divChanceRange.innerHTML = chanceText[controls.chanceRange.value]
     updateChanceText()
     controls.enableHeightFilter.addEventListener("change", applySearch);

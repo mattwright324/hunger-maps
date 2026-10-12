@@ -286,6 +286,46 @@ lootSources.forEach(row => {
     if (!LOOT_SOURCE_TABLES[row.SourceName]) LOOT_SOURCE_TABLES[row.SourceName] = combineTables(row.SourceName, LOOT_SOURCES[row.SourceName]);
 })
 
+// TEMP: console helper, e.g. findItemSources("ID_Money_Gold") or findItemSources("Gold Coin")
+window.findItemSources = (name) => {
+    const query = name.toLowerCase();
+
+    // LootSource -> unique container display names across all maps (AI spawners use the monster's display name)
+    const containerNames = {};
+    const addName = (source, displayName) => {
+        if (!source || !displayName) return;
+        (containerNames[source] ??= new Set()).add(displayName);
+    };
+    Object.values(presets).forEach(preset => preset.rawData.forEach(row => {
+        addName(row.LootSource, row.DisplayName || row.OuterType);
+        AI_TABLES[row.AISpawner]?.forEach(monster => addName(monster.LootSource, monster.DisplayName || monster.ObjectName));
+    }));
+
+    const results = [];
+    Object.entries(LOOT_SOURCE_TABLES).forEach(([sourceName, table]) => {
+        table.forEach(row => {
+            const item = ITEMS[row["ObjectName"]];
+            if (row["ObjectName"]?.toLowerCase() !== query && item?.DisplayName?.toLowerCase() !== query) return;
+            const percent = Number(row["WeightPercent"]);
+            const containers = containerNames[sourceName] ?? new Set(["(unused)"]);
+            containers.forEach(container => results.push({
+                Container: container,
+                Source: sourceName,
+                Item: row["ObjectName"],
+                Percent: percent.toPrecision(3) + "%",
+                Ratio: 100 / percent,
+            }));
+        });
+    });
+    // Most likely first (smallest 1/x), sorted on the unrounded ratio before formatting
+    results.sort((a, b) => a.Ratio - b.Ratio);
+    results.forEach(r => r.Ratio = "1/" + Math.round(r.Ratio).toLocaleString());
+    console.table(results);
+    return results;
+}
+
+
+
 const aiTables = await getAiCsvData("./data/ai_tables.csv?v=" + elements.metaVersion);
 export const AI_TABLES = {}
 aiTables.forEach(row => {
