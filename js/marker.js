@@ -101,6 +101,12 @@ class Marker {
         return this.#table;
     }
 
+    // Loot source the table data was built from, if it came from one (for roll counts)
+    get #tableSource() {
+        const tableData = this.tableData;
+        return tableData && tableData === data.LOOT_SOURCE_TABLES[this.#row.LootSource] ? this.#row.LootSource : null;
+    }
+
     // Estimated average copper value of everything this marker yields
     get estValue() {
         return this.#estValue.total;
@@ -375,21 +381,26 @@ class Marker {
         }
         const tableData = this.tableData;
         if (tableData) {
+            const tableSource = this.#tableSource;
             let loot = 0;
             tableData.forEach(row => {
-                loot += this.#itemAvgValue(row["ObjectName"], Number(row["WeightPercent"]));
+                loot += this.#itemAvgValue(row["ObjectName"], this.#containerPercent(tableSource, row));
                 const subTable = data.LOOT_SOURCE_TABLES[row["LootSource"]];
                 if (subTable) {
-                    const subLoot = subTable.reduce((sum, row2) => sum + this.#itemAvgValue(row2["ObjectName"], Number(row2["WeightPercent"])), 0)
-                        * (Number(data.LOOT_SOURCES[row["LootSource"]]?.[0]?.MaxEntries) || 1);
+                    const subLoot = subTable.reduce((sum, row2) => sum + this.#itemAvgValue(row2["ObjectName"], this.#containerPercent(row["LootSource"], row2)), 0);
                     loot += subLoot * (Number(row["WeightPercent"]) || 0) / 100;
                 }
             })
-            estValue.loot = loot * (Number(data.LOOT_SOURCES[this.#row.LootSource]?.[0]?.MaxEntries) || 1);
+            estValue.loot = loot;
         }
 
         estValue.total = estValue.resource + estValue.grants + estValue.loot;
         return estValue;
+    }
+
+    // Chance an entry appears at least once per container; a single roll's chance if the table has no loot source
+    #containerPercent(sourceName, row) {
+        return (sourceName && data.containerChances(sourceName))?.get(row["ObjectName"]) ?? Number(row["WeightPercent"]);
     }
 
     #itemValue(itemId) {
@@ -442,19 +453,27 @@ class Marker {
         return whole ? `${v}${suffix}` : `${v.toFixed(1)}${suffix}`;
     }
 
-    #itemLine(percent, itemHtml, value) {
+    #chanceText(percent) {
+        return percent === 100 ? "Always" : Number(percent) === 0 ? "Never" : Number.isFinite(Number(percent)) ? `1/${this.#readableNumber(100 / Number(percent))}` : Number(percent);
+    }
+
+    // percent is the chance per roll, containerPercent the chance per container when the roll count is known
+    #itemLine(percent, itemHtml, value, containerPercent = percent) {
         let multiplier = 1;
         // Rough estimate for vendor markup multiplier. Could not find data confirming.
         // Measured from TT3 shop prices from videos/screenshots vs item value from the game data.
         // However, the multiplier appears to vary a lot (x5 - x4) and it is unknown how much reputation affects it.
         if (this.#class === "npc") multiplier = 4.277
         value = value * multiplier;
+        const percentTitle = containerPercent === percent
+            ? `${Number(percent)}`
+            : `Per roll: ${this.#chanceText(percent)} (${Number(percent)}%)\nPer container: ${this.#chanceText(containerPercent)} (${Number(containerPercent)}%)`;
         const percentHtml = percent === null || percent === undefined || percent === ""
             ? ""
-            : `<span class="loot-percent" title='${Number(percent)}' style="color:${this.#percentColor(percent)}">${percent === 100 ? "Always" : Number.isFinite(Number(percent)) ? `1/${this.#readableNumber(100 / Number(percent))}` : Number(percent)}</span>`;
+            : `<span class="loot-percent" title='${percentTitle}' style="color:${this.#percentColor(containerPercent)}">${this.#chanceText(containerPercent)}</span>`;
         const valueHtml = value === null || value === undefined
             ? ""
-            : `<span class="loot-value" title="Total: ${Number(value).toLocaleString()}\nWeighted: ${Number(value * (Number(percent) / 100)).toLocaleString()}">${this.formatCoins(value)}</span>`;
+            : `<span class="loot-value" title="Total: ${Number(value).toLocaleString()}\nWeighted: ${Number(value * (Number(containerPercent) / 100)).toLocaleString()}">${this.formatCoins(value)}</span>`;
         return `<div class="loot-row">${percentHtml}<span class="loot-item">${itemHtml}</span>${valueHtml}</div>`;
     }
 
@@ -484,12 +503,12 @@ class Marker {
         return `<tr><td><strong>${label}</strong></td><td>${this.#itemLine(null, this.#formatItem(itemId), this.#itemValue(itemId))}</td></tr>`;
     }
 
-    #formatLootEntry(row) {
+    #formatLootEntry(row, sourceName) {
         const percent = Number(row["WeightPercent"]);
         const tableName = row["TableName"]?.replace("DA_AISpawner_", "");
         const objectName = row["ObjectName"];
         if (data.ITEMS[objectName]) {
-            return this.#itemLine(percent, this.#formatItem(objectName, tableName), this.#itemValue(objectName));
+            return this.#itemLine(percent, this.#formatItem(objectName, tableName), this.#itemValue(objectName), this.#containerPercent(sourceName, row));
         }
         let name = `<span class="name">${encodeHTML(objectName || "")}</span>`;
         if (row["DisplayName"]) {
@@ -502,13 +521,14 @@ class Marker {
         let cached = tableRowsCache.get(tableData);
         if (!cached) tableRowsCache.set(tableData, cached = {});
         const key = this.#class === "npc" ? "npc" : "other";
+        const tableSource = this.#tableSource;
         return cached[key] ??= tableData.map(row => {
-            let html = `<tr><td colspan="2" class="${row["TableName"].startsWith("DA_AI") ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${row["WeightPercent"]}">${this.#formatLootEntry(row)}</td></tr>`;
+            let html = `<tr><td colspan="2" class="${row["TableName"].startsWith("DA_AI") ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${this.#containerPercent(tableSource, row)}">${this.#formatLootEntry(row, tableSource)}</td></tr>`;
 
             const subTableData = data.LOOT_SOURCE_TABLES[row["LootSource"]];
             if (subTableData) {
                 const subrows = subTableData.map(row2 =>
-                    `<tr><td colspan="2" class="filterable" data-item="${row2["ObjectName"]}" data-percent="${row2["WeightPercent"]}">${this.#formatLootEntry(row2)}</td></tr>`);
+                    `<tr><td colspan="2" class="filterable" data-item="${row2["ObjectName"]}" data-percent="${this.#containerPercent(row["LootSource"], row2)}">${this.#formatLootEntry(row2, row["LootSource"])}</td></tr>`);
                 html += `<tr><td colspan="2" class="loot-subtable"><table class="marker-info-table table table-sm table-striped mb-0">${subrows.join("")}</table></td></tr>`;
             }
             return html;

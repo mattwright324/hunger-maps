@@ -79,6 +79,13 @@ async function parseMarkerCSV(text) {
     return rows;
 }
 
+// CSV WeightPercent is rounded to 4 decimals, leaving rare entries with only 1-2 significant digits.
+// Recalculate it from the raw weights, keeping the CSV value when they aren't numbers (header row)
+function exactPercent(Weight, WeightSum, WeightPercent) {
+    const percent = 100 * Number(Weight) / Number(WeightSum);
+    return Number.isFinite(percent) ? percent : WeightPercent;
+}
+
 async function getLootCsvData(url) {
     return await fetch(url)
         .then(r => r.text())
@@ -94,7 +101,7 @@ async function parseLootCSV(text) {
 
         const [TableName, Weight, WeightSum, WeightPercent, ObjectName] = cols;
 
-        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName});
+        rows.push({TableName, Weight, WeightSum, WeightPercent: exactPercent(Weight, WeightSum, WeightPercent), ObjectName});
     }
 
     console.log("Parsed CSV data:", rows.length, text);
@@ -116,7 +123,7 @@ async function parseSourceCSV(text) {
 
         const [SourceName,MinEntries,MaxEntries,LootTable,TableName,Weight,WeightSum,WeightPercent,AlwaysSpawn] = cols;
 
-        rows.push({SourceName,MinEntries,MaxEntries,LootTable,TableName,Weight,WeightSum,WeightPercent,AlwaysSpawn});
+        rows.push({SourceName,MinEntries,MaxEntries,LootTable,TableName,Weight,WeightSum,WeightPercent: exactPercent(Weight, WeightSum, WeightPercent),AlwaysSpawn});
     }
 
     console.log("Parsed CSV data:", rows.length, text);
@@ -138,7 +145,7 @@ async function parseAiCSV(text) {
 
         const [TableName, Weight, WeightSum, WeightPercent, ObjectName, DisplayName, LootSource] = cols;
 
-        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName, DisplayName, LootSource});
+        rows.push({TableName, Weight, WeightSum, WeightPercent: exactPercent(Weight, WeightSum, WeightPercent), ObjectName, DisplayName, LootSource});
     }
 
     console.log("Parsed CSV data:", rows.length, text);
@@ -204,7 +211,7 @@ async function parseVendorCSV(text) {
 
         const [TableName, Weight, WeightSum, WeightPercent, ObjectName] = cols;
 
-        rows.push({TableName, Weight, WeightSum, WeightPercent, ObjectName});
+        rows.push({TableName, Weight, WeightSum, WeightPercent: exactPercent(Weight, WeightSum, WeightPercent), ObjectName});
     }
 
     console.log("Parsed CSV data:", rows.length, text);
@@ -233,8 +240,10 @@ function combineTables(sourceName, sources) {
         copy.push(...table.map(entry => ({ ...entry })));
         copy.forEach(entry => {
             const percentNote = Number(source["WeightPercent"]).toFixed(2) + "% " + Number(entry["WeightPercent"]).toFixed(2) + "% " + source["TableName"];
-            const weight = 1000 * (Number(entry["WeightPercent"] || 1) / 100) * ((Number(source["WeightPercent"]) || 1) / 100)
+            const weight = 1000 * ((Number(entry["WeightPercent"]) || 0) / 100) * ((Number(source["WeightPercent"]) || 0) / 100)
             const objectName = entry["ObjectName"]
+            // Zero weight entries or sub tables can never drop
+            if (!weight) return;
 
             if (!combinedByObjectName.has(objectName)) {
                 combinedByObjectName.set(objectName, {
@@ -286,6 +295,76 @@ lootSources.forEach(row => {
     if (!LOOT_SOURCE_TABLES[row.SourceName]) LOOT_SOURCE_TABLES[row.SourceName] = combineTables(row.SourceName, LOOT_SOURCES[row.SourceName]);
 })
 
+// Exact chance each entry is drawn at least once in k weighted draws without duplicates, for every k in [1, maxK].
+// Weighted draws without replacement are equivalent to each entry arriving at an exponential time with rate = weight,
+// the first k arrivals being the drawn entries. So P(i drawn) = ∫ w_i·e^(-w_i·t)·P(fewer than k others arrived by t) dt,
+// integrated over log(t) with the trapezoid rule.
+function inclusionChances(weights, maxK) {
+    const n = weights.length;
+    const result = Array.from({length: maxK + 1}, () => new Array(n).fill(0));
+    const total = weights.reduce((sum, w) => sum + w, 0);
+    if (!total || maxK < 1) return result;
+    const w = weights.map(x => x / total);
+    const minW = Math.min(...w.filter(x => x > 0));
+    const lo = Math.log(1e-6), hi = Math.log(50 / minW), steps = 150, h = (hi - lo) / steps;
+    // pre[i][m] / suf[i][m] = P(exactly m of entries before / from i arrived), truncated to m < maxK
+    const pre = Array.from({length: n + 1}, () => new Float64Array(maxK));
+    const suf = Array.from({length: n + 1}, () => new Float64Array(maxK));
+    pre[0][0] = 1;
+    suf[n][0] = 1;
+    for (let s = 0; s <= steps; s++) {
+        const t = Math.exp(lo + s * h);
+        const trap = (s === 0 || s === steps) ? 0.5 : 1;
+        const q = w.map(x => 1 - Math.exp(-x * t));
+        for (let i = 0; i < n; i++) for (let m = 0; m < maxK; m++)
+            pre[i + 1][m] = pre[i][m] * (1 - q[i]) + (m > 0 ? pre[i][m - 1] * q[i] : 0);
+        for (let i = n - 1; i >= 0; i--) for (let m = 0; m < maxK; m++)
+            suf[i][m] = suf[i + 1][m] * (1 - q[i]) + (m > 0 ? suf[i + 1][m - 1] * q[i] : 0);
+        for (let i = 0; i < n; i++) {
+            if (!w[i]) continue;
+            const density = w[i] * t * Math.exp(-w[i] * t) * h * trap;
+            let fewer = 0; // P(fewer than k others arrived), accumulated as k grows
+            for (let k = 1; k <= maxK; k++) {
+                for (let a = 0; a < k; a++) fewer += pre[i][a] * suf[i + 1][k - 1 - a];
+                result[k][i] += density * fewer;
+            }
+        }
+    }
+    // Enough rolls to draw every entry, exactly rather than integration error away from it
+    const positive = w.filter(x => x > 0).length;
+    for (let k = positive; k <= maxK; k++) result[k] = w.map(x => x > 0 ? 1 : 0);
+    return result;
+}
+
+// ObjectName -> percent chance the item appears at least once in a container of this loot source,
+// accounting for the random roll count (uniform in MinEntries-MaxEntries) and no duplicate items per container.
+// AlwaysSpawn tables are assumed to use up one roll each and guarantee their items.
+const containerChanceCache = {};
+export function containerChances(sourceName) {
+    if (sourceName in containerChanceCache) return containerChanceCache[sourceName];
+    const sources = LOOT_SOURCES[sourceName];
+    const table = LOOT_SOURCE_TABLES[sourceName];
+    if (!sources || !table) return containerChanceCache[sourceName] = null;
+
+    const minRolls = Number(sources[0].MinEntries) || 1;
+    const maxRolls = Math.max(minRolls, Number(sources[0].MaxEntries) || 1);
+    const alwaysTables = sources.filter(source => source.AlwaysSpawn === "True");
+    const guaranteed = new Set(alwaysTables.flatMap(source => (LOOT_TABLES[source.TableName] || []).map(entry => entry.ObjectName)));
+
+    const chances = new Map();
+    guaranteed.forEach(objectName => chances.set(objectName, 100));
+    const rolled = table.filter(row => !guaranteed.has(row.ObjectName));
+    const minK = Math.max(0, minRolls - alwaysTables.length);
+    const maxK = Math.max(0, maxRolls - alwaysTables.length);
+    const byK = inclusionChances(rolled.map(row => Number(row.Weight) || 0), maxK);
+    rolled.forEach((row, i) => {
+        let sum = 0;
+        for (let k = minK; k <= maxK; k++) sum += k > 0 ? byK[k][i] : 0;
+        chances.set(row.ObjectName, 100 * sum / (maxK - minK + 1));
+    });
+    return containerChanceCache[sourceName] = chances;
+}
+
 // TEMP: console helper, e.g. findItemSources("ID_Money_Gold") or findItemSources("Gold Coin")
 window.findItemSources = (name) => {
     const query = name.toLowerCase();
@@ -307,19 +386,28 @@ window.findItemSources = (name) => {
             const item = ITEMS[row["ObjectName"]];
             if (row["ObjectName"]?.toLowerCase() !== query && item?.DisplayName?.toLowerCase() !== query) return;
             const percent = Number(row["WeightPercent"]);
+            const containerPercent = containerChances(sourceName)?.get(row["ObjectName"]) ?? percent;
+            const source = LOOT_SOURCES[sourceName]?.[0];
             const containers = containerNames[sourceName] ?? new Set(["(unused)"]);
             containers.forEach(container => results.push({
                 Container: container,
                 Source: sourceName,
                 Item: row["ObjectName"],
-                Percent: percent.toPrecision(3) + "%",
-                Ratio: 100 / percent,
+                Rolls: source ? `${source.MinEntries}-${source.MaxEntries}` : "",
+                ItemPercent: percent.toPrecision(3) + "%",
+                ItemRatio: 100 / percent,
+                ContainerPercent: containerPercent.toPrecision(3) + "%",
+                ContainerRatio: 100 / containerPercent,
             }));
         });
     });
-    // Most likely first (smallest 1/x), sorted on the unrounded ratio before formatting
-    results.sort((a, b) => a.Ratio - b.Ratio);
-    results.forEach(r => r.Ratio = "1/" + Math.round(r.Ratio).toLocaleString());
+    // Most likely per container first (smallest 1/x), sorted on the unrounded ratio before formatting
+    results.sort((a, b) => a.ContainerRatio - b.ContainerRatio || a.ItemRatio - b.ItemRatio);
+    const formatRatio = ratio => "1/" + (ratio < 10 ? Number(ratio.toFixed(2)) : Math.round(ratio)).toLocaleString();
+    results.forEach(r => {
+        r.ItemRatio = formatRatio(r.ItemRatio);
+        r.ContainerRatio = formatRatio(r.ContainerRatio);
+    });
     console.table(results);
     return results;
 }
