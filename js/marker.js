@@ -677,13 +677,13 @@ class Marker {
                 this.#tint = 0xFFFFFF;
                 this.#zIndex = 60;
 
-                // Greater than 6 silver mark as good
-                if (this.estValue > 600) {
+                // Greater than 5 silver mark as good
+                if (this.estValue > 500) {
                     this.#tint = 0xFFF0B2;
                     this.#zIndex = 100;
                     this.#descriptors.push("good");
                 }
-                if (this.estValue > 2000) {
+                if (this.estValue > 1500) {
                     this.#tint = 0xFFD800;
                     this.#zIndex = 110;
                     this.#descriptors.push("great");
@@ -770,12 +770,12 @@ class Marker {
                 sprite.texture = textures.charcoal;
             }
 
-            // Greater than 6 silver mark as good
-            if (this.estValue > 600) {
+            // Greater than 5 silver mark as good
+            if (this.estValue > 500) {
                 this.#zIndex = 100;
                 this.#descriptors.push("good");
             }
-            if (this.estValue > 2000) {
+            if (this.estValue > 1500) {
                 this.#tint = 0xFFD800;
                 this.#zIndex = 110;
                 this.#descriptors.push("great");

@@ -181,7 +181,7 @@ def contains_string(obj, needle):
         return True
     return False
 
-def export_inventory_items():
+def export_inventory_items_recipes():
     item_objects = []
     for folder in [INVENTORY_DEFS, SMART_BRUSHES]:
         for root, _, files in os.walk(folder):
@@ -213,6 +213,7 @@ def export_inventory_items():
                 brushes[item_tag] = image
             else:
                 print(f"No image for {item_tag}")
+    item_dict = {}
     items_csv = []
     for obj_type in item_resolver.by_type:
         for obj in item_resolver.by_type[obj_type]:
@@ -245,7 +246,55 @@ def export_inventory_items():
                 icon = brushes[brush]
                 icon_src = "Smart Brush"
 
+            item_dict[name] = {
+                "BrushID": brush,
+                "Icon": icon,
+                "IconSrc": icon_src,
+                "DisplayName": display_name,
+                "Value": value,
+                "Rarity": rarity,
+                "Capacity": capacity,
+                "MaxStackSize": max_stack_size,
+                "LootGenMin": loot_gen_min,
+                "LootGenMax": loot_gen_max
+            }
             items_csv.append([type, name, brush, icon, icon_src, display_name, value, rarity, capacity, max_stack_size, loot_gen_min, loot_gen_max])
+
+    recipes = []
+    for obj in item_resolver.by_type["InventoryDefinition_CraftingRecipe"]:
+        props = obj.get("Properties")
+        result_item = None
+        item_name = props.get("CraftedItem", {}).get("ObjectName")
+        if item_name:
+            matches = re.search(r"(\w+)'(?:\w+:PersistentLevel\.)?(\w+)(?:[:.]\w+)?'", item_name)
+            if matches:
+                item_name = matches.group(2)
+                result_item = item_dict.get(item_name)
+
+        material_cost = 0
+        for m in props.get("Materials", []):
+            key = m.get("Key", "")
+            amount = m.get("Value", 0)
+            matches = re.search(r"(\w+)'.+\.(\w+)'", key)
+            if matches:
+                m_item = item_dict.get(matches.group(2))
+                if m_item:
+                    material_cost += int(amount or 0) * int(m_item.get("Value") or 0)
+                else:
+                    print(f"Unknown material {matches.group(2)}")
+
+        if result_item:
+            prof = (props.get("UsableByProfessions") or [""])[0]
+            level = int(props.get("RecipeLevel") or 0)
+            print(f"{prof} {level} {item_name} {result_item.get("DisplayName")} {result_item.get("Value")} {material_cost} {int(result_item.get("Value") or 0) - material_cost}")
+            recipes.append([prof, level, item_name, result_item.get("DisplayName"), result_item.get("Value"), material_cost, int(result_item.get("Value") or 0) - material_cost])
+
+    with open("output/recipe_items.csv", "w", newline="", encoding="utf-8") as csvfile:
+        writer = csv.writer(csvfile)
+        writer.writerow(["Profession", "Level", "ItemName", "DisplayName", "Value", "MaterialCost", "Profit"])
+        recipes.sort(key=lambda r: (r[0], r[1], r[2]), reverse=True)
+        writer.writerows(recipes)
+        print(f"Wrote {len(recipes)} rows to output/recipe_items.csv")
 
     with open("output/inventory_items.csv", "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile)
@@ -859,10 +908,10 @@ def get_bp_objects():
 def main():
     os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
-    export_loot_sources()
+    # export_loot_sources()
     # export_loot_tables()
     # export_ai_tables()
-    # export_inventory_items()
+    export_inventory_items_recipes()
     # export_resource_nodes()
 
     # bp_objects = get_bp_objects()

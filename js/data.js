@@ -295,8 +295,6 @@ lootSources.forEach(row => {
     if (!LOOT_SOURCE_TABLES[row.SourceName]) LOOT_SOURCE_TABLES[row.SourceName] = combineTables(row.SourceName, LOOT_SOURCES[row.SourceName]);
 })
 
-// Chance of each roll count. The game picks a random number in MinEntries-MaxEntries and rounds it,
-// so the end counts only get half as much of the range as the ones between (1-3 is 25% / 50% / 25%)
 function rollCountChances(minRolls, maxRolls) {
     if (maxRolls <= minRolls) return new Map([[minRolls, 1]]);
     const span = maxRolls - minRolls;
@@ -305,10 +303,6 @@ function rollCountChances(minRolls, maxRolls) {
     return chances;
 }
 
-// ObjectName -> percent chance the item appears in a container of this loot source.
-// Every roll picks from the full table; a roll landing on an item already in the container is lost (no reroll),
-// so the chance is 1 - (1 - p)^k for k rolls, averaged over the roll count chances.
-// AlwaysSpawn tables are assumed to use up one roll each and guarantee their items.
 const containerChanceCache = {};
 export function containerChances(sourceName) {
     if (sourceName in containerChanceCache) return containerChanceCache[sourceName];
