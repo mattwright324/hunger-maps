@@ -2,6 +2,8 @@ import {textures} from "textures";
 import * as data from "data";
 import {controls} from "dom";
 
+const debug = new URLSearchParams(window.location.search).has("debug");
+
 let stickyMarker = null;
 let justTapped = false;
 
@@ -482,17 +484,17 @@ class Marker {
         return `<div class="loot-row">${percentHtml}<span class="loot-item">${itemHtml}</span>${valueHtml}</div>`;
     }
 
-    #formatItem(itemId, muted) {
+    #formatItem(itemId, tableName) {
         const item = data.ITEMS[itemId];
         const notes = [];
         if (!item) {
-            if (muted) notes.push(muted);
+            if (tableName && debug) notes.push(tableName);
             return `<span class="name">${encodeHTML(itemId)}</span>${this.#formatNotes(notes)}`;
         }
         const min = Number(item.LootGenMin) || 1
         const max = Number(item.LootGenMax) || 1
         if (min > 1 || max > 1) notes.push(`(${min}-${max} items)`);
-        if (muted) notes.push(muted);
+        if (tableName && debug) notes.push(tableName);
         return `<span class="item ${item?.Rarity?.replaceAll('.', ' ')}"><img alt="Icon" src="items/${item.Icon || "Placeholder"}.png" height="30" loading="lazy"><span class="name">${encodeHTML(item.DisplayName)}</span></span>${this.#formatNotes(notes)}`
     }
 

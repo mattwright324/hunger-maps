@@ -1,6 +1,8 @@
 import {elements} from "dom";
 import Marker from "marker";
 
+const debug = new URLSearchParams(window.location.search).has("debug");
+
 function splitCSVLine(line) {
     const cols = [];
     let cur = "";
@@ -465,7 +467,7 @@ function inMapImage(preset, row) {
     return 0 <= x && x <= 4096 && -500 <= y && y <= 4096;
 }
 
-if (!new URLSearchParams(window.location.search).has("debug")) {
+if (!debug) {
     Object.values(presets).forEach(preset => preset.rawData = preset.rawData.filter(row => inMapImage(preset, row)));
 }
 
