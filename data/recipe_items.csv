@@ -1,0 +1,163 @@
+Profession,Level,ItemName,DisplayName,Value,MaterialCost,Profit
+Profession.Scavenger,300,ID_Legendary_GoldBar,Gold Bar,1635,1486,149
+Profession.Scavenger,300,ID_Legendary_BoltOfSilkCloth,Bolt of Silk Cloth,1705,1550,155
+Profession.Scavenger,225,ID_Epic_SilverBar,Silver Bar,380,344,36
+Profession.Scavenger,225,ID_Epic_BoltOfFineWool,Bolt of Fine Wool,350,318,32
+Profession.Scavenger,150,ID_Rare_IronBar,Iron Bar,94,86,8
+Profession.Scavenger,150,ID_Rare_BoltOfCottonCloth,Bolt of Cotton Cloth,90,82,8
+Profession.Scavenger,75,ID_Uncommon_CopperBar,Copper Bar,32,30,2
+Profession.Scavenger,75,ID_Uncommon_BoltOfLinenCloth,Bolt Of Linen Cloth,30,28,2
+Profession.Scavenger,0,ID_Common_LeadBar,Lead Bar,12,10,2
+Profession.Scavenger,0,ID_Common_BoltOfBurlapCloth,Bolt Of Burlap Cloth,10,8,2
+Profession.Physician,350,ID_Med_Legendary06,The Psychopomp,73530,58848,14682
+Profession.Physician,300,ID_Med_Ampoule_Legendary,Ambrosia,7866,6072,1794
+Profession.Physician,275,ID_Med_Epic07,Scarlet Return,11683,9341,2342
+Profession.Physician,250,ID_Med_Antidote_Heavy,Mother’s Blood,4100,3265,835
+Profession.Physician,225,ID_Med_Ampoule_Epic,Empusa's Tonic,3807,3062,745
+Profession.Physician,200,ID_Med_Rare04,Pressurised Bloodbag,1966,1549,417
+Profession.Physician,175,ID_Med_Antidote_Medium,Robust Antidote,690,541,149
+Profession.Physician,150,ID_Med_Ampoule_Rare,Robust Ampoule,623,421,202
+Profession.Physician,125,ID_Med_Uncommon03,Sealed Bloodbag,531,427,104
+Profession.Physician,100,ID_Med_Antidote_Light,Weak Antidote,178,133,45
+Profession.Physician,75,ID_Med_Ampoule_Uncommon,Basic Ampoule,158,111,47
+Profession.Physician,50,ID_Med_Common03,Crude Bloodbag,130,57,73
+Profession.Physician,0,ID_Med_Ampoule_Common,Crude Ampoule ,32,22,10
+Profession.Outfitter,370,ID_WeaponBag_Legendary01,Apollo Holster,44000,35259,8741
+Profession.Outfitter,370,ID_Lockbox_Legendary01,Charon's Oyster,450000,360267,89733
+Profession.Outfitter,360,ID_BackBag_Legendary03,Sheath of the Four Winds,42000,33535,8465
+Profession.Outfitter,350,ID_Armor_Leg_Legendary01,Old Guard Greaves,27800,22228,5572
+Profession.Outfitter,345,ID_BackBag_Legendary02,Zealot's Tower,37000,29580,7420
+Profession.Outfitter,335,ID_HipBag_Legendary02,Pegasus,25000,20021,4979
+Profession.Outfitter,325,ID_Armor_Head_Legendary01,Old Guard Helmet,21600,17266,4334
+Profession.Outfitter,320,ID_Armor_Chest_Legendary01,Old Guard Cuirass,32300,25881,6419
+Profession.Outfitter,310,ID_BackBag_Legendary01,Coldstream Pack,28000,22414,5586
+Profession.Outfitter,301,ID_Lockbox_Epic01,Silver Pocket,62000,49320,12680
+Profession.Outfitter,300,ID_HipBag_Legendary01,Zazel's Carry,18500,14764,3736
+Profession.Outfitter,295,ID_WeaponBag_Epic01,Boutet's Riflecase,6800,5448,1352
+Profession.Outfitter,285,ID_HipBag_Epic03,Miser's Purse,5200,4136,1064
+Profession.Outfitter,275,ID_Armor_Leg_Epic01,Black Dragoon Greaves,4200,4272,-72
+Profession.Outfitter,265,ID_BackBag_Epic02,Bag of Maratha,6400,5109,1291
+Profession.Outfitter,255,ID_HipBag_Epic02,Butterfly Cannister,4500,3559,941
+Profession.Outfitter,250,ID_Armor_Head_Epic01,Black Dragoon Helmet,3632,2904,728
+Profession.Outfitter,240,ID_Armor_Chest_Epic01,Black Dragoon Cuirass,5150,4142,1008
+Profession.Outfitter,230,ID_BackBag_Epic01,Trevallion's Valise,5800,4654,1146
+Profession.Outfitter,225,ID_HipBag_Epic01,Case of the Old Guard,3800,3041,759
+Profession.Outfitter,220,ID_WeaponBag_Rare01,Hunting Sling,1750,1396,354
+Profession.Outfitter,210,ID_Armor_Leg_Rare01,Sapper's Greaves,680,539,141
+Profession.Outfitter,200,ID_BackBag_Rare02,Grenadier's Battlepack,1492,1163,329
+Profession.Outfitter,190,ID_HipBag_Rare02,Attachés Fold,1052,850,202
+Profession.Outfitter,185,ID_Armor_Head_Rare01,Sapper's Helmet,718,548,170
+Profession.Outfitter,175,ID_Armor_Chest_Rare01,Sapper's Cuirass,787,619,168
+Profession.Outfitter,160,ID_BackBag_Rare01,Ludwig's Drumcase,1265,1012,253
+Profession.Outfitter,150,ID_HipBag_Rare01,Grubber's Purse,938,750,188
+Profession.Outfitter,135,ID_BackBag_Uncommon03,Leather Barrel Bag,323,262,61
+Profession.Outfitter,125,ID_Armor_Leg_Uncommon01,Leather Greaves,178,140,38
+Profession.Outfitter,120,ID_HipBag_Uncommon03,Old Satchel,252,202,50
+Profession.Outfitter,110,ID_Armor_Head_Uncommon01,Leather Helmet,170,136,34
+Profession.Outfitter,105,ID_BackBag_Uncommon02,Muriel's Box,311,367,-56
+Profession.Outfitter,95,ID_HipBag_Uncommon02,Threshing Basket,220,172,48
+Profession.Outfitter,90,ID_Armor_Chest_Uncommon01,Leather Cuirass,243,184,59
+Profession.Outfitter,80,ID_BackBag_Uncommon01,Burlap Haversack,273,214,59
+Profession.Outfitter,75,ID_HipBag_Uncommon01,Ragged Sack,150,125,25
+Profession.Outfitter,65,ID_BackBag_Common02,Foraging Basket,90,74,16
+Profession.Outfitter,50,ID_Armor_Chest_Common01,Quilted Cuirass,94,75,19
+Profession.Outfitter,25,ID_BackBag_Common01,Damp Knapsack,78,62,16
+Profession.Outfitter,15,ID_HipBag_Common02,Rusty Bucket,44,35,9
+Profession.Outfitter,0,ID_HipBag_Common01,Moist Pouch,38,30,8
+Profession.Naturalist,300,ID_Spice_05_MalabarPepper,Malabar Pepper,3531,3210,321
+Profession.Naturalist,300,ID_Herb_05_MilkofPoppy,Milk of Poppy,2512,2285,227
+Profession.Naturalist,225,ID_Spice_04_SaffronThreads,Saffron Threads,814,740,74
+Profession.Naturalist,225,ID_Herb_04_FungalUnguent,Fungal Unguent,555,505,50
+Profession.Naturalist,150,ID_Spice_03_FineCinnamon,Fine Cinnamon,194,180,14
+Profession.Naturalist,150,ID_Herb_03_PinkYarrowDust,Yarrow Dust,133,120,13
+Profession.Naturalist,75,ID_Spice_02_OilOfClove,Oil of Clove,40,40,0
+Profession.Naturalist,75,ID_Herb_02_DriedRosemary,Dried Rosemary,28,25,3
+Profession.Naturalist,0,ID_Spice_01_SourGarlic,Sour Garlic,22,20,2
+Profession.Naturalist,0,ID_Herb_01_LavenderOil,Lavender Oil,16,15,1
+Profession.Metallurgist,352,ID_Weap_2HMelee_Legendary02,Zweihander,38000,30393,7607
+Profession.Metallurgist,275,ID_Weap_2HMelee_Epic02,Halberd,4800,3706,1094
+Profession.Metallurgist,225,ID_Weap_1HMelee_Epic01,Sabre,3800,3032,768
+Profession.Metallurgist,200,ID_Weap_2HMelee_Rare02,War Axe,1000,799,201
+Profession.Metallurgist,185,ID_Weap_2HMelee_Rare01,Spear,920,736,184
+Profession.Metallurgist,165,ID_Weap_1HMelee_Rare02,Axe,650,509,141
+Profession.Metallurgist,150,ID_Weap_1HMelee_Rare01,Rapier,600,479,121
+Profession.Metallurgist,125,ID_Weap_2HMelee_Uncommon01,Longsword,525,417,108
+Profession.Metallurgist,100,ID_Weap_1HMelee_Uncommon02,Mace,324,259,65
+Profession.Metallurgist,75,ID_Weap_1HMelee_Uncommon01,Short Sword,296,241,55
+Profession.Metallurgist,50,ID_Weap_2HMelee_Common01,Club,248,198,50
+Profession.Metallurgist,0,ID_Weap_1HMelee_Common01,Dagger,94,75,19
+Profession.Gunsmith,375,ID_Weap_Rifle_Scope_Legendary04,Farsight Drak,,0,0
+Profession.Gunsmith,375,ID_Weap_Rifle_Scope_Epic04,Farsight Swan,,0,0
+Profession.Gunsmith,375,ID_Weap_Rifle_Scope_Epic03,Farsight Voir,,0,0
+Profession.Gunsmith,375,ID_Weap_Rifle_Legendary02,Drak,42500,33975,8525
+Profession.Gunsmith,365,ID_Weap_Rifle_Legendary03,Belier,40000,32603,7397
+Profession.Gunsmith,345,ID_Weap_Pistol_Legendary01,Volcan,28000,22415,5585
+Profession.Gunsmith,301,ID_Weap_Rifle_Legendary01,Jager,35000,27992,7008
+Profession.Gunsmith,299,ID_Weap_Rifle_Epic04,Swan,9200,7357,1843
+Profession.Gunsmith,290,ID_Weap_Pistol_Epic02,Borodino,5200,4142,1058
+Profession.Gunsmith,275,ID_Weap_Rifle_Epic03,Voir,8400,6729,1671
+Profession.Gunsmith,275,ID_Weap_Pistol_Epic01,Morgan,4500,3344,1156
+Profession.Gunsmith,250,ID_Weap_Rifle_Epic02,Lasher,8600,6867,1733
+Profession.Gunsmith,235,ID_Weap_Rifle_Epic01,Lionne,7000,5433,1567
+Profession.Gunsmith,235,ID_Ammunition_05_Exotic,Exotic Ammunition,8000,24000,-16000
+Profession.Gunsmith,225,ID_Weap_Rifle_Rare02,Kompas,1253,1001,252
+Profession.Gunsmith,225,ID_Weap_Pistol_Epic03,Marengo,4200,3363,837
+Profession.Gunsmith,205,ID_Weap_Rifle_Rare01,Vepr,1030,823,207
+Profession.Gunsmith,200,ID_Ammunition_04_Refined,Refined Ammunition,2500,12000,-9500
+Profession.Gunsmith,175,ID_Weap_Pistol_Rare02,Cavalier,918,2487,-1569
+Profession.Gunsmith,160,ID_Ammunition_03_Heavy,Heavy Ammunition,200,12,188
+Profession.Gunsmith,150,ID_Weap_Pistol_Rare01,Deux,881,705,176
+Profession.Gunsmith,145,ID_Weap_Rifle_Uncommon02,Volant,650,516,134
+Profession.Gunsmith,110,ID_Weap_Rifle_Uncommon01,Louisville,560,484,76
+Profession.Gunsmith,75,ID_Weap_Pistol_Uncommon01,Auster,350,261,89
+Profession.Gunsmith,75,ID_Ammunition_02_Medium,Medium Ammunition,8,6,2
+Profession.Gunsmith,50,ID_Weap_Rifle_Common01,Brown Betty,151,121,30
+Profession.Gunsmith,25,ID_Weap_Pistol_Common02,Longboy,131,105,26
+Profession.Gunsmith,0,ID_Weap_Pistol_Common01,Snub,112,90,22
+Profession.Gunsmith,0,ID_Ammunition_01_Crude,Crude Ammunition,3,2,1
+Profession.Cook,365,ID_Drink_Legendary01,Remy of Barbados,8700,9873,-1173
+Profession.Cook,355,ID_Food_Legendary03,Imperial Pot-au-Feu,8126,7837,289
+Profession.Cook,340,ID_Drink_Legendary02,Évian Spring Water,8550,7326,1224
+Profession.Cook,320,ID_Food_Legendary02,Brioche,9358,7453,1905
+Profession.Cook,301,ID_Food_Legendary01,Tarte Tatin,10329,8169,2160
+Profession.Cook,290,ID_Drink_Epic01,Naval Rum,4200,3075,1125
+Profession.Cook,285,ID_Food_Epic03,Burgundy Ragout,3933,3144,789
+Profession.Cook,265,ID_Drink_Epic02,Regimental Reserve,4100,1844,2256
+Profession.Cook,245,ID_Food_Epic02,Spiced Bread,4529,3418,1111
+Profession.Cook,225,ID_Food_Epic01,Candied Apple,4998,3934,1064
+Profession.Cook,215,ID_Drink_Rare01,Rum of the Indies,685,533,152
+Profession.Cook,205,ID_Food_Rare04,Kedgeree,643,509,134
+Profession.Cook,190,ID_Drink_Rare02,Purified Water,665,217,448
+Profession.Cook,170,ID_Food_Rare05,Fougasse Bread,741,597,144
+Profession.Cook,150,ID_Food_Rare01,Apple Pie,819,674,145
+Profession.Cook,140,ID_Drink_Uncommon01,Sweet Rum,175,141,34
+Profession.Cook,130,ID_Food_Uncommon03,Cabbage Soup,163,132,31
+Profession.Cook,110,ID_Drink_Uncommon02,Boiled Water,168,103,65
+Profession.Cook,90,ID_Food_Uncommon04,Fresh Baguette,188,147,41
+Profession.Cook,75,ID_Food_Uncommon01,Jellied Apple,208,158,50
+Profession.Cook,65,ID_Drink_Common04,Spoiled Rum,24,25,-1
+Profession.Cook,55,ID_Food_Common04,Thin Gruel,33,28,5
+Profession.Cook,35,ID_Drink_Common01,Tepid Water,22,27,-5
+Profession.Cook,18,ID_Food_Common05,Mouldy Baguette,38,31,7
+Profession.Cook,0,ID_Food_Common01,Stewed Apple,42,37,5
+Profession.Conservator,300,ID_Legendary_MarksmansSpine,Marksman's Spine,10009,9099,910
+Profession.Conservator,300,ID_Legendary_LiquidMercury,Distilled Mercury,3637,3306,331
+Profession.Conservator,225,ID_Epic_ChromaticLens,Chromatic Lens,376,376,0
+Profession.Conservator,225,ID_Common_LockspringSteel,Lockspring Steel,2286,2078,208
+Profession.Conservator,150,ID_Rare_PolishedFiringPin,Polished Firing Pin,584,530,54
+Profession.Conservator,150,ID_Rare_Ambergris,Ambergris,186,170,16
+Profession.Conservator,75,ID_Uncommon_ForgedTriggerArm,Tempered Trigger Arm,213,194,19
+Profession.Conservator,75,ID_Uncommon_Ferrite,Ferrite,84,76,8
+Profession.Conservator,0,ID_Common_SharpScrews,Sharp Screws,85,77,8
+Profession.Conservator,0,ID_Common_FreshGunpowder,Fresh Gunpowder,2,1,1
+Profession.Conservator,0,ID_Common_CopperFilament,Copper Filament,36,32,4
+Profession.Artificer,350,ID_Tools_Legendary_Repair01,Clockwork Tongs,66177,53024,13153
+Profession.Artificer,300,ID_ArmorPatch_Legendary,Damascus Armour Plate,79,10838,-10759
+Profession.Artificer,275,ID_Tools_Epic_Repair01,Delicate Tongs,10514,33594,-23080
+Profession.Artificer,225,ID_ArmorPatch_Epic,Steel Armour Plate,79,2867,-2788
+Profession.Artificer,200,ID_Tools_Rare_Repair01,Machinist Tongs,1769,1398,371
+Profession.Artificer,150,ID_ArmorPatch_Rare,Ceramic Armour Plate,79,855,-776
+Profession.Artificer,125,ID_Tools_Uncommon_Repair01,Journeyman Tongs,477,375,102
+Profession.Artificer,75,ID_ArmorPatch_Uncommon,Leather Armour Plate,79,218,-139
+Profession.Artificer,50,ID_Tools_Common_Repair01,Rusty Tongs,75,50,25
+Profession.Artificer,0,ID_ArmorPatch_Common,Cloth Armour Plate,79,45,34

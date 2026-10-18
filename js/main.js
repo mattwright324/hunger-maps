@@ -46,13 +46,7 @@ import {loadTexture} from "textures";
         document.getElementById("offsetY").value = preset.offsetY;
         document.getElementById("rotation").value = preset.rotation;
 
-        preset.data().forEach(marker => {
-            // Ignore markers outside of image (except a little bit outside for Jacques Folly)
-            if (!(0 <= marker.sprite.x && marker.sprite.x <= 4096 && -500 <= marker.sprite.y && marker.sprite.y <= 4096)) {
-                return
-            }
-            world.addChild(marker.container)
-        });
+        preset.data().forEach(marker => world.addChild(marker.container));
         pixi.scaleMarkersToZoom();
 
         const sprites = pixi.markerSprites();

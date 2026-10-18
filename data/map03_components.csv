@@ -316,6 +316,8 @@ SceneComponent,BP_AISpawner_C,BP_AISpawner_C_ce52be21fe63b205_1,15592.239,-13553
 SceneComponent,BP_AISpawner_C,BP_AISpawner_C_ce52be21fe63b205_3,15003.199,-13767.498,210.83644,,,,,DA_AISpawner_Military,{}
 SceneComponent,BP_AISpawner_C,BP_AISpawner_C_d30a12f2c04c18d1_1,-12963.07,48371.992,-2245.4531,,,,,DA_AISpawner_Military,{}
 SceneComponent,BP_AISpawner_C,BP_AISpawner_C_d30a12f2c04c18d1_3,-12639.405,47835.453,-2292.0022,,,,,DA_AISpawner_Military,{}
+SceneComponent,BP_AISpawner_C,SPOI_Ruins_Small_01a_C_23.BP_AISpawner,-109463.5071,16077.61338,-736.01983,,,,,DA_ExampleSpawner,{}
+SceneComponent,BP_AISpawner_C,SPOI_Ruins_Small_01a_C_23.BP_AISpawner1,-109759.05664,16364.26516,-736.01983,,,,,DA_ExampleSpawner,{}
 SceneComponent,BP_AISpawner_C,UNP_BP_AISpawner1_00b6a2249b669eac_1,29375.518,42000.336,-2849.4983,,,,,DA_AISpawner_Mobs_Rare,{}
 SceneComponent,BP_AISpawner_C,UNP_BP_AISpawner1_039c8620f5ef8060_2,-146.90845,-11431.682,426.2847,,,,,DA_AISpawner_Peasants,{}
 SceneComponent,BP_AISpawner_C,UNP_BP_AISpawner1_049f5705fc7f2404_1,30171.398,1606.3708,-804.6714,,,,,DA_AISpawner_Mobs_Rare,{}
@@ -952,7 +954,7 @@ SceneComponent,BP_BreakableBridge_01a_C,BP_BreakableBridge_01a_C_UAID_18C04DA820
 SceneComponent,BP_BreakableBridge_02a_C,BP_BreakableBridge_02a_C_UAID_00FF8EFC2BEF673902_1236020032,43525.4,38302.273,-3677.7415,,,,,,"{""health"": ""100.0 HP""}"
 SceneComponent,BP_BreakableBridge_02a_C,BP_BreakableBridge_02a_C_UAID_04D9F5F93AD5783302_1715039077,27803.143,-12214.035,-2493.448,,,,,,"{""health"": ""100.0 HP""}"
 SceneComponent,BP_BreakableWellCover_01a_C,UNP_BP_BreakableWellCover_01a_UAID_0468748824944E8902_c85329728f06dd80_1129898571,-15861.855,10691.782,-38.12351,,,,,,"{""health"": ""100.0 HP""}"
-SceneComponent,BP_DirigibleFlare_C,BP_DirigibleFlare_C_UAID_04D9F5F93AD53E7302_edad57567b47cde9_2091261950,11504.749,-3825.8188,-155.11198,The Stricken Craft,,,,,"{""instruction"": ""Find and activate the Deadsmoke"", ""quest_id"": ""Quest.Reynauld.DQ06"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Activate the Deadsmoke""}"
+SceneComponent,BP_DirigibleFlare_C,BP_DirigibleFlare_C_UAID_04D9F5F93AD53E7302_edad57567b47cde9_2091261950,11504.749,-3825.8188,-155.11198,The Stricken Craft,,,,,"{""interaction"": ""Activate the Deadsmoke"", ""instruction"": ""Find and activate the Deadsmoke"", ""quest_id"": ""Quest.Reynauld.DQ06"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_Door_Cage_01a_C,BP_Door_Cage_01a_C_UAID_046874882494F98A02_2c07323eb2e99beb_1938735635,32733.463,9058.324,1284.5508,,,,,,{}
 SceneComponent,BP_Door_Cage_02a_C,BP_Door_Cage_02a_C_UAID_046874882494F98A02_2c07323eb2e99beb_1938904642,33879.723,9842.942,1163.5013,,,,,,{}
 SceneComponent,BP_Door_Cage_02a_C,BP_Door_Cage_02a_C_UAID_046874882494F98A02_2c07323eb2e99beb_1939054647,33664.62,10027.329,1152.1198,,,,,,{}
@@ -1060,39 +1062,39 @@ SceneComponent,BP_EasyFog_C,BP_EasyFog_C_5,62397.363,-71632.805,43451.91,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7772E02_4cbed4e5a689032f_2087186598,-340576.6,976148.7,24915.0,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7782E02_4b21edfab64d74c7_1508726198,1341588.6,275542.66,461387.44,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_9C6B002263F7782E02_4b21edfab64d74c7_1508727199,1341598.6,275552.66,461387.44,,,,,,{}
-SceneComponent,BP_Etienne_C,BP_Etienne_C_UAID_D843AE1A93E5C0BD02_6eba12598bb1f39f_1593979557,36893.098,14210.943,-7263.2334,The Shako,,,,,"{""instruction"": ""Search for Etienne."", ""grant_items"": {""ID_Lore_Common_ReynauldBP04EtiennesLastNote_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q04"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Search Etienne""}"
+SceneComponent,BP_Etienne_C,BP_Etienne_C_UAID_D843AE1A93E5C0BD02_6eba12598bb1f39f_1593979557,36893.098,14210.943,-7263.2334,The Shako,,,,,"{""interaction"": ""Search Etienne"", ""instruction"": ""Search for Etienne."", ""grant_items"": {""ID_Lore_Common_ReynauldBP04EtiennesLastNote_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_ExtractorsCache_M03_C,BP_ExtractorsCache_M03_C_UAID_D843AE1A93E5AFE502_1871298156,38444.473,-14458.04,-5351.628,The Extractor's Cache,,,,,"{""instruction"": ""Deposit 1x Robust Ampoule, 1x Fresh Baguette, 1x Boiled Water in the Sombre Forest strongbox"", ""quest_id"": ""Quest.Eloise.MQ01"", ""quest_giver"": ""Character.NPC.Eloise""}"
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_581CF8D81CD7B8A302_12e65868fd8f26ee_1362814441,35886.805,19191.395,-5833.2007,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E530E302_12e65868fd8f26ee_1379521144,40285.523,15601.011,-4866.706,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E530E302_12e65868fd8f26ee_1425647145,29874.896,18122.533,-6199.808,,,,,,{}
 SceneComponent,BP_FogDisableVolume_Base_C,BP_FogDisableVolume_Base_C_UAID_D843AE1A93E530E302_12e65868fd8f26ee_1463677146,29218.602,14131.416,-1815.2141,,,,,,{}
-SceneComponent,BP_Interact01_C,BP_Interact01_C_UAID_04D9F5F93AD5AA6C02_f6ac66adf17bf997_2027113062,-20681.701,22380.938,-1475.9799,Brother In Arms,,,,,"{""instruction"": ""Inspect the Hung Bodies."", ""quest_id"": ""Quest.Reynauld.Q06"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Inspect the corpse.""}"
-SceneComponent,BP_Interact02_C,BP_Interact02_C_UAID_04D9F5F93AD5AA6C02_f6ac66adf17bf997_1945008061,-20509.207,22077.521,-1413.1832,Brother In Arms,,,,,"{""instruction"": ""Inspect the Decree on the table."", ""grant_items"": {""ID_Lore_Common_ReynauldBP06Decree_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q06"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Inspect Order of Execution""}"
-SceneComponent,BP_Interact03_C,BP_Interact03_C_UAID_04D9F5F93AD5A26C02_aea6d6ea3b5e144a_1760716797,33609.37,7876.117,1255.3816,Brother In Arms,,,,,"{""instruction"": ""Inspect Ambrose's Diary."", ""grant_items"": {""ID_Lore_Common_ReynauldBP06AmbroseDiary_Note2"": 1}, ""quest_id"": ""Quest.Reynauld.Q06"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Take Ambrose's Diary""}"
+SceneComponent,BP_Interact01_C,BP_Interact01_C_UAID_04D9F5F93AD5AA6C02_f6ac66adf17bf997_2027113062,-20681.701,22380.938,-1475.9799,Brother In Arms,,,,,"{""interaction"": ""Inspect the corpse."", ""instruction"": ""Inspect the Hung Bodies."", ""quest_id"": ""Quest.Reynauld.Q06"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_Interact02_C,BP_Interact02_C_UAID_04D9F5F93AD5AA6C02_f6ac66adf17bf997_1945008061,-20509.207,22077.521,-1413.1832,Brother In Arms,,,,,"{""interaction"": ""Inspect Order of Execution"", ""instruction"": ""Inspect the Decree on the table."", ""grant_items"": {""ID_Lore_Common_ReynauldBP06Decree_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q06"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_Interact03_C,BP_Interact03_C_UAID_04D9F5F93AD5A26C02_aea6d6ea3b5e144a_1760716797,33609.37,7876.117,1255.3816,Brother In Arms,,,,,"{""interaction"": ""Take Ambrose's Diary"", ""instruction"": ""Inspect Ambrose's Diary."", ""grant_items"": {""ID_Lore_Common_ReynauldBP06AmbroseDiary_Note2"": 1}, ""quest_id"": ""Quest.Reynauld.Q06"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_LadderVolume_01_C,BP_LadderVolume_01_C_35267f9c3545d35c_1,57049.92,30101.398,-4464.971,,,,,,{}
 SceneComponent,BP_Lift_01A_C,BP_Lift_01A_C_UAID_581CF8B72315867A02_00c96ecbce87a0a2_1453208959,31592.229,19560.07,-3132.9895,,,,,,{}
-SceneComponent,BP_LouisMother_C,BP_LouisMother_C_UAID_04D9F5F93AD5EA5D02_4f58371cef43ffd2_1437924890,68750.164,2805.3523,-5303.2354,A Sombre Revelation,,,,,"{""instruction"": ""Take Louis' Mother's Locket."", ""grant_items"": {""ID_Uncommon_MothersLocket"": 1}, ""quest_id"": ""Quest.Louis.Q08"", ""quest_giver"": ""Character.NPC.Louis"", ""interaction"": ""Take the Locket""}"
-SceneComponent,BP_LouisMothersNoteQ08_C,BP_LouisMothersNoteQ08_C_UAID_D843AE1A93E5DFE202_1857004213,68700.016,2835.4758,-5452.1743,A Sombre Revelation,,,,,"{""instruction"": ""Take Louis' Mother's Note."", ""grant_items"": {""ID_Lore_Epic_Note07_U"": 1}, ""quest_id"": ""Quest.Louis.Q08"", ""quest_giver"": ""Character.NPC.Louis"", ""interaction"": ""Take the Note""}"
-SceneComponent,BP_MortuaryRecord_C,BP_MortuaryRecord_C_UAID_04D9F5F93AD5725A02_4cb1a62a42540541_2013102759,38272.223,48692.504,-3534.1997,Down From Mount Sinai,,,,,"{""instruction"": ""Find the Codex Medicamentarius."", ""grant_items"": {""ID_Uncommon_MortuaryRecord"": 1}, ""quest_id"": ""Quest.Eloise.Q10"", ""quest_giver"": ""Character.NPC.Eloise"", ""interaction"": ""Take Codex Medicamentarius""}"
+SceneComponent,BP_LouisMother_C,BP_LouisMother_C_UAID_04D9F5F93AD5EA5D02_4f58371cef43ffd2_1437924890,68750.164,2805.3523,-5303.2354,A Sombre Revelation,,,,,"{""interaction"": ""Take the Locket"", ""instruction"": ""Take Louis' Mother's Locket."", ""grant_items"": {""ID_Uncommon_MothersLocket"": 1}, ""quest_id"": ""Quest.Louis.Q08"", ""quest_giver"": ""Character.NPC.Louis""}"
+SceneComponent,BP_LouisMothersNoteQ08_C,BP_LouisMothersNoteQ08_C_UAID_D843AE1A93E5DFE202_1857004213,68700.016,2835.4758,-5452.1743,A Sombre Revelation,,,,,"{""interaction"": ""Take the Note"", ""instruction"": ""Take Louis' Mother's Note."", ""grant_items"": {""ID_Lore_Epic_Note07_U"": 1}, ""quest_id"": ""Quest.Louis.Q08"", ""quest_giver"": ""Character.NPC.Louis""}"
+SceneComponent,BP_MortuaryRecord_C,BP_MortuaryRecord_C_UAID_04D9F5F93AD5725A02_4cb1a62a42540541_2013102759,38272.223,48692.504,-3534.1997,Down From Mount Sinai,,,,,"{""interaction"": ""Take Codex Medicamentarius"", ""instruction"": ""Find the Codex Medicamentarius."", ""grant_items"": {""ID_Uncommon_MortuaryRecord"": 1}, ""quest_id"": ""Quest.Eloise.Q10"", ""quest_giver"": ""Character.NPC.Eloise""}"
 SceneComponent,BP_P_CrowsCircle_01_C,UNP_BP_P_CrowsCircle_01_20c886124a4a6cac_0,-1582.1167,13224.797,2884.003,,,,,,{}
-SceneComponent,BP_PiroCorpsePile_01_C,BP_Pyre_M01_C_UAID_D843AE1A93E5B1DA02_1759299011,19664.096,-10430.137,-1009.12616,Cleansing Fire,,,,,"{""instruction"": ""Burn the corpse pile east of the Galerius watchtower."", ""quest_id"": ""Quest.Piro.DQ10"", ""quest_giver"": ""Character.NPC.Piro"", ""interaction"": ""Burn the Corpse Pile""}"
-SceneComponent,BP_PiroCorpsePile_02_C,BP_Pyre_02_C_UAID_D843AE1A93E5B3DA02_1394038366,-9499.021,8094.163,-330.18076,Cleansing Fire,,,,,"{""instruction"": ""Burn the corpse pile north of the Westway Stables."", ""quest_id"": ""Quest.Piro.DQ10"", ""quest_giver"": ""Character.NPC.Piro"", ""interaction"": ""Burn the Corpse Pile""}"
-SceneComponent,BP_PiroCorpsePile_03_C,BP_Pyre_03_C_UAID_D843AE1A93E5B3DA02_1592526370,20498.422,52705.35,-3730.7607,Cleansing Fire,,,,,"{""instruction"": ""Burn the corpse pile south of the Overrun Billet."", ""quest_id"": ""Quest.Piro.DQ10"", ""quest_giver"": ""Character.NPC.Piro"", ""interaction"": ""Burn the Corpse Pile""}"
-SceneComponent,BP_Q04_Interact02_C,BP_Q07_Interact02_C_UAID_D843AE1A93E5269602_12e65868fd8f26ee_1153559110,36875.727,14262.933,-7254.1846,The Shako,,,,,"{""instruction"": ""Take Etienne's Shako."", ""grant_items"": {""ID_Rare_EtienneShako"": 1}, ""quest_id"": ""Quest.Reynauld.Q04"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Take Etienne's Shako""}"
-SceneComponent,BP_Q05_Water01_C,StaticMeshActor_UAID_18C04DA8201B605602_a95c94d953822ddd_1803669318,59292.215,9393.55,-771.77026,Testing The Waters,,,,,"{""instruction"": ""Draw water from the Sombre Forest spring."", ""grant_items"": {""ID_Uncommon_M03WaterSample"": 1}, ""quest_id"": ""Quest.Piro.Q05"", ""quest_giver"": ""Character.NPC.Piro"", ""interaction"": ""Collect sample.""}"
-SceneComponent,BP_Q07_LacourtsLedger_C,BP_Q07_LacourtsLedger_C_UAID_04D9F5F93AD53C3702_35267f9c3545d35c_2004238083,57230.55,29448.502,-4749.333,Sweet Sylvette,,,,,"{""instruction"": ""Find Lacourt's Ledger in the Black Wood Mill."", ""quest_id"": ""Quest.MrSweet.Q07"", ""quest_giver"": ""Character.NPC.MrSweet"", ""interaction"": ""Examine Lacourt's Ledger""}"
-SceneComponent,BP_Q08_Sylvette_C,BP_Q08_Sylvette_C_UAID_04D9F5F93AD5A16C02_aea6d6ea3b5e144a_2003270393,31417.402,9302.589,1142.9131,The Garrison,,,,,"{""instruction"": ""Find Sylvette."", ""quest_id"": ""Quest.MrSweet.Q08"", ""quest_giver"": ""Character.NPC.MrSweet"", ""interaction"": ""Examine Sylvette's Remains""}"
+SceneComponent,BP_PiroCorpsePile_01_C,BP_Pyre_M01_C_UAID_D843AE1A93E5B1DA02_1759299011,19664.096,-10430.137,-1009.12616,Cleansing Fire,,,,,"{""interaction"": ""Burn the Corpse Pile"", ""instruction"": ""Burn the corpse pile east of the Galerius watchtower."", ""quest_id"": ""Quest.Piro.DQ10"", ""quest_giver"": ""Character.NPC.Piro""}"
+SceneComponent,BP_PiroCorpsePile_02_C,BP_Pyre_02_C_UAID_D843AE1A93E5B3DA02_1394038366,-9499.021,8094.163,-330.18076,Cleansing Fire,,,,,"{""interaction"": ""Burn the Corpse Pile"", ""instruction"": ""Burn the corpse pile north of the Westway Stables."", ""quest_id"": ""Quest.Piro.DQ10"", ""quest_giver"": ""Character.NPC.Piro""}"
+SceneComponent,BP_PiroCorpsePile_03_C,BP_Pyre_03_C_UAID_D843AE1A93E5B3DA02_1592526370,20498.422,52705.35,-3730.7607,Cleansing Fire,,,,,"{""interaction"": ""Burn the Corpse Pile"", ""instruction"": ""Burn the corpse pile south of the Overrun Billet."", ""quest_id"": ""Quest.Piro.DQ10"", ""quest_giver"": ""Character.NPC.Piro""}"
+SceneComponent,BP_Q04_Interact02_C,BP_Q07_Interact02_C_UAID_D843AE1A93E5269602_12e65868fd8f26ee_1153559110,36875.727,14262.933,-7254.1846,The Shako,,,,,"{""interaction"": ""Take Etienne's Shako"", ""instruction"": ""Take Etienne's Shako."", ""grant_items"": {""ID_Rare_EtienneShako"": 1}, ""quest_id"": ""Quest.Reynauld.Q04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_Q05_Water01_C,StaticMeshActor_UAID_18C04DA8201B605602_a95c94d953822ddd_1803669318,59292.215,9393.55,-771.77026,Testing The Waters,,,,,"{""interaction"": ""Collect sample."", ""instruction"": ""Draw water from the Sombre Forest spring."", ""grant_items"": {""ID_Uncommon_M03WaterSample"": 1}, ""quest_id"": ""Quest.Piro.Q05"", ""quest_giver"": ""Character.NPC.Piro""}"
+SceneComponent,BP_Q07_LacourtsLedger_C,BP_Q07_LacourtsLedger_C_UAID_04D9F5F93AD53C3702_35267f9c3545d35c_2004238083,57230.55,29448.502,-4749.333,Sweet Sylvette,,,,,"{""interaction"": ""Examine Lacourt's Ledger"", ""instruction"": ""Find Lacourt's Ledger in the Black Wood Mill."", ""quest_id"": ""Quest.MrSweet.Q07"", ""quest_giver"": ""Character.NPC.MrSweet""}"
+SceneComponent,BP_Q08_Sylvette_C,BP_Q08_Sylvette_C_UAID_04D9F5F93AD5A16C02_aea6d6ea3b5e144a_2003270393,31417.402,9302.589,1142.9131,The Garrison,,,,,"{""interaction"": ""Examine Sylvette's Remains"", ""instruction"": ""Find Sylvette."", ""quest_id"": ""Quest.MrSweet.Q08"", ""quest_giver"": ""Character.NPC.MrSweet""}"
 SceneComponent,BP_QIS_Reynauld07_C,BP_Q07_Interact01_C_UAID_04D9F5F93AD5AF6C02_7127332db5ae3901_1453700351,4898.7646,7199.8115,-579.38135,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1182366448,5753.114,3266.4294,-599.40283,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1242125451,12114.867,3749.7366,-606.27423,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1273695453,3798.6287,3963.9636,-592.53076,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1364742455,13435.403,4495.826,-631.6051,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_QIS_Reynauld07_C,LevelInstance_UAID_04D9F5F93AD5EA6C02_1464491457,9444.889,3835.8215,-589.2058,The Hide,,,,,"{""interaction"": ""Search the Hide"", ""instruction"": ""Find Etienne's hide and retrieve his Logbook."", ""grant_items"": {""ID_Lore_Common_ReynauldBP07EtienneLogbook_Note1"": 1}, ""quest_id"": ""Quest.Reynauld.Q07"", ""quest_giver"": ""Character.NPC.Reynauld""}"
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1516902804,-8204.943,4948.557,-2507.4722,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1553699878,-3325.683,3796.4854,-2489.703,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1580733991,1170.3278,3840.6057,-2221.872,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1613566057,9706.538,8162.6333,-1914.7163,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
-SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1642605116,17763.824,2875.7183,-1855.5833,Clearing the Ravine,,,,DA_AISpawner_Miniboss,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1516902804,-8204.943,4948.557,-2507.4722,Clearing the Ravine,,,,DA_AISpawner_Brute,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1553699878,-3325.683,3796.4854,-2489.703,Clearing the Ravine,,,,DA_AISpawner_Brute,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1580733991,1170.3278,3840.6057,-2221.872,Clearing the Ravine,,,,DA_AISpawner_Brute,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1613566057,9706.538,8162.6333,-1914.7163,Clearing the Ravine,,,,DA_AISpawner_Brute,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_QIS_Reynauld_WQ04_C,BP_WQ04_BruteSpawner_C_UAID_D843AE1A93E5809B02_1642605116,17763.824,2875.7183,-1855.5833,Clearing the Ravine,,,,DA_AISpawner_Brute,"{""quest_id"": ""Quest.Reynauld.WQ04"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_0,31869.445,51315.08,-6111.028,,,,,,{}
 SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_1,20023.096,53911.59,-3714.776,,,,,,{}
 SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_10,-13120.095,45233.76,-2594.2734,,,,,,{}
@@ -1112,190 +1114,192 @@ SceneComponent,BP_RaidSpawn_C,BP_RaidSpawn_C_UAID_04D9F5F93AD53E9402_1785473988,
 SceneComponent,BP_Ruins_Medium_01a_C,BP_Ruins_Medium_01a_C_0,-109718.43,10395.306,-831.39166,,,,,,{}
 SceneComponent,BP_SPOI_C,UNP_BP_SPOI_039c8620f5ef8060_0,-222.72151,-11930.833,426.2847,,,,,,{}
 SceneComponent,BP_SPOI_C,UNP_BP_SPOI_fea4b5c59189294b_0,4061.0925,41838.703,-2994.2002,,,,,,{}
-SceneComponent,BP_SawmillReport_C,BP_SawmillReport_C_UAID_04D9F5F93AD5735A02_35267f9c3545d35c_1541742737,57167.008,29526.67,-4737.472,Down From Mount Sinai,,,,,"{""instruction"": ""Find the Course in Civil Architecture - Rondelet."", ""grant_items"": {""ID_Uncommon_SawmillReport"": 1}, ""quest_id"": ""Quest.Eloise.Q10"", ""quest_giver"": ""Character.NPC.Eloise"", ""interaction"": ""Take Course in Civil Architecture - Rondelet""}"
-SceneComponent,BP_SignalHorn_M03_C,BP_SignalHorn_M03_C_UAID_04D9F5F93AD5B85B02_1148204739,-7638.505,17888.602,511.75177,Mountain Echo,,,,,"{""instruction"": ""Sound the signal horn in Sombre Forest."", ""quest_id"": ""Quest.Reynauld.DQ03"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Blow the Signal Horn""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Fem_C_UAID_18C04DA8201B437902_b67ec8a3d8d2e891_1151872190,-2625.993,39539.895,-3255.9763,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEFD45502_08f1821ec36d4652_1076987282,45276.64,21094.596,-1514.5406,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEFD45502_1c2a6cdba880923c_1076987282,23142.566,-4663.6074,-1371.7336,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEFD45502_246194deecc0f216_1076987282,58318.113,13238.855,-1078.308,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_046874882494BF9102_6eba12598bb1f39f_1350762973,41255.94,15895.377,-995.70056,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_046874882494BF9102_6eba12598bb1f39f_1352116310,40724.016,14995.832,1134.9418,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_18C04DA8201B867902_7d841b13de30ebaf_1932594305,-6942.3643,45419.16,-3036.611,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_18C04DA8201B897902_7d841b13de30ebaf_1957753011,-5393.418,39554.4,-3032.5708,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_046874882494118C02_2389606fe4e70095_1381458957,25173.855,26577.729,-774.23444,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_046874882494118C02_2389606fe4e70095_1381887013,16161.474,21312.736,-511.8169,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_046874882494169202_12e65868fd8f26ee_1866909980,37589.645,14569.498,2049.947,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_0468748824941D8B02_2c07323eb2e99beb_1278008806,35328.66,9364.64,1642.9348,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_c85329728f06dd80_0,-14273.635,13834.722,624.70544,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_04D9F5F93AD5A93C02_29fb098085780a4e_1159232437,20300.373,15650.004,-97.05339,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_04D9F5F93AD5DB3D02_91ce05da56308e53_1355538414,12563.014,39122.918,-2247.9888,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_04D9F5F93AD5DC3202_20c886124a4a6cac_1858507815,-1556.8208,11595.962,-111.97049,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_29a1b4c71511b535_0,44686.164,43450.99,-5339.668,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_5039a3ad58c94e5b_0,43432.117,25473.094,-2803.3184,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_9c34f29bae09b13e_0,-1542.7776,4925.43,-646.94116,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_046874882494907E02_f6ac66adf17bf997_1315730612,-19531.297,24655.098,-1530.8721,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_046874882494D77F02_46c6e786a3fd7089_1162516158,23705.129,41576.332,-2461.3994,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_UAID_046874882494597E02_4f8bcf840b5012b1_1576819317,-8652.771,19888.217,66.13439,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_UAID_046874882494597E02_4f8bcf840b5012b1_1642816395,-6643.913,19202.123,54.00721,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_bacad867c9c5e889_0,24183.127,650.3506,-1010.7753,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEF3F8902_a44c2e6e6faa7d77_1212548552,59335.85,4728.915,-935.6418,,,50.0,Blueprint,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_0894a4b7551bfdac_0,3573.8806,27311.072,-882.90607,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_08be49ae777b02d9_0,-12266.259,-15793.133,1718.2283,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1146f3376378a2b5_0,53743.344,16846.463,-2274.8027,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_11fc3648b829698c_0,2677.0757,19017.9,503.49872,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_12a1f002c01538ba_0,-5257.689,-18500.871,1718.1003,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1561a8731776018d_0,-12530.203,2181.283,1770.5157,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1885bab0097135e4_0,-20896.377,30979.943,535.5164,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1ac539276a1dfa67_0,-6365.4453,-12460.343,1101.3384,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_244e20c53f6fdd69_0,11467.154,28167.762,-711.9306,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_26db654f305f1d92_0,56.875824,52168.523,-2790.224,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_2798a497eeff3a9f_0,-20578.371,38197.91,535.5164,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_2ef0a1af000c2358_0,-20280.297,18368.03,-906.69916,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_3135b739fdcdd68b_0,7801.6655,-17146.951,482.3816,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_3ad39f653938bc41_0,23476.557,29892.96,-1176.2913,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_3c39fe0742cfc153_0,28457.613,7394.858,1694.8318,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_407a81d2c574939c_0,54811.043,7197.239,-129.64705,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_419337242b61f3a7_0,23660.893,-17985.803,-1560.6183,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_43ada4b51533062c_0,142.8889,602.15375,-93.55583,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_5d85f5a092c91210_0,9753.202,-17307.96,464.20895,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_5f727d84eda2cf62_0,-5623.7485,-8201.129,936.69946,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_63af1096b7378570_0,9695.398,-11361.613,381.66278,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_6faa4e55037b1ff8_0,-9650.322,-21263.396,1209.6652,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7a32076158876815_0,11399.633,-15677.902,341.7326,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7a61cc8c21434164_0,-21634.82,26397.03,-667.8148,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7c42150e991da5a5_0,13630.213,-18240.746,488.07266,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7e7e4c0dd0948b82_0,-8259.35,9262.731,216.95766,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_8304a667a6ba9a75_0,27884.066,-14570.506,-1999.5052,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_859aa18503f5926a_0,2138.196,27352.297,-929.23224,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_8f95974c80e89842_0,-18955.059,40979.973,604.7366,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_958a95dc3142bbf2_0,-19209.629,31176.12,535.5164,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_9fbde8b6c23b8361_0,-22533.402,27990.582,-667.8148,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_a8ec247345d9e686_0,-10086.936,-18774.453,1280.729,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_ab076ee457c9a808_0,6417.9673,-14593.316,393.0478,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_ac90aaa5c5cda036_0,5992.3877,51614.266,-2696.9265,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_afd1df9a18b1e1e8_0,-191.54828,46218.723,-2173.6235,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b569bc5d5e83e6b0_0,-17718.28,26030.754,-936.06683,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b70318fddf00217d_0,-11611.331,-21789.547,1303.6556,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b742af10fe7ecf85_0,55166.785,17752.607,-2199.1304,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b8e213fe35498db6_0,15849.631,-18142.781,494.85556,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_bf20ee70d86c992d_0,1150.5591,-12750.012,1141.647,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_bf56834ec61d6aff_0,17788.912,-18155.797,539.4578,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_c7ff2d5126f42aa9_0,-5509.872,12444.435,403.83453,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_caa3dcf4e84c752e_0,13109.938,9687.533,-110.863045,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_d1d65ebd8a0473fc_0,-14088.43,28074.605,-1024.3118,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_db805b1cc86bab89_0,3088.3623,5284.757,-90.424355,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_e5310b1f786287b9_0,-2893.4404,49961.734,-2341.2483,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_e6784b6f4bf9ff8e_0,11295.945,-5950.621,430.55453,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_ea7ffb5fbbaf7525_0,-8562.626,-17918.207,1296.6624,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_eb3f6aef83b41fcf_0,-2953.3003,16076.869,492.79187,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_f45a0dc9ca613635_0,-18543.729,32883.72,605.0,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_fccd5bcfe259a2d4_0,-20603.203,36338.508,535.5164,,,10.0,Custom,,"{""visible"": true, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1293194986,24671.71,53717.53,-5717.1133,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1298561987,24880.012,53664.7,-5835.7515,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1316587988,24093.098,54001.0,-5484.2246,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1325863989,24176.238,53968.08,-5514.113,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1343506990,22692.223,54880.5,-5662.6206,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1193906182,45539.863,17036.46,-901.2086,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1223931183,45193.875,17160.742,-797.2202,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1241482184,46645.723,16947.629,-706.0973,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1283899186,48001.473,15676.584,-472.54242,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1297003187,46573.99,16913.94,-712.6793,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD3E202_1985950941,46863.258,16662.691,-849.3674,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD3E202_1995942942,45503.664,16898.236,-772.48645,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1340756202,31111.803,21233.688,-1379.7041,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1353539203,31231.018,21345.8,-1371.7749,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1362485204,31586.55,21574.578,-1341.4054,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1376953205,30280.857,20449.545,-1304.3162,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1383645206,30082.717,20315.451,-1303.7426,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1392020207,30055.441,20303.197,-1306.9637,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1402134208,30690.012,20824.135,-1560.5753,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1412058209,30948.615,20939.28,-1431.8688,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_046874882494AD8D02_e866662526208594_1993926592,39018.6,48628.65,-3484.4546,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_0a920fb21e69c5bc_1,47719.32,30196.53,-4220.27,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_UAID_046874882494118C02_2389606fe4e70095_1342237562,20522.326,24897.354,-884.50024,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_UAID_0468748824942F8002_4f8bcf840b5012b1_1274665370,-7099.1143,17398.283,144.18628,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_UAID_046874882494977D02_c01302f103af8f1c_1269204605,42246.223,32755.537,-2723.425,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_0a920fb21e69c5bc_2,47794.977,29620.611,-4242.6406,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_UAID_046874882494118C02_2389606fe4e70095_1342237563,20033.967,24583.434,-913.895,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_UAID_0468748824942F8002_4f8bcf840b5012b1_1274668371,-7665.7515,17273.303,109.42481,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_UAID_046874882494977D02_c01302f103af8f1c_1269207606,42825.797,32716.81,-2745.7954,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_0a920fb21e69c5bc_3,47819.867,29546.057,-4219.615,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_UAID_046874882494118C02_2389606fe4e70095_1342232559,19976.367,24529.783,-891.26355,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_UAID_0468748824942F8002_4f8bcf840b5012b1_1274654367,-7737.9663,17240.521,129.88268,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_UAID_046874882494977D02_c01302f103af8f1c_1269194602,42903.78,32726.6,-2722.7705,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_0a920fb21e69c5bc_4,47849.336,29496.404,-4226.4546,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_UAID_046874882494118C02_2389606fe4e70095_1342235561,19944.154,24481.836,-897.8898,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_UAID_0468748824942F8002_4f8bcf840b5012b1_1274662369,-7784.725,17207.236,120.596825,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_UAID_046874882494977D02_c01302f103af8f1c_1269200604,42958.25,32745.762,-2729.6094,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_0a920fb21e69c5bc_0,47767.793,30308.422,-4223.5312,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_UAID_046874882494118C02_2389606fe4e70095_1342234560,20644.258,24900.998,-884.1485,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_UAID_0468748824942F8002_4f8bcf840b5012b1_1274659368,-6983.31,17360.229,139.52551,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_UAID_046874882494977D02_c01302f103af8f1c_1269197603,42146.004,32825.01,-2726.6863,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Group_01a_C,DNU_SoundTrap_Crow_Group_01a_C_UAID_046874882494928402_29fb098085780a4e_1956894569,22979.023,16934.545,160.52045,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Group_01a_C,UNP_BP_SoundTrap_Crow_Group_01a_UAID_046874882494907E02_f6ac66adf17bf997_1355313783,-18835.924,21337.377,-1494.3628,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Group_01a_C,UNP_BP_SoundTrap_Crow_Group_01a_UAID_046874882494907E02_f6ac66adf17bf997_1355880821,-18331.145,21949.78,-1494.3628,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_0e11671aba4149ed_0,-559.0423,21649.176,-4.5446215,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_1c6c96231a0d6fcc_0,8341.331,13303.5,107.46522,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_1e8938903aab7f84_0,30481.139,25256.35,-1788.137,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_23fb81a63ddc28f3_0,51211.82,29759.525,-4666.39,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_2f63e42062b2d7bb_0,3929.2593,21864.938,-47.489536,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_320c17913e438a5b_0,42885.285,43746.734,-4991.276,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_349fc21aac453220_0,56004.363,24154.027,-4894.947,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_39b35c7bdfce31f3_0,3025.2544,10659.705,25.24836,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_41a0eced7cba3bb9_0,53137.1,24682.846,-4847.9995,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_41bb02367f810541_0,46665.51,33930.773,-2987.8162,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_45b31efba6894815_0,45693.645,31475.957,-3108.8584,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_4a3134f02ee3373d_0,475.6795,40878.14,-2493.2012,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_4e88f428efb5af14_0,52319.58,26835.908,-4813.012,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_5475fbfcda31740c_0,1428.6957,22627.262,-116.31714,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_6371e507bb8e6de4_0,-3084.8003,20567.057,109.10793,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_65609cd8ea8c534c_0,-2409.6562,6976.7354,-274.96964,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_65dc2ce00c80d7ac_0,4047.8335,17531.932,212.95593,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_6671a53a8df94fa4_0,-15822.492,21337.38,-1231.1226,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_6a0943f00de6807a_0,48182.402,41004.58,-4981.1665,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_778d6b8505fefabc_0,1917.9714,45123.78,-2625.387,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_7ae454b5ee900472_0,50226.8,27804.016,-4582.3667,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_83ad3bf228d3f4d3_0,4634.474,15923.38,188.134,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_8484dee19b4cd6fd_0,49244.273,34124.68,-4301.0396,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_8f24a6a81aba01e4_0,11322.128,12681.583,-66.49077,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_921ef0f1325455de_0,8112.275,14459.588,404.46127,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_9bdf1dcba4ccbe1b_0,39798.125,-1744.618,-1212.4456,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1333237419,22219.055,23937.121,-553.52094,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1333534513,21233.2,24952.564,-688.8657,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1334265711,25322.621,22150.756,-540.43225,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1335450048,27208.693,25570.207,-1208.4005,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1370866249,23065.164,24327.574,-877.509,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494238002_20c886124a4a6cac_1618754100,466.69235,12739.759,411.77686,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494238002_20c886124a4a6cac_1618834119,-1117.2786,14842.312,101.00474,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_0468748824944A8902_35267f9c3545d35c_1907037699,54087.09,30006.4,-5221.3965,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494759C02_35267f9c3545d35c_1187674151,55825.71,28918.797,-4574.146,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494938402_29fb098085780a4e_1503471480,31258.586,18459.521,401.394,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494BB8602_92f9112ff1518191_1708169559,41173.965,-9534.017,-3394.5925,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494BB8602_92f9112ff1518191_1730814941,38813.773,-8604.714,-3628.6199,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_18C04DA8201B897902_7d841b13de30ebaf_2109837019,-7984.5938,36157.45,-2088.6409,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_18C04DA8201BEF7202_91ce05da56308e53_1825872924,9721.341,46603.645,-2511.5945,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_581CF8B72315DE6302_91ce05da56308e53_1308104657,13864.389,40653.883,-2156.444,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a101d35d8aba0e41_0,52225.176,30693.867,-4834.168,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a347c4276a757b3e_0,42677.16,28649.943,-2768.2197,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a372773c3329b421_0,47014.824,38801.04,-5002.49,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a907f7e08bcc7144_0,12444.733,13000.84,-75.493164,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_b0c98e3af57991af_0,50457.746,22964.162,-4119.675,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_b596651595a3de6d_0,46570.984,18446.867,-1950.913,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_b7dfeb3666986412_0,32184.666,27277.129,-2127.8347,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_bbcfa35503839d35_0,33095.914,4868.42,884.9131,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_cde4da2cbb4f0a09_0,44512.152,56470.383,-3886.978,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_d0d40f2cdc606e35_0,11100.766,14330.689,148.59943,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_d4e1ed7202705c6c_0,-4745.656,7386.02,-179.5546,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_dd5982801d8a857a_0,32956.957,35252.484,-2924.9636,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_deb68d4bd4295415_0,8617.122,18247.709,206.68156,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_e915950daa8e8663_0,8513.957,50350.465,-3544.2908,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_edc52b1227c59d46_0,41897.766,28815.623,-2773.7788,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_ee517047c9f77099_0,-4470.6963,10287.48,68.662636,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_ee7c747a40935d6e_0,42102.566,27253.936,-2789.5198,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_f56ee197333f9d6b_0,-9106.896,15417.997,81.11269,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Line_01a_30fa77cbf391bfc5_0,-109514.42,14529.723,-416.38535,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Line_01a_UAID_0468748824941D8B02_2c07323eb2e99beb_1278505820,30127.492,8530.616,1469.489,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
-SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Line_01a_UAID_046874882494977D02_c01302f103af8f1c_1270685784,42479.785,31975.193,-2548.1475,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
+SceneComponent,BP_SawmillReport_C,BP_SawmillReport_C_UAID_04D9F5F93AD5735A02_35267f9c3545d35c_1541742737,57167.008,29526.67,-4737.472,Down From Mount Sinai,,,,,"{""interaction"": ""Take Course in Civil Architecture - Rondelet"", ""instruction"": ""Find the Course in Civil Architecture - Rondelet."", ""grant_items"": {""ID_Uncommon_SawmillReport"": 1}, ""quest_id"": ""Quest.Eloise.Q10"", ""quest_giver"": ""Character.NPC.Eloise""}"
+SceneComponent,BP_SignalHorn_M03_C,BP_SignalHorn_M03_C_UAID_04D9F5F93AD5B85B02_1148204739,-7638.505,17888.602,511.75177,Mountain Echo,,,,,"{""interaction"": ""Blow the Signal Horn"", ""instruction"": ""Sound the signal horn in Sombre Forest."", ""quest_id"": ""Quest.Reynauld.DQ03"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Fem_C_UAID_18C04DA8201B437902_b67ec8a3d8d2e891_1151872190,-2625.993,39539.895,-3255.9763,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEFD45502_08f1821ec36d4652_1076987282,45276.64,21094.596,-1514.5406,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEFD45502_1c2a6cdba880923c_1076987282,23142.566,-4663.6074,-1371.7336,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEFD45502_246194deecc0f216_1076987282,58318.113,13238.855,-1078.308,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_046874882494BF9102_6eba12598bb1f39f_1350762973,41255.94,15895.377,-995.70056,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_046874882494BF9102_6eba12598bb1f39f_1352116310,40724.016,14995.832,1134.9418,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_18C04DA8201B867902_7d841b13de30ebaf_1932594305,-6942.3643,45419.16,-3036.611,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,BP_SoundTrap_Corpse_Male_C_UAID_18C04DA8201B897902_7d841b13de30ebaf_1957753011,-5393.418,39554.4,-3032.5708,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_046874882494118C02_2389606fe4e70095_1381458957,25173.855,26577.729,-774.23444,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_046874882494118C02_2389606fe4e70095_1381887013,16161.474,21312.736,-511.8169,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_046874882494169202_12e65868fd8f26ee_1866909980,37589.645,14569.498,2049.947,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_UAID_0468748824941D8B02_2c07323eb2e99beb_1278008806,35328.66,9364.64,1642.9348,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_C,UNP_BP_SoundTrap_Corpse_Fem_c85329728f06dd80_0,-14273.635,13834.722,624.70544,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_04D9F5F93AD5A93C02_29fb098085780a4e_1159232437,20300.373,15650.004,-97.05339,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_04D9F5F93AD5DB3D02_91ce05da56308e53_1355538414,12563.014,39122.918,-2247.9888,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_04D9F5F93AD5DC3202_20c886124a4a6cac_1858507815,-1556.8208,11595.962,-111.97049,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_29a1b4c71511b535_0,44686.164,43450.99,-5339.668,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_5039a3ad58c94e5b_0,43432.117,25473.094,-2803.3184,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_9c34f29bae09b13e_0,-1542.7776,4925.43,-646.94116,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_046874882494907E02_f6ac66adf17bf997_1315730612,-19531.297,24655.098,-1530.8721,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_C_UAID_046874882494D77F02_46c6e786a3fd7089_1162516158,23705.129,41576.332,-2461.3994,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_UAID_046874882494597E02_4f8bcf840b5012b1_1576819317,-8652.771,19888.217,66.13439,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_UAID_046874882494597E02_4f8bcf840b5012b1_1642816395,-6643.913,19202.123,54.00721,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Fem_Hung05a_C,UNP_BP_SoundTrap_Corpse_Fem_Hung05a_bacad867c9c5e889_0,24183.127,650.3506,-1010.7753,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,BP_SoundTrap_Corpse_Male_C_UAID_00FF8EFC2BEF3F8902_a44c2e6e6faa7d77_1212548552,59335.85,4728.915,-935.6418,,,50.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_0894a4b7551bfdac_0,3573.8806,27311.072,-882.90607,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_08be49ae777b02d9_0,-12266.259,-15793.133,1718.2283,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1146f3376378a2b5_0,53743.344,16846.463,-2274.8027,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_11fc3648b829698c_0,2677.0757,19017.9,503.49872,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_12a1f002c01538ba_0,-5257.689,-18500.871,1718.1003,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1561a8731776018d_0,-12530.203,2181.283,1770.5157,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1885bab0097135e4_0,-20896.377,30979.943,535.5164,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_1ac539276a1dfa67_0,-6365.4453,-12460.343,1101.3384,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_244e20c53f6fdd69_0,11467.154,28167.762,-711.9306,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_26db654f305f1d92_0,56.875824,52168.523,-2790.224,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_2798a497eeff3a9f_0,-20578.371,38197.91,535.5164,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_2ef0a1af000c2358_0,-20280.297,18368.03,-906.69916,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_3135b739fdcdd68b_0,7801.6655,-17146.951,482.3816,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_3ad39f653938bc41_0,23476.557,29892.96,-1176.2913,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_3c39fe0742cfc153_0,28457.613,7394.858,1694.8318,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_407a81d2c574939c_0,54811.043,7197.239,-129.64705,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_419337242b61f3a7_0,23660.893,-17985.803,-1560.6183,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_43ada4b51533062c_0,142.8889,602.15375,-93.55583,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_5d85f5a092c91210_0,9753.202,-17307.96,464.20895,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_5f727d84eda2cf62_0,-5623.7485,-8201.129,936.69946,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_63af1096b7378570_0,9695.398,-11361.613,381.66278,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_6faa4e55037b1ff8_0,-9650.322,-21263.396,1209.6652,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7a32076158876815_0,11399.633,-15677.902,341.7326,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7a61cc8c21434164_0,-21634.82,26397.03,-667.8148,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7c42150e991da5a5_0,13630.213,-18240.746,488.07266,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_7e7e4c0dd0948b82_0,-8259.35,9262.731,216.95766,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_8304a667a6ba9a75_0,27884.066,-14570.506,-1999.5052,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_859aa18503f5926a_0,2138.196,27352.297,-929.23224,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_8f95974c80e89842_0,-18955.059,40979.973,604.7366,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_958a95dc3142bbf2_0,-19209.629,31176.12,535.5164,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_9fbde8b6c23b8361_0,-22533.402,27990.582,-667.8148,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_a8ec247345d9e686_0,-10086.936,-18774.453,1280.729,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_ab076ee457c9a808_0,6417.9673,-14593.316,393.0478,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_ac90aaa5c5cda036_0,5992.3877,51614.266,-2696.9265,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_afd1df9a18b1e1e8_0,-191.54828,46218.723,-2173.6235,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b569bc5d5e83e6b0_0,-17718.28,26030.754,-936.06683,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b70318fddf00217d_0,-11611.331,-21789.547,1303.6556,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b742af10fe7ecf85_0,55166.785,17752.607,-2199.1304,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_b8e213fe35498db6_0,15849.631,-18142.781,494.85556,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_bf20ee70d86c992d_0,1150.5591,-12750.012,1141.647,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_bf56834ec61d6aff_0,17788.912,-18155.797,539.4578,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_c7ff2d5126f42aa9_0,-5509.872,12444.435,403.83453,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_caa3dcf4e84c752e_0,13109.938,9687.533,-110.863045,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_d1d65ebd8a0473fc_0,-14088.43,28074.605,-1024.3118,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_db805b1cc86bab89_0,3088.3623,5284.757,-90.424355,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_e5310b1f786287b9_0,-2893.4404,49961.734,-2341.2483,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_e6784b6f4bf9ff8e_0,11295.945,-5950.621,430.55453,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_ea7ffb5fbbaf7525_0,-8562.626,-17918.207,1296.6624,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_eb3f6aef83b41fcf_0,-2953.3003,16076.869,492.79187,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_f45a0dc9ca613635_0,-18543.729,32883.72,605.0,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Corpse_Male_C,UNP_NT_CorpseMale_Hanging_01_fccd5bcfe259a2d4_0,-20603.203,36338.508,535.5164,,,10.0,Custom,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1293194986,24671.71,53717.53,-5717.1133,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1298561987,24880.012,53664.7,-5835.7515,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1316587988,24093.098,54001.0,-5484.2246,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1325863989,24176.238,53968.08,-5514.113,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEF5A8D02_1343506990,22692.223,54880.5,-5662.6206,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1193906182,45539.863,17036.46,-901.2086,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1223931183,45193.875,17160.742,-797.2202,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1241482184,46645.723,16947.629,-706.0973,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1283899186,48001.473,15676.584,-472.54242,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD1E202_1297003187,46573.99,16913.94,-712.6793,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD3E202_1985950941,46863.258,16662.691,-849.3674,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFD3E202_1995942942,45503.664,16898.236,-772.48645,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1340756202,31111.803,21233.688,-1379.7041,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1353539203,31231.018,21345.8,-1371.7749,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1362485204,31586.55,21574.578,-1341.4054,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1376953205,30280.857,20449.545,-1304.3162,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1383645206,30082.717,20315.451,-1303.7426,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1392020207,30055.441,20303.197,-1306.9637,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1402134208,30690.012,20824.135,-1560.5753,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_00FF8EFC2BEFE0E202_1412058209,30948.615,20939.28,-1431.8688,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,BP_SoundTrap_Crow_C_UAID_046874882494AD8D02_e866662526208594_1993926592,39018.6,48628.65,-3484.4546,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_0a920fb21e69c5bc_1,47719.32,30196.53,-4220.27,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_UAID_046874882494118C02_2389606fe4e70095_1342237562,20522.326,24897.354,-884.50024,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_UAID_0468748824942F8002_4f8bcf840b5012b1_1274665370,-7099.1143,17398.283,144.18628,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow1_UAID_046874882494977D02_c01302f103af8f1c_1269204605,42246.223,32755.537,-2723.425,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_0a920fb21e69c5bc_2,47794.977,29620.611,-4242.6406,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_UAID_046874882494118C02_2389606fe4e70095_1342237563,20033.967,24583.434,-913.895,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_UAID_0468748824942F8002_4f8bcf840b5012b1_1274668371,-7665.7515,17273.303,109.42481,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow2_UAID_046874882494977D02_c01302f103af8f1c_1269207606,42825.797,32716.81,-2745.7954,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_0a920fb21e69c5bc_3,47819.867,29546.057,-4219.615,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_UAID_046874882494118C02_2389606fe4e70095_1342232559,19976.367,24529.783,-891.26355,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_UAID_0468748824942F8002_4f8bcf840b5012b1_1274654367,-7737.9663,17240.521,129.88268,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow3_UAID_046874882494977D02_c01302f103af8f1c_1269194602,42903.78,32726.6,-2722.7705,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_0a920fb21e69c5bc_4,47849.336,29496.404,-4226.4546,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_UAID_046874882494118C02_2389606fe4e70095_1342235561,19944.154,24481.836,-897.8898,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_UAID_0468748824942F8002_4f8bcf840b5012b1_1274662369,-7784.725,17207.236,120.596825,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow4_UAID_046874882494977D02_c01302f103af8f1c_1269200604,42958.25,32745.762,-2729.6094,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_0a920fb21e69c5bc_0,47767.793,30308.422,-4223.5312,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_UAID_046874882494118C02_2389606fe4e70095_1342234560,20644.258,24900.998,-884.1485,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_UAID_0468748824942F8002_4f8bcf840b5012b1_1274659368,-6983.31,17360.229,139.52551,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_C,UNP_BP_SoundTrap_Crow_UAID_046874882494977D02_c01302f103af8f1c_1269197603,42146.004,32825.01,-2726.6863,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_SoundTrap_Crow_Group_01a_C,DNU_SoundTrap_Crow_Group_01a_C_UAID_046874882494928402_29fb098085780a4e_1956894569,22979.023,16934.545,160.52045,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 6}}"
+SceneComponent,BP_SoundTrap_Crow_Group_01a_C,UNP_BP_SoundTrap_Crow_Group_01a_UAID_046874882494907E02_f6ac66adf17bf997_1355313783,-18835.924,21337.377,-1494.3628,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 6}}"
+SceneComponent,BP_SoundTrap_Crow_Group_01a_C,UNP_BP_SoundTrap_Crow_Group_01a_UAID_046874882494907E02_f6ac66adf17bf997_1355880821,-18331.145,21949.78,-1494.3628,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 6}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,PG_Ruins_Small_05a_C_1.BP_SoundTrap_Crow_Group,-110873.31795,12720.51041,-467.58676,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,SPOI_Ruins_Small_01a_C_23.BP_SoundTrap_Crow_Group,-109663.17465,16061.52567,-381.66092,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_0e11671aba4149ed_0,-559.0423,21649.176,-4.5446215,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_1c6c96231a0d6fcc_0,8341.331,13303.5,107.46522,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_1e8938903aab7f84_0,30481.139,25256.35,-1788.137,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_23fb81a63ddc28f3_0,51211.82,29759.525,-4666.39,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_2f63e42062b2d7bb_0,3929.2593,21864.938,-47.489536,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_320c17913e438a5b_0,42885.285,43746.734,-4991.276,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_349fc21aac453220_0,56004.363,24154.027,-4894.947,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_39b35c7bdfce31f3_0,3025.2544,10659.705,25.24836,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_41a0eced7cba3bb9_0,53137.1,24682.846,-4847.9995,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_41bb02367f810541_0,46665.51,33930.773,-2987.8162,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_45b31efba6894815_0,45693.645,31475.957,-3108.8584,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_4a3134f02ee3373d_0,475.6795,40878.14,-2493.2012,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_4e88f428efb5af14_0,52319.58,26835.908,-4813.012,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_5475fbfcda31740c_0,1428.6957,22627.262,-116.31714,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_6371e507bb8e6de4_0,-3084.8003,20567.057,109.10793,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_65609cd8ea8c534c_0,-2409.6562,6976.7354,-274.96964,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_65dc2ce00c80d7ac_0,4047.8335,17531.932,212.95593,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_6671a53a8df94fa4_0,-15822.492,21337.38,-1231.1226,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_6a0943f00de6807a_0,48182.402,41004.58,-4981.1665,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_778d6b8505fefabc_0,1917.9714,45123.78,-2625.387,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_7ae454b5ee900472_0,50226.8,27804.016,-4582.3667,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_83ad3bf228d3f4d3_0,4634.474,15923.38,188.134,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_8484dee19b4cd6fd_0,49244.273,34124.68,-4301.0396,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_8f24a6a81aba01e4_0,11322.128,12681.583,-66.49077,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_921ef0f1325455de_0,8112.275,14459.588,404.46127,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_9bdf1dcba4ccbe1b_0,39798.125,-1744.618,-1212.4456,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1333237419,22219.055,23937.121,-553.52094,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1333534513,21233.2,24952.564,-688.8657,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1334265711,25322.621,22150.756,-540.43225,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1335450048,27208.693,25570.207,-1208.4005,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494118C02_2389606fe4e70095_1370866249,23065.164,24327.574,-877.509,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494238002_20c886124a4a6cac_1618754100,466.69235,12739.759,411.77686,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494238002_20c886124a4a6cac_1618834119,-1117.2786,14842.312,101.00474,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_0468748824944A8902_35267f9c3545d35c_1907037699,54087.09,30006.4,-5221.3965,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494759C02_35267f9c3545d35c_1187674151,55825.71,28918.797,-4574.146,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494938402_29fb098085780a4e_1503471480,31258.586,18459.521,401.394,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494BB8602_92f9112ff1518191_1708169559,41173.965,-9534.017,-3394.5925,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_046874882494BB8602_92f9112ff1518191_1730814941,38813.773,-8604.714,-3628.6199,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_18C04DA8201B897902_7d841b13de30ebaf_2109837019,-7984.5938,36157.45,-2088.6409,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_18C04DA8201BEF7202_91ce05da56308e53_1825872924,9721.341,46603.645,-2511.5945,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_UAID_581CF8B72315DE6302_91ce05da56308e53_1308104657,13864.389,40653.883,-2156.444,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a101d35d8aba0e41_0,52225.176,30693.867,-4834.168,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a347c4276a757b3e_0,42677.16,28649.943,-2768.2197,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a372773c3329b421_0,47014.824,38801.04,-5002.49,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_a907f7e08bcc7144_0,12444.733,13000.84,-75.493164,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_b0c98e3af57991af_0,50457.746,22964.162,-4119.675,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_b596651595a3de6d_0,46570.984,18446.867,-1950.913,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_b7dfeb3666986412_0,32184.666,27277.129,-2127.8347,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_bbcfa35503839d35_0,33095.914,4868.42,884.9131,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_cde4da2cbb4f0a09_0,44512.152,56470.383,-3886.978,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_d0d40f2cdc606e35_0,11100.766,14330.689,148.59943,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_d4e1ed7202705c6c_0,-4745.656,7386.02,-179.5546,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_dd5982801d8a857a_0,32956.957,35252.484,-2924.9636,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_deb68d4bd4295415_0,8617.122,18247.709,206.68156,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_e915950daa8e8663_0,8513.957,50350.465,-3544.2908,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_edc52b1227c59d46_0,41897.766,28815.623,-2773.7788,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_ee517047c9f77099_0,-4470.6963,10287.48,68.662636,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_ee7c747a40935d6e_0,42102.566,27253.936,-2789.5198,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Group_f56ee197333f9d6b_0,-9106.896,15417.997,81.11269,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Line_01a_30fa77cbf391bfc5_0,-109514.42,14529.723,-416.38535,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Line_01a_UAID_0468748824941D8B02_2c07323eb2e99beb_1278505820,30127.492,8530.616,1469.489,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
+SceneComponent,BP_SoundTrap_Crow_Line_01a_C,UNP_BP_SoundTrap_Crow_Line_01a_UAID_046874882494977D02_c01302f103af8f1c_1270685784,42479.785,31975.193,-2548.1475,,,20.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4}}"
 SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_UAID_00FF8EFC2BEF3F8902_a44c2e6e6faa7d77_2134940631,59666.01,4561.937,-1955.6069,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_UAID_046874882494928402_29fb098085780a4e_1956303517,29689.75,18298.562,171.16542,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_UAID_046874882494928402_29fb098085780a4e_1956306518,29466.902,18978.906,169.99472,,,50.0,Blueprint,,{}
@@ -1306,6 +1310,9 @@ SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_UAID_04D9
 SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_UAID_04D9F5F93AD5953102_ab5027526005fa55_1497996242,60776.035,17691.604,-2414.8628,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_UAID_581CF8B72315D72C02_35267f9c3545d35c_1401143674,54863.35,29159.361,-5312.6514,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,BP_SoundTrap_Ground_Glass_C_c85329728f06dd80_486,-14330.812,14905.755,-145.09184,,,50.0,Blueprint,,{}
+SceneComponent,BP_SoundTrap_Ground_Glass_C,PG_Ruins_Small_05a_C_1.BP_SoundTrap_Ground_Glass,-111146.99905,12658.248,-818.106551,,,50.0,Blueprint,,{}
+SceneComponent,BP_SoundTrap_Ground_Glass_C,PG_Ruins_Small_05a_C_1.BP_SoundTrap_Ground_Glass1,-109572.70973999999,13040.940340000001,-830.3456768,,,50.0,Blueprint,,{}
+SceneComponent,BP_SoundTrap_Ground_Glass_C,SPOI_Ruins_Small_01a_C_23.BP_SoundTrap_Ground_Glass,-109891.2828,15899.7495,-818.136956,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,UNP_BP_SoundTrap_Ground_Glass_C_92f9112ff1518191_3,41018.15,-10622.49,-3845.2607,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,UNP_BP_SoundTrap_Ground_Glass_C_92f9112ff1518191_4,39123.527,-10613.823,-3696.4944,,,50.0,Blueprint,,{}
 SceneComponent,BP_SoundTrap_Ground_Glass_C,UNP_BP_SoundTrap_Ground_Glass_C_UAID_046874882494938402_29fb098085780a4e_1575534777,20876.086,16696.055,73.127945,,,50.0,Blueprint,,{}
@@ -1480,18 +1487,18 @@ SceneComponent,BP_Trapdoor_01a_C,UNP_Trapdoor_01_UAID_0468748824941D8B02_2c07323
 SceneComponent,BP_Trapdoor_01a_C,UNP_Trapdoor_01_UAID_046874882494977D02_c01302f103af8f1c_1270707798,42678.23,31612.248,-2367.742,,,,,,{}
 SceneComponent,BP_Trapdoor_01a_C,UNP_Trapdoor_01_c85329728f06dd80_0,-15346.642,13835.694,347.29385,,,,,,{}
 SceneComponent,BP_Trapdoor_01a_C,UNP_Trapdoor_02_c85329728f06dd80_1,-12615.076,14156.454,199.84193,,,,,,{}
-SceneComponent,BP_WeaponCache01_C,BP_WeaponCache01_C_UAID_04D9F5F93AD5463502_6050371b4132a7ae_1594069830,24598.797,-14764.439,-4419.262,The Hidden Cache,,,,,"{""instruction"": ""Locate the Powder Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Examine the Powder Cache.""}"
-SceneComponent,BP_WeaponCache02_C,BP_WeaponCache02_C_UAID_04D9F5F93AD5463502_6050371b4132a7ae_1535612829,24324.94,-16375.147,-4428.468,The Hidden Cache,,,,,"{""instruction"": ""Locate the Rifle Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Examine the Rifle Cache.""}"
-SceneComponent,BP_WeaponCache03_C,BP_WeaponCache03_C_UAID_04D9F5F93AD5463502_c6899ba472a785b4_1264790818,-1348.3556,51014.938,-5603.1196,The Hidden Cache,,,,,"{""instruction"": ""Locate the Munition Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Examine the Munition Cache.""}"
-SceneComponent,BP_WeaponCache04_C,BP_WeaponCache04_C_UAID_04D9F5F93AD5463502_83f36e3a3de27e74_1103252814,-1610.2451,49488.26,-4290.277,The Hidden Cache,,,,,"{""instruction"": ""Locate the Fuse Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Examine the Fuse Cache.""}"
-SceneComponent,BP_WeaponCache04_C,BP_WeaponCache04_C_UAID_04D9F5F93AD5463502_a44c2e6e6faa7d77_1103252814,57312.582,6573.592,-2430.045,The Hidden Cache,,,,,"{""instruction"": ""Locate the Fuse Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Examine the Fuse Cache.""}"
-SceneComponent,BP_WeaponCache05_C,BP_WeaponCache05_C_UAID_04D9F5F93AD5463502_c6899ba472a785b4_1289998819,-2266.0571,49008.188,-5610.7334,The Hidden Cache,,,,,"{""instruction"": ""Locate the Supplies Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld"", ""interaction"": ""Examine the Supplies Cache.""}"
+SceneComponent,BP_WeaponCache01_C,BP_WeaponCache01_C_UAID_04D9F5F93AD5463502_6050371b4132a7ae_1594069830,24598.797,-14764.439,-4419.262,The Hidden Cache,,,,,"{""interaction"": ""Examine the Powder Cache."", ""instruction"": ""Locate the Powder Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_WeaponCache02_C,BP_WeaponCache02_C_UAID_04D9F5F93AD5463502_6050371b4132a7ae_1535612829,24324.94,-16375.147,-4428.468,The Hidden Cache,,,,,"{""interaction"": ""Examine the Rifle Cache."", ""instruction"": ""Locate the Rifle Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_WeaponCache03_C,BP_WeaponCache03_C_UAID_04D9F5F93AD5463502_c6899ba472a785b4_1264790818,-1348.3556,51014.938,-5603.1196,The Hidden Cache,,,,,"{""interaction"": ""Examine the Munition Cache."", ""instruction"": ""Locate the Munition Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_WeaponCache04_C,BP_WeaponCache04_C_UAID_04D9F5F93AD5463502_83f36e3a3de27e74_1103252814,-1610.2451,49488.26,-4290.277,The Hidden Cache,,,,,"{""interaction"": ""Examine the Fuse Cache."", ""instruction"": ""Locate the Fuse Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_WeaponCache04_C,BP_WeaponCache04_C_UAID_04D9F5F93AD5463502_a44c2e6e6faa7d77_1103252814,57312.582,6573.592,-2430.045,The Hidden Cache,,,,,"{""interaction"": ""Examine the Fuse Cache."", ""instruction"": ""Locate the Fuse Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld""}"
+SceneComponent,BP_WeaponCache05_C,BP_WeaponCache05_C_UAID_04D9F5F93AD5463502_c6899ba472a785b4_1289998819,-2266.0571,49008.188,-5610.7334,The Hidden Cache,,,,,"{""interaction"": ""Examine the Supplies Cache."", ""instruction"": ""Locate the Supplies Cache."", ""quest_id"": ""Quest.Reynauld.Q08"", ""quest_giver"": ""Character.NPC.Reynauld""}"
 SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a1_UAID_046874882494928402_29fb098085780a4e_1954944239,27048.07,18490.82,213.16612,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a1_UAID_046874882494928402_29fb098085780a4e_1956298515,29768.84,19181.254,363.2865,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a2_UAID_046874882494928402_29fb098085780a4e_1954953242,27771.805,18419.623,210.83133,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_Burned_C,UNP_BP_Window_Ext_Single_07a_UAID_046874882494928402_29fb098085780a4e_1954947240,27527.809,17717.652,215.38287,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_0,56004.17,29844.652,-4738.2324,,,,,,{}
-SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_1,56193.633,29519.838,-4738.2324,,,,,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_1,56193.633,29519.838,-4738.2324,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_10,55142.668,29132.955,-4719.2046,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_13,57366.754,29049.025,-5200.3335,,,,,,{}
 SceneComponent,BP_Window_Ext_Single_07a_C,BP_Window_Ext_Single_07a_C_35267f9c3545d35c_2,56419.258,29655.072,-4738.2324,,,,,,{}
@@ -1610,6 +1617,7 @@ SceneComponent,C_BeerBarrels_01a_Spawner_C,LevelInstance_UAID_00FF8EFC2BEFF28202
 SceneComponent,C_BeerBarrels_01a_Spawner_C,LevelInstance_UAID_04D9F5F93AD57E6402_12e65868fd8f26ee_1956066683,45061.086,14056.954,2100.229,Beer Barrel,Distillery_Small,,,,{}
 SceneComponent,C_Wardrobe_01a_Spawner_C,C_Wardrobe_01a_Spawner_C_35267f9c3545d35c_1,57644.04,29021.477,-4850.325,Wardrobe,HighClassCiv_Small,,,,{}
 SceneComponent,C_Wardrobe_02a_Spawner_C,C_Wardrobe_02a_Spawner_C_35267f9c3545d35c_1,57064.027,30016.414,-4850.3184,Cupboard,Civilian_Small,,,,{}
+SceneComponent,C_Wardrobe_02a_Spawner_C,SPOI_Ruins_Small_01a_C_23.C_Wardrobe_02a,-109301.85893,16474.266765,-831.3916600000001,Cupboard,Civilian_Small,,,,{}
 SceneComponent,C_Wardrobe_02a_Spawner_C,UNP_C_Wardrobe_02a_Spawner1_248ca04a73e0c586_1,36390.176,19771.748,2135.174,Cupboard,Civilian_Small,,,,{}
 SceneComponent,C_Wardrobe_02a_Spawner_C,UNP_C_Wardrobe_02a_Spawner1_6ed99d200bbadc17_1,13214.093,45126.57,-2972.0354,Cupboard,Civilian_Small,,,,{}
 SceneComponent,C_Wardrobe_02a_Spawner_C,UNP_C_Wardrobe_02a_Spawner1_UAID_046874882494907E02_f6ac66adf17bf997_1359949924,-19939.91,20675.44,-1480.7095,Cupboard,Civilian_Small,,,,{}
@@ -1641,7 +1649,7 @@ SceneComponent,CineCameraActor,CineCameraActor_UAID_D843AE1A93E5F05102_116691047
 SceneComponent,CineCameraActor,CineCameraActor_UAID_D843AE1A93E5F05102_1359106471,3531.7065,12056.681,938.1435,,,,,,{}
 SceneComponent,CineCameraActor,CineCameraActor_UAID_D843AE1A93E5F05102_1512546472,-1476.3715,12612.768,900.89075,,,,,,{}
 SceneComponent,CineCameraActor,CineCameraActor_UAID_D843AE1A93E5F05102_1726910473,34253.367,5256.5674,2136.6177,,,,,,{}
-SceneComponent,DNU_SoundTrap_Crow_Line_01a_C,DNU_SoundTrap_Crow_Line_01a_C_UAID_00FF8EFC2BEFD1E202_1252441185,47018.152,16544.084,-671.5976,,,20.0,Blueprint,,"{""visible"": false, ""health"": ""10.0 HP""}"
+SceneComponent,DNU_SoundTrap_Crow_Line_01a_C,DNU_SoundTrap_Crow_Line_01a_C_UAID_00FF8EFC2BEFD1E202_1252441185,47018.152,16544.084,-671.5976,,,20.0,Blueprint,,"{""health"": ""10.0 HP""}"
 SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-1_-1_-1_F9BFF03,-12800.0,-12800.0,-12800.0,,,,,,{}
 SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-1_0_-1_F9BFF03,-12800.0,12800.0,-12800.0,,,,,,{}
 SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_1_1_-1_F9BFF03,38400.0,38400.0,-12800.0,,,,,,{}
@@ -1835,6 +1843,7 @@ SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,Loot_AmmoBox_Small_01a_Spawner_C
 SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,Loot_AmmoBox_Small_01a_Spawner_C_UAID_581CF8B72315CE4802_2c07323eb2e99beb_1197336021,35676.023,8823.724,1118.6133,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,Loot_AmmoBox_Small_01a_Spawner_C_UAID_581CF8B72315EB7D02_00c96ecbce87a0a2_1257570602,29952.785,19171.238,-3958.902,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,Loot_AmmoBox_Small_01a_Spawner_C_c85329728f06dd80_0,-15415.327,13297.171,-24.73506,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
+SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,SPOI_Ruins_Small_01a_C_23.Loot_AmmoBox_Small_01a,-109366.03725,16577.25892,-831.39166,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,UNP_Loot_AmmoBox_Small_01a2_UAID_0468748824944E8902_c85329728f06dd80_1224350401,-13353.132,13774.13,-472.8515,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,UNP_Loot_AmmoBox_Small_01a2_UAID_0468748824944E8902_c85329728f06dd80_1224575410,-14177.627,14999.392,-472.82773,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_AmmoBox_Small_01a_Spawner_C,UNP_Loot_AmmoBox_Small_01a2_UAID_18C04DA8201B327902_0937f42e405261d3_2128310253,-11912.998,-141.18074,2008.1985,Munitions Crate,Ammo_Medium,50.0,Blueprint,,{}
@@ -2025,6 +2034,7 @@ SceneComponent,Loot_AshPile_01a_Spawner_C,Loot_AshPile_01a_Spawner_C_UAID_581CF8
 SceneComponent,Loot_AshPile_01a_Spawner_C,Loot_AshPile_01a_Spawner_C_UAID_581CF8B72315E27902_29fb098085780a4e_2144004108,26487.871,15266.261,59.911003,Pile of Ash,AshPile,50.0,Blueprint,,{}
 SceneComponent,Loot_AshPile_01a_Spawner_C,Loot_AshPile_01a_Spawner_C_UAID_581CF8B72315E37902_29fb098085780a4e_1093542290,27962.645,16808.604,114.059906,Pile of Ash,AshPile,50.0,Blueprint,,{}
 SceneComponent,Loot_AshPile_01a_Spawner_C,Loot_AshPile_01a_Spawner_C_UAID_581CF8B72315E37902_29fb098085780a4e_1129640296,26716.139,18725.787,55.060913,Pile of Ash,AshPile,50.0,Blueprint,,{}
+SceneComponent,Loot_Barrel_01a_Spawner_C,BP_Ruins_Medium_01a_C_0.PG_StoneWell_01a.Loot_Barrel_01a,-112075.63299672658,9825.188159781557,-828.151675,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_5abb851929817da7_1,-12326.455,-26.037128,1799.2235,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_7f13be226a970f87_1,60535.074,18011.281,-2459.0974,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_UAID_00FF8EFC2BEF0C6602_b67ec8a3d8d2e891_1691914644,-4973.3345,36449.543,-2596.1533,Oak Barrel,OakBarrel,,,,{}
@@ -2055,6 +2065,8 @@ SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_c85329728f06d
 SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_c85329728f06dd80_14,-15157.197,14212.13,-639.2249,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_ce52be21fe63b205_1,14797.877,-12497.939,130.60226,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,Loot_Barrel_01a_Spawner_C_d30a12f2c04c18d1_1,-13845.221,47388.3,-2372.2363,Oak Barrel,OakBarrel,,,,{}
+SceneComponent,Loot_Barrel_01a_Spawner_C,PG_Ruins_Small_05a_C_1.Loot_Barrel_01a,-110968.47129999999,12762.47193,-790.42952,Oak Barrel,OakBarrel,,,,{}
+SceneComponent,Loot_Barrel_01a_Spawner_C,SPOI_Ruins_Small_01a_C_23.PG_SC_Barrels_09.Loot_Barrel_01a_Spawner,-109284.769902,16573.751841999998,-831.184583,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,UNP_Loot_Barrel_01a_30fa77cbf391bfc5_0,-109658.11,14268.803,-793.7787,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,UNP_Loot_Barrel_01a_Spawner1_c01302f103af8f1c_3,42428.9,31721.531,-2913.6375,Oak Barrel,OakBarrel,,,,{}
 SceneComponent,Loot_Barrel_01a_Spawner_C,UNP_Loot_Barrel_01a_Spawner_7ab07c62ce485b20_0,49679.094,31360.08,-4415.244,Oak Barrel,OakBarrel,,,,{}
@@ -2367,6 +2379,9 @@ SceneComponent,Loot_Chest_Large_01a_Spawner_C,UNP_Loot_Chest_Small_01a1_UAID_046
 SceneComponent,Loot_Chest_Large_01a_Spawner_C,UNP_Loot_Chest_Small_01a1_UAID_D843AE1A93E5282D02_320e0a82f1b6c155_2118243696,55143.977,26697.305,-5365.7114,Large Chest,Chest_Global_Large,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Large_01a_Spawner_C,UNP_Loot_Chest_Small_01a1_UAID_D843AE1A93E5282D02_b9315f8214441e9d_2118243696,-4223.2188,23526.662,-262.39825,Large Chest,Chest_Global_Large,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Large_01a_Spawner_C,UNP_Loot_Chest_Small_01a1_UAID_D843AE1A93E5282D02_ce2c25b7d895b9b7_2118243696,35877.72,43196.188,-4869.212,Large Chest,Chest_Global_Large,50.0,Blueprint,,{}
+SceneComponent,Loot_Chest_Medium_01a_Spawner_C,BP_Ruins_Medium_01a_C_0.BP_MudFloor_01a.Loot_Chest_Medium_01a,-111483.23493372364,11245.284425001755,-835.965097,Chest,Chest_Global_Medium,10.0,Custom,,{}
+SceneComponent,Loot_Chest_Medium_01a_Spawner_C,BP_Ruins_Medium_01a_C_0.BP_MudFloor_01a1.Loot_Chest_Medium_01a,-110916.99193050571,9653.389828482634,-835.965097,Chest,Chest_Global_Medium,10.0,Custom,,{}
+SceneComponent,Loot_Chest_Medium_01a_Spawner_C,BP_Ruins_Medium_01a_C_0.BP_MudFloor_01a2.Loot_Chest_Medium_01a,-110098.51902774385,10695.284045440794,-835.965097,Chest,Chest_Global_Medium,10.0,Custom,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_5abb851929817da7_1,-11213.926,56.449432,1836.6312,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_7f13be226a970f87_1,61650.652,18013.385,-2421.6897,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_UAID_046874882494169202_12e65868fd8f26ee_1796533414,39701.125,20555.84,1541.0536,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
@@ -2400,6 +2415,7 @@ SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_c
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_c85329728f06dd80_2,-14583.86,14223.111,350.27557,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_ce52be21fe63b205_1,15818.916,-12947.389,168.00992,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,Loot_Chest_Medium_01a_Spawner_C_d30a12f2c04c18d1_1,-13601.883,48477.02,-2334.8286,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
+SceneComponent,Loot_Chest_Medium_01a_Spawner_C,SPOI_Ruins_Small_01a_C_23.BP_MudFloor_01a.Loot_Chest_Medium_01a,-109617.01315,16092.61248,-826.772147,Chest,Chest_Global_Medium,10.0,Custom,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Medium_01a_05e8571f94eea9cd_0,50376.836,31050.49,-4420.3184,Chest,Chest_Global_Medium,10.0,Custom,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Medium_01a_2260739d0610a5fa_0,-15517.98,23116.986,-1541.8542,Chest,Chest_Global_Medium,10.0,Custom,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Medium_01a_2a8d74f1dd8747f9_0,11602.864,-10449.695,-240.31345,Chest,Chest_Global_Medium,10.0,Custom,,{}
@@ -2462,6 +2478,7 @@ SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Medium_01a_UAID_D8
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Medium_01a_UAID_D843AE1A93E5282D02_ce2c25b7d895b9b7_2118242692,35643.984,42912.66,-4626.064,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Medium_01a_f4a31f46605b5882_0,59476.637,25206.514,-5590.1953,Chest,Chest_Global_Medium,10.0,Custom,,{}
 SceneComponent,Loot_Chest_Medium_01a_Spawner_C,UNP_Loot_Chest_Small_01a1_bacad867c9c5e889_0,23973.184,458.08298,-1003.29236,Chest,Chest_Global_Medium,50.0,Blueprint,,{}
+SceneComponent,Loot_Chest_Small_01a_Spawner_C,BP_Ruins_Medium_01a_C_0.PG_StoneWell_01a.Loot_Chest_Small_01a,-112080.51741510554,9718.932464802749,-799.373767,Small Chest,Chest_Global_Small,5.0,Custom,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_35267f9c3545d35c_51,56543.43,31772.613,-5307.8755,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_UAID_00FF8EFC2BEF067102_2093717538,34818.523,12386.93,1225.9634,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_UAID_046874882494AD8D02_e866662526208594_1994895632,37100.66,48386.52,-3636.404,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
@@ -2481,6 +2498,7 @@ SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_UAI
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_UAID_581CF8B72315053B02_35267f9c3545d35c_1722939901,55350.258,29240.023,-5377.5127,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_UAID_581CF8B72315235F02_92f9112ff1518191_1868403459,44176.29,-8530.829,-3810.426,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,Loot_Chest_Small_01a_Spawner_C_UAID_581CF8B72315AF3A02_35267f9c3545d35c_1952599411,55653.87,29328.72,-5416.6274,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
+SceneComponent,Loot_Chest_Small_01a_Spawner_C,SPOI_Ruins_Small_01a_C_23.Loot_Chest_Small_01a,-109938.89886,16145.7684,-819.371391,Small Chest,Chest_Global_Small,50.0,Blueprint,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,UNP_Loot_Chest_Small_01a_0894a4b7551bfdac_0,3789.7568,27386.154,-1427.4459,Small Chest,Chest_Global_Small,20.0,Custom,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,UNP_Loot_Chest_Small_01a_08be49ae777b02d9_0,-12084.576,-15897.374,1166.0609,Small Chest,Chest_Global_Small,20.0,Custom,,{}
 SceneComponent,Loot_Chest_Small_01a_Spawner_C,UNP_Loot_Chest_Small_01a_1146f3376378a2b5_0,53589.094,16742.863,-2835.3716,Small Chest,Chest_Global_Small,20.0,Custom,,{}
@@ -3137,6 +3155,7 @@ SceneComponent,Loot_DungeonM03_01a_Spawner_C,Loot_DungeonM03_01a_Spawner_C_UAID_
 SceneComponent,Loot_FargothStump_01a_Spawner_C,Loot_FargothStump_01a_Spawner_C_UAID_D843AE1A93E554CF02_2144098337,12254.132,-18752.07,-56.142624,Fargot's Hiding Place,FargothStump,0.1,Blueprint,,{}
 SceneComponent,Loot_FlourSack_01_Spawner_C,Loot_FlourSack_01_Spawner_C_UAID_046874882494378F02_d30c5cf25f8a0dcb_1828039890,22410.422,-1760.2758,-946.711,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
 SceneComponent,Loot_FlourSack_01_Spawner_C,Loot_FlourSack_01_Spawner_C_UAID_046874882494D77F02_46c6e786a3fd7089_1403680629,25171.383,42360.86,-2387.057,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
+SceneComponent,Loot_FlourSack_01_Spawner_C,PG_Ruins_Small_05a_C_1.PG_FlourSacks_09a.Loot_FlourSack_01,-111048.93721780844,12439.613495867154,-832.7935032000004,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
 SceneComponent,Loot_FlourSack_01_Spawner_C,UNP_Container_FlourSack_01_UAID_04687488249402DA02_e36b4c37399c2378_2015990149,38984.797,-14644.267,-5326.3306,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
 SceneComponent,Loot_FlourSack_01_Spawner_C,UNP_Container_FlourSack_01_UAID_046874882494118C02_2389606fe4e70095_1336294258,22846.357,26853.127,-1083.9685,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
 SceneComponent,Loot_FlourSack_01_Spawner_C,UNP_Container_FlourSack_01_UAID_046874882494378F02_d30c5cf25f8a0dcb_1818547225,24774.754,-573.0577,-982.1571,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
@@ -3443,16 +3462,16 @@ SceneComponent,Loot_PowderLocker_01a_Spawner_C,Loot_PowderLocker_01a_Spawner_C_U
 SceneComponent,Loot_PowderLocker_01a_Spawner_C,Loot_PowderLocker_01a_Spawner_C_UAID_D843AE1A93E59FE502_1127286320,42359.152,-9863.49,-3649.197,Powder Locker,PowderLocker,50.0,Blueprint,,{}
 SceneComponent,Loot_PowderLocker_01a_Spawner_C,Loot_PowderLocker_01a_Spawner_C_UAID_D843AE1A93E59FE502_1587829344,57162.414,29534.744,-5410.9526,Powder Locker,PowderLocker,50.0,Blueprint,,{}
 SceneComponent,Loot_PowderLocker_01a_Spawner_C,Loot_PowderLocker_01a_Spawner_C_UAID_D843AE1A93E59FE502_1838946614,-235.76663,13797.362,-105.65432,Powder Locker,PowderLocker,50.0,Blueprint,,{}
-SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,Loot_WeaponCrate_01a_C_UAID_046874882494EC8802_6050371b4132a7ae_1430475213,25833.344,-18149.29,-4339.3154,Ranged Weapon Chest,Weapon_Ranged,25.0,Blueprint,,{}
+SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,Loot_WeaponCrate_01a_C_UAID_046874882494EC8802_6050371b4132a7ae_1430475213,25833.344,-18149.29,-4339.3154,Ranged Weapon Chest,Weapon_Ranged,50.0,Blueprint,,{}
 SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_01a_5039a3ad58c94e5b_0,43293.625,25650.414,-2936.8806,Ranged Weapon Chest,Weapon_Ranged,25.0,Custom,,{}
-SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_01a_90d7047e313b2b81_0,18930.166,32138.521,-1987.4895,Ranged Weapon Chest,Weapon_Ranged,25.0,Blueprint,,{}
+SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_01a_90d7047e313b2b81_0,18930.166,32138.521,-1987.4895,Ranged Weapon Chest,Weapon_Ranged,50.0,Blueprint,,{}
 SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_01a_Spawner_UAID_046874882494378F02_d30c5cf25f8a0dcb_1827243838,23680.156,-2992.4375,-1009.223,Ranged Weapon Chest,Weapon_Ranged,10.0,Custom,,{}
 SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_01a_Spawner_UAID_046874882494998402_42c3d461f962a7d8_1739747522,25326.805,18438.754,-1082.7374,Ranged Weapon Chest,Weapon_Ranged,10.0,Custom,,{}
 SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_01a_Spawner_UAID_D843AE1A93E5DB2C02_34b8e3f6f402fe5e_1591937181,30462.111,11394.727,1097.1389,Ranged Weapon Chest,Weapon_Ranged,10.0,Custom,,{}
-SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_046874882494368F02_9c34f29bae09b13e_1380473312,-1763.0024,5928.1494,-540.57837,Ranged Weapon Chest,Weapon_Ranged,25.0,Blueprint,,{}
-SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_0468748824944E9002_29a1b4c71511b535_1416961424,44127.027,44188.074,-5251.3394,Ranged Weapon Chest,Weapon_Ranged,25.0,Blueprint,,{}
-SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_046874882494F98A02_2c07323eb2e99beb_1893398286,31658.879,7948.643,1218.5402,Ranged Weapon Chest,Weapon_Ranged,25.0,Blueprint,,{}
-SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_046874882494F98A02_2c07323eb2e99beb_1893636301,34550.605,10030.957,1216.5122,Ranged Weapon Chest,Weapon_Ranged,25.0,Blueprint,,{}
+SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_046874882494368F02_9c34f29bae09b13e_1380473312,-1763.0024,5928.1494,-540.57837,Ranged Weapon Chest,Weapon_Ranged,50.0,Blueprint,,{}
+SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_0468748824944E9002_29a1b4c71511b535_1416961424,44127.027,44188.074,-5251.3394,Ranged Weapon Chest,Weapon_Ranged,50.0,Blueprint,,{}
+SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_046874882494F98A02_2c07323eb2e99beb_1893398286,31658.879,7948.643,1218.5402,Ranged Weapon Chest,Weapon_Ranged,50.0,Blueprint,,{}
+SceneComponent,Loot_RangedWeaponCrate_01a_Spawner_C,UNP_Loot_WeaponCrate_Rare_01a_UAID_046874882494F98A02_2c07323eb2e99beb_1893636301,34550.605,10030.957,1216.5122,Ranged Weapon Chest,Weapon_Ranged,50.0,Blueprint,,{}
 SceneComponent,Loot_RangedWeaponCrate_REL_01a_Spawner_C,Loot_RangedWeaponCrate_REL_01a_Spawner_C_UAID_046874882494F98A02_2c07323eb2e99beb_1938732633,33090.438,9048.957,1367.3663,Reinforced Ranged Weapon Chest,Weapon_Ranged_REL,50.0,Blueprint,,"{""keyed"": ""ID_Key_Silver""}"
 SceneComponent,Loot_RangedWeaponCrate_REL_01a_Spawner_C,Loot_RangedWeaponCrate_REL_01a_Spawner_C_UAID_04D9F5F93AD5603502_35267f9c3545d35c_2140680967,57573.4,29105.723,-4468.5947,Reinforced Ranged Weapon Chest,Weapon_Ranged_REL,50.0,Blueprint,,"{""keyed"": ""ID_Key_Silver""}"
 SceneComponent,Loot_RangedWeaponCrate_REL_01a_Spawner_C,Loot_RangedWeaponCrate_REL_01a_Spawner_C_UAID_04D9F5F93AD5CA3302_edad57567b47cde9_2102636930,10264.976,-3297.538,142.70322,Reinforced Ranged Weapon Chest,Weapon_Ranged_REL,50.0,Blueprint,,"{""keyed"": ""ID_Key_Silver""}"
@@ -3528,9 +3547,9 @@ SceneComponent,Loot_TinkerCase_01a_Spawner_C,Loot_TinkerCase_01a_Spawner_C_UAID_
 SceneComponent,Loot_TinkerCase_01a_Spawner_C,Loot_TinkerCase_01a_Spawner_C_UAID_D843AE1A93E59FE502_1400672332,39211.926,-10419.101,-3613.1267,Tinker's Case,TinkerCase,50.0,Blueprint,,{}
 SceneComponent,Loot_TinkerCase_01a_Spawner_C,Loot_TinkerCase_01a_Spawner_C_UAID_D843AE1A93E59FE502_1493460338,58068.457,29534.299,-5311.4478,Tinker's Case,TinkerCase,50.0,Blueprint,,{}
 SceneComponent,Loot_TinkerCase_01a_Spawner_C,Loot_TinkerCase_01a_Spawner_C_UAID_D843AE1A93E5A0E502_1583815796,-124.440544,14176.553,-22.645813,Tinker's Case,TinkerCase,50.0,Blueprint,,{}
-SceneComponent,PG_Crane_01a_C,PG_Crane_01a_C_35267f9c3545d35c_1,55374.76,29616.004,-4175.025,,,,,,{}
+SceneComponent,PG_Crane_01a_C,PG_Crane_01a_C_35267f9c3545d35c_1,55374.76,29616.004,-4175.025,Flour Sack,Sack_Flour,75.0,Blueprint,,{}
 SceneComponent,PG_Debris_12a_C,UNP_PG_Debris_12a_UAID_046874882494168102_20c886124a4a6cac_1343904337,-1917.789,12691.595,-105.67524,Oak Barrel,OakBarrel,,,,{}
-SceneComponent,PG_Ruins_Small_05a_C,PG_Ruins_Small_05a_C_1,-110250.54,12925.564,-831.39166,Oak Barrel,OakBarrel,50.0,Blueprint,,{}
+SceneComponent,PG_Ruins_Small_05a_C,PG_Ruins_Small_05a_C_1,-110250.54,12925.564,-831.39166,,,,,,{}
 SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_046874882494168102_20c886124a4a6cac_1343698325,67.35573,33.719067,20.627756,,,,,,{}
 SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_046874882494427E02_6ed99d200bbadc17_1174504287,67.35573,33.71907,20.627756,,,,,,{}
 SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_046874882494427E02_a08f056012bf1a67_1174504287,67.35573,33.71907,20.627756,,,,,,{}
@@ -3551,11 +3570,11 @@ SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_046874882494D77F02_4
 SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_046874882494F98A02_2c07323eb2e99beb_2107027989,67.35573,33.71907,20.627756,,,,,,{}
 SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_046874882494F98A02_2c07323eb2e99beb_2108010143,67.35573,33.71907,20.627756,,,,,,{}
 SceneComponent,PG_SC_Barrels_08_C,UNP_PG_SC_Barrels_08_UAID_18C04DA8201B437902_b67ec8a3d8d2e891_1439530341,67.35573,33.719067,20.627756,,,,,,{}
-SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_0937f42e405261d3_0,-11994.825,-448.7546,2778.5112,Nest,Nest,10.0,Blueprint,,{}
-SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_37a28efbd26adc60_0,14892.245,-13026.865,1109.8899,Nest,Nest,10.0,Blueprint,,{}
-SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_9b091094a2e3f407_0,-13344.56,47583.254,-1392.9486,Nest,Nest,10.0,Blueprint,,{}
-SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_ab5027526005fa55_0,60835.38,17565.766,-1479.8098,Nest,Nest,10.0,Blueprint,,{}
-SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_c85329728f06dd80_0,-15612.818,14113.7295,325.52747,Nest,Nest,10.0,Blueprint,,{}
+SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_0937f42e405261d3_0,-11994.825,-448.7546,2778.5112,Nest,Nest,10.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4, ""BP_SoundTrap_Crow_Line_01a_C"": 1, ""Loot_BirdsNest_01a_Spawner_C"": 1}}"
+SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_37a28efbd26adc60_0,14892.245,-13026.865,1109.8899,Nest,Nest,10.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4, ""BP_SoundTrap_Crow_Line_01a_C"": 1, ""Loot_BirdsNest_01a_Spawner_C"": 1}}"
+SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_9b091094a2e3f407_0,-13344.56,47583.254,-1392.9486,Nest,Nest,10.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4, ""BP_SoundTrap_Crow_Line_01a_C"": 1, ""Loot_BirdsNest_01a_Spawner_C"": 1}}"
+SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_ab5027526005fa55_0,60835.38,17565.766,-1479.8098,Nest,Nest,10.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4, ""BP_SoundTrap_Crow_Line_01a_C"": 1, ""Loot_BirdsNest_01a_Spawner_C"": 1}}"
+SceneComponent,PG_Soundtrap_Beam_Crows_01a_C,UNP_PG_Soundtrap_Beam_Crows_01a_c85329728f06dd80_0,-15612.818,14113.7295,325.52747,Nest,Nest,10.0,Blueprint,,"{""health"": ""10.0 HP"", ""contains"": {""BP_SoundTrap_Crow_C"": 4, ""BP_SoundTrap_Crow_Line_01a_C"": 1, ""Loot_BirdsNest_01a_Spawner_C"": 1}}"
 SceneComponent,PG_Stool_01a_C,PG_Stool_01a_C_UAID_D843AE1A93E5FEA202_1285307458,33482.13,19284.363,2136.7668,,,,,,{}
 SceneComponent,PG_Workbench_01_Spawner_C,PG_Workbench_01_Spawner_C_35267f9c3545d35c_1,58092.98,29475.7,-5411.346,Workbench Drawer,Workbench_Small,,,,{}
 SceneComponent,PG_Workbench_01_Spawner_C,PG_Workbench_01_Spawner_C_35267f9c3545d35c_3,55918.914,32335.555,-4940.2695,Workbench Drawer,Workbench_Small,,,,{}
@@ -3563,7 +3582,7 @@ SceneComponent,PG_Workbench_01_Spawner_C,PG_Workbench_01_Spawner_C_UAID_04687488
 SceneComponent,PG_Workbench_01_Spawner_C,PG_Workbench_01_Spawner_C_UAID_046874882494977D02_c01302f103af8f1c_1270171681,41557.38,30797.988,-2911.0303,Workbench Drawer,Workbench_Small,,,,{}
 SceneComponent,PG_Workbench_01_Spawner_C,UNP_PG_Workbench_01_UAID_0468748824944A8902_35267f9c3545d35c_1898499323,55938.848,27005.867,-5408.065,Workbench Drawer,Workbench_Small,,,,{}
 SceneComponent,PG_Workbench_01_Spawner_C,UNP_PG_Workbench_01_UAID_046874882494BB8602_92f9112ff1518191_1733258069,43221.27,-10321.408,-3650.6934,Workbench Drawer,Workbench_Small,,,,{}
-SceneComponent,SPOI_Ruins_Small_01a_C,SPOI_Ruins_Small_01a_C_23,-109175.75,16523.805,-831.39166,Small Chest,Chest_Global_Small,50.0,Blueprint,DA_AISpawner_Miniboss,{}
+SceneComponent,SPOI_Ruins_Small_01a_C,SPOI_Ruins_Small_01a_C_23,-109175.75,16523.805,-831.39166,,,,,,{}
 SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigible_C_0,10515.951,16909.3,147.65292,Annecy Road Dirigible,,,,,{}
 SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigible_C_1,39719.008,-3573.8962,-1792.1956,North Camp Dirigible,,,,,{}
 SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigible_C_2,29504.44,12456.206,1345.2488,Fusiliers Garrison Dirigible,,,,,{}
@@ -3577,33 +3596,33 @@ SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigi
 SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigible_C_UAID_04D9F5F93AD5656502_1890990196,40132.15,8527.102,1374.5374,Pit Dirigible,,,,,{}
 SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigible_C_UAID_04D9F5F93AD5B56602_1463730662,-3306.9316,42357.914,-2495.0244,Quarry Dirigible,,,,,{}
 SphereComponent,BP_RaidExtractionPoint_Dirigible_C,BP_RaidExtractionPoint_Dirigible_C_UAID_04D9F5F93AD5FC3402_1375810047,29617.465,-14201.094,-2372.1194,Basin Cliff Dirigible,,,,,{}
-StaticMeshComponent,Actor,Actor_0a65446b0d2529e0_9,12254.375,42118.58,-2888.641,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_343d1044c12c175f_0,62480.86,-1325.6246,-4755.2256,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_3b12317ea1fcbdda_0,43722.926,46531.434,-5230.626,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_0a65446b0d2529e0_9,12254.375,42118.58,-2888.641,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_343d1044c12c175f_0,62480.86,-1325.6246,-4755.2256,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_3b12317ea1fcbdda_0,43722.926,46531.434,-5230.626,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_3ec831d0606c3d94_0,69108.94,3123.4565,-5596.5796,,,,,,{}
 StaticMeshComponent,Actor,Actor_653315ec23b604ae_0,10120.119,43008.42,-2935.3406,,,,,,{}
-StaticMeshComponent,Actor,Actor_65d9c2c136e04938_0,6809.1255,-20378.55,-31.770273,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_65d9c2c136e04938_0,6809.1255,-20378.55,-31.770273,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_7593430b60a84fea_0,11543.353,44420.54,-2887.541,,,,,,{}
-StaticMeshComponent,Actor,Actor_955cc7d06168ea1d_0,65152.96,2729.7026,-4771.902,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494168102_20c886124a4a6cac_1343700326,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494427E02_6ed99d200bbadc17_1174570296,13509.224,44452.57,-2849.7922,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494427E02_a08f056012bf1a67_1174570296,49836.07,30457.094,-4239.2,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494427E02_d13aeda62c2404aa_1174570296,45082.613,13584.059,2264.5278,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494477E02_248ca04a73e0c586_1606598358,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_0468748824944E8902_c85329728f06dd80_1135169677,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_0468748824944E8902_c85329728f06dd80_1135396684,209.34427,-54.332256,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494907E02_f6ac66adf17bf997_1376805385,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494907E02_f6ac66adf17bf997_1377294392,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494907E02_f6ac66adf17bf997_1699936556,209.34428,-54.332256,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494977D02_c01302f103af8f1c_1434293217,209.3443,-54.332256,95.16696,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494D77F02_46c6e786a3fd7089_1405642066,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494D77F02_46c6e786a3fd7089_1413926425,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_046874882494F98A02_2c07323eb2e99beb_2108011144,209.34428,-54.332253,95.166954,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_581CF8B72315C94F02_0a65446b0d2529e0_1833550486,12155.1455,42194.344,-2888.1475,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_581CF8B72315C94F02_d511d7897b3e3c3c_1833550486,13834.67,45130.207,-3026.6812,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_UAID_581CF8B72315C94F02_fdc3d6e4587808e0_1833550486,42769.242,26541.002,-2949.68,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_955cc7d06168ea1d_0,65152.96,2729.7026,-4771.902,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494168102_20c886124a4a6cac_1343700326,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494427E02_6ed99d200bbadc17_1174570296,13509.224,44452.57,-2849.7922,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494427E02_a08f056012bf1a67_1174570296,49836.07,30457.094,-4239.2,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494427E02_d13aeda62c2404aa_1174570296,45082.613,13584.059,2264.5278,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494477E02_248ca04a73e0c586_1606598358,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_0468748824944E8902_c85329728f06dd80_1135169677,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_0468748824944E8902_c85329728f06dd80_1135396684,209.34427,-54.332256,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494907E02_f6ac66adf17bf997_1376805385,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494907E02_f6ac66adf17bf997_1377294392,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494907E02_f6ac66adf17bf997_1699936556,209.34428,-54.332256,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494977D02_c01302f103af8f1c_1434293217,209.3443,-54.332256,95.16696,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494D77F02_46c6e786a3fd7089_1405642066,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494D77F02_46c6e786a3fd7089_1413926425,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_046874882494F98A02_2c07323eb2e99beb_2108011144,209.34428,-54.332253,95.166954,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_581CF8B72315C94F02_0a65446b0d2529e0_1833550486,12155.1455,42194.344,-2888.1475,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_581CF8B72315C94F02_d511d7897b3e3c3c_1833550486,13834.67,45130.207,-3026.6812,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_UAID_581CF8B72315C94F02_fdc3d6e4587808e0_1833550486,42769.242,26541.002,-2949.68,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_1c84e9605552bb88_1151383084,68815.67,2892.424,-5556.301,,,,,,"{""visible"": false}"
-StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_2a58ec0e7b5f1d6c_1325497134,31753.238,19044.193,-5288.751,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_2a58ec0e7b5f1d6c_1325497134,31753.238,19044.193,-5288.751,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_2d1ba48273ef26c2_1130343077,36995.06,14186.192,-7116.086,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_37a70465a812999d_1211372092,23585.938,201.7043,-870.07214,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_43e22c5d8e40812a_1211372092,12423.754,39056.082,-2061.084,,,,,,"{""visible"": false}"
@@ -3611,7 +3630,7 @@ StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_45e1ee1fee89ff8c_1151383
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_47f14179e88a172a_1130343077,-9004.803,19511.05,264.40845,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_4b4f7a8d3e156d4c_1130343077,23624.912,39992.086,-2266.3442,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_4c1c11c82901fdb8_1151383084,-7815.661,19489.062,251.15248,,,,,,"{""visible"": false}"
-StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_50cedf7d0f13c933_1325497134,31748.684,18451.695,-5288.751,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_50cedf7d0f13c933_1325497134,31748.684,18451.695,-5288.751,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_524085205dea7fcf_1130343077,24071.193,40.932648,-843.6792,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_5d1203ed4fb8eadc_1130343077,-6729.174,19710.955,252.28128,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_64af00296cefccd9_1130343077,56793.027,26999.45,-5183.6025,,,,,,"{""visible"": false}"
@@ -3633,12 +3652,15 @@ StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_e10ef0544770964d_1130343
 StaticMeshComponent,Actor,Actor_UAID_D843AE1A93E58A5202_f2a1630299cdf563_1130343077,-3835.6506,23487.96,-91.48775,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_b577c58d72231d0c_0,11121.111,44119.113,-2734.5461,,,,,,{}
 StaticMeshComponent,Actor,Actor_bacad867c9c5e889_2,23926.393,39.128353,-692.9686,,,,,,"{""visible"": false}"
-StaticMeshComponent,Actor,Actor_c9bdea24449a5a6b_0,20748.87,39124.133,-2045.2412,,,,,,"{""visible"": true}"
-StaticMeshComponent,Actor,Actor_d511d7897b3e3c3c_9,13714.026,45098.082,-3027.1748,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_c9bdea24449a5a6b_0,20748.87,39124.133,-2045.2412,,,,,,"{""visible"": false}"
+StaticMeshComponent,Actor,Actor_d511d7897b3e3c3c_9,13714.026,45098.082,-3027.1748,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_deafa6fee9cd0b16_0,49964.38,31486.172,-4385.4526,,,,,,{}
 StaticMeshComponent,Actor,Actor_f5e949c25fd8185c_0,-5121.2886,36095.37,-2304.7456,,,,,,{}
-StaticMeshComponent,Actor,Actor_fdc3d6e4587808e0_9,42663.734,26474.262,-2950.1733,,,,,,"{""visible"": true}"
+StaticMeshComponent,Actor,Actor_fdc3d6e4587808e0_9,42663.734,26474.262,-2950.1733,,,,,,"{""visible"": false}"
 StaticMeshComponent,Actor,Actor_fe1b57b7a3b31366_0,-7204.0522,37544.613,-2494.8242,,,,,,{}
+StaticMeshComponent,LootNode,BP_Ruins_Medium_01a_C_0.PG_OldShelf_01.LootNode,-112158.06595209999,10600.07818,-649.5323487,,LIT_Item_Civilian_Shelf,,,,{}
+StaticMeshComponent,LootNode,BP_Ruins_Medium_01a_C_0.PG_OldShelf_03.LootNode,-111186.1099274,10826.099799,-649.532349,,LIT_Item_Civilian_Shelf,,,,{}
+StaticMeshComponent,LootNode,BP_Ruins_Medium_01a_C_0.PG_OldShelf_03.LootNode1,-111184.44961499999,10882.70628,-608.47413,,LIT_Item_Civilian_Shelf,,,,{}
 StaticMeshComponent,LootNode,LootNode_UAID_0468748824946A9102_70b069ed0aa90e45_1400888517,31895.41,23072.334,-5588.925,,ID_Lore_Uncommon_Note03_U,,,,{}
 StaticMeshComponent,LootNode,LootNode_UAID_046874882494AD8D02_e866662526208594_1997730827,36847.504,49535.28,-3578.2866,,LIT_Ampoules,,,,{}
 StaticMeshComponent,LootNode,LootNode_UAID_046874882494AD8D02_e866662526208594_1997732828,36917.715,49355.918,-3565.0405,,LIT_Ampoules,,,,{}
@@ -3690,6 +3712,13 @@ StaticMeshComponent,LootNode,LootNode_UAID_D843AE1A93E5E48802_4cb1a62a42540541_1
 StaticMeshComponent,LootNode,LootNode_UAID_D843AE1A93E5E48802_4cb1a62a42540541_2002092054,37437.98,48546.703,-3606.5378,,LIT_Ampoules,,,,{}
 StaticMeshComponent,LootNode,LootNode_UAID_D843AE1A93E5E48802_4cb1a62a42540541_2046987055,35808.95,49300.59,-3587.3542,,LIT_Ampoules,,,,{}
 StaticMeshComponent,LootNode,LootNode_bacad867c9c5e889_0,24160.8,-28.956837,-719.4668,,ID_Lore_Uncommon_Note03_U,,,,{}
+StaticMeshComponent,LootNode,PG_Ruins_Small_05a_C_1.PG_OldShelf_03.LootNode,-110296.1421404,12756.202519,-629.154439,,LIT_Item_Civilian_Shelf,,,,{}
+StaticMeshComponent,LootNode,PG_Ruins_Small_05a_C_1.PG_OldShelf_03.LootNode1,-110294.48182799999,12812.809000000001,-588.09622,,LIT_Item_Civilian_Shelf,,,,{}
+StaticMeshComponent,LootNode,PG_Ruins_Small_05a_C_1.PG_OldShelf_04.LootNode,-109801.964331,12693.375838,-696.883379,,LIT_Item_Camp,,,,{}
+StaticMeshComponent,LootNode,PG_Ruins_Small_05a_C_1.PG_OldShelf_04.LootNode1,-109745.35785,12691.715525,-655.82516,,LIT_Item_Camp,,,,{}
+StaticMeshComponent,LootNode,PG_Ruins_Small_05a_C_1.PG_OldShelf_04.LootNode2,-109821.409454,12685.044703,-615.023336,,LIT_Item_Civilian_Shelf,,,,{}
+StaticMeshComponent,LootNode,SPOI_Ruins_Small_01a_C_23.PG_OldShelf_03.LootNode,-109352.375001,15750.6904274,-662.662939,,LIT_Item_Civilian_Shelf,,,,{}
+StaticMeshComponent,LootNode,SPOI_Ruins_Small_01a_C_23.PG_OldShelf_03.LootNode1,-109295.76852,15749.030115,-621.60472,,LIT_Item_Civilian_Shelf,,,,{}
 StaticMeshComponent,LootNode,UNP_LootNode1_UAID_0468748824944A8902_35267f9c3545d35c_1906833696,55779.47,32147.436,-4853.8613,,LIT_Loose_MediumItems,,,,{}
 StaticMeshComponent,LootNode,UNP_LootNode1_UAID_0468748824944E8902_c85329728f06dd80_1129141542,-14297.453,14416.3,-58.95923,,LIT_Loose_MediumItems,,,,{}
 StaticMeshComponent,LootNode,UNP_LootNode1_UAID_046874882494907E02_f6ac66adf17bf997_1419483479,-18862.793,22218.182,-1428.2445,,LIT_Item_Valuables,,,,{}

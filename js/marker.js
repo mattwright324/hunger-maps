@@ -523,7 +523,7 @@ class Marker {
         const key = this.#class === "npc" ? "npc" : "other";
         const tableSource = this.#tableSource;
         return cached[key] ??= tableData.map(row => {
-            let html = `<tr><td colspan="2" class="${row["TableName"].startsWith("DA_AI") ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${this.#containerPercent(tableSource, row)}">${this.#formatLootEntry(row, tableSource)}</td></tr>`;
+            let html = `<tr><td colspan="2" class="${data.AI_TABLES[row["TableName"]] ? "" : "filterable"}" data-item="${row["ObjectName"]}" data-percent="${this.#containerPercent(tableSource, row)}">${this.#formatLootEntry(row, tableSource)}</td></tr>`;
 
             const subTableData = data.LOOT_SOURCE_TABLES[row["LootSource"]];
             if (subTableData) {

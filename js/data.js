@@ -453,6 +453,17 @@ export const presets = {
     }
 };
 
+function inMapImage(preset, row) {
+    const angle = preset.rotation * Math.PI / 180;
+    const x = (row.X * Math.cos(angle) - row.Y * Math.sin(angle)) * preset.scale + preset.offsetX;
+    const y = (row.X * Math.sin(angle) + row.Y * Math.cos(angle)) * preset.scale + preset.offsetY;
+    return 0 <= x && x <= 4096 && -500 <= y && y <= 4096;
+}
+
+if (!new URLSearchParams(window.location.search).has("debug")) {
+    Object.values(presets).forEach(preset => preset.rawData = preset.rawData.filter(row => inMapImage(preset, row)));
+}
+
 export const looseItems = [
     "LootNode",
     "Loose",
