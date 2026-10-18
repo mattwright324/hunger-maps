@@ -144,9 +144,9 @@ class Marker {
     #lookupTable() {
         if (this.#loot_table_lookup) return;
         const lootSource = this.#row.LootSource;
-        const sources = data.LOOT_SOURCE_TABLES[lootSource];
-        const table = data.LOOT_TABLES[lootSource];
-        const item = data.ITEMS[lootSource]
+        const sources = lootSource && data.LOOT_SOURCE_TABLES[lootSource];
+        const table = lootSource && data.LOOT_TABLES[lootSource];
+        const item = lootSource && data.ITEMS[lootSource]
         if (sources) {
             this.#table = sources
         } else if (table) {
@@ -303,6 +303,11 @@ class Marker {
         this.#estValue = this.#calculateEstValue();
 
         this.#classify();
+
+        if (this.#row.StackMoved) {
+            //this.#tint = 0x0000FF;
+            this.#descriptors.push("stacked");
+        }
 
         const brightnessFactor = Math.min(1.0, (Number(this.#row.SpawnChance || '100') + 15) / 100);
         if (brightnessFactor < 1.0) {

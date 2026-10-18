@@ -23,6 +23,10 @@ function splitCSVLine(line) {
     return cols;
 }
 
+function csvDataLines(text) {
+    return text.split(/\r?\n/).slice(1).filter(line => line.trim());
+}
+
 async function getMarkerCsvData(url) {
     return await fetch(url)
         .then(r => r.text())
@@ -30,16 +34,14 @@ async function getMarkerCsvData(url) {
 }
 
 async function parseMarkerCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
-
-    const xy = {}
 
     for (let line of lines) {
         const cols = splitCSVLine(line);
         if (cols.length < 6) continue;
 
-        const [
+        let [
             RootType, OuterType, OuterName, X, Y, Z,
             DisplayName, LootSource, SpawnChance, ChanceType, AISpawner, CsvJson
         ] = cols;
@@ -47,10 +49,6 @@ async function parseMarkerCSV(text) {
         if (!X || !Y || !Z) continue;
 
         //if (Visible === "False") continue;
-
-        const key = X + "," + Y;
-        if (!xy[key]) xy[key] = 1; else xy[key] += 1;
-        if (xy[key] > 1) console.log("Duplicate key: ", key, xy[key], OuterType, OuterName);
 
         let json = {}
         try {
@@ -71,7 +69,8 @@ async function parseMarkerCSV(text) {
             SpawnChance,
             ChanceType,
             AISpawner,
-            CsvJson: json
+            CsvJson: json,
+            StackMoved: false
         });
     }
 
@@ -80,7 +79,7 @@ async function parseMarkerCSV(text) {
 }
 
 // CSV WeightPercent is rounded to 4 decimals, leaving rare entries with only 1-2 significant digits.
-// Recalculate it from the raw weights, keeping the CSV value when they aren't numbers (header row)
+// Recalculate it from the raw weights, keeping the CSV value when they aren't numbers
 function exactPercent(Weight, WeightSum, WeightPercent) {
     const percent = 100 * Number(Weight) / Number(WeightSum);
     return Number.isFinite(percent) ? percent : WeightPercent;
@@ -93,7 +92,7 @@ async function getLootCsvData(url) {
 }
 
 async function parseLootCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
 
     for (let line of lines) {
@@ -115,7 +114,7 @@ async function getSourceCsvData(url) {
 }
 
 async function parseSourceCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
 
     for (let line of lines) {
@@ -137,7 +136,7 @@ async function getAiCsvData(url) {
 }
 
 async function parseAiCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
 
     for (let line of lines) {
@@ -159,7 +158,7 @@ async function getNodeCsvData(url) {
 }
 
 async function parseNodeCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
 
     for (let line of lines) {
@@ -181,7 +180,7 @@ async function getItemsCsvData(url) {
 }
 
 async function parseItemsCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
 
     for (let line of lines) {
@@ -203,7 +202,7 @@ async function getVendorCsvData(url) {
 }
 
 async function parseVendorCSV(text) {
-    const lines = text.split(/\r?\n/);
+    const lines = csvDataLines(text);
     const rows = [];
 
     for (let line of lines) {
@@ -453,16 +452,77 @@ export const presets = {
     }
 };
 
-function inMapImage(preset, row) {
+function mapImagePosition(preset, row) {
     const angle = preset.rotation * Math.PI / 180;
-    const x = (row.X * Math.cos(angle) - row.Y * Math.sin(angle)) * preset.scale + preset.offsetX;
-    const y = (row.X * Math.sin(angle) + row.Y * Math.cos(angle)) * preset.scale + preset.offsetY;
+    return {
+        x: (row.X * Math.cos(angle) - row.Y * Math.sin(angle)) * preset.scale + preset.offsetX,
+        y: (row.X * Math.sin(angle) + row.Y * Math.cos(angle)) * preset.scale + preset.offsetY,
+    };
+}
+
+function inMapImage(preset, row) {
+    const {x, y} = mapImagePosition(preset, row);
     return 0 <= x && x <= 4096 && -500 <= y && y <= 4096;
 }
 
 if (!new URLSearchParams(window.location.search).has("debug")) {
     Object.values(presets).forEach(preset => preset.rawData = preset.rawData.filter(row => inMapImage(preset, row)));
 }
+
+const STACK_PX = 1;
+const NUDGE_PX = 1.5;
+
+function spreadStacks(preset) {
+    const rows = preset.rawData;
+    const positions = rows.map(row => mapImagePosition(preset, row));
+    const cellOf = p => [Math.floor(p.x / STACK_PX), Math.floor(p.y / STACK_PX)];
+    const grid = new Map();
+    positions.forEach((p, i) => {
+        const key = cellOf(p).join(",");
+        grid.has(key) ? grid.get(key).push(i) : grid.set(key, [i]);
+    });
+
+    const parent = rows.map((_, i) => i);
+    const find = i => {
+        while (parent[i] !== i) i = parent[i] = parent[parent[i]];
+        return i;
+    };
+    positions.forEach((p, i) => {
+        const [cx, cy] = cellOf(p);
+        for (let dx = -1; dx <= 1; dx++) {
+            for (let dy = -1; dy <= 1; dy++) {
+                (grid.get(`${cx + dx},${cy + dy}`) || []).forEach(j => {
+                    if (j > i && Math.hypot(p.x - positions[j].x, p.y - positions[j].y) < STACK_PX) parent[find(i)] = find(j);
+                });
+            }
+        }
+    });
+    const stacks = new Map();
+    rows.forEach((_, i) => {
+        const root = find(i);
+        stacks.has(root) ? stacks.get(root).push(i) : stacks.set(root, [i]);
+    });
+
+    let moved = 0;
+    stacks.forEach(([first, ...rest]) => {
+        rest.forEach((i, n) => {
+            const ring = Math.floor(n / 6) + 1;
+            const angle = (n % 6) * Math.PI / 3 + (ring - 1) * Math.PI / 6;
+            const radius = ring * NUDGE_PX / preset.scale;
+            rows[i].X = rows[first].X + radius * Math.cos(angle);
+            rows[i].Y = rows[first].Y + radius * Math.sin(angle);
+            rows[i].StackMoved = true;
+        });
+        moved += rest.length;
+    });
+    return moved;
+}
+
+Object.values(presets).forEach(preset => {
+    let moved = 0;
+    for (let pass = 0, n; pass < 10 && (n = spreadStacks(preset)); pass++) moved += n;
+    console.log(`Moved ${moved} stacked markers apart for`, preset.texture);
+});
 
 export const looseItems = [
     "LootNode",
