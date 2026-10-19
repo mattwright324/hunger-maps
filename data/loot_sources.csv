@@ -203,6 +203,7 @@ Hunger_Waif,1,2,Hunger_Waif,LIT_GlobalItems_03_Rare,5.0,231.18999999947846,2.162
 Hunger_Waif,1,2,Hunger_Waif,LIT_GlobalItems_02_Uncommon,25.0,231.18999999947846,10.8136,False
 Hunger_Waif,1,2,Hunger_Waif,LIT_GlobalItems_01_Common,100.0,231.18999999947846,43.2545,False
 Hunger_Waif,1,2,Hunger_Waif,LIT_Cosmetics_All,0.03,231.18999999947846,0.013,False
+Hunger_Shambler_Elite,1,3,Hunger_Shambler_Elite,,100,100,100,
 Hunger_Shambler,1,3,Hunger_Shambler,LIT_Shambler_01,25.0,56.16000000014901,44.5157,False
 Hunger_Shambler,1,3,Hunger_Shambler,LIT_RecipesLootable_All,0.04,56.16000000014901,0.0712,False
 Hunger_Shambler,1,3,Hunger_Shambler,LIT_GlobalItems_05_Legendary,0.1,56.16000000014901,0.1781,False
@@ -218,6 +219,9 @@ Hunger_Howler,1,2,Hunger_Howler,LIT_GlobalItems_03_Rare,5.0,231.18999999947846,2
 Hunger_Howler,1,2,Hunger_Howler,LIT_GlobalItems_02_Uncommon,25.0,231.18999999947846,10.8136,False
 Hunger_Howler,1,2,Hunger_Howler,LIT_GlobalItems_01_Common,100.0,231.18999999947846,43.2545,False
 Hunger_Howler,1,2,Hunger_Howler,LIT_Cosmetics_All,0.03,231.18999999947846,0.013,False
+Hunger_Dreg_Voltigeur,1,2,Hunger_Dreg_Voltigeur,,100,100,100,
+Hunger_Dreg_Military,1,2,Hunger_Dreg_Military,,100,100,100,
+Hunger_Dreg_Elite,1,2,Hunger_Dreg_Elite,,100,100,100,
 Hunger_DregFarmerUnique,1,1,Hunger_FarmerDregUnique,LIT_FarmerDregUnique,100.0,100.0,100.0,False
 Hunger_Dreg,1,2,Hunger_Dreg,LIT_RecipesLootable_All,0.02,233.67692077718675,0.0086,False
 Hunger_Dreg,1,2,Hunger_Dreg,LIT_GlobalItems_05_Legendary,0.1,233.67692077718675,0.0428,False
@@ -551,5 +555,5 @@ Ammo_Small,1,1,Ammunition,LIT_Ammunition_Crafting,10.0,100.0,10.0,False
 Ammo_Small,1,1,Ammunition,LIT_Ammunition_All,90.0,100.0,90.0,False
 Ammo_Medium,1,2,Ammunition,LIT_Ammunition_Crafting,10.0,100.0,10.0,False
 Ammo_Medium,1,2,Ammunition,LIT_Ammunition_All,90.0,100.0,90.0,False
-Ammo_Large,1,3,Ammunition,LIT_Ammunition_Crafting,10.0,100.0,10.0,False
-Ammo_Large,1,3,Ammunition,LIT_Ammunition_All,90.0,100.0,90.0,False
+Ammo_Large,2,4,Ammunition,LIT_Ammunition_Crafting,10.0,100.0,10.0,False
+Ammo_Large,2,4,Ammunition,LIT_Ammunition_All,90.0,100.0,90.0,False

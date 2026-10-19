@@ -1,12 +1,10 @@
 RootType,OuterType,OuterName,X,Y,Z,DisplayName,LootSource,Chance,ChanceType,AISpawner,JSON
-SceneComponent,AGV_SoundScatter_C,AGV_SoundScatter_C_UAID_107C614ADD424AC502_2c2cf887d3b34203_1576020558,794.0,3197.0,9540.0,,,,,,{}
-SceneComponent,AGV_SoundScatter_C,AGV_SoundScatter_C_UAID_107C614ADD424CC502_2c2cf887d3b34203_1390563922,4033.0,4014.0,12029.0,,,,,,{}
-SceneComponent,AGV_SoundScatter_C,AGV_SoundScatter_C_UAID_107C614ADD424CC502_2c2cf887d3b34203_1434453923,1044.0,5327.0,12029.0,,,,,,{}
+FastGeoContainer,StaticMesh,SM_StairIntegrated_01a,-850.0085,9747.823,-3423.5867,,,,,,"{""visible"": true}"
 SceneComponent,BP_3P_Door_02a_C,BP_3P_Door_02a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798703670,-2562.2715,-2893.5532,11027.105,,,,,,{}
 SceneComponent,BP_A01_Bear_Chateau_C,BP_Bear_Chateau_C_UAID_D843AE641AE3BA4402_c11e2be935ce527e_1716508694,3956.971,4198.764,10851.81,Bear,,,,,{}
 SceneComponent,BP_A01_Castiel_Chateau_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_1bd283b4387b8246_1734867266,1779.7677,4110.0776,10828.173,Castiel,,,,,{}
 SceneComponent,BP_A01_Eloise_Chateau_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_809515a4cbf4253c_1734862265,3224.6077,5188.1553,10841.041,Eloise,,,,,"{""vendor_data"": ""DA_Eloise""}"
-SceneComponent,BP_A01_Hector_Chateau_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_0721e9471fe0b78d_1707567249,-2750.5115,185.69331,11034.051,Hector,,,,,"{""vendor_data"": ""DA_Hector""}"
+SceneComponent,BP_A01_Hector_Chateau_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_ec31e4b5444ca13f_1707567249,-2139.963,317.33353,11061.584,Hector,,,,,"{""vendor_data"": ""DA_Hector""}"
 SceneComponent,BP_A01_Louis_Chateau_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_a313fa97746a8c2b_1707567249,3670.2764,4220.7974,10838.079,Louis,,,,,"{""vendor_data"": ""DA_Louis""}"
 SceneComponent,BP_A01_Metallurgist_Hub_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_8949ff6bc4471953_1734862265,4369.731,5907.7686,10837.925,Jean Fondeur,,,,,"{""vendor_data"": ""DA_Metallurgist01""}"
 SceneComponent,BP_A01_MrSweet_Chateau_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_36706b8488e932c6_1734862265,3159.7676,3405.9583,10841.845,Mr Sweet,,,,,"{""vendor_data"": ""DA_MrSweet""}"
@@ -15,15 +13,15 @@ SceneComponent,BP_A01_Outfitter_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD517
 SceneComponent,BP_A01_Piro_Chateau_C,BP_A01_Piro_Chateau_C_UAID_D843AE641AE3BA4402_c11e2be935ce527e_1716502693,1537.3907,5202.7705,10836.62,Piro,,,,,"{""vendor_data"": ""DA_Piro""}"
 SceneComponent,BP_A01_Reynauld_Chateau_C,BP_Reynauld_01_C_UAID_D843AE641AE3BA4402_c11e2be935ce527e_1716520696,5287.022,3413.3005,11347.975,Reynauld,,,,,"{""vendor_data"": ""DA_Reynauld""}"
 SceneComponent,BP_A01_Scavenger_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_e484c652ea6996c5_1707567249,3253.8215,6215.693,10839.369,Filthy François,,,,,"{""vendor_data"": ""DA_Scavenger01""}"
-SceneComponent,BP_A02_Artificer_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_d00a942ad1e03667_1707567249,1047.1516,594.47266,11129.353,Heinrich Voss,,,,,"{""vendor_data"": ""DA_Artificer02""}"
-SceneComponent,BP_A02_Claude_Hub_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_a4ddd8690be110d9_1734862265,-1620.7225,-1905.0353,11033.484,Claude,,,,,"{""vendor_data"": ""DA_Claude""}"
+SceneComponent,BP_A02_Artificer_Hub_C,BP_A02_Outfitter_Hub_C_UAID_08BFB82FEC6A16EA02_99c5de060d023245_1693326707,1195.0562,750.7025,11122.588,Heinrich Voss,,,,,"{""vendor_data"": ""DA_Artificer02""}"
+SceneComponent,BP_A02_Claude_Hub_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_a4ddd8690be110d9_1734862265,-1567.486,-1829.7034,11032.451,Claude,,,,,"{""vendor_data"": ""DA_Claude""}"
 SceneComponent,BP_A02_Crone_Chateau_C,BP_A02_Crone_Chateau_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798271517,-2742.2974,3006.2756,11042.425,The White Hat Crone,,,,,"{""vendor_data"": ""DA_WhiteHatCrone""}"
 SceneComponent,BP_A02_Grillard_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_991472f297ac9969_1707567249,-3549.28,2028.4365,11031.523,Grillard,,,,,"{""vendor_data"": ""DA_Cook02""}"
-SceneComponent,BP_A02_Gunsmith_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_9c672f9fc956eaed_1707567249,843.53534,-519.49304,11027.668,Voyant the Rifleman,,,,,"{""vendor_data"": ""DA_Gunsmith02""}"
-SceneComponent,BP_A02_Henri_Hub_C,BP_A02_Henri_Hub_C_UAID_50EBF6D29969685002_1c59a412a6a1f787_1518393615,-2865.0903,-1054.2754,11026.627,Henri,,,,,"{""vendor_data"": ""DA_Henri""}"
+SceneComponent,BP_A02_Gunsmith_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_9c672f9fc956eaed_1707567249,892.7134,-490.38025,11027.668,Voyant the Rifleman,,,,,"{""vendor_data"": ""DA_Gunsmith02""}"
+SceneComponent,BP_A02_Henri_Hub_C,BP_A02_Henri_Hub_C_UAID_50EBF6D29969685002_1c59a412a6a1f787_1518393615,-2926.696,-1084.4299,11030.38,Henri,,,,,"{""vendor_data"": ""DA_Henri""}"
 SceneComponent,BP_A02_Outfitter_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_c638ef1768bb09f7_1707567249,-167.8731,-1338.7239,11137.957,Sirène,,,,,"{""vendor_data"": ""DA_Outfitter02""}"
 SceneComponent,BP_A02_Physician_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_7e2a92f11e921248_1707567249,-2424.7874,2664.3506,11044.776,Doctor Lucien Moreau,,,,,"{""vendor_data"": ""DA_Physician02""}"
-SceneComponent,BP_A02_Savant_Hub_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_bf8eb92afda46b19_1734862265,418.09604,1326.6371,11130.643,Savant,,,,,"{""vendor_data"": ""DA_Savant""}"
+SceneComponent,BP_A02_Savant_Hub_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_bf8eb92afda46b19_1734862265,463.5962,1345.7924,11130.307,Savant,,,,,"{""vendor_data"": ""DA_Savant""}"
 SceneComponent,BP_A03_Artificer_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_55fa9a2d61d26b96_1707567249,-1990.5089,-6195.3438,11027.105,Madame ,,,,,"{""vendor_data"": ""DA_Artificer03""}"
 SceneComponent,BP_A03_Catalina_Hub_C,BP_A03_Catalina_Hub_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1863482728,-3349.3438,-5001.604,11027.106,Catalina,,,,,"{""vendor_data"": ""DA_Catalina""}"
 SceneComponent,BP_A03_Outfitter_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_3061e1e65674b248_1707567249,-2359.91,-6757.376,11027.105,Monsieur Louche,,,,,"{""vendor_data"": ""DA_Outfitter03""}"
@@ -31,7 +29,7 @@ SceneComponent,BP_A03_Physician_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD517
 SceneComponent,BP_A04_Artificer_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_cbce2883364e83ac_1707567249,1421.148,-3966.8223,10616.797,Madame ,,,,,"{""vendor_data"": ""DA_Artificer04""}"
 SceneComponent,BP_A04_Gunsmith_Hub_C,BP_A04_Gunsmith_Hub_C_UAID_D843AE641AE3BA4402_f2e5ec72270a1070_1902549980,2527.0566,-4229.074,10616.797,René du Chêne,,,,,"{""vendor_data"": ""DA_Gunsmith04""}"
 SceneComponent,BP_A04_Metallurgist_Hub_C,BP_A04_Metallurgist_Hub_C_UAID_D843AE641AE3BA4402_f2e5ec72270a1070_1902554981,2494.5425,-4772.842,10616.797,Metallurgist04,,,,,"{""vendor_data"": ""DA_Metallurgist04""}"
-SceneComponent,BP_A04_Outfitter_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_11bc355588237d27_1707567249,2023.4625,-5655.134,10616.797,Monsieur,,,,,"{""vendor_data"": ""DA_Outfitter04""}"
+SceneComponent,BP_A04_Outfitter_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_11bc355588237d27_1707567249,1952.064,-5659.295,10616.797,Monsieur,,,,,"{""vendor_data"": ""DA_Outfitter04""}"
 SceneComponent,BP_A04_Physician_Hub_C,BP_A02_Outfitter_Hub_C_UAID_04D9F5F93AD5175402_c50b0d3e8b1c3360_1707567249,701.4997,-4359.632,11043.195,Sirène,,,,,"{""vendor_data"": ""DA_Outfitter02""}"
 SceneComponent,BP_AlnusRock_Autumn_01a_C,BP_AlnusRock_Autumn_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941514332,-3284.4202,-9404.576,8081.341,,,,,,{}
 SceneComponent,BP_AlnusRock_Autumn_01a_C,BP_AlnusRock_Autumn_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941519333,-8554.294,-233.8637,814.8932,,,,,,{}
@@ -45,6 +43,7 @@ SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F
 SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F93AD5739C02_66aa6e9c712a59a1_1644764573,684.6794,531.9561,11345.562,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F93AD5739C02_7a15d21b0f0b5b10_1644764573,-2853.0803,3447.688,11482.537,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F93AD5739C02_7b55a12144e60e41_1644764573,645.26733,1430.5125,11343.934,,,,,,"{""health"": ""10.0 HP""}"
+SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F93AD5739C02_9ea71dd73bf1e9fb_1644764573,-3251.1023,-303.7616,11324.2705,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F93AD5739C02_a0988bbba611a0f2_1644764573,-3791.3867,2302.0295,11299.847,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_BreakableWindow_195x105_BST_02b_C,StaticMeshActor_UAID_04D9F5F93AD5739C02_fe0b6f5b49a2ed56_1644764573,307.50113,909.1938,11343.386,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_DirigibleMover_01a_C,BP_DirigibleMover_01a_C_UAID_50EBF6D299695E4B02_1419855847,2945.4993,1957.2511,16415.904,,,,,,{}
@@ -59,14 +58,11 @@ SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6
 SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6D299695E4B02_1419842843,-44438.32,-56112.258,23131.502,,,,,,{}
 SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6D299695E4B02_1419846844,-97427.86,-5643.316,9720.509,,,,,,{}
 SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6D299695E4B02_1419849845,25866.96,23806.14,17323.043,,,,,,{}
-SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6D299695E4B02_1419852846,-1940.2214,-13580.302,15338.192,,,,,,{}
+SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6D299695E4B02_1419852846,2647.337,-10124.3125,16267.935,,,,,,{}
 SceneComponent,BP_Dirigible_Chateau_01a_C,BP_Dirigible_Chateau_01a_C_UAID_50EBF6D299695F4B02_1173423084,-5117.144,8175.072,6043.879,,,,,,{}
 SceneComponent,BP_Dirigible_Chateau_01a_C,StaticMeshActor_UAID_04D9F5F93AD5CE8402_c11e2be935ce527e_1377576190,6288.6465,1835.5892,11096.497,,,,,,{}
+SceneComponent,BP_Dirigible_Chateau_01a_C,StaticMeshActor_UAID_AC361BEF6594B0F802_99c5de060d023245_1360472396,-1563.5717,599.65485,13292.696,,,,,,{}
 SceneComponent,BP_Dirigible_Chateau_01a_C,StaticMeshActor_UAID_D843AE641AE3BA4402_c11e2be935ce527e_1716404661,2374.8464,2688.6914,10970.742,,,,,,{}
-SceneComponent,BP_Door_Ext_Arch_01a_Blocked_C,BP_Door_1p_m_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940733048,1514.0461,231.24434,14647.608,,,,,,{}
-SceneComponent,BP_Door_Ext_Arch_01a_Blocked_C,BP_Door_1p_m_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940737049,2760.0198,-1014.7484,14647.608,,,,,,{}
-SceneComponent,BP_Door_Ext_Arch_01a_Blocked_C,BP_Door_Ext_Arch_01a_Blocked_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940967129,-2618.9038,-8943.372,10826.872,,,,,,{}
-SceneComponent,BP_Door_Ext_Arch_01a_Blocked_C,BP_Door_Ext_Arch_01a_Blocked_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941448308,6255.382,-1682.6775,7671.584,,,,,,{}
 SceneComponent,BP_Door_Ext_Double_01a_C,BP_Door_Ext_Double_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941542338,-2628.823,-6960.274,10834.421,,,,,,{}
 SceneComponent,BP_Door_Int_Double_01a_C,BP_Door_Int_Double_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798708671,-3920.0,-1300.0,11924.109,,,,,,{}
 SceneComponent,BP_Door_Int_Double_01a_C,BP_Door_Int_Double_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798712672,-3610.7422,-2461.0,11924.334,,,,,,{}
@@ -78,27 +74,20 @@ SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_D843AE641AE3CE4402_1419569364,1341
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_D843AE641AE3CE4402_1419576367,1341588.6,275542.66,461387.44,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_D843AE641AE3CE4402_1713720389,2454482.8,564250.94,2360292.2,,,,,,{}
 SceneComponent,BP_EasyFog_C,BP_EasyFog_C_UAID_D843AE641AE3CE4402_1987658400,-340576.6,976148.7,24915.0,,,,,,{}
-SceneComponent,BP_FishBasket_01a_C,UNP_BP_FishBasket_01a_bcb2f72933d94da3_0,-2257.4165,-3957.1526,11027.105,,,,,,{}
-SceneComponent,BP_FishCrate_01_c_C,UNP_BP_FishCrate_01_c1_bcb2f72933d94da3_1,-2254.714,-3848.6492,11116.8955,,,,,,{}
-SceneComponent,BP_FishCrate_01_c_C,UNP_BP_FishCrate_01_c_bcb2f72933d94da3_0,-2220.9546,-3963.5007,11116.8955,,,,,,{}
-SceneComponent,BP_FishCrate_02_c_C,UNP_BP_FishCrate_02_c_bcb2f72933d94da3_0,-2208.6184,-3900.2727,11116.8955,,,,,,{}
-SceneComponent,BP_FishCrate_03_b_C,UNP_BP_FishCrate_03_b_bcb2f72933d94da3_0,-2090.6682,-3708.681,11063.234,,,,,,{}
 SceneComponent,BP_Gate_A01_A02_C,BP_Gate_A01_A02_C_UAID_04D9F5F93AD50A5602_1749294116,1715.1162,4024.2595,10900.723,,,,,,"{""area_name"": ""Cauldron"", ""required_quests"": [""Quest.Eloise.Q10""]}"
 SceneComponent,BP_Gate_A02_A01_C,BP_Gate_A02_A01_C_UAID_04D9F5F93AD50A5602_2144300162,1538.5276,3882.7554,10915.062,,,,,,"{""area_name"": ""Outer Ramparts"", ""required_quests"": [""Quest.Eloise.Q01""]}"
 SceneComponent,BP_Gate_A02_A03_C,BP_Gate_A02_A03_C_UAID_04D9F5F93AD50B5602_1197880339,-2532.807,-2631.613,11206.655,,,,,,"{""area_name"": ""The Galleries"", ""required_quests"": [""Quest.Hector.Q04""]}"
 SceneComponent,BP_Gate_A03_A02_C,BP_Gate_A03_A02_C_UAID_04D9F5F93AD50B5602_1314220340,-2566.4756,-2949.4233,11191.005,,,,,,"{""area_name"": ""Cauldron"", ""required_quests"": [""Quest.Hector.Q02""]}"
 SceneComponent,BP_Gate_A03_A04_C,BP_Gate_A03_A04_C_UAID_04D9F5F93AD50B5602_1751312342,-1211.4575,-4848.7983,11184.37,,,,,,"{""area_name"": ""The Heavenly Reaches"", ""required_quests"": [""Quest.Eloise.Q01""]}"
 SceneComponent,BP_Gate_A04_A03_C,BP_Gate_A04_A03_C_UAID_04D9F5F93AD50B5602_1511601341,-1050.9564,-4834.4316,11227.636,,,,,,"{""area_name"": ""The Galleries"", ""required_quests"": [""Quest.Eloise.Q01""]}"
-SceneComponent,BP_HerbsRack_01a_C,BP_HerbsRack_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798212490,-577.3223,-962.6777,11770.0,,,,,,{}
-SceneComponent,BP_HerbsRack_02a_C,BP_HerbsRack_02a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798209489,-771.8629,-852.07104,12070.0,,,,,,{}
 SceneComponent,BP_LevelManager_C,BP_LevelManager_C_1,1280.0,11160.0,10949.127,,,,,,{}
 SceneComponent,BP_MX_Chateau_C,BP_MX_Chateau_C_UAID_D843AE641AE3BA4402_2c2cf887d3b34203_1570203899,2360.0,4330.0,10897.809,,,,,,{}
 SceneComponent,BP_P_CrowsCircle_01_C,BP_P_CrowsCircle_01_C_0,-10876.982,38007.066,3914.4297,,,,,,{}
 SceneComponent,BP_P_CrowsCircle_01_C,BP_P_CrowsCircle_01_C_1,-14787.47,13027.818,2230.0225,,,,,,{}
 SceneComponent,BP_P_CrowsCircle_01_C,BP_P_CrowsCircle_01_C_3,1023.0832,-2802.8115,18362.025,,,,,,{}
 SceneComponent,BP_P_CrowsCircle_01_C,BP_P_CrowsCircle_01_C_4,2531.287,7274.765,15153.352,,,,,,{}
-SceneComponent,BP_Scaffolding_SmallCrane_01_C,BP_Scaffolding_SmallCrane_01_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941439305,6951.298,-1700.7019,6616.41,,,,,,{}
-SceneComponent,BP_Scaffolding_SmallCrane_01_C,BP_Scaffolding_SmallCrane_01_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941442306,5978.7466,-5895.608,9238.69,,,,,,{}
+SceneComponent,BP_RopeSpline_C,BP_RopeSpline_C_UAID_08BFB82FEC6AF8EB02_99c5de060d023245_1494417927,-2016.2136,968.31506,11133.558,,,,,,{}
+SceneComponent,BP_Sheep_01a_C,BP_Sheep_01a_C_UAID_10FFE0F0DC0E390003_99c5de060d023245_1519553870,-2068.6885,850.8897,11034.563,,,,,,{}
 SceneComponent,BP_Sheep_01a_C,BP_Sheep_01a_C_UAID_50EBF6D29969739102_c11e2be935ce527e_1125619898,3728.0203,6724.826,10841.09,,,,,,{}
 SceneComponent,BP_Sheep_01a_C,BP_Sheep_01a_C_UAID_50EBF6D29969739102_c11e2be935ce527e_1161089899,3124.478,6238.4976,10840.907,,,,,,{}
 SceneComponent,BP_Sheep_01a_C,BP_Sheep_01a_C_UAID_50EBF6D29969739102_c11e2be935ce527e_1871239062,3620.0525,6715.733,10850.957,,,,,,{}
@@ -106,21 +95,6 @@ SceneComponent,BP_Sheep_01a_C,BP_Sheep_01a_C_UAID_50EBF6D299698E9102_c11e2be935c
 SceneComponent,BP_Town_01_Merged_C,BP_Town_01_C_1,-216133.67,-68830.33,-2741.292,,,,,,{}
 SceneComponent,BP_Town_01_Merged_C,BP_Town_01_C_3,-318952.03,138861.06,-5473.298,,,,,,{}
 SceneComponent,BP_Town_02_Merged_C,BP_Town_01_C_4,-120081.016,-404750.66,-76.433395,,,,,,{}
-SceneComponent,BP_VegetablesBasket_01a_C,UNP_BP_VegetablesBasket_01a_7dc32bdef8128433_0,-3215.8887,-5343.673,11142.107,,,,,,{}
-SceneComponent,BP_VegetablesBasket_01a_C,UNP_BP_VegetablesBasket_01a_8e8428bd7739a4a7_0,-2845.8022,-3979.6785,11116.674,,,,,,{}
-SceneComponent,BP_VegetablesBasket_01a_C,UNP_BP_VegetablesBasket_01a_a213e7414ba3e3bb_0,-2825.7053,-3071.8975,11142.194,,,,,,{}
-SceneComponent,BP_VegetablesBasket_01b_C,UNP_BP_VegetablesBasket_01b_8e8428bd7739a4a7_0,-2886.4187,-3994.8413,11117.31,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02a_C,UNP_BP_VegetablesCrate_02a1_7dc32bdef8128433_0,-3197.2168,-5360.416,11074.136,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02a_C,UNP_BP_VegetablesCrate_02a1_8e8428bd7739a4a7_1,-2830.015,-4072.857,11026.606,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02a_C,UNP_BP_VegetablesCrate_02a1_a213e7414ba3e3bb_0,-2809.0737,-3090.669,11074.223,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02a_C,UNP_BP_VegetablesCrate_02a2_8e8428bd7739a4a7_2,-2905.5308,-3949.5398,11117.412,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02a_C,UNP_BP_VegetablesCrate_02a_8e8428bd7739a4a7_0,-2845.895,-3704.957,11086.894,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02c_C,UNP_BP_VegetablesCrate_02c1_8e8428bd7739a4a7_1,-2851.795,-3694.114,11027.106,,,,,,{}
-SceneComponent,BP_VegetablesCrate_02c_C,UNP_BP_VegetablesCrate_02c_8e8428bd7739a4a7_0,-3040.344,-3833.168,11027.106,,,,,,{}
-SceneComponent,BP_VegetablesCrate_03a_C,UNP_BP_VegetablesCrate_03a_8e8428bd7739a4a7_0,-2848.56,-3643.995,11085.823,,,,,,{}
-SceneComponent,BP_VegetablesCrate_03b_C,UNP_BP_VegetablesCrate_03b1_8e8428bd7739a4a7_1,-2855.0967,-3876.631,11115.722,,,,,,{}
-SceneComponent,BP_VegetablesCrate_03b_C,UNP_BP_VegetablesCrate_03b2_8e8428bd7739a4a7_2,-3026.8684,-4102.7056,11026.484,,,,,,{}
-SceneComponent,BP_VegetablesCrate_03b_C,UNP_BP_VegetablesCrate_03b_8e8428bd7739a4a7_0,-2791.8828,-3678.0593,11026.822,,,,,,{}
 SceneComponent,BP_Window_195x105_BST_02c_C,BP_Window_195x105_BST_02c_C_UAID_04D9F5F93AD5DC8002_1740587431,-1747.9548,3177.0835,11178.987,,,,,,"{""health"": ""10.0 HP""}"
 SceneComponent,BP_Window_195x105_BST_02c_Chateau_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1797189106,-6641.6255,739.5935,10344.666,,,,,,{}
 SceneComponent,BP_Window_195x105_BST_02c_Chateau_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1797209111,-6270.063,-1826.5066,9955.877,,,,,,{}
@@ -151,7 +125,6 @@ SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3
 SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798006409,-2120.0862,-3970.6255,13015.188,,,,,,{}
 SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798011411,-2986.7766,-3970.6255,13015.188,,,,,,{}
 SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798015413,-1651.5151,-2462.7563,12482.665,,,,,,{}
-SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798578624,-1685.863,1606.0345,11326.004,,,,,,{}
 SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941466314,4294.809,-1479.9991,11891.967,,,,,,{}
 SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941470316,5205.304,-2560.2974,11135.498,,,,,,{}
 SceneComponent,BP_Window_Large_01a_Hub_C,BP_Window_Large_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941474318,5157.237,-1707.2638,11135.498,,,,,,{}
@@ -243,24 +216,13 @@ SceneComponent,BP_Window_XL_01a_Hub_C,BP_Window_XL_01a_C_UAID_04D9F5F93AD5D54802
 SceneComponent,BP_Window_XL_01a_Hub_C,BP_Window_XL_01a_C_UAID_04D9F5F93AD5D54802_99c5de060d023245_1803966330,-3267.8499,-1263.3804,11985.0,,,,,,{}
 SceneComponent,BP_Window_XL_01a_Hub_C,BP_Window_XL_01a_C_UAID_04D9F5F93AD5D54802_99c5de060d023245_1809548332,-3267.8499,-2079.4531,11985.0,,,,,,{}
 SceneComponent,BP_Window_XL_01a_Hub_C,BP_Window_XL_01a_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1798078438,-3268.1934,368.71045,11985.0,,,,,,{}
-SceneComponent,C_Chest_01a_C,C_Chest_01a_C_UAID_D843AE1A93E5CB3202_c55cd7d2ca76988f_1200687311,3074.041,3658.4812,10840.802,,,,,,{}
-SceneComponent,C_LI_Bookshelf_Single_01a_Spawner_C,Actor_42c0e3494aed166e_0,-3319.7883,617.46643,11923.929,Wardrobe,Civilian_Small,,,,{}
-SceneComponent,C_LI_Bookshelf_Single_01a_Spawner_C,Actor_cd38f38f219b46e8_0,-3884.7168,-2216.4128,11923.929,Wardrobe,Civilian_Small,,,,{}
 SceneComponent,CameraActor,CameraActor_UAID_D843AE641AE3BA4402_99c5de060d023245_1796360796,-2516.5513,2700.089,11179.195,,,,,,{}
 SceneComponent,Chimney_01a_C,Chimney_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940578992,3382.234,-1694.6486,13188.911,,,,,,{}
 SceneComponent,Chimney_01a_C,Chimney_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940867094,3202.0544,-1386.3934,13188.911,,,,,,{}
-SceneComponent,Chimney_03a_C,Chimney_03a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940587995,5590.0557,-2667.675,11826.856,,,,,,{}
-SceneComponent,Chimney_03a_C,Chimney_03a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940760057,1964.1725,1013.90283,15360.022,,,,,,{}
-SceneComponent,Chimney_03a_C,Chimney_03a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940764058,3123.3,-277.92355,16215.989,,,,,,{}
-SceneComponent,Chimney_03a_C,Chimney_03a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941432303,6352.8267,-2450.0593,8699.666,,,,,,{}
-SceneComponent,Chimney_03a_C,Chimney_03a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941436304,6340.3203,-4215.832,8699.666,,,,,,{}
-SceneComponent,Chimney_04a_C,Chimney_04a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940583994,5553.7188,-1220.0847,11938.8955,,,,,,{}
-SceneComponent,Deco_HangingCloth_01_C,UNP_Deco_HangingCloth_01_46d84569bf1d2af0_0,-3076.3538,-7960.379,10614.206,,,,,,{}
-SceneComponent,Deco_HangingCloth_01_C,UNP_Deco_HangingCloth_01_a38e2377a55e8c01_0,7916.047,5192.0986,8637.908,,,,,,{}
 SceneComponent,Guard_01a_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_eda3b9e0eb68f723_1734862265,1469.0184,4149.052,10840.522,,,,,,{}
 SceneComponent,Guard_01b_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_8294ff6bc6ad18f3_1734867266,-2549.9568,-2625.9988,11034.923,,,,,,{}
 SceneComponent,Guard_01c_C,Guard_01c_C_UAID_04D9F5F93AD5D08402_c11e2be935ce527e_1085335821,6457.503,2869.0574,11127.6045,,,,,,{}
-SceneComponent,Guard_01c_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_0387d41caf2a6fb8_1734867266,-2836.042,47.84508,11033.915,,,,,,{}
+SceneComponent,Guard_01c_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_0387d41caf2a6fb8_1734867266,-2874.6035,-0.9053079,11033.915,,,,,,{}
 SceneComponent,Guard_01c_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_5695f918251288c6_1734867266,-1180.0596,1430.1389,11034.723,,,,,,{}
 SceneComponent,Guard_01c_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_721733d06d8d1684_1734867266,2506.5718,6416.6885,10837.976,,,,,,{}
 SceneComponent,Guard_01c_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_a029afbef3dc432d_1734867266,-2790.4634,-2743.802,11029.909,,,,,,{}
@@ -269,7 +231,7 @@ SceneComponent,Guard_01d_C,Guard_01d_C_UAID_04D9F5F93AD5D08402_c11e2be935ce527e_
 SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_183ad2cfde8e18a5_1734867266,104.564316,738.7393,11760.767,,,,,,{}
 SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_4ee8340afdd78ab5_1734867266,-945.8646,-1135.8992,11760.767,,,,,,{}
 SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_703242e640124a26_1734867266,2429.3196,6581.6353,10832.041,,,,,,{}
-SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_7d137f0557abe242_1734867266,-3168.1768,240.58119,11104.453,,,,,,{}
+SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_7d137f0557abe242_1734867266,-2967.1023,601.8815,11032.209,,,,,,{}
 SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_b99cb96d412e3c82_1734867266,734.9086,1324.949,11760.767,,,,,,{}
 SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_c355f9d0a21807b9_1734867266,-115.1282,2583.0923,11032.265,,,,,,{}
 SceneComponent,Guard_01d_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_ddcd97dd2f5c2eff_1734867266,-2998.831,983.06226,12353.954,,,,,,{}
@@ -287,24 +249,17 @@ SceneComponent,Guard_01e_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_9440f03b54ddd
 SceneComponent,Guard_01e_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_c7d506f7c901f42a_1734867266,-1557.0846,3067.1616,12353.097,,,,,,{}
 SceneComponent,Guard_01e_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_e0ad59cf24ffe17a_1734867266,4555.642,-534.85236,11384.585,,,,,,{}
 SceneComponent,Guard_01e_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_fcbcbfdde3ed12bd_1734867266,-1896.1421,-5158.3613,11027.106,,,,,,{}
-SceneComponent,Guard_01f_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_1563bae360f19522_1734867266,-2799.1196,375.216,11033.494,,,,,,{}
 SceneComponent,Guard_01f_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_1c341c1115d9f06e_1734867266,-2316.5872,-4348.0376,11028.124,,,,,,{}
 SceneComponent,Guard_01f_C,StaticMeshActor_UAID_04D9F5F93AD5083C02_a42103a0159b77ee_1734867266,-2328.66,-2718.4814,11034.923,,,,,,{}
 SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-1_0_-1,-12800.0,12800.0,-12800.0,,,,,,{}
 SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-1_0_0,-12800.0,12800.0,12800.0,,,,,,{}
-SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-1_1_-1,-12800.0,38400.0,-12800.0,,,,,,{}
-SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-2_0_-1,-38400.0,12800.0,-12800.0,,,,,,{}
-SceneComponent,InstancedFoliageActor,InstancedFoliageActor_25600_-2_1_-1,-38400.0,38400.0,-12800.0,,,,,,{}
 SceneComponent,Light_Ceiling_01a_C,Light_Ceiling_01a_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1863434712,-5579.3047,-3451.2366,11926.211,,,,,,{}
 SceneComponent,Light_Ceiling_01a_C,Light_Ceiling_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940567985,3073.0,-4944.0,10073.0,,,,,,{}
 SceneComponent,Light_Ceiling_01a_C,Light_Ceiling_01a_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940571988,3073.0,-3152.0,10073.0,,,,,,{}
-SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_57329bfc6dfaaa8a_1,-1457.2358,896.5713,11204.481,,,,,,{}
-SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_6e97b666190c85c7_1,-2501.626,-499.8978,11186.862,,,,,,{}
-SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_700733763f4809a8_1,-2704.9229,862.6974,11185.604,,,,,,{}
 SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_7dc32bdef8128433_1,-3205.1228,-5250.749,11179.808,,,,,,{}
-SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_8e8428bd7739a4a7_1,-2840.6968,-3796.211,11197.364,,,,,,{}
+SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_UAID_08BFB82FEC6AAAF002_57329bfc6dfaaa8a_1978755022,-1525.5907,982.53204,11244.469,,,,,,{}
+SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_UAID_08BFB82FEC6AAAF002_8e8428bd7739a4a7_1978755022,-2801.503,-3790.3677,11237.352,,,,,,{}
 SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_a213e7414ba3e3bb_1,-2804.3682,-2980.818,11179.8955,,,,,,{}
-SceneComponent,Light_Lantern_01a_C,Light_Lantern_01a_C_a6c83affdf0b6f6c_1,-2987.365,-2034.7334,11186.326,,,,,,{}
 SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1861858113,-2266.3225,-6338.594,11471.67,,,,,,{}
 SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1861861114,-2881.781,-6336.786,11471.67,,,,,,{}
 SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1861864115,-2907.198,-4585.6313,11471.67,,,,,,{}
@@ -314,62 +269,30 @@ SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_83341eb1e
 SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1861877119,-1700.0292,-5152.384,11491.058,,,,,,{}
 SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1861881120,-1701.0438,-5761.6733,11471.67,,,,,,{}
 SceneComponent,Light_Wall_02_C,Light_Wall_02_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1940575991,4355.61,-933.2376,11839.165,,,,,,{}
-SceneComponent,PG_CampFire_Smouldering_C,PG_CampFire_Smouldering_C_747d800bc1cc41ee_0,-1681.6757,-900.04083,11033.378,,,,,,{}
 SceneComponent,PG_CampFire_Smouldering_C,UNP_PG_CampFire_Smouldering1_90398660cfebf0ad_1,2015.2909,3764.5532,11036.407,,,,,,{}
 SceneComponent,PG_CampFire_Smouldering_C,UNP_PG_CampFire_Smouldering_90398660cfebf0ad_0,1456.6765,4323.1675,11036.407,,,,,,{}
 SceneComponent,PG_CampFire_Smouldering_C,UNP_PG_CampFire_Smouldering_UAID_0468748824940DBE02_c11e2be935ce527e_1804449194,2457.9146,6085.648,10833.97,,,,,,{}
-SceneComponent,PG_Coffin_02a_Hub_C,Coffin_Group_02_C_UAID_D843AE641AE3BA4402_83341eb1e5ddffa6_1863429710,-3401.8638,-5782.9595,11027.106,,,,,,{}
-SceneComponent,PG_Stool_02a_C,UNP_PG_Stool_02a_bcb2f72933d94da3_0,-2073.2244,-3993.407,11027.105,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1797192107,-6339.7837,-2028.8179,10517.051,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1797197108,-6337.4175,-1630.6097,10517.051,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1797201109,-6334.7627,-1183.8496,10517.051,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_99c5de060d023245_1797205110,-6330.11,-400.72772,10517.051,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941386288,6820.345,-2552.1619,6664.137,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941390289,6822.4326,-2950.3716,6664.137,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941394290,6826.8564,-3794.263,6656.194,,,,,,{}
-SceneComponent,Window_195x105_ST_01c_C,BP_Window_Large_01b_C_UAID_D843AE641AE3BA4402_acd23bd0e6a677c1_1941400291,6816.7896,-4195.095,6656.194,,,,,,{}
 StaticMeshComponent,BP_ArtificerCrafting_A01_C,StaticMeshActor_UAID_04687488249414BE02_c55cd7d2ca76988f_1497010580,2965.6313,3512.6804,10847.798,Artificer Workbench,,,,,"{""interaction"": ""Craft""}"
-StaticMeshComponent,BP_ArtificerCrafting_C,BP_ArtificerCrafting_C_UAID_04D9F5F93AD5228602_99c5de060d023245_1494274043,746.4782,621.0281,11129.261,Artificer Workbench,,,,,"{""interaction"": ""Craft""}"
-StaticMeshComponent,BP_BannerVAT_01a_C,StaticMeshActor_272,-559.18646,1732.0299,14071.584,,,,,,{}
-StaticMeshComponent,BP_BannerVAT_01a_C,StaticMeshActor_36,2015.6807,-520.0591,19435.865,,,,,,{}
-StaticMeshComponent,BP_BannerVAT_01a_C,StaticMeshActor_37,-5616.513,-4251.917,14803.418,,,,,,{}
-StaticMeshComponent,BP_BannerVAT_01b_C,StaticMeshActor_296,-559.2108,1731.8751,13918.063,,,,,,{}
+StaticMeshComponent,BP_ArtificerCrafting_A02_C,BP_ArtificerCrafting_A02_C_UAID_D843AE1A93E5350803_99c5de060d023245_1541858610,1034.2621,1025.5156,11130.103,Artificer Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_ConservatorRefining_Curios_C,BP_ConservatorRefining_Curios_C_UAID_04D9F5F93AD59E8702_c11e2be935ce527e_2096447901,3122.1606,3909.8032,10841.245,Curio Desk,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,BP_ConservatorRefining_Mechs_C,BP_ConservatorRefining_C_UAID_04D9F5F93AD55C8602_99c5de060d023245_1722466598,673.3601,1287.3395,11127.422,Mechanism Workbench,,,,,"{""interaction"": ""Refine""}"
+StaticMeshComponent,BP_ConservatorRefining_Curios_C,BP_ConservatorRefining_Curios_C_UAID_D843AE1A93E5DD0703_99c5de060d023245_1114360143,296.13892,1007.4115,11129.589,Curio Desk,,,,,"{""interaction"": ""Refine""}"
+StaticMeshComponent,BP_ConservatorRefining_Mechs_C,BP_ConservatorRefining_C_UAID_08BFB82FEC6A7CE902_99c5de060d023245_2118024594,704.8018,1286.3813,11127.422,Mechanism Workbench,,,,,"{""interaction"": ""Refine""}"
 StaticMeshComponent,BP_ConservatorRefining_Mechs_C,BP_ConservatorRefining_Mechs_C_UAID_04D9F5F93AD50B8702_c11e2be935ce527e_1943134051,3172.5957,3718.4807,10835.946,Mechanism Workbench,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,BP_ConservatorRefining_Mechs_C,BP_ConservatorRefining_Mechs_C_UAID_04D9F5F93AD50C8702_99c5de060d023245_1203317242,979.6305,1007.59766,11129.157,Mechanism Workbench,,,,,"{""interaction"": ""Refine""}"
 StaticMeshComponent,BP_CookCrafting01_C,BP_CookCrafting_C_UAID_0468748824940DBE02_c11e2be935ce527e_2102487463,3693.8372,5475.558,10835.962,Cooking Pot,,,,,"{""interaction"": ""Cook""}"
-StaticMeshComponent,BP_CookCrafting02_C,BP_CookCrafting_C_UAID_04D9F5F93AD5AF5402_721ca775cb4eb9ba_1602796001,-3374.0676,2145.313,11030.968,Cauldron,,,,,"{""interaction"": ""Cook""}"
-StaticMeshComponent,BP_FrenchFlagVAT_02b_C,StaticMeshActor_287,-1709.6361,2042.3707,12643.366,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_02b_C,StaticMeshActor_310,5702.497,-1699.9941,12651.602,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_02b_C,StaticMeshActor_325,-5715.303,-1701.0881,12101.38,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_03a_C,StaticMeshActor_306,2411.1768,7298.756,13047.273,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_03a_C,StaticMeshActor_328,-6116.3335,-3436.3076,10354.973,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_03a_C,StaticMeshActor_330,-4419.599,1990.0421,9225.833,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_03a_C,StaticMeshActor_331,1310.199,-613.1044,17810.447,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_03a_C,StaticMeshActor_332,268.54092,-1654.7625,17810.447,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_04a_C,StaticMeshActor_316,-2680.0217,-9609.742,12408.294,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_04a_C,StaticMeshActor_317,-5682.7476,-868.5276,12080.269,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_04a_C,StaticMeshActor_367,9073.912,6431.787,10431.996,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_05a_C,StaticMeshActor_UAID_04D9F5F93AD55B8602_99c5de060d023245_1522174110,-696.4043,-711.6622,11775.041,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_05a_C,StaticMeshActor_UAID_04D9F5F93AD55B8602_99c5de060d023245_1632091111,-115.61077,-121.05909,11775.041,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_05a_C,StaticMeshActor_UAID_D843AE641AE3BA4402_99c5de060d023245_1798266515,-3219.9912,-59.31965,12074.741,,,,,,{}
-StaticMeshComponent,BP_FrenchFlagVAT_05a_C,StaticMeshActor_UAID_D843AE641AE3BA4402_99c5de060d023245_1798268516,-3219.3115,-1677.9451,12074.741,,,,,,{}
+StaticMeshComponent,BP_CookCrafting02_C,BP_CookCrafting02_C_UAID_D4939058105BF6F002_99c5de060d023245_1327421238,-3590.5815,1859.8116,11033.585,Cauldron,,,,,"{""interaction"": ""Cook""}"
 StaticMeshComponent,BP_GunsmithCrafting_C,BP_GunsmithCrafting_C_UAID_0468748824940DBE02_c11e2be935ce527e_1757010021,5088.2085,2420.8694,11114.409,Gunsmithing Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_GunsmithCrafting_C,BP_GunsmithCrafting_C_UAID_04D9F5F93AD5338602_99c5de060d023245_1092253046,308.6072,-407.21353,11027.668,Gunsmithing Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_MetallurgistCrafting_C,BP_A02_MetallurgistCrafting_C_UAID_0468748824940DBE02_c11e2be935ce527e_1749828806,4324.324,5713.5815,10875.263,Anvil,,,,,"{""interaction"": ""Craft""}"
-StaticMeshComponent,BP_MetallurgistCrafting_C,BP_MetallurgistCrafting_C_UAID_04D9F5F93AD57D8402_bd4cf950e161a127_1540819573,-2857.5579,-855.64923,11033.076,Anvil,,,,,"{""interaction"": ""Craft""}"
+StaticMeshComponent,BP_MetallurgistCrafting_C,BP_MetallurgistCrafting_C_UAID_04D9F5F93AD57D8402_bd4cf950e161a127_1540819573,-2828.7114,-808.3235,11032.824,Anvil,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_NaturalistRefining_Herbs_01_C,BP_NaturalistRefining_Herbs_01_C_UAID_0468748824940DBE02_c11e2be935ce527e_1752082850,2348.0215,5603.008,10836.681,Herb Table,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,BP_NaturalistRefining_Herbs_02_C,BP_NaturalistRefining_Herbs_02_C_UAID_D843AE1A93E582A502_4734e3ad7ed16de1_1129683623,-2710.1829,2765.4326,11044.578,Herb Table,,,,,"{""interaction"": ""Refine""}"
+StaticMeshComponent,BP_NaturalistRefining_Herbs_02_C,BP_NaturalistRefining_Herbs_02_C_UAID_D843AE1A93E582A502_4734e3ad7ed16de1_1129683623,-2645.5674,2811.0532,11044.578,Herb Table,,,,,"{""interaction"": ""Refine""}"
 StaticMeshComponent,BP_NaturalistRefining_Spice_01_C,BP_NaturalistRefining_Spice_01_C_UAID_0468748824940DBE02_c11e2be935ce527e_1751833840,2307.5515,5974.548,10840.855,Pestle & Mortar,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,BP_NaturalistRefining_Spice_01_C,BP_NaturalistRefining_Spice_C_UAID_04D9F5F93AD5C28602_99c5de060d023245_1099316193,-2861.5513,2665.7847,11043.595,Pestle & Mortar,,,,,"{""interaction"": ""Refine""}"
+StaticMeshComponent,BP_NaturalistRefining_Spice_01_C,BP_NaturalistRefining_Spice_C_UAID_04D9F5F93AD5C28602_99c5de060d023245_1099316193,-2940.5657,2587.7173,11043.595,Pestle & Mortar,,,,,"{""interaction"": ""Refine""}"
 StaticMeshComponent,BP_OutfitterCrafting_A01_C,BP_OutfitterCrafting_A01_C_UAID_0468748824940DBE02_c11e2be935ce527e_1759545083,6030.7954,3297.902,11124.661,Outfitter Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_OutfitterCrafting_A02_C,BP_OutfitterCrafting_A02_C_UAID_D843AE1A93E5D1D102_99c5de060d023245_1797102989,-396.69446,-1703.7778,11137.157,Outfitter Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_PhysicianCrafting_01_C,BP_PhysicianCrafting_01_C_UAID_04D9F5F93AD57D8502_c11e2be935ce527e_1555094006,1719.0679,5320.55,10842.479,Physician Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_PhysicianCrafting_02_C,BP_PhysicianCrafting_C_UAID_04D9F5F93AD5038102_99c5de060d023245_1907324211,-2162.663,2450.3718,11052.094,Physician Workbench,,,,,"{""interaction"": ""Craft""}"
 StaticMeshComponent,BP_ScavengerRefining_Cloth_C,BP_ScavengerRefining_Cloth_C_UAID_04D9F5F93AD5998702_c11e2be935ce527e_2126164022,2199.3152,5680.354,10834.011,Loom,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,BP_ScavengerRefining_Cloth_C,StaticMeshActor_UAID_04D9F5F93AD5728602_99c5de060d023245_1338403354,-564.7424,-1430.9918,11137.193,Loom,,,,,"{""interaction"": ""Refine""}"
+StaticMeshComponent,BP_ScavengerRefining_Cloth_C,BP_ScavengerRefining_Cloth_C_UAID_D843AE1A93E5DC0703_99c5de060d023245_1606185959,-936.4026,-1138.8975,11085.074,Loom,,,,,"{""interaction"": ""Refine""}"
 StaticMeshComponent,BP_ScavengerRefining_Ore_C,BP_ScavengerRefining_Ore_C_UAID_0468748824940DBE02_c11e2be935ce527e_1805489222,4120.493,6444.015,10837.109,Smelter,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,BP_ScavengerRefining_Ore_C,BP_ScavengerRefining_Ore_C_UAID_04D9F5F93AD59A8702_8223c7b529e43635_1340895209,-1693.0106,-2288.4692,11035.081,Smelter,,,,,"{""interaction"": ""Refine""}"
-StaticMeshComponent,C_LI_Bookshelf_Single_01a_Spawner_C,Actor_42c0e3494aed166e_0,342.0682,189.91774,453.21378,Wardrobe,Civilian_Small,,,,{}
-StaticMeshComponent,C_LI_Bookshelf_Single_01a_Spawner_C,Actor_cd38f38f219b46e8_0,342.0682,189.91774,453.21378,Wardrobe,Civilian_Small,,,,{}
+StaticMeshComponent,BP_ScavengerRefining_Ore_C,BP_ScavengerRefining_Ore_C_UAID_D843AE1A93E5DB0703_99c5de060d023245_2101582771,-3116.531,-635.21185,11063.302,Smelter,,,,,"{""interaction"": ""Refine""}"

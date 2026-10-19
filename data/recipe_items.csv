@@ -142,6 +142,7 @@ Profession.Cook,18,ID_Food_Common05,Mouldy Baguette,38,31,7
 Profession.Cook,0,ID_Food_Common01,Stewed Apple,42,37,5
 Profession.Conservator,300,ID_Legendary_MarksmansSpine,Marksman's Spine,10009,9099,910
 Profession.Conservator,300,ID_Legendary_LiquidMercury,Distilled Mercury,3637,3306,331
+Profession.Conservator,225,ID_Epic_MammothGrain,Mammoth Grain,1000,500,500
 Profession.Conservator,225,ID_Epic_ChromaticLens,Chromatic Lens,376,376,0
 Profession.Conservator,225,ID_Common_LockspringSteel,Lockspring Steel,2286,2078,208
 Profession.Conservator,150,ID_Rare_PolishedFiringPin,Polished Firing Pin,584,530,54
@@ -152,12 +153,12 @@ Profession.Conservator,0,ID_Common_SharpScrews,Sharp Screws,85,77,8
 Profession.Conservator,0,ID_Common_FreshGunpowder,Fresh Gunpowder,2,1,1
 Profession.Conservator,0,ID_Common_CopperFilament,Copper Filament,36,32,4
 Profession.Artificer,350,ID_Tools_Legendary_Repair01,Clockwork Tongs,66177,53024,13153
-Profession.Artificer,300,ID_ArmorPatch_Legendary,Damascus Armour Plate,79,10838,-10759
+Profession.Artificer,300,ID_ArmorPatch_Legendary,Damascus Armour Plate,13548,10838,2710
 Profession.Artificer,275,ID_Tools_Epic_Repair01,Delicate Tongs,10514,33594,-23080
-Profession.Artificer,225,ID_ArmorPatch_Epic,Steel Armour Plate,79,2867,-2788
+Profession.Artificer,225,ID_ArmorPatch_Epic,Steel Armour Plate,6557,2867,3690
 Profession.Artificer,200,ID_Tools_Rare_Repair01,Machinist Tongs,1769,1398,371
-Profession.Artificer,150,ID_ArmorPatch_Rare,Ceramic Armour Plate,79,855,-776
+Profession.Artificer,150,ID_ArmorPatch_Rare,Ceramic Armour Plate,1073,855,218
 Profession.Artificer,125,ID_Tools_Uncommon_Repair01,Journeyman Tongs,477,375,102
-Profession.Artificer,75,ID_ArmorPatch_Uncommon,Leather Armour Plate,79,218,-139
+Profession.Artificer,75,ID_ArmorPatch_Uncommon,Leather Armour Plate,272,218,54
 Profession.Artificer,50,ID_Tools_Common_Repair01,Rusty Tongs,75,50,25
-Profession.Artificer,0,ID_ArmorPatch_Common,Cloth Armour Plate,79,45,34
+Profession.Artificer,0,ID_ArmorPatch_Common,Cloth Armour Plate,55,45,10

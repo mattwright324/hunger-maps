@@ -6,7 +6,7 @@ import math
 from collections import Counter, defaultdict, deque
 
 # FModel export of the game's /Game content folder
-EXPORT_ROOT = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\ProjectRLH\Content"
+EXPORT_ROOT = r"C:\Users\mattwright324\AppData\Local\Temp\7zO01F3A62F\Output\Exports\Hunger\Content"
 
 def content_path(*parts):
     return os.path.join(EXPORT_ROOT, *parts)
